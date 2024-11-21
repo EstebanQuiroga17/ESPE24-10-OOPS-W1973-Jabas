@@ -1,0 +1,7 @@
+To do List:
+
+For QuickStock ClassDiagram:
+- Assign attributes and methods to cashier.
+- Add more classes.
+- Add associations.
+- Review Inventory class functionality.
