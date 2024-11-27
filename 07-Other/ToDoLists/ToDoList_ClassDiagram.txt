@@ -5,3 +5,7 @@ For QuickStock ClassDiagram:
 - Add more classes.
 - Add associations.
 - Review Inventory class functionality.
+-Implement income and expenses functions.
+-Implement inventory, sales and via-email reports.
+-Adjust some classes attributes according to manual reports
+showed on user requirements "Appendix C"

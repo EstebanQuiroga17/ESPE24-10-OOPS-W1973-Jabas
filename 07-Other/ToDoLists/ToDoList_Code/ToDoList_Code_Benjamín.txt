@@ -1,0 +1,7 @@
+27/11/2024
+Create classes at Model: Invoice
+			Income: add attributes and methods, find a way that works in the system
+			Expense: add attributes and methods, find a way that works in the system
+Revisa el diagrama de clases completo y busca contradicciones
+o errores en asociaciones o dependencias, si necesita un cambio
+avisa en wpp.	
