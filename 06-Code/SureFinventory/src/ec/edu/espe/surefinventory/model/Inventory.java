@@ -7,8 +7,7 @@ import java.time.LocalDate;
  * @author Esteban Quiroga
  */
 public class Inventory {
-    
-    Product product;
+   
     int  id;
     String name;
     LocalDate creationDate;
@@ -17,5 +16,6 @@ public class Inventory {
     public void stockStatus(){
         //TODO code stockStatus method
     }
+    
     
 }
