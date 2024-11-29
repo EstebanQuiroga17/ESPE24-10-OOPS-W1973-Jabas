@@ -1,6 +1,8 @@
 package ec.edu.espe.surefinventory.view;
 
 import java.util.Scanner;
+import ec.edu.espe.surefinventory.model.Manager;
+
 
 /**
  *
@@ -8,9 +10,9 @@ import java.util.Scanner;
  */
 public class DashBoard {
     
-    private int menuOption;
+    private int dashboardOption;
     
-    public void initMainMenu(){
+    public void initMainDashboard(){
         System.out.println("SureFinventory \n"
         +   "Selecciona una opcion para continuar...\n"
         + "1. Ingresar como admin.\n"
@@ -18,30 +20,39 @@ public class DashBoard {
         
        Scanner scanner = new Scanner(System.in);
        
-       this.setMenuOption(scanner.nextInt());
+       this.setDashboardOption(scanner.nextInt());
        
+    }
+    
+    public void initAdminDashboard(Manager manager){
+        
+        System.out.println("Ingresa tu contrasena para iniciar: ");
+        
+        Scanner scanner = new Scanner(System.in);
+        String password = scanner.next();
+        
+        while(password.equals(manager.getPassword()) == false){
+           
+            System.out.println("Contrasena incorrecta, intentalo de nuevo...");
+            password = scanner.next();
+        }
+        
+        System.out.println("Bienvenido "+ manager.getUsername());
+        
+        
     }
 
     public DashBoard(int menuOption) {
-        this.menuOption = menuOption;
+        this.dashboardOption = menuOption;
     }
 
-    /**
-     * @return the menuOption
-     */
-    public int getMenuOption() {
-        return menuOption;
+    public int getDashboardOption() {
+        return dashboardOption;
     }
 
-    /**
-     * @param menuOption the menuOption to set
-     */
-    public void setMenuOption(int menuOption) {
-        this.menuOption = menuOption;
+    public void setDashboardOption(int dashboardOption) {
+        this.dashboardOption = dashboardOption;
     }
-
-   
-    
     
         
     

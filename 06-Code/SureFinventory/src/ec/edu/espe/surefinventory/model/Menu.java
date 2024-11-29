@@ -1,4 +1,4 @@
-package ec.espe.edu.surefinventory.model;
+package ec.edu.espe.surefinventory.model;
 
 /**
  *
