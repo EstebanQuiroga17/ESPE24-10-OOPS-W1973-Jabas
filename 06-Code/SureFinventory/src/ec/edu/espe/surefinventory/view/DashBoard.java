@@ -12,7 +12,7 @@ public class DashBoard {
     
     public void initMainMenu(){
         System.out.println("SureFinventory \n"
-        +   "Selecciona una opción para continuar...\n"
+        +   "Selecciona una opcion para continuar...\n"
         + "1. Ingresar como admin.\n"
         + "2. Ingresar como mesero. \n");
         
