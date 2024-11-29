@@ -16,6 +16,10 @@ public class Inventory {
     public void stockStatus(){
         //TODO code stockStatus method
     }
+
+    public void removeProduct(Product product) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
     
     
 }

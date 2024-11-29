@@ -1,9 +1,11 @@
-package ec.espe.edu.surefinventory.model;
+package ec.edu.espe.surefinventory.model;
 
 /**
  *
  * @author Matias Rojas 
  */
+import ec.edu.espe.surefinventory.model.Inventory;
+import ec.edu.espe.surefinventory.model.Product;
 import java.time.LocalDate;
 import java.util.List;
 

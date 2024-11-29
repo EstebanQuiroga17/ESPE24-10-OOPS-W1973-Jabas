@@ -1,5 +1,7 @@
 package ec.edu.espe.surefinventory.model;
 
+import ec.espe.edu.surefinventory.model.Menu;
+
 /**
  *
  * @author Esteban Quiroga

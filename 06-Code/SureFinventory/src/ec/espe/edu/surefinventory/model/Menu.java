@@ -4,6 +4,7 @@ package ec.espe.edu.surefinventory.model;
  *
  * @author Matias Rojas
  */
+import ec.edu.espe.surefinventory.model.Product;
 import java.util.List;
 
 public class Menu {
