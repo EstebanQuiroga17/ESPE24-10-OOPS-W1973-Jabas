@@ -6,11 +6,11 @@ import java.util.Scanner;
  *
  * @author Esteban Quiroga
  */
-public class MainMenu {
+public class DashBoard {
     
     private int menuOption;
     
-    public void initMainMenu(MainMenu menu){
+    public void initMainMenu(DashBoard menu){
         System.out.println("SureFinventory \n"
         +   "Selecciona una opción para continuar...\n"
         + "1. Ingresar como admin.\n"
@@ -22,7 +22,7 @@ public class MainMenu {
        
     }
 
-    public MainMenu(int menuOption) {
+    public DashBoard(int menuOption) {
         this.menuOption = menuOption;
     }
 
