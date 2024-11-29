@@ -10,7 +10,7 @@ public class SureFinventoryApp {
         
         DashBoard menu = new DashBoard(0);
     
-        menu.initMainMenu(menu);
+        menu.initMainMenu();
         
     }
     

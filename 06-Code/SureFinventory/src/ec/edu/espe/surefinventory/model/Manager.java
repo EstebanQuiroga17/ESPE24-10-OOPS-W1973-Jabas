@@ -1,5 +1,7 @@
 package ec.edu.espe.surefinventory.model;
 
+import ec.espe.edu.surefinventory.model.Menu;
+
 /**
  *
  * @author Esteban Quiroga
@@ -25,9 +27,9 @@ public class Manager {
         //TODO code method
     }
     
-    public Menu editMenu(Menu menu){
+    public void editMenu(Menu menu){
         //TODO code method
-        return newMenu;
+        
     }
     
    
