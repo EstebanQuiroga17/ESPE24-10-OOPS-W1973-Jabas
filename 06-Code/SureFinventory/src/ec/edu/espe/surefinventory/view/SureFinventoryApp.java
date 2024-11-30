@@ -8,18 +8,22 @@ import ec.edu.espe.surefinventory.model.Manager;
  */
 public class SureFinventoryApp {
 
-    
     public static void main(String[] args) {
-        
-        //TODO englobe menu into a dowhile
-            DashBoard dashboard = new DashBoard(0);
+        DashBoard dashboard = new DashBoard(0);
+        int option;
 
+        do {
             dashboard.initMainDashboard();
-        
-            if(1 == dashboard.getDashboardOption()){
-                
+            option = dashboard.getDashboardOption();
+
+            if (option == 1) {
                 Manager mainManager = new Manager("Manager", 103, "juanito123");
                 dashboard.initAdminDashboard(mainManager);
-            }        
-    }
+            } else if (option == 0) {
+                System.out.println("Exiting application...");
+            } else {
+                System.out.println("Invalid option. Please try again.");
+            }
+        } while (option != 0); 
+  }
 }
