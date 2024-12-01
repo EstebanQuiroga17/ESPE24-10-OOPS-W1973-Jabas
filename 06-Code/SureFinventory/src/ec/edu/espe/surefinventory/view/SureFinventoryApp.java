@@ -18,7 +18,7 @@ public class SureFinventoryApp {
 
             if (option == 1) {
                 Manager mainManager = new Manager("Manager", 103, "juanito123");
-                dashboard.initAdminDashboard(mainManager);
+                dashboard.initManagerDashboard(mainManager, option);
             } else if (option == 0) {
                 System.out.println("Exiting application...");
             } else {
@@ -26,4 +26,7 @@ public class SureFinventoryApp {
             }
         } while (option != 0); 
   }
+    
+    
 }
+    

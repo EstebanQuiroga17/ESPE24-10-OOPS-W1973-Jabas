@@ -11,6 +11,7 @@ import ec.edu.espe.surefinventory.model.Manager;
 public class DashBoard {
     
     private int dashboardOption;
+     Scanner scanner = new Scanner(System.in);
     
     public void initMainDashboard(){
         System.out.println("SureFinventory \n"
@@ -18,17 +19,16 @@ public class DashBoard {
         + "1. Ingresar como admin.\n"
         + "2. Ingresar como mesero. \n");
         
-       Scanner scanner = new Scanner(System.in);
+      
        
        this.setDashboardOption(scanner.nextInt());
        
     }
     
-    public void initAdminDashboard(Manager manager){
+    public void initManagerDashboard(Manager manager, int option){
         
-        System.out.println("Ingresa tu contrasena para iniciar: ");
+        System.out.println("Ingresa tu contrasena para iniciar: \n");
         
-        Scanner scanner = new Scanner(System.in);
         String password = scanner.next();
         
         while(password.equals(manager.getPassword()) == false){
@@ -37,9 +37,22 @@ public class DashBoard {
             password = scanner.next();
         }
         
-        System.out.println("Bienvenido "+ manager.getUsername());
+        System.out.println("Bienvenido "+ manager.getUsername()"\n");
         
-        
+        do{
+            
+            System.out.println("1. Modificar el inventario. \n"
+                               +"2. Crear un cajero. \n"
+                               +"3. Abrir la caja registradora. \n"
+                               +"4. Editar el Menu.\n"
+                               + "5. Salir. \n");
+            option = scanner.nextInt();
+            switch(option){
+                case 1:
+                
+            }
+            
+        }while(option<1 && option >5 );
     }
 
     public DashBoard(int menuOption) {
