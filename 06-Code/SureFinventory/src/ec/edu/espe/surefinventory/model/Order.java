@@ -34,11 +34,11 @@ public class Order {
         }
     }
 
-    public void removeInventoryProducts(Inventory inventory) {
-        for (Product product : productList) {
-            inventory.removeProduct(product);
-        }
-    }
+    //public void removeInventoryProducts(Inventory inventory) {
+      //  for (Product product : productList) {
+        //    inventory.removeProduct(product);//
+        //}
+    //}
 
     // Getters and setters 
 

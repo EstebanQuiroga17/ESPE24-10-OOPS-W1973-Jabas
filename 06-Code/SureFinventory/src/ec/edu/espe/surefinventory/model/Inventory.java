@@ -19,9 +19,7 @@ public class Inventory {
         
     }
     
-    public Inventory createInventory(){
-        return inventory;
-    }
+   
     
     public void updateInventory(Inventory inventory){
         
