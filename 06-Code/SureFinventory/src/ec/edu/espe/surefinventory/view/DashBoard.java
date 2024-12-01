@@ -16,7 +16,7 @@ public class DashBoard {
     public void initMainDashboard(){
         System.out.println("SureFinventory \n"
         +   "Selecciona una opcion para continuar...\n"
-        + "1. Ingresar como admin.\n"
+        + "1. Ingresar como manager.\n"
         + "2. Ingresar como mesero. \n");
         
       
@@ -37,7 +37,7 @@ public class DashBoard {
             password = scanner.next();
         }
         
-        System.out.println("Bienvenido "+ manager.getUsername()"\n");
+        System.out.println("Bienvenido "+ manager.getUsername() + "\n");
         
         do{
             
@@ -45,10 +45,23 @@ public class DashBoard {
                                +"2. Crear un cajero. \n"
                                +"3. Abrir la caja registradora. \n"
                                +"4. Editar el Menu.\n"
-                               + "5. Salir. \n");
+                               + "5. Volver al inicio. \n");
             option = scanner.nextInt();
             switch(option){
-                case 1:
+                case 1: //TODO create inventory dashboard
+                break;
+                
+                case 2: //TODO insert create cashier method from Manager class
+                break;
+                
+                case 3: //TODO create cash register dashboard
+                break;
+                
+                case 4: //TODO insert Menu functions
+                break;
+                
+                case 5: //TODO insert exit method
+                break;
                 
             }
             
