@@ -9,11 +9,17 @@ class Invoice {
     private Customer customer;
     private String paymentMethod;
     private int id;
+    private double total;
+    private double iva;
+     private Order description;
 
     @Override
     public String toString() {
-        return "Invoice{" + "customer=" + customer + ", paymentMethod=" + paymentMethod + ", id=" + id + ", description=" + description + '}';
+        return "Invoice{" + "customer=" + customer + ", paymentMethod=" + paymentMethod + ", id=" + id + ", total=" + total + ", iva=" + iva + ", description=" + description + '}';
     }
+    
+
+    
 
     public Invoice(Customer customer, String paymentMethod, int id, Order description) {
         this.customer = customer;
@@ -21,7 +27,7 @@ class Invoice {
         this.id = id;
         this.description = description;
     }
-    private Order description;
+  
 
     /**
      * @return the customer
@@ -78,5 +84,42 @@ class Invoice {
     public void setDescription(Order description) {
         this.description = description;
     }
-    
+
+    /**
+     * @return the total
+     */
+    public double getTotal() {
+        return total;
+    }
+
+    /**
+     * @param total the total to set
+     */
+    public void setTotal(double total) {
+        this.total = total;
+    }
+
+    /**
+     * @return the iva
+     */
+    public double getIva() {
+        return iva;
+    }
+
+    /**
+     * @param iva the iva to set
+     */
+    public void setIva(double iva) {
+        this.iva = iva;
+    }
+    public void printInvoice() {
+    System.out.println("========== Invoice ==========");
+    System.out.println("Customer: " + customer);
+    System.out.println("Payment Method: " + paymentMethod);
+    System.out.println("Invoice ID: " + id);
+    System.out.println("Description: " + description);
+    System.out.printf("IVA: $%.2f%n", iva);
+    System.out.printf("Total: $%.2f%n", total);
+    System.out.println("=============================");
+}
 }
