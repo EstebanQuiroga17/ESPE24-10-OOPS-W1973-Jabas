@@ -7,7 +7,7 @@ import java.time.LocalDate;
  *
  * @author Benjamin Robalino <jabasteam>
  */
-class Expense {
+public class Expense {
     private double amount;
     private String description;
     private LocalDate date;

@@ -1,5 +1,6 @@
 package ec.edu.espe.surefinventory.model;
 
+import utils.TransactionManager;
 import java.time.LocalDate;
 
 /**

@@ -5,7 +5,7 @@ package ec.edu.espe.surefinventory.model;
  *
  * @author Benjamin Robalino <jabasteam>
  */
-class Invoice {
+public class Invoice {
     private Customer customer;
     private String paymentMethod;
     private int id;

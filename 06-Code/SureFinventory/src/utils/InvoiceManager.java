@@ -1,6 +1,6 @@
 
 
-package ec.edu.espe.surefinventory.model;
+package utils;
 
 /**
  *
@@ -8,6 +8,7 @@ package ec.edu.espe.surefinventory.model;
  */
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import ec.edu.espe.surefinventory.model.Invoice;
 
 import java.io.FileWriter;
 import java.io.IOException;
