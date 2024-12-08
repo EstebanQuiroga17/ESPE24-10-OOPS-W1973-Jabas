@@ -13,12 +13,6 @@ public class Inventory {
     LocalDate creationDate;
     Product productList;
     
-    
-
-    public void openInventory (Inventory inventory){
-        
-    }
-    
    
     
     public void updateInventory(Inventory inventory){

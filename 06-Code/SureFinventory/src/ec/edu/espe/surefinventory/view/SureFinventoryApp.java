@@ -9,11 +9,8 @@ import ec.edu.espe.surefinventory.model.Manager;
 public class SureFinventoryApp {
 
     public static void main(String[] args) {
-        DashBoard dashboard = new DashBoard(0);
 
-
-        
-        dashboard.initMainDashboard(dashboard);
+        DashBoard.initMainDashboard();
         
   }
     

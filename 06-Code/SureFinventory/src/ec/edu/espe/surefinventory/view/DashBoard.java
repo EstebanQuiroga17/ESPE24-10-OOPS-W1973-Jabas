@@ -11,22 +11,23 @@ import ec.edu.espe.surefinventory.model.Manager;
 public class DashBoard {
     
     private int dashboardOption;
-    Scanner scanner = new Scanner(System.in);
+    public static Scanner scanner = new Scanner(System.in);
     
-    public void initMainDashboard(DashBoard dashboard){
+    public static void initMainDashboard(){
         
         System.out.println("SureFinventory \n"
         +   "Selecciona una opcion para continuar...\n"
         + "1. Ingresar como manager.\n"
         + "2. Ingresar como mesero. \n");
-
-        this.setDashboardOption(scanner.nextInt());
+        
+        Scanner scanner = new Scanner(System.in);
+        int dashboardOption = scanner.nextInt();        
         
         do{
             switch (dashboardOption) {
                 case 1 -> {
                     Manager mainManager = new Manager("Manager", "juanito123");
-                    dashboard.initManagerDashboard(mainManager, dashboardOption);
+                    DashBoard.initManagerDashboard(mainManager, dashboardOption);
                 }
                 case 2 -> System.out.println("Exiting application...");
                 default -> System.out.println("Invalid option. Please try again.");
@@ -37,7 +38,7 @@ public class DashBoard {
        
     }
     
-    public void initManagerDashboard(Manager manager, int option){
+    public static void initManagerDashboard(Manager manager, int option){
         
         System.out.println("Ingresa tu contrasena para iniciar: \n");
         
@@ -72,7 +73,7 @@ public class DashBoard {
                 case 4: //TODO insert Menu functions
                 break;
                 
-                case 5: //TODO insert exit method
+                case 5: 
                 break;
                 
             }
