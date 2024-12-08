@@ -6,53 +6,19 @@ package utils;
  *
  * @author Benjamin Robalino <jabasteam>
  */
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 import ec.edu.espe.surefinventory.model.Invoice;
 
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
+import java.lang.reflect.Type;
 import java.util.List;
 
 public class InvoiceManager {
-    private List<Invoice> invoices;
+    private static final String INVOICE_FILE_PATH = "data/invoices.json";
 
-    public InvoiceManager() {
-        this.invoices = new ArrayList<>();
-    }
+    private static final Type INVOICE_LIST_TYPE = new TypeToken<List<Invoice>>() {}.getType();
+    private static final MainDataManager<Invoice> invoiceManager = new MainDataManager<>(INVOICE_FILE_PATH, INVOICE_LIST_TYPE);
 
-    /**
-     * Adds a new invoice to the list.
-     *
-     * @param invoice The invoice to add.
-     */
-    public void addInvoice(Invoice invoice) {
-        invoices.add(invoice);
-    }
-
-    /**
-     * Saves all invoices to a JSON file.
-     *
-     * @param filePath The file path to save the invoices.
-     */
-    public void saveInvoicesToFile(String filePath) {
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-
-        try (FileWriter writer = new FileWriter(filePath)) {
-            gson.toJson(invoices, writer);
-            System.out.println("Invoices saved to " + filePath);
-        } catch (IOException e) {
-            System.err.println("Error saving invoices: " + e.getMessage());
-        }
-    }
-
-    /**
-     * Prints all invoices.
-     */
-    public void printAllInvoices() {
-        for (Invoice invoice : invoices) {
-            invoice.printInvoice();
-        }
+    public static MainDataManager<Invoice> getInvoiceManager() {
+        return invoiceManager;
     }
 }

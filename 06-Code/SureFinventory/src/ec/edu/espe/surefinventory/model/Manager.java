@@ -1,7 +1,7 @@
 package ec.edu.espe.surefinventory.model;
 
 import java.util.Scanner;
-import utils.InfoManager;
+import utils.AdminDataManager;
 
 /**
  *
@@ -33,7 +33,7 @@ public class Manager {
         
         Cashier cashier = new Cashier(username, password);
         
-        InfoManager.addCashier(cashier);
+        AdminDataManager.addCashier(cashier);
         
         System.out.println(cashier +"Creado con exito");
         
