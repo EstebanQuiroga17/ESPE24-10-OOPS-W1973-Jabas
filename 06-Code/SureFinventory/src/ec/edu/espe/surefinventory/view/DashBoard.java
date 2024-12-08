@@ -11,17 +11,29 @@ import ec.edu.espe.surefinventory.model.Manager;
 public class DashBoard {
     
     private int dashboardOption;
-     Scanner scanner = new Scanner(System.in);
+    Scanner scanner = new Scanner(System.in);
     
-    public void initMainDashboard(){
+    public void initMainDashboard(DashBoard dashboard){
+        
         System.out.println("SureFinventory \n"
         +   "Selecciona una opcion para continuar...\n"
         + "1. Ingresar como manager.\n"
         + "2. Ingresar como mesero. \n");
+
+        this.setDashboardOption(scanner.nextInt());
         
-      
+        do{
+            switch (dashboardOption) {
+                case 1 -> {
+                    Manager mainManager = new Manager("Manager", "juanito123");
+                    dashboard.initManagerDashboard(mainManager, dashboardOption);
+                }
+                case 2 -> System.out.println("Exiting application...");
+                default -> System.out.println("Invalid option. Please try again.");
+            }
+        } while(dashboardOption > 2 || dashboardOption < 1);
        
-       this.setDashboardOption(scanner.nextInt());
+       
        
     }
     
@@ -51,7 +63,7 @@ public class DashBoard {
                 case 1: //TODO create inventory dashboard
                 break;
                 
-                case 2: //TODO insert create cashier method from Manager class
+                case 2: manager.createCashier();
                 break;
                 
                 case 3: //TODO create cash register dashboard

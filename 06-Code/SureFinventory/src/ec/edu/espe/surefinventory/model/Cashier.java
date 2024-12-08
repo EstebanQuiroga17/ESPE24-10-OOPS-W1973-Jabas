@@ -6,12 +6,10 @@ package ec.edu.espe.surefinventory.model;
  */
 public class Cashier {
     private String username;
-    private int id;
     private String password;
 
-    public Cashier(String username, int id, String password) {
+    public Cashier(String username,String password) {
         this.username = username;
-        this.id = id;
         this.password = password;
     }
 
@@ -27,14 +25,6 @@ public class Cashier {
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getPassword() {

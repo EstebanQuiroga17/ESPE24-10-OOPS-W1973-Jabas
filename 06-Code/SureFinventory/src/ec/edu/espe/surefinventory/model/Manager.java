@@ -1,21 +1,19 @@
 package ec.edu.espe.surefinventory.model;
 
+import java.util.Scanner;
+import utils.InfoManager;
+
 /**
  *
  * @author Esteban Quiroga
  */
 public class Manager {
     private String username;
-    private int id;
     private String password;
-    
-   
-    
-    
 
-    public Manager(String username, int id, String password) {
+    
+    public Manager(String username, String password) {
         this.username = username;
-        this.id = id;
         this.password = password;
     }
     
@@ -24,8 +22,21 @@ public class Manager {
         //TODO code method
     }
     
-    public void createCashier(Cashier cashier){
-        //TODO code method
+    public void createCashier(){
+        Scanner scanner = new Scanner(System.in);
+        
+        System.out.println("Ingrese el nombre de usuario.");
+            String newUsername = scanner.nextLine();
+        
+        System.out.println("Ingrese una contrasena.");
+            String newPassword = scanner.nextLine();
+        
+        Cashier cashier = new Cashier(username, password);
+        
+        InfoManager.addCashier(cashier);
+        
+        System.out.println(cashier +"Creado con exito");
+        
     }
     
     public void updateInventory(Inventory inventory){
@@ -55,19 +66,6 @@ public class Manager {
         this.username = username;
     }
 
-    /**
-     * @return the id
-     */
-    public int getId() {
-        return id;
-    }
-
-    /**
-     * @param id the id to set
-     */
-    public void setId(int id) {
-        this.id = id;
-    }
 
     /**
      * @return the password
