@@ -3,7 +3,7 @@ package ec.edu.espe.surefinventory.model;
 
 
 import java.time.LocalDateTime;
->>>>>>> 56e3928fc0b49d633bf5b11c91a97606b1bfb291
+
 
 /**
  *
@@ -67,7 +67,7 @@ public class Inventory {
      */
     public void setTotalQuantity(int totalQuantity) {
         this.totalQuantity = totalQuantity;
->>>>>>> 56e3928fc0b49d633bf5b11c91a97606b1bfb291
+
     }
     
     public void updateInventory(Inventory inventory){
@@ -78,6 +78,6 @@ public class Inventory {
         
     }
 
->>>>>>> 56e3928fc0b49d633bf5b11c91a97606b1bfb291
+
     
 }
