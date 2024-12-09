@@ -2,27 +2,30 @@
 package ec.edu.espe.surefinventory.model;
 
 /**
- *
- * @author Abner
- * @version 0.1.0
+ * @author abner
  */
 public class Product {
+    private int id;
     private String name;
-    private double cost;
+    private float price; 
+    private float weight; 
     private int quantity;
-    private double weight;
 
-   //Constructor for Inventory
- public Product(String name, int quantity, double weight) {
+    public Product(int id, String name, float price, float weight, int quantity) {
+        this.id = id;
         this.name = name;
+        this.price = price;
         this.weight = weight;
         this.quantity = quantity;
     }
- //Constructor for Invoice 
-    public Product(String name, double cost, int quantity) {
-        this.name = name;
-        this.cost = cost;
-        this.quantity = quantity;
+
+    // Getters y Setters
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -33,12 +36,20 @@ public class Product {
         this.name = name;
     }
 
-    public double getCost() {
-        return cost;
+    public float getPrice() {
+        return price;
     }
 
-    public void setCost(double cost) {
-        this.cost = cost;
+    public void setPrice(float price) {
+        this.price = price;
+    }
+
+    public float getWeight() {
+        return weight;
+    }
+
+    public void setWeight(float weight) {
+        this.weight = weight;
     }
 
     public int getQuantity() {
@@ -48,20 +59,9 @@ public class Product {
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
- public void setWeight(double weight) {
-        this.weight = weight;
-    }
 
-    public double getWeight() {
-        return weight;
-    }
     @Override
     public String toString() {
-        return "Product{" +
-               "name='" + name + '\'' +
-               ", cost=" + cost +
-               ", quantity=" + quantity +
-               '}';
+        return "ID: " + id + ", Nombre: " + name + ", Precio: $" + price + ", Peso: " + weight + "g, Cantidad: " + quantity;
     }
-    
 }
