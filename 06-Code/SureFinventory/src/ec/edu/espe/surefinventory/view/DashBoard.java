@@ -58,6 +58,7 @@ public class DashBoard {
                                +"2. Crear un cajero. \n"                               
                                +"3. Editar el Menu.\n"
                                +"4. Volver al inicio. \n");
+            
             option = scanner.nextInt();
             switch(option){
                 case 1: //TODO create inventory dashboard
@@ -85,19 +86,40 @@ public class DashBoard {
                                "2. Añadir un nuevo producto.\n"+
                                "3. Remover un producto.\n"+
                                "4. Regresar al inicio.\n");
+            System.out.print("Selecciona una opción: ");
             
             dashboardOption = scanner.nextInt();
             
             switch(dashboardOption){
-                case 1: //TODO put showMenu method from Menu class
-                break;
+                case 1 -> {
+                System.out.println("Visualizando el Menú:");
+                menu.displayMenu();
+            } 
+                case 2 -> {
+                System.out.println("Añadiendo un nuevo producto...");
+                System.out.print("Ingresa el ID del producto: ");
+                int id = scanner.nextInt();
+                System.out.print("Ingresa el nombre del producto: ");
+                scanner.nextLine(); 
+                String name = scanner.nextLine();
+                System.out.print("Ingresa el precio del producto: ");
+                float price = scanner.nextFloat(); 
+                System.out.print("Ingresa el peso del producto (en g): ");
+                float weight = scanner.nextFloat(); 
+                System.out.print("Ingresa la cantidad disponible del producto: ");
+                int quantity = scanner.nextInt();
+
+                Product newProduct = new Product(id, name, price, weight, quantity);
+                menu.addProduct(newProduct);
+            }
                 
-                case 2: //TODO put addProduct method form Menu class
-                break;
-                
-                case 3: //TODO add removeProduct method form Menu class
-                break;
-                
+                case 3 -> {
+                System.out.println("Remover un producto...");
+                System.out.print("Ingresa el ID del producto a eliminar: ");
+                int id = scanner.nextInt();
+                menu.removeProduct(id);
+            }
+                     
                 case 4: DashBoard.initMainDashboard();
                 break;
                 
