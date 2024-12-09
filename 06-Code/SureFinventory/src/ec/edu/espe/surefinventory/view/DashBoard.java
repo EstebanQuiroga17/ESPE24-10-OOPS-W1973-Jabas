@@ -2,6 +2,8 @@ package ec.edu.espe.surefinventory.view;
 
 import java.util.Scanner;
 import ec.edu.espe.surefinventory.model.Manager;
+import ec.edu.espe.surefinventory.model.Menu;
+import ec.edu.espe.surefinventory.model.Product;
 
 
 /**
@@ -89,7 +91,7 @@ public class DashBoard {
             System.out.print("Selecciona una opción: ");
             
             dashboardOption = scanner.nextInt();
-            
+            Menu menu = new Menu(1);
             switch(dashboardOption){
                 case 1 -> {
                 System.out.println("Visualizando el Menú:");
@@ -120,8 +122,7 @@ public class DashBoard {
                 menu.removeProduct(id);
             }
                      
-                case 4: DashBoard.initMainDashboard();
-                break;
+                case 4 -> DashBoard.initMainDashboard();
                 
             }
         } while(dashboardOption<1 || dashboardOption>4);
