@@ -31,9 +31,7 @@ public class MainDataManager<T> {
         loadData();
     }
 
-    /**
-     * Loads data from the JSON file into the items list.
-     */
+    
     private void loadData() {
         try (Reader reader = new FileReader(filePath)) {
             List<T> loadedItems = gson.fromJson(reader, itemType);
@@ -47,9 +45,7 @@ public class MainDataManager<T> {
         }
     }
 
-    /**
-     * Saves the items list to the JSON file.
-     */
+    
     private void saveData() {
         try (Writer writer = new FileWriter(filePath)) {
             gson.toJson(items, writer);
@@ -58,22 +54,13 @@ public class MainDataManager<T> {
         }
     }
 
-    /**
-     * Adds a new item to the manager and saves changes to the file.
-     *
-     * @param item the item to add
-     */
+   
     public void addItem(T item) {
         items.add(item);
         saveData();
     }
 
-    /**
-     * Removes an item from the manager based on the provided predicate.
-     *
-     * @param predicate a condition to identify the item to remove
-     * @return true if an item was removed, false otherwise
-     */
+   
     public boolean removeItem(java.util.function.Predicate<T> predicate) {
         boolean removed = items.removeIf(predicate);
         if (removed) {
@@ -82,13 +69,6 @@ public class MainDataManager<T> {
         return removed;
     }
 
-    /**
-     * Updates an existing item in the manager.
-     *
-     * @param predicate   a condition to identify the item to update
-     * @param updatedItem the new item to replace the existing one
-     * @return true if the item was updated, false otherwise
-     */
     public boolean updateItem(java.util.function.Predicate<T> predicate, T updatedItem) {
         Optional<T> existingItem = items.stream().filter(predicate).findFirst();
         if (existingItem.isPresent()) {
@@ -100,11 +80,6 @@ public class MainDataManager<T> {
         return false;
     }
 
-    /**
-     * Retrieves all items managed by this instance.
-     *
-     * @return an unmodifiable list of items
-     */
     public List<T> getItems() {
         return Collections.unmodifiableList(items);
     }

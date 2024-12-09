@@ -26,5 +26,5 @@ public class InventoryDataManager {
         return inventoryManager;
     }
 
-    // Add additional inventory-specific methods here if needed
+    
 }
