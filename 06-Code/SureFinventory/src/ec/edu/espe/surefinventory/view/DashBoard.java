@@ -22,7 +22,7 @@ public class DashBoard {
                 2. Salir.
                 """);
 
-            int option = getIntInput("Selecciona una opción: ");
+            int option = getIntInput("Selecciona una opcion: ");
 
             switch (option) {
                 case 1 -> {
