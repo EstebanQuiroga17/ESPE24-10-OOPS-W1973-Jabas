@@ -3,13 +3,8 @@ package ec.edu.espe.surefinventory.view;
 import ec.edu.espe.surefinventory.model.Inventory;
 import ec.edu.espe.surefinventory.model.Product;
 import ec.edu.espe.surefinventory.model.Manager;
-<<<<<<< HEAD
 import utils.AdminDataManager;
 import utils.InventoryDataManager;
-=======
-import ec.edu.espe.surefinventory.model.Menu;
-import ec.edu.espe.surefinventory.model.Product;
->>>>>>> 2121b9f47d4935a9d32ad2e44b48ecaa31f77676
 
 import java.time.LocalDateTime;
 import java.util.Scanner;
@@ -34,75 +29,6 @@ public class DashBoard {
                     Manager mainManager = new Manager("Manager", "admin123");
                     initManagerDashboard(mainManager);
                 }
-<<<<<<< HEAD
-=======
-                case 2 -> System.out.println("Exiting application...");
-                default -> System.out.println("Invalid option. Please try again.");
-            }
-        } while(dashboardOption > 2 || dashboardOption < 1);
-       
-       
-       
-    }
-    
-    public static void initManagerDashboard(Manager manager, int option){
-        
-        System.out.println("Ingresa tu contrasena para iniciar: \n");
-        
-        String password = scanner.next();
-        
-        while(password.equals(manager.getPassword()) == false){
-           
-            System.out.println("Contrasena incorrecta, intentalo de nuevo...");
-            password = scanner.next();
-        }
-        
-        System.out.println("Bienvenido "+ manager.getUsername() + "\n");
-        
-        do{
-            
-            System.out.println("1. Modificar el inventario. \n"
-                               +"2. Crear un cajero. \n"                               
-                               +"3. Editar el Menu.\n"
-                               +"4. Volver al inicio. \n");
-            
-            option = scanner.nextInt();
-            switch(option){
-                case 1: //TODO create inventory dashboard
-                break;
-                
-                case 2: manager.createCashier();
-                break;
-                
-                case 3: DashBoard.initMenuDashboard();
-                break;
-                
-                case 4: DashBoard.initMainDashboard();
-                break;
-                
-                default: DashBoard.initMainDashboard();
-                break;
-            }
-            
-        }while(option<1 && option >5 );
-    }
-
-    public static void initMenuDashboard(){
-        do{
-            System.out.println("1. Ver el Menu. \n"+
-                               "2. Añadir un nuevo producto.\n"+
-                               "3. Remover un producto.\n"+
-                               "4. Regresar al inicio.\n");
-            System.out.print("Selecciona una opción: ");
-            
-            dashboardOption = scanner.nextInt();
-            Menu menu = new Menu(1);
-            switch(dashboardOption){
-                case 1 -> {
-                System.out.println("Visualizando el Menú:");
-                menu.displayMenu();
-            } 
->>>>>>> 2121b9f47d4935a9d32ad2e44b48ecaa31f77676
                 case 2 -> {
                     System.out.println("Saliendo del sistema...");
                     return;
@@ -133,25 +59,13 @@ public class DashBoard {
                 case 1 -> initInventoryDashboard();
                 case 2 -> createCashier();
                 
-                case 4 -> {
+                case 3 -> {
                     System.out.println("Regresando al menú principal...");
                     return;
                 }
                 default -> System.out.println("Opción inválida. Intenta nuevamente.");
             }
-<<<<<<< HEAD
         }
-=======
-                     
-                case 4 -> DashBoard.initMainDashboard();
-                
-            }
-        } while(dashboardOption<1 || dashboardOption>4);
-    }
-    
-    public DashBoard(int menuOption) {
-        this.dashboardOption = menuOption;
->>>>>>> 2121b9f47d4935a9d32ad2e44b48ecaa31f77676
     }
 
     private static void initInventoryDashboard() {
@@ -224,7 +138,7 @@ public class DashBoard {
         AdminDataManager.addCashier(new ec.edu.espe.surefinventory.model.Cashier(username, password));
     }
 
-    
+   
 
     private static boolean authenticateManager(Manager manager) {
         int attempts = 0;
