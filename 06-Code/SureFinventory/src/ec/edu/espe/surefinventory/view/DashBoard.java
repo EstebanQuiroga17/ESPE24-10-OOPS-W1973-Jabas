@@ -55,10 +55,9 @@ public class DashBoard {
         do{
             
             System.out.println("1. Modificar el inventario. \n"
-                               +"2. Crear un cajero. \n"
-                               +"3. Abrir la caja registradora. \n"
-                               +"4. Editar el Menu.\n"
-                               + "5. Volver al inicio. \n");
+                               +"2. Crear un cajero. \n"                               
+                               +"3. Editar el Menu.\n"
+                               +"4. Volver al inicio. \n");
             option = scanner.nextInt();
             switch(option){
                 case 1: //TODO create inventory dashboard
@@ -67,15 +66,14 @@ public class DashBoard {
                 case 2: manager.createCashier();
                 break;
                 
-                case 3: //TODO create cash register dashboard
+                case 3: //TODO create menu dashboard
                 break;
                 
-                case 4: //TODO insert Menu functions
+                case 4: DashBoard.initMainDashboard();
                 break;
                 
-                case 5: 
+                default: DashBoard.initMainDashboard();
                 break;
-                
             }
             
         }while(option<1 && option >5 );
