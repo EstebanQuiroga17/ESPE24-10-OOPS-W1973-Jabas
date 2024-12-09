@@ -26,7 +26,7 @@ public class DashBoard {
 
             switch (option) {
                 case 1 -> {
-                    Manager mainManager = new Manager("Manager", "admin123");
+                    Manager mainManager = new Manager("MayraCevallos", "padma108");
                     initManagerDashboard(mainManager);
                 }
                 case 2 -> {
