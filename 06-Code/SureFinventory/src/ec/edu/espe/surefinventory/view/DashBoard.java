@@ -10,7 +10,7 @@ import ec.edu.espe.surefinventory.model.Manager;
  */
 public class DashBoard {
     
-    private int dashboardOption;
+    private static int dashboardOption;
     public static Scanner scanner = new Scanner(System.in);
     
     public static void initMainDashboard(){
@@ -79,14 +79,27 @@ public class DashBoard {
         }while(option<1 && option >5 );
     }
 
-    public void initMenuDashboard(){
+    public static void initMenuDashboard(){
         do{
-            System.out.println("1. View Menu. \n"+
-                               "2. Add a new product.\n"+
-                               "3. Remove a product.\n"+
+            System.out.println("1. Ver el Menu. \n"+
+                               "2. Añadir un nuevo producto.\n"+
+                               "3. Remover un producto.\n"+
                                "4. Regresar al inicio.\n");
             
+            dashboardOption = scanner.nextInt();
+            
             switch(dashboardOption){
+                case 1: //TODO put showMenu method from Menu class
+                break;
+                
+                case 2: //TODO put addProduct method form Menu class
+                break;
+                
+                case 3: //TODO add removeProduct method form Menu class
+                break;
+                
+                case 4: DashBoard.initMainDashboard();
+                break;
                 
             }
         } while(dashboardOption<1 || dashboardOption>4);
