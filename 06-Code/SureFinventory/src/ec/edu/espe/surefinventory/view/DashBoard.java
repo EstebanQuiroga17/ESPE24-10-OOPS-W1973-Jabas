@@ -66,7 +66,7 @@ public class DashBoard {
                 case 2: manager.createCashier();
                 break;
                 
-                case 3: //TODO create menu dashboard
+                case 3: DashBoard.initMenuDashboard();
                 break;
                 
                 case 4: DashBoard.initMainDashboard();
@@ -79,6 +79,19 @@ public class DashBoard {
         }while(option<1 && option >5 );
     }
 
+    public void initMenuDashboard(){
+        do{
+            System.out.println("1. View Menu. \n"+
+                               "2. Add a new product.\n"+
+                               "3. Remove a product.\n"+
+                               "4. Regresar al inicio.\n");
+            
+            switch(dashboardOption){
+                
+            }
+        } while(dashboardOption<1 || dashboardOption>4);
+    }
+    
     public DashBoard(int menuOption) {
         this.dashboardOption = menuOption;
     }
