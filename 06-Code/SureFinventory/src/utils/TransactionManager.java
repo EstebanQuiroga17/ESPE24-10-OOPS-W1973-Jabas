@@ -1,5 +1,4 @@
 
-
 package utils;
 
 /**
@@ -7,113 +6,51 @@ package utils;
  * @author Benjamin Robalino <jabasteam>
  */
 
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 import ec.edu.espe.surefinventory.model.Expense;
 import ec.edu.espe.surefinventory.model.Income;
 
-import java.io.*;
-import java.util.ArrayList;
+import java.lang.reflect.Type;
 import java.util.List;
 
 public class TransactionManager {
-    private List<Income> incomes;
-    private List<Expense> expenses;
-    private String filePath; // New attribute for file path
+    private static final String INCOME_FILE_PATH = "data/incomes.json";
+    private static final String EXPENSE_FILE_PATH = "data/expenses.json";
+
+    private static final Type INCOME_LIST_TYPE = new TypeToken<List<Income>>() {}.getType();
+    private static final Type EXPENSE_LIST_TYPE = new TypeToken<List<Expense>>() {}.getType();
+
+    private final MainDataManager<Income> incomeManager;
+    private final MainDataManager<Expense> expenseManager;
 
     public TransactionManager() {
-        this.incomes = new ArrayList<>();
-        this.expenses = new ArrayList<>();
-        this.filePath = "transactions.json"; // Default file path
-    }
-
-    /**
-     * Constructor with file path.
-     *
-     * @param filePath Path where the JSON file will be saved/loaded.
-     */
-    public TransactionManager(String filePath) {
-        this.incomes = new ArrayList<>();
-        this.expenses = new ArrayList<>();
-        this.filePath = filePath;
+        this.incomeManager = new MainDataManager<>(INCOME_FILE_PATH, INCOME_LIST_TYPE);
+        this.expenseManager = new MainDataManager<>(EXPENSE_FILE_PATH, EXPENSE_LIST_TYPE);
     }
 
     public void addIncome(Income income) {
-        incomes.add(income);
+        incomeManager.addItem(income);
+        System.out.println("Income added successfully: " + income);
     }
 
     public void addExpense(Expense expense) {
-        expenses.add(expense);
+        expenseManager.addItem(expense);
+        System.out.println("Expense added successfully: " + expense);
     }
 
     public double calculateTotalIncome() {
-        return incomes.stream().mapToDouble(Income::getAmount).sum();
+        return incomeManager.getItems().stream().mapToDouble(Income::getAmount).sum();
     }
 
     public double calculateTotalExpenses() {
-        return expenses.stream().mapToDouble(Expense::getAmount).sum();
-    }
-
-    public double calculateNetBalance() {
-        return calculateTotalIncome() - calculateTotalExpenses();
+        return expenseManager.getItems().stream().mapToDouble(Expense::getAmount).sum();
     }
 
     public List<Income> getIncomes() {
-        return incomes;
+        return incomeManager.getItems();
     }
 
     public List<Expense> getExpenses() {
-        return expenses;
-    }
-
-    /**
-     * Sets the file path for saving/loading JSON data.
-     *
-     * @param filePath The file path to use.
-     */
-    public void setFilePath(String filePath) {
-        this.filePath = filePath;
-    }
-
-    /**
-     * Gets the current file path.
-     *
-     * @return The file path being used.
-     */
-    public String getFilePath() {
-        return filePath;
-    }
-
-    /**
-     * Saves the incomes and expenses to a JSON file.
-     */
-    public void saveToFile() {
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-
-        try (Writer writer = new FileWriter(filePath)) {
-            gson.toJson(this, writer);
-            System.out.println("Data saved to " + filePath);
-        } catch (IOException e) {
-            System.err.println("Error saving data: " + e.getMessage());
-        }
-    }
-
-    /**
-     * Loads the incomes and expenses from a JSON file.
-     */
-    public void loadFromFile() {
-        Gson gson = new Gson();
-
-        try (Reader reader = new FileReader(filePath)) {
-            TransactionManager loadedData = gson.fromJson(reader, TransactionManager.class);
-            this.incomes = loadedData.incomes;
-            this.expenses = loadedData.expenses;
-            System.out.println("Data loaded from " + filePath);
-        } catch (FileNotFoundException e) {
-            System.err.println("File not found at " + filePath + ". Starting with empty data.");
-        } catch (IOException e) {
-            System.err.println("Error loading data: " + e.getMessage());
-        }
+        return expenseManager.getItems();
     }
 }

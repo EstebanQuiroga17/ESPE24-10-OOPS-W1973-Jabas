@@ -1,25 +1,24 @@
 package ec.edu.espe.surefinventory.model;
 
-import utils.TransactionManager;
-import java.time.LocalDate;
-
 /**
  *
  * @author Esteban Quiroga
  */
+import utils.TransactionManager;
+import utils.InvoiceManager;
+
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 public class CashRegister {
     private LocalDate date;
-    private List<Invoice> invoiceList; // To store invoices
-    private TransactionManager transactionManager; // To manage incomes and expenses
+    private final TransactionManager transactionManager;
+    private final InvoiceManager invoiceManager;
 
     public CashRegister() {
         this.date = LocalDate.now();
-        this.invoiceList = new ArrayList<>();
         this.transactionManager = new TransactionManager();
+        this.invoiceManager = new InvoiceManager();
     }
 
     /**
@@ -29,7 +28,6 @@ public class CashRegister {
      */
     public void addIncome(Income income) {
         transactionManager.addIncome(income);
-        System.out.println("Income added: " + income);
     }
 
     /**
@@ -39,7 +37,6 @@ public class CashRegister {
      */
     public void addExpense(Expense expense) {
         transactionManager.addExpense(expense);
-        System.out.println("Expense added: " + expense);
     }
 
     /**
@@ -76,11 +73,10 @@ public class CashRegister {
      * @param invoice The invoice to add.
      */
     public void addInvoice(Invoice invoice) {
-        invoiceList.add(invoice);
-        System.out.println("Invoice added: " + invoice);
+        invoiceManager.getInvoiceManager().addItem(invoice);
     }
 
     public List<Invoice> getInvoices() {
-        return invoiceList;
+        return invoiceManager.getInvoiceManager().getItems();
     }
 }
