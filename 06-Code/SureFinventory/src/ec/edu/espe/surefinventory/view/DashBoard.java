@@ -134,6 +134,95 @@ public class DashBoard {
             }
         }
     }
+    private void manageCashRegister() {
+        Scanner scanner = new Scanner(System.in);
+        int choice;
+
+        do {
+            System.out.println("====== Cash Register Management ======");
+            System.out.println("1. Add Income");
+            System.out.println("2. Add Expense");
+            System.out.println("3. Generate Balance Report");
+            System.out.println("4. View All Incomes");
+            System.out.println("5. View All Expenses");
+            System.out.println("6. Back to Main Menu");
+            System.out.print("Enter your choice: ");
+            choice = scanner.nextInt();
+
+            switch (choice) {
+                case 1 -> addIncome();
+                case 2 -> addExpense();
+                case 3 -> generateBalanceReport();
+                case 4 -> viewAllIncomes();
+                case 5 -> viewAllExpenses();
+                case 6 -> System.out.println("Returning to main menu...");
+                default -> System.out.println("Invalid choice! Please try again.");
+            }
+        } while (choice != 6);
+    }
+
+        private void addIncome() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter income amount: ");
+        double amount = scanner.nextDouble();
+        scanner.nextLine();
+        System.out.print("Enter income description: ");
+        String description = scanner.nextLine();
+
+        Income income = new Income(amount, description, Calendar.getInstance());
+        cashRegister.addIncome(income);
+        System.out.println("Income added successfully: " + income);
+    }
+
+        private void addExpense() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter expense amount: ");
+        double amount = scanner.nextDouble();
+        scanner.nextLine();
+        System.out.print("Enter expense description: ");
+        String description = scanner.nextLine();
+
+        Expense expense = new Expense(amount, description, Calendar.getInstance());
+        cashRegister.addExpense(expense);
+        System.out.println("Expense added successfully: " + expense);
+    }
+
+        private void generateBalanceReport() {
+        Income incomeReport = cashRegister.createIncomeReport();
+        Expense expenseReport = cashRegister.createExpenseReport();
+
+        double balance = incomeReport.getAmount() - expenseReport.getAmount();
+        System.out.println("====== Balance Report ======");
+        System.out.println("Total Income: $" + incomeReport.getAmount());
+        System.out.println("Total Expenses: $" + expenseReport.getAmount());
+        System.out.println("Net Balance: $" + balance);
+    }
+
+        private void viewAllIncomes() {
+        List<Income> incomes = cashRegister.getAllIncomes();
+
+        if (incomes.isEmpty()) {
+            System.out.println("No incomes recorded.");
+        } else {
+            System.out.println("====== All Incomes ======");
+            for (Income income : incomes) {
+                System.out.println(income);
+            }
+        }
+    }
+
+        private void viewAllExpenses() {
+        List<Expense> expenses = cashRegister.getAllExpenses();
+
+        if (expenses.isEmpty()) {
+            System.out.println("No expenses recorded.");
+        } else {
+            System.out.println("====== All Expenses ======");
+            for (Expense expense : expenses) {
+                System.out.println(expense);
+            }
+        }
+    }
 
     private void manageCashiers() {
         Scanner scanner = new Scanner(System.in);
@@ -179,9 +268,7 @@ public class DashBoard {
         }
     }
 
-    private void manageCashRegister() {
-        // Implementation remains as it was.
-    }
+   
 
     private void manageOrdersAndInvoices() {
         Scanner scanner = new Scanner(System.in);
