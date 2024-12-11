@@ -1,83 +1,61 @@
 package ec.edu.espe.surefinventory.model;
 
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
 
-
-import java.time.LocalDateTime;
-
-
-/**
- *
- * @author Esteban Quiroga
- */
 public class Inventory {
-   
-    
-    private LocalDateTime lastUpdated;
-    private Product productList;
-    private int totalQuantity;
+    private Calendar lastUpdated;
+    private List<Product> products;
 
-    public Inventory(LocalDateTime lastUpdated, Product productList, int totalQuantity) {
+    public Inventory(Calendar lastUpdated) {
         this.lastUpdated = lastUpdated;
-        this.productList = productList;
-        this.totalQuantity = totalQuantity;
+        this.products = new ArrayList<>();
     }
 
-    @Override
-    public String toString() {
-        return "Inventory{" + "lastUpdated=" + lastUpdated + ", productList=" + productList + ", totalQuantity=" + totalQuantity + '}';
-    }
-    
-    /**
-     * @return the lastUpdated
-     */
-    public LocalDateTime getLastUpdated() {
+    // Getters
+    public Calendar getLastUpdated() {
         return lastUpdated;
     }
 
-    /**
-     * @param lastUpdated the lastUpdated to set
-     */
-    public void setLastUpdated(LocalDateTime lastUpdated) {
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    // Setters
+    public void setLastUpdated(Calendar lastUpdated) {
         this.lastUpdated = lastUpdated;
     }
 
-    /**
-     * @return the productList
-     */
-    public Product getProductList() {
-        return productList;
+    // Methods for managing products
+    public void addProduct(Product product) {
+        Product existingProduct = findProductById(product.getId());
+        if (existingProduct != null) {
+            existingProduct.setQuantity(existingProduct.getQuantity() + product.getQuantity());
+        } else {
+            products.add(product);
+        }
+        lastUpdated = Calendar.getInstance();
     }
 
-    /**
-     * @param productList the productList to set
-     */
-    public void setProductList(Product productList) {
-        this.productList = productList;
+    public boolean removeProduct(int productId) {
+        return products.removeIf(product -> product.getId() == productId);
     }
 
-    /**
-     * @return the totalQuantity
-     */
+    public Product findProductById(int productId) {
+        for (Product product : products) {
+            if (product.getId() == productId) {
+                return product;
+            }
+        }
+        return null;
+    }
+
     public int getTotalQuantity() {
+        int totalQuantity = 0;
+        for (Product product : products) {
+            totalQuantity += product.getQuantity();
+        }
         return totalQuantity;
     }
-
-    /**
-     * @param totalQuantity the totalQuantity to set
-     */
-    public void setTotalQuantity(int totalQuantity) {
-        this.totalQuantity = totalQuantity;
-
-    }
-    
-    public void updateInventory(Inventory inventory){
-        
-    }
-    
-    public void deleteInventory(Inventory inventory){
-        
-    }
-
-
-    
 }

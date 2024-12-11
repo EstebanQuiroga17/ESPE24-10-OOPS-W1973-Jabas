@@ -1,4 +1,3 @@
-
 package ec.edu.espe.surefinventory.model;
 
 /**
@@ -123,3 +122,4 @@ public class Invoice {
     System.out.println("=============================");
 }
 }
+
