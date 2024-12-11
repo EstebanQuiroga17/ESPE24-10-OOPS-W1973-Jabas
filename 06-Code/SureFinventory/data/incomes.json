@@ -1,0 +1,14 @@
+[
+  {
+    "amount": 234.0,
+    "description": "sells",
+    "date": {
+      "year": 2024,
+      "month": 11,
+      "dayOfMonth": 11,
+      "hourOfDay": 11,
+      "minute": 19,
+      "second": 4
+    }
+  }
+]
