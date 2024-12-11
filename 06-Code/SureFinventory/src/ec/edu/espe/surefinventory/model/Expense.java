@@ -1,18 +1,13 @@
-
 package ec.edu.espe.surefinventory.model;
 
-import java.time.LocalDate;
+import java.util.Calendar;
 
-/**
- *
- * @author Benjamin Robalino <jabasteam>
- */
 public class Expense {
     private double amount;
     private String description;
-    private LocalDate date;
+    private Calendar date;
 
-   public Expense(double amount, String description, LocalDate date) {
+    public Expense(double amount, String description, Calendar date) {
         this.amount = amount;
         this.description = description;
         this.date = date;
@@ -34,11 +29,11 @@ public class Expense {
         this.description = description;
     }
 
-    public LocalDate getDate() {
+    public Calendar getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(Calendar date) {
         this.date = date;
     }
 
@@ -47,7 +42,7 @@ public class Expense {
         return "Expense{" +
                "amount=" + amount +
                ", description='" + description + '\'' +
-               ", date=" + date +
+               ", date=" + date.getTime() +
                '}';
     }
 }

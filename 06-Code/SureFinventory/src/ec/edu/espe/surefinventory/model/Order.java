@@ -1,53 +1,39 @@
 package ec.edu.espe.surefinventory.model;
 
-/**
- *
- * @author Matias Rojas 
- */
-import ec.edu.espe.surefinventory.model.Inventory;
-import ec.edu.espe.surefinventory.model.Product;
-import java.time.LocalDate;
+import java.util.Calendar;
 import java.util.List;
 
 public class Order {
-    private float price;
+    private double totalPrice;
     private int itemQuantity;
     private int id;
-    private List<Product> productList;
-    private LocalDate date;
+    private List<MainDish> mainDishes;
+    private Calendar date;
 
-    public Order(float price, int itemQuantity, int id, List<Product> productList, LocalDate date) {
-        this.price = price;
+    public Order(double totalPrice, int itemQuantity, int id, List<MainDish> mainDishes, Calendar date) {
+        this.totalPrice = totalPrice;
         this.itemQuantity = itemQuantity;
         this.id = id;
-        this.productList = productList;
+        this.mainDishes = mainDishes;
         this.date = date;
     }
 
     public void printOrder() {
         System.out.println("Order ID: " + id);
-        System.out.println("Date: " + date);
-        System.out.println("Total Price: $" + price);
+        System.out.println("Date: " + date.getTime());
+        System.out.println("Total Price: $" + totalPrice);
         System.out.println("Items:");
-        for (Product product : productList) {
-            System.out.println("- " + product.getName());
+        for (MainDish mainDish : mainDishes) {
+            System.out.println("- " + mainDish.getName() + " (Price: $" + mainDish.getPrice() + ")");
         }
     }
 
-    //public void removeInventoryProducts(Inventory inventory) {
-      //  for (Product product : productList) {
-        //    inventory.removeProduct(product);//
-        //}
-    //}
-
-    // Getters and setters 
-
-    public float getPrice() {
-        return price;
+    public double getTotalPrice() {
+        return totalPrice;
     }
 
-    public void setPrice(float price) {
-        this.price = price;
+    public void setTotalPrice(double totalPrice) {
+        this.totalPrice = totalPrice;
     }
 
     public int getItemQuantity() {
@@ -66,21 +52,19 @@ public class Order {
         this.id = id;
     }
 
-    public List<Product> getProductList() {
-        return productList;
+    public List<MainDish> getMainDishList() {
+        return mainDishes;
     }
 
-    public void setProductList(List<Product> productList) {
-        this.productList = productList;
+    public void setMainDishList(List<MainDish> mainDishList) {
+        this.mainDishes = mainDishList;
     }
 
-    public LocalDate getDate() {
+    public Calendar getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(Calendar date) {
         this.date = date;
     }
 }
-
-    

@@ -1,4 +1,3 @@
-
 package utils;
 
 /**
@@ -14,18 +13,18 @@ import java.lang.reflect.Type;
 import java.util.List;
 
 public class TransactionManager {
-    private static final String INCOME_FILE_PATH = "data/incomes.json";
-    private static final String EXPENSE_FILE_PATH = "data/expenses.json";
+    private static final String incomeFilePath = "data/incomes.json";
+    private static final String expenseFilePath = "data/expenses.json";
 
-    private static final Type INCOME_LIST_TYPE = new TypeToken<List<Income>>() {}.getType();
-    private static final Type EXPENSE_LIST_TYPE = new TypeToken<List<Expense>>() {}.getType();
+    private static final Type incomeListType = new TypeToken<List<Income>>() {}.getType();
+    private static final Type expenseListType = new TypeToken<List<Expense>>() {}.getType();
 
     private final MainDataManager<Income> incomeManager;
     private final MainDataManager<Expense> expenseManager;
 
     public TransactionManager() {
-        this.incomeManager = new MainDataManager<>(INCOME_FILE_PATH, INCOME_LIST_TYPE);
-        this.expenseManager = new MainDataManager<>(EXPENSE_FILE_PATH, EXPENSE_LIST_TYPE);
+        this.incomeManager = new MainDataManager<>(incomeFilePath, incomeListType);
+        this.expenseManager = new MainDataManager<>(expenseFilePath, expenseListType);
     }
 
     public void addIncome(Income income) {
