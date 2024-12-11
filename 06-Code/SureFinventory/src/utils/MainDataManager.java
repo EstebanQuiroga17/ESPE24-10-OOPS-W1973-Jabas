@@ -1,5 +1,3 @@
-
-
 package utils;
 
 /**
@@ -17,8 +15,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-public class MainDataManager<T> {
-    private final List<T> items;
+public class MainDataManager<DataType> {
+    private final List<DataType> items;
     private final String filePath;
     private final Gson gson;
     private final Type itemType;
@@ -31,10 +29,9 @@ public class MainDataManager<T> {
         loadData();
     }
 
-    
     private void loadData() {
         try (Reader reader = new FileReader(filePath)) {
-            List<T> loadedItems = gson.fromJson(reader, itemType);
+            List<DataType> loadedItems = gson.fromJson(reader, itemType);
             if (loadedItems != null) {
                 items.addAll(loadedItems);
             }
@@ -45,7 +42,6 @@ public class MainDataManager<T> {
         }
     }
 
-    
     private void saveData() {
         try (Writer writer = new FileWriter(filePath)) {
             gson.toJson(items, writer);
@@ -54,14 +50,12 @@ public class MainDataManager<T> {
         }
     }
 
-   
-    public void addItem(T item) {
+    public void addItem(DataType item) {
         items.add(item);
         saveData();
     }
 
-   
-    public boolean removeItem(java.util.function.Predicate<T> predicate) {
+    public boolean removeItem(java.util.function.Predicate<DataType> predicate) {
         boolean removed = items.removeIf(predicate);
         if (removed) {
             saveData();
@@ -69,8 +63,8 @@ public class MainDataManager<T> {
         return removed;
     }
 
-    public boolean updateItem(java.util.function.Predicate<T> predicate, T updatedItem) {
-        Optional<T> existingItem = items.stream().filter(predicate).findFirst();
+    public boolean updateItem(java.util.function.Predicate<DataType> predicate, DataType updatedItem) {
+        Optional<DataType> existingItem = items.stream().filter(predicate).findFirst();
         if (existingItem.isPresent()) {
             int index = items.indexOf(existingItem.get());
             items.set(index, updatedItem);
@@ -80,7 +74,7 @@ public class MainDataManager<T> {
         return false;
     }
 
-    public List<T> getItems() {
+    public List<DataType> getItems() {
         return Collections.unmodifiableList(items);
     }
 }

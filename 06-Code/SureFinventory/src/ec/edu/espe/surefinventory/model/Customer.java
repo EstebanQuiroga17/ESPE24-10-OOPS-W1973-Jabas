@@ -1,4 +1,3 @@
-
 package ec.edu.espe.surefinventory.model;
 
 /**
@@ -14,6 +13,11 @@ public class Customer {
         this.id = id;
         this.name = name;
         this.phoneNumber = phoneNumber;
+    }
+
+    @Override
+    public String toString() {
+        return "Customer{" + "id=" + id + ", name=" + name + ", phoneNumber=" + phoneNumber + '}';
     }
    
 }
