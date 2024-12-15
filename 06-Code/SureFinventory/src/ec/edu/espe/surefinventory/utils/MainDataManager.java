@@ -1,4 +1,4 @@
-package utils;
+package ec.edu.espe.surefinventory.utils;
 
 /**
  *

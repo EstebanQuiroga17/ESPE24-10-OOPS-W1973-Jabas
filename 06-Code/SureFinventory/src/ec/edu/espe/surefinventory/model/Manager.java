@@ -1,7 +1,7 @@
 package ec.edu.espe.surefinventory.model;
 
 import java.util.Scanner;
-import utils.AdminDataManager;
+import ec.edu.espe.surefinventory.utils.AdminDataManager;
 
 /**
  *

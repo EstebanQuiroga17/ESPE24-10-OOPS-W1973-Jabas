@@ -1,4 +1,4 @@
-package utils;
+package ec.edu.espe.surefinventory.utils;
 
 import com.google.gson.reflect.TypeToken;
 import ec.edu.espe.surefinventory.model.Cashier;

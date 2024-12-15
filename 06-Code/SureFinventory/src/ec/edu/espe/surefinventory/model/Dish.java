@@ -1,12 +1,12 @@
 package ec.edu.espe.surefinventory.model;
 
-public class MainDish {
+public class Dish {
     private String name;
     private int id;
     private double price;
 
     // Constructor
-    public MainDish(int id, String name, double price) {
+    public Dish(int id, String name, double price) {
         this.id = id;
         this.name = name;
         this.price = price;

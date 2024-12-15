@@ -7,10 +7,10 @@ public class Order {
     private double totalPrice;
     private int itemQuantity;
     private int id;
-    private List<MainDish> mainDishes;
+    private List<Dish> mainDishes;
     private Calendar date;
 
-    public Order(double totalPrice, int itemQuantity, int id, List<MainDish> mainDishes, Calendar date) {
+    public Order(double totalPrice, int itemQuantity, int id, List<Dish> mainDishes, Calendar date) {
         this.totalPrice = totalPrice;
         this.itemQuantity = itemQuantity;
         this.id = id;
@@ -23,7 +23,7 @@ public class Order {
         System.out.println("Date: " + date.getTime());
         System.out.println("Total Price: $" + totalPrice);
         System.out.println("Items:");
-        for (MainDish mainDish : mainDishes) {
+        for (Dish mainDish : mainDishes) {
             System.out.println("- " + mainDish.getName() + " (Price: $" + mainDish.getPrice() + ")");
         }
     }
@@ -52,11 +52,11 @@ public class Order {
         this.id = id;
     }
 
-    public List<MainDish> getMainDishList() {
+    public List<Dish> getMainDishList() {
         return mainDishes;
     }
 
-    public void setMainDishList(List<MainDish> mainDishList) {
+    public void setMainDishList(List<Dish> mainDishList) {
         this.mainDishes = mainDishList;
     }
 

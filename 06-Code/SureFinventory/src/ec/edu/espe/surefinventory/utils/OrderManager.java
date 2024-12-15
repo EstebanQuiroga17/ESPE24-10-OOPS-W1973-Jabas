@@ -1,4 +1,4 @@
-package utils;
+package ec.edu.espe.surefinventory.utils;
 
 import ec.edu.espe.surefinventory.model.Order;
 import com.google.gson.reflect.TypeToken;

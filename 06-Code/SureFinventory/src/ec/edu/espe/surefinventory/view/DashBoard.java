@@ -8,7 +8,7 @@ import java.util.*;
 public class DashBoard {
     private final CashRegister cashRegister;
     private final Map<String, String> userCredentials;
-    private final List<MainDish> mainDishes;
+    private final List<Dish> mainDishes;
     private final List<Order> orders;
     private final List<Invoice> invoices;
     private final List<Cashier> cashiers;
@@ -119,7 +119,7 @@ public class DashBoard {
         System.out.print("Enter Main Dish Price: ");
         double price = scanner.nextDouble();
 
-        MainDish mainDish = new MainDish(id, name, price);
+        Dish mainDish = new Dish(id, name, price);
         mainDishes.add(mainDish);
         System.out.println("Main dish added successfully: " + mainDish);
     }
@@ -129,7 +129,7 @@ public class DashBoard {
             System.out.println("No main dishes available.");
         } else {
             System.out.println("====== All Main Dishes ======");
-            for (MainDish dish : mainDishes) {
+            for (Dish dish : mainDishes) {
                 System.out.println(dish);
             }
         }
@@ -293,7 +293,7 @@ public class DashBoard {
 
     private void createOrder() {
         Scanner scanner = new Scanner(System.in);
-        List<MainDish> dishesInOrder = new ArrayList<>();
+        List<Dish> dishesInOrder = new ArrayList<>();
 
         System.out.println("Enter dishes for the order:");
         String choice;
@@ -306,13 +306,13 @@ public class DashBoard {
             System.out.print("Enter Main Dish Price: ");
             double price = scanner.nextDouble();
 
-            MainDish dish = new MainDish(id, name, price);
+            Dish dish = new Dish(id, name, price);
             dishesInOrder.add(dish);
             System.out.print("Add another dish? (yes/no): ");
             choice = scanner.next();
         } while (choice.equalsIgnoreCase("yes"));
 
-        double totalPrice = dishesInOrder.stream().mapToDouble(MainDish::getPrice).sum();
+        double totalPrice = dishesInOrder.stream().mapToDouble(Dish::getPrice).sum();
         int itemCount = dishesInOrder.size();
         Order order = new Order(totalPrice, itemCount, orders.size() + 1, dishesInOrder, Calendar.getInstance());
 
