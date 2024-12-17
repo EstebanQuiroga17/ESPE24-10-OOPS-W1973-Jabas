@@ -2,82 +2,77 @@
 package ec.edu.espe.surefinventory.utils;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
+import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Scanner;
+
 
 /**
  *
  * @author Esteban Quiroga 
  */
 public class JsonFileManager {
-    Gson gson = new Gson();
+    Gson gson = new GsonBuilder().setPrettyPrinting().create();
     String filePath;
     FileReader reader;
     
     
-    public <T> ArrayList<T> decerializeJson(){
-        try(FileReader reader = new FileReader(filePath)){
-
-            Type arrayList = new TypeToken<T>() {}.getType();
+    public <T> ArrayList<T> decerializeJson(Class<T> clazz) {
+        try (FileReader reader = new FileReader(filePath)) {
+         
+            Type listType = TypeToken.getParameterized(ArrayList.class, clazz).getType();
             
-            ArrayList<T> objects = gson.fromJson(reader, arrayList);
+            
+            ArrayList<T> objects = gson.fromJson(reader, listType);
             
             return objects;
-            
-            }catch(IOException e) {
-                e.printStackTrace();
-            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         
         return null;
     }
     
-    public <T> void updateObject(String attribute, T newValue){
-        try{
-            FileReader reader = new FileReader(filePath);
-            JsonObject jsonObject = JsonParser.parseReader(reader).getAsJsonObject();
-            reader.close();
-            
-            while(jsonObject.has(attribute)==false)
+    public <T> void printJson(ArrayList<T> arrayList){
+        int index = 1; 
+            for(T object : arrayList)
             {
-                System.out.println("No se encontro el atributo."
-                        + "\n Ingresa uno nuevo.\n");
-                Scanner scanner = new Scanner(System.in);
-                attribute = scanner.next();
+                System.out.println(index + ":" + object);
+                index++;
             }
+    }
             
-            if(newValue instanceof Number){
-                jsonObject.addProperty(attribute, (Number) newValue);
-            }
-            else if(newValue instanceof String){
-                jsonObject.addProperty(attribute, (String) newValue);
-            }
+    public <T> T searchObjectByIndex(ArrayList<T> arrayList,int index){
+        
+        T object = arrayList.get(index-1);
+        return object;
+    }
+    
+    public static <T> void changeAttribute(T object, String attributeName, Object newValue) {
+        try {
+           
+            Class<?> clazz = object.getClass();
             
-            FileWriter writer = new FileWriter(filePath);
-                gson.toJson(jsonObject, writer);
-                writer.close();
             
-            System.out.println("Atributo actualizado correctamente.\n");
-        }catch (IOException e) {
+            Field field = clazz.getDeclaredField(attributeName);
+            field.setAccessible(true);  
+
+            field.set(object, newValue);
+            
+            System.out.println("Atributo cambiado con exito.");
+
+        } catch (NoSuchFieldException | IllegalAccessException e) {
             e.printStackTrace();
+            System.out.println("Error al cambiar el atributo.");
         }
     }
-
+    
     public JsonFileManager(String filePath) {
         this.filePath = filePath;
-    }
-
-    
-    public static void main(String[] args) {
-        JsonFileManager incomesManager = new JsonFileManager("C:\\Users\\TEVS\\ESPE2410-OOPSW1973-JABAS\\06-Code\\SureFinventory\\data\\incomes.json");
-        
-        System.out.println(incomesManager.decerializeJson());
     }
 }
 

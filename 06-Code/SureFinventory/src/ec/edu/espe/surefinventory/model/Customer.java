@@ -58,6 +58,11 @@ public class Customer {
         this.idNumber = idNumber;
     }
 
+    @Override
+    public String toString() {
+        return "Customer{" + "name=" + name + ", phoneNumber=" + phoneNumber + ", idNumber=" + idNumber + '}';
+    }
+
     
    
 }
