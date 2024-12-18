@@ -4,7 +4,9 @@ package ec.edu.espe.surefinventory.utils;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+import ec.edu.espe.surefinventory.model.Customer;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.lang.reflect.Type;
@@ -46,7 +48,7 @@ public class JsonFileManager {
             }
     }
             
-    public <T> T searchObjectByIndex(ArrayList<T> arrayList,int index){
+    public static <T> T searchObjectByIndex(ArrayList<T> arrayList,int index){
         
         T object = arrayList.get(index-1);
         return object;
@@ -71,8 +73,33 @@ public class JsonFileManager {
         }
     }
     
+    public static <T> void deleteObjectByIndex(int index, ArrayList<T> objects){
+        objects.remove(index-1); 
+    }
+    
+    
+    public void updateJsonFile(String json){
+        try{
+            FileWriter writer = new FileWriter(filePath);
+            
+            writer.write(json);
+        }catch (IOException ex){
+            ex.printStackTrace();
+        }
+    }
+    
+    
     public JsonFileManager(String filePath) {
         this.filePath = filePath;
+    }
+    
+    
+    public static void main(String[] args) {
+        
+        JsonFileManager customerFileManager = new JsonFileManager("06-Code/SureFinventory/data/customer.json");
+        ArrayList<Customer> customers;
+        
+        customers = customerFileManager.decerializeJson(Customer.class);     
     }
 }
 
