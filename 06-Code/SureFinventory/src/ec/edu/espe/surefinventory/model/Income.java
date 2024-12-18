@@ -39,10 +39,12 @@ public class Income {
 
     @Override
     public String toString() {
-        return "Income{" +
-               "amount=" + amount +
-               ", description='" + description + '\'' +
-               ", date=" + date.getTime() +
-               '}';
-    }
+        return String.format(
+        "%-15s | %-30s | %-25s%n" +
+        "--------------------------------------------------%n" +
+        "$%-14.2f | %-30s | %-25s",
+        "Amount", "Description", "Date", 
+        amount, description, date.toString()
+    );
+}
 }

@@ -10,6 +10,18 @@ public class Order {
     private List<Dish> mainDishes;
     private Calendar date;
 
+    @Override
+    public String toString() {
+        return String.format(
+        "%-15s | %-15s | %-10s | %-20s | %-20s%n" +
+        "----------------------------------------------------------------------------------%n" +
+        "$%-14.2f | %-15d | %-10d | %-20s | %-20s",
+        "Total Price", "Item Quantity", "ID", "Main Dishes", "Date",
+        totalPrice, itemQuantity, id, mainDishes, date.toString()
+    );
+}
+
+
     public Order(double totalPrice, int itemQuantity, int id, List<Dish> mainDishes, Calendar date) {
         this.totalPrice = totalPrice;
         this.itemQuantity = itemQuantity;

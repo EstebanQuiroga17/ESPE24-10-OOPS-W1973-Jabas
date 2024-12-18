@@ -8,6 +8,11 @@ public class Cashier {
     private String username;
     private String password;
 
+    @Override
+    public String toString() {
+        return "Cashier{" + "username=" + username + ", password=" + password + '}';
+    }
+
     public Cashier(String username,String password) {
         this.username = username;
         this.password = password;

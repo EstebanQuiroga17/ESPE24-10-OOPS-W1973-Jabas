@@ -38,20 +38,23 @@ public class Dish {
         this.price = price;
     }
 
-    // Utility methods
+   
     public void updateDetails(String newName, double newPrice) {
         this.name = newName;
         this.price = newPrice;
     }
 
-    // toString Method
+    
     @Override
     public String toString() {
-        return "MainDish{" +
-               "id=" + id +
-               ", name='" + name + '\'' +
-               ", price=" + price +
-               '}';
-    }
+        return String.format(
+        "%-10s | %-20s | %-10s%n" +
+        "---------------------------------%n" +
+        "%-10d | %-20s | $%-10.2f",
+        "ID", "Name", "Price", 
+        id, name, price
+    );
+        }
+
 }
 

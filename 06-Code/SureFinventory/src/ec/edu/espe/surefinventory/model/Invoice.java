@@ -14,8 +14,15 @@ public class Invoice {
 
     @Override
     public String toString() {
-        return "Invoice{" + "customer=" + customer + ", paymentMethod=" + paymentMethod + ", id=" + id + ", total=" + total + ", iva=" + iva + ", description=" + description + '}';
-    }
+        return String.format(
+        "%-20s | %-20s | %-10s | %-15s | %-15s | %-30s%n" +
+        "----------------------------------------------------------------------------------%n" +
+        "%-20s | %-20s | %-10d | $%-14.2f | $%-14.2f | %-30s",
+        "Customer", "Payment Method", "ID", "Total", "IVA", "Description",
+        customer, paymentMethod, id, total, iva, description
+    );
+}
+
     
 
     

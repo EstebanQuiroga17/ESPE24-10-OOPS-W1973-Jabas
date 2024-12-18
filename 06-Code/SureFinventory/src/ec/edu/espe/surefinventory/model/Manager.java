@@ -11,6 +11,17 @@ public class Manager {
     private String username;
     private String password;
 
+       @Override
+    public String toString() {
+        return String.format(
+        "%-20s | %-20s | %-20s%n" +
+        "--------------------------------------------------%n" +
+        "%-20s | %-20s",
+        "Username", "Password", 
+        username, password
+    );
+}
+
     
     public Manager(String username, String password) {
         this.username = username;

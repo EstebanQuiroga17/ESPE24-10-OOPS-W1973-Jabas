@@ -60,8 +60,14 @@ public class Customer {
 
     @Override
     public String toString() {
-        return "Customer{" + "name=" + name + ", phoneNumber=" + phoneNumber + ", idNumber=" + idNumber + '}';
-    }
+    return String.format(
+        "%-10s | %-15s | %-10s%n" +
+        "---------------------------------%n" +
+        "%-10s | %-15s | %-10s",
+        "Name", "Phone", "ID", 
+        name, phoneNumber, idNumber
+    );
+}
 
     
    
