@@ -1,4 +1,4 @@
-package ec.edu.espe.surefinventory.view;
+    package ec.edu.espe.surefinventory.view;
 
 import ec.edu.espe.surefinventory.model.*;
 import java.security.MessageDigest;

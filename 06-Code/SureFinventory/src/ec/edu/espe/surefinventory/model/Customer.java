@@ -7,12 +7,12 @@ package ec.edu.espe.surefinventory.model;
 public class Customer {
    private String name;
    private int phoneNumber;
-   private int idNumber;
+   private int id;
 
-    public Customer(String name, int phoneNumber, int idNumber) {
+    public Customer(String name, int phoneNumber, int id) {
         this.name = name;
         this.phoneNumber = phoneNumber;
-        this.idNumber = idNumber;
+        this.id = id;
     }
    
 
@@ -48,14 +48,14 @@ public class Customer {
      * @return the idNumber
      */
     public int getIdNumber() {
-        return idNumber;
+        return id;
     }
 
     /**
      * @param idNumber the idNumber to set
      */
     public void setIdNumber(int idNumber) {
-        this.idNumber = idNumber;
+        this.id = idNumber;
     }
 
     @Override
@@ -65,7 +65,9 @@ public class Customer {
         "---------------------------------%n" +
         "%-10s | %-15s | %-10s",
         "Name", "Phone", "ID", 
-        name, phoneNumber, idNumber
+        name, phoneNumber, id+
+                "\n"
+         
     );
 }
 
