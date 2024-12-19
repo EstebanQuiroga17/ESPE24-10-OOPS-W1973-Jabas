@@ -77,13 +77,14 @@ public class JsonFileManager {
     }
     
     
-    public void updateJsonFile(String json){
-        try{
-            FileWriter writer = new FileWriter(filePath);
-            
+    public <T> void updateJsonFile(ArrayList<T> objects) {
+        try (FileWriter writer = new FileWriter(filePath)) {            
+            String json = gson.toJson(objects);          
             writer.write(json);
-            
-        }catch (IOException ex){
+            writer.flush(); 
+            System.out.println("Archivo JSON actualizado correctamente.");
+        } catch (IOException ex) {
+            System.err.println("Error al escribir en el archivo JSON: " + ex.getMessage());
             ex.printStackTrace();
         }
     }
