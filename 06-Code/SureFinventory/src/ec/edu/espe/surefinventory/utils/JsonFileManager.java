@@ -81,14 +81,12 @@ public class JsonFileManager {
         try (FileWriter writer = new FileWriter(filePath)) {            
             String json = gson.toJson(objects);          
             writer.write(json);
-<<<<<<< HEAD
-        }catch (IOException ex){
+            writer.flush();
 
-            writer.flush(); 
             System.out.println("Archivo JSON actualizado correctamente.");
         } catch (IOException ex) {
             System.err.println("Error al escribir en el archivo JSON: " + ex.getMessage());
->>>>>>> 3c1181162522f60c91e5671f957baafcce395350
+
             ex.printStackTrace();
         }
     }
@@ -137,9 +135,7 @@ public class JsonFileManager {
         System.out.println("La nueva lista es: \n");
         customerFileManager.printJson(customers);
         
-        Gson gson1 = new Gson();
-        String json = gson1.toJson(customers);
-        customerFileManager.updateJsonFile(json);
+       customerFileManager.updateJsonFile(customers);
     }
 }
 

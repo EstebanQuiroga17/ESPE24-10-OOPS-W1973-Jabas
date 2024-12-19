@@ -1,4 +1,7 @@
 [
- {"name": "juan", "phoneNumber": 2131312, "id": 1234},
- {"name": "ana", "phoneNumber": 12, "id": 124}
+  {
+    "name": "juan",
+    "phoneNumber": 1234,
+    "id": 1234
+  }
 ]
