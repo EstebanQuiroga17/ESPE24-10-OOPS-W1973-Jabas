@@ -82,7 +82,6 @@ public class JsonFileManager {
             FileWriter writer = new FileWriter(filePath);
             
             writer.write(json);
-            
         }catch (IOException ex){
             ex.printStackTrace();
         }
