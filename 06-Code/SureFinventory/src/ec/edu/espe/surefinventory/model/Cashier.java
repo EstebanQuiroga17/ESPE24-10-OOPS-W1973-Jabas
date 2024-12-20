@@ -10,7 +10,9 @@ public class Cashier {
 
     @Override
     public String toString() {
-        return "Cashier{" + "username=" + username + ", password=" + password + '}';
+        return "Cashier{" + "username=" + username +
+                ", password=" + password +
+                "\n";
     }
 
     public Cashier(String username,String password) {
