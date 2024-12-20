@@ -2,63 +2,63 @@ package ec.edu.espe.surefinventory.model;
 
 import java.util.Scanner;
 import ec.edu.espe.surefinventory.utils.*;
+import java.util.ArrayList;
+import java.util.Calendar;
 
 /**
  *
- * @author Esteban Quiroga
+ * @author Matias Rojas
  */
 public class Manager {
     private String username;
     private String password;
 
-       @Override
-    public String toString() {
-        return String.format(
-        "%-20s | %-20s | %-20s%n" +
-        "--------------------------------------------------%n" +
-        "%-20s | %-20s",
-        "Username", "Password", 
-        username, password +
-                "\n"
-    );
-}
-
-    
     public Manager(String username, String password) {
         this.username = username;
         this.password = password;
     }
     
-    
-  
-    
-    public void createCashier(){
-        Scanner scanner = new Scanner(System.in);
-        
-        System.out.println("Ingrese el nombre de usuario.");
-            String newUsername = scanner.nextLine();
-        
-        System.out.println("Ingrese una contrasena.");
-            String newPassword = scanner.nextLine();
-        
-        Cashier cashier = new Cashier(username, password);
-        
-        
-        
-        System.out.println(cashier +"Creado con exito");
-        
+
+    @Override
+    public String toString() {
+        return "Manager{" + "username=" + username + ", password=" + password + '}';
     }
     
-   
-    
-    public void closeCashRegister(){
+    public void chanMenu(Menu menu){
         //TODO code method
     }
     
-    public void editMenu(Menu menu){
-        //TODO code method
+    public Order takeOrder(Customer customer, ArrayList<Dish> dishes){
+      //TODO code method 
+        Order order = null;      
+        return order;
         
     }
+    
+    public Cashier createCashier(String username, String password){
+       //TODO code method
+        Cashier cashier = null;       
+        return cashier;      
+    }
+    
+    public void logIn(){
+        //TODO code method
+    }
+    
+    public void cancelOrder(Order order){
+        //TODO code method
+    }
+    
+    public void addExpense(){
+        //TODO code method
+    }
+    
+    public AccountingReport createAccountingReport(Calendar fromDate, Calendar toDate){
+        //TODO code method
+        return null;
+    }
+    
+    
 
     /**
      * @return the username
@@ -74,7 +74,6 @@ public class Manager {
         this.username = username;
     }
 
-
     /**
      * @return the password
      */
@@ -89,5 +88,4 @@ public class Manager {
         this.password = password;
     }
     
-   
 }
