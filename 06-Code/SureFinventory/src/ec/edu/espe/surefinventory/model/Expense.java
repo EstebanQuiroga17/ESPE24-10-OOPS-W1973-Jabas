@@ -44,7 +44,8 @@ public class Expense {
             "--------------------------------------------------%n" +
             "$%-14.2f | %-30s | %-25s",
             "Amount", "Description", "Date",
-            amount, description, date.toString()
+            amount, description, date.toString()+
+                "\n"
         );
     }
 }

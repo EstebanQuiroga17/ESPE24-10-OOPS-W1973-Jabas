@@ -19,7 +19,8 @@ public class Invoice {
         "----------------------------------------------------------------------------------%n" +
         "%-20s | %-20s | %-10d | $%-14.2f | $%-14.2f | %-30s",
         "Customer", "Payment Method", "ID", "Total", "IVA", "Description",
-        customer, paymentMethod, id, total, iva, description
+        customer, paymentMethod, id, total, iva, description+
+                "\n"
     );
 }
 

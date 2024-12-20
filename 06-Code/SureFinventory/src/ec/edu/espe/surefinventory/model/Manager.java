@@ -1,7 +1,7 @@
 package ec.edu.espe.surefinventory.model;
 
 import java.util.Scanner;
-import ec.edu.espe.surefinventory.utils.AdminDataManager;
+import ec.edu.espe.surefinventory.utils.*;
 
 /**
  *
@@ -18,7 +18,8 @@ public class Manager {
         "--------------------------------------------------%n" +
         "%-20s | %-20s",
         "Username", "Password", 
-        username, password
+        username, password +
+                "\n"
     );
 }
 
@@ -29,9 +30,7 @@ public class Manager {
     }
     
     
-    public void changeInventory(Inventory inventory){
-        //TODO code method
-    }
+  
     
     public void createCashier(){
         Scanner scanner = new Scanner(System.in);
@@ -44,15 +43,13 @@ public class Manager {
         
         Cashier cashier = new Cashier(username, password);
         
-        AdminDataManager.addCashier(cashier);
+        
         
         System.out.println(cashier +"Creado con exito");
         
     }
     
-    public void updateInventory(Inventory inventory){
-        //TODO code method
-    }
+   
     
     public void closeCashRegister(){
         //TODO code method

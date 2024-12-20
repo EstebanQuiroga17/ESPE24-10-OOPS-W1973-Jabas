@@ -52,7 +52,8 @@ public class Dish {
         "---------------------------------%n" +
         "%-10d | %-20s | $%-10.2f",
         "ID", "Name", "Price", 
-        id, name, price
+        id, name, price,
+                "\n"
     );
         }
 
