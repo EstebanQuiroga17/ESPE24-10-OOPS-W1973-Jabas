@@ -1,4 +1,4 @@
-    package ec.edu.espe.surefinventory.model;
+package ec.edu.espe.surefinventory.model;
 
 import ec.edu.espe.surefinventory.model.*;
 import java.security.MessageDigest;
@@ -31,7 +31,7 @@ public class DashBoard {
 
     }
 
-    public void printCahierMenu(){
+    public void printCahierDashBoard(){
         System.out.println("====== Bienvenido Cajero! ======");
         System.out.println("1. Crear una orden.");
         System.out.println("2. Crear una factura.");
@@ -87,4 +87,16 @@ public class DashBoard {
         
         dashBoardOption = scanner.nextInt();
     }
+    
+    public void printManageUsersDashBoard(){
+        System.out.println("====== Administrador de usuarios ======");
+        System.out.println("====== Que vamos a hacer hoy!? ======");
+        System.out.println("1. Crear un cajero.");
+        System.out.println("2. Cambiar un nombre de usuario.");
+        System.out.println("3. Cambiar una contrasena.");
+        System.out.println("4. Salir");
+        
+        dashBoardOption = scanner.nextInt();
+    }
+    
 }
