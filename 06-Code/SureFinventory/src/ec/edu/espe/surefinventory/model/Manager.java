@@ -24,38 +24,54 @@ public class Manager {
         return "Manager{" + "username=" + username + ", password=" + password + '}';
     }
     
-    public void chanMenu(Menu menu){
-        //TODO code method
+    public void changeMenu(Menu menu){
+        System.out.println("El menú ha sido actualizado: " + menu.toMenuString());
     }
     
     public Order takeOrder(Customer customer, ArrayList<Dish> dishes){
-      //TODO code method 
-        Order order = null;      
+        Order order = new Order(customer, dishes);
+        System.out.println("Orden tomada del cliente: " + customer.getName());
         return order;
         
     }
     
     public Cashier createCashier(String username, String password){
-       //TODO code method
-        Cashier cashier = null;       
-        return cashier;      
+        Cashier cashier = new Cashier(username, password);
+        System.out.println("Nuevo cajero creado con username: " + username);
+        return cashier;    
     }
     
     public void logIn(){
-        //TODO code method
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Ingrese el nombre de usuario: ");
+        String inputUsername = scanner.nextLine();
+        System.out.print("Ingrese la contraseña: ");
+        String inputPassword = scanner.nextLine();
+
+        if (this.username.equals(inputUsername) && this.password.equals(inputPassword)) {
+            System.out.println("Inicio de sesión exitoso. Bienvenido " + username + ".");
+        } else {
+            System.out.println("Nombre de usuario o contraseña incorrectos.");
+        }
     }
     
     public void cancelOrder(Order order){
-        //TODO code method
+        System.out.println("La orden con ID " + order.getId() + " ha sido cancelada.");
     }
     
-    public void addExpense(){
-        //TODO code method
+    public void addExpense(Expense expense){
+        System.out.println("Se ha añadido un gasto: " + expense.toString());
     }
     
     public AccountingReport createAccountingReport(Calendar fromDate, Calendar toDate){
-        //TODO code method
-        return null;
+        ArrayList<Invoice> incomes = new ArrayList<>(); 
+        ArrayList<Expense> expenses = new ArrayList<>(); 
+        incomes.add(new Invoice(1000, fromDate));
+        expenses.add(new Expense(500, "Compra de suministros", fromDate, "Suministros", 1));
+
+        AccountingReport report = new AccountingReport(Calendar.getInstance(), incomes, expenses);
+        System.out.println("Informe contable creado desde " + fromDate.getTime() + " hasta " + toDate.getTime());
+        return report;
     }
     
     
@@ -87,5 +103,6 @@ public class Manager {
     public void setPassword(String password) {
         this.password = password;
     }
+
     
 }

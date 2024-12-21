@@ -314,7 +314,7 @@ public class DashBoard {
 
         double totalPrice = dishesInOrder.stream().mapToDouble(Dish::getPrice).sum();
         int itemCount = dishesInOrder.size();
-        Order order = new Order(totalPrice, itemCount, orders.size() + 1, dishesInOrder, Calendar.getInstance());
+        Order order = new Order(totalPrice, itemCount);
 
         orders.add(order);
         System.out.println("Order created successfully!");

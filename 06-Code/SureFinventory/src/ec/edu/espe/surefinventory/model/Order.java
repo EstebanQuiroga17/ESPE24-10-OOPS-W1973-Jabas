@@ -24,7 +24,7 @@ public class Order {
 }
 
 
-    public Order(double totalPrice, int itemQuantity, int id, List<Dish> mainDishes, Calendar date) {
+    public Order(Customer totalPrice, ArrayList<Dish> itemQuantity) {
         this.totalPrice = totalPrice;
         this.itemQuantity = itemQuantity;
         this.id = id;

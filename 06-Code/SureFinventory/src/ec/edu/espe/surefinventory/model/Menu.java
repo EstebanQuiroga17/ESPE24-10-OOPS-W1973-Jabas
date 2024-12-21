@@ -34,4 +34,8 @@ public class Menu {
     public void setMainDishes(List<Dish> mainDishes) {
         this.mainDishes = mainDishes;
     }
+
+    String toMenuString() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }
