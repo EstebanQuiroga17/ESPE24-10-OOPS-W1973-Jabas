@@ -6,22 +6,8 @@ import java.security.NoSuchAlgorithmException;
 import java.util.*;
 
 public class DashBoard {
-    private final CashRegister cashRegister;
-    private final Map<String, String> userCredentials;
-    private final List<Dish> mainDishes;
-    private final List<Order> orders;
-    private final List<Invoice> invoices;
-    private final List<Cashier> cashiers;
-
-    public DashBoard() {
-        this.cashRegister = new CashRegister();
-        this.userCredentials = new HashMap<>();
-        this.mainDishes = new ArrayList<>();
-        this.orders = new ArrayList<>();
-        this.invoices = new ArrayList<>();
-        this.cashiers = new ArrayList<>();
-        userCredentials.put("admin", hashPassword("admin123")); // Default credentials for testing
-    }
+    int dashBoardOption;
+    Scanner scanner = new Scanner(System.in);
 
     public void displayMainMenu() {
         while (!login()) {
@@ -53,23 +39,12 @@ public class DashBoard {
     }
 
     private boolean login() {
-        Scanner scanner = new Scanner(System.in);
 
         System.out.println("====== Login ======");
-        System.out.print("Enter username: ");
-        String username = scanner.nextLine();
-        System.out.print("Enter password: ");
-        String password = scanner.nextLine();
-
-        String hashedPassword = hashPassword(password);
-
-        if (userCredentials.containsKey(username) && userCredentials.get(username).equals(hashedPassword)) {
-            System.out.println("Login successful!");
-            return true;
-        } else {
-            System.out.println("Invalid username or password.");
-            return false;
-        }
+        System.out.println("1. Ingresar como admin.");
+        System.out.println("2. Ingresar como cajero.");
+        
+      
     }
 
     private String hashPassword(String password) {
