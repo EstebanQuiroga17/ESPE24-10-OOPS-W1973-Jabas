@@ -2,7 +2,7 @@ package ec.edu.espe.surefinventory.model;
 
 /**
  *
- * @author abner
+ * @author Esteban Quiroga
  */
 public class Customer {
    private String name;
