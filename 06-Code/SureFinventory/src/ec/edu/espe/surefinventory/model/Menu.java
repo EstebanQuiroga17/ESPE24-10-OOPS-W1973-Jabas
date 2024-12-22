@@ -1,41 +1,74 @@
-package ec.edu.espe.surefinventory.model;
+
+package sureinventoryapp.model;
 
 import java.util.ArrayList;
-import java.util.List;
 
+/**
+ *
+ * @author abner
+ */
 public class Menu {
-    private int id;
-    private List<Dish> mainDishes;
+    
+    private String name;
+    private ArrayList<Dish> productList;
 
-    public Menu(int id) {
-        this.id = id;
-        this.mainDishes = new ArrayList<>();
+    public Menu(String name, ArrayList<Dish> productList) {
+        this.name = name;
+        this.productList = productList;
+    }
+    
+    public void addDish(Dish dish) {
+        productList.add(dish);
     }
 
-    // Add a MainDish to the menu
-    public void addMainDish(Dish mainDish) {
-        mainDishes.add(mainDish);
+    @Override
+    public String toString() {
+        StringBuilder menuString = new StringBuilder();
+        
+        menuString.append(String.format(
+            "%-20s | %-20s%n" +
+            "-----------------------------------------%n",
+            "Product List", "Menu Name"));
+
+        for (Dish dish : productList) {
+            menuString.append(String.format("%-20s | %-20d | $%-10.2f%n", 
+                    dish.getName(), dish.getId(), dish.getPrice()));
+        }
+
+        if (productList.isEmpty()) {
+            menuString.append("No dishes available\n");
+        }
+    }
+     
+
+    /**
+     * @return the name
+     */
+    public String getName() {
+        return name;
     }
 
-    // Get the list of MainDishes
-    public List<Dish> getMainDishes() {
-        return mainDishes;
+    /**
+     * @return the productList
+     */
+    public ArrayList<Dish> getProductList() {
+        return productList;
     }
 
-    // Getters and Setters
-    public int getId() {
-        return id;
+    /**
+     * @param name the name to set
+     */
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    /**
+     * @param productList the productList to set
+     */
+    public void setProductList(ArrayList<Dish> productList) {
+        this.productList = productList;
     }
+    
+    
 
-    public void setMainDishes(List<Dish> mainDishes) {
-        this.mainDishes = mainDishes;
-    }
-
-    String toMenuString() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
 }
