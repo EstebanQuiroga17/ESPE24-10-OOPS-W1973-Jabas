@@ -1,10 +1,11 @@
 
-package sureinventoryapp.model;
+package ec.edu.espe.sureinveoryapp.model;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import java.io.File;
-import java.io.IOException;
+import ec.edu.espe.sureinveoryapp.utils.JsonFileManager;
+import java.util.ArrayList;
+import java.util.Scanner;
+
+
 
 /**
  *
@@ -32,24 +33,8 @@ public class Cashier {
             "\n"
         );
     }
+       
     
-    
-    
-    public static boolean logIn(String inputUsername, String inputPassword, String jsonFilePath){
-        try{
-            ObjectMapper objectMapper = new ObjectMapper();
-            JsonNode rootNode = objectMapper.readTree(new File(jsonFilePath));
-            String jsonUsername = rootNode.get("userName").asText();
-            String jsonPassword = rootNode.get("password").asText();
-            
-            return inputUsername.equals(jsonUsername) && inputPassword.equals(jsonPassword);
-            
-        }catch (IOException e) {
-        System.err.println("Error reading JSON file: " + e.getMessage());
-        }
-          return false;         
-        }
-
     /**
      * @return the id
      */
@@ -90,6 +75,35 @@ public class Cashier {
      */
     public void setUsername(String username) {
         this.username = username;
+    }
+    
+    public static boolean logIn(){
+        String filePath = "C:/Users/abner/Documents/ESPE2410-OOPSW1973-JABAS/06-Code/SureFinventory/data/cashier.json";
+        JsonFileManager jsonFileManager = new JsonFileManager(filePath);
+        
+        ArrayList<Cashier> cashiers = jsonFileManager.decerializeJson(Cashier.class);
+        
+        if (cashiers == null || cashiers.isEmpty()) {
+            System.out.println(" There is no data in the JSON file ");
+            return false;
+        }
+        
+        
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter your username ");
+        String inputUsername = scanner.nextLine();
+        System.out.print("Enter your password: ");
+        String inputPassword = scanner.nextLine();
+        
+        for (Cashier cashier : cashiers) {
+            if (cashier.getUsername().equals(inputUsername) && cashier.getPassword().equals(inputPassword)) {
+                System.out.println("Login successful. WELCOME! " + inputUsername + "!");
+                return true;
+            }
+        }
+        
+        System.out.println("INCORRECT ---> check username and password");
+        return false;
     }
     
 
