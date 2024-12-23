@@ -1,5 +1,8 @@
 package ec.edu.espe.surefinventory.model;
-
+/**
+ *
+ * @author Benjamin Robalino <jabasteam>
+ */
 import ec.edu.espe.surefinventory.model.*;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
