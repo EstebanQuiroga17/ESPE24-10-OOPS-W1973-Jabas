@@ -1,5 +1,8 @@
 package ec.edu.espe.surefinventory.model;
-
+/**
+ *
+ * @author Benjamin Robalino <jabasteam>
+ */
 public class Dish {
     private String name;
     private int id;
@@ -39,11 +42,7 @@ public class Dish {
     }
 
    
-    public void updateDetails(String newName, double newPrice) {
-        this.name = newName;
-        this.price = newPrice;
-    }
-
+   
     
     @Override
     public String toString() {
