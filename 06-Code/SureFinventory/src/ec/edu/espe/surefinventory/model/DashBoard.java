@@ -98,5 +98,9 @@ public class DashBoard {
         
         dashBoardOption = scanner.nextInt();
     }
+
+    public int getDashBoardOption() {
+        return dashBoardOption;
+    }
     
 }
