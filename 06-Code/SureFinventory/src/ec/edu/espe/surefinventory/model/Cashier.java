@@ -1,7 +1,9 @@
 
-package ec.edu.espe.sureinveoryapp.model;
+package ec.edu.espe.surefinventory.model;
 
-import ec.edu.espe.sureinveoryapp.utils.JsonFileManager;
+import ec.edu.espe.surefinventory.utils.JsonFileManager;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -12,24 +14,23 @@ import java.util.Scanner;
  * @author abner
  */
 public class Cashier {
-    private String username;
+    private String userName;
     private String password;
     private int id;
 
     public Cashier(String username, String password, int id) {
-        this.username = username;
+        this.userName = username;
         this.password = password;
         this.id = id;
     }
 
     @Override
     public String toString() {
-        return String.format(
-            "%-10s | %-15s | %-10s%n" +
+        return String.format("%-10s | %-15s | %-10s%n" +
             "---------------------------------%n" +
             "%-10d | %-15s | %-10s",
             "ID", "Username", "Password",
-            id, username, password,
+            id, userName, password,
             "\n"
         );
     }
@@ -52,8 +53,8 @@ public class Cashier {
     /**
      * @return the username
      */
-    public String getUsername() {
-        return username;
+    public String getuserName() {
+        return userName;
     }
 
     /**
@@ -73,12 +74,14 @@ public class Cashier {
     /**
      * @param username the username to set
      */
-    public void setUsername(String username) {
-        this.username = username;
+    public void setuserName(String username) {
+        this.userName = username;
     }
     
     public static boolean logIn(){
-        String filePath = "C:/Users/abner/Documents/ESPE2410-OOPSW1973-JABAS/06-Code/SureFinventory/data/cashier.json";
+        
+        Path filePath = Paths.get("data","cashier.json");
+        
         JsonFileManager jsonFileManager = new JsonFileManager(filePath);
         
         ArrayList<Cashier> cashiers = jsonFileManager.decerializeJson(Cashier.class);
@@ -96,7 +99,8 @@ public class Cashier {
         String inputPassword = scanner.nextLine();
         
         for (Cashier cashier : cashiers) {
-            if (cashier.getUsername().equals(inputUsername) && cashier.getPassword().equals(inputPassword)) {
+            
+            if (cashier.getuserName().equals(inputUsername) && cashier.getPassword().equals(inputPassword)) {
                 System.out.println("Login successful. WELCOME! " + inputUsername + "!");
                 return true;
             }

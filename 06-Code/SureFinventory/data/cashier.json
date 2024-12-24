@@ -1,4 +1,10 @@
- {
-    "userName": "Admin",
-    "password": "soyadmin"
- }
+[
+    {
+    "userName": "Cajero",
+    "password": "soycajero"
+    },
+    {
+    "userName": "CajeroManuel",
+    "password": "soycajeroManuel"
+    }
+]

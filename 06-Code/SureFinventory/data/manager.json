@@ -1,6 +1,4 @@
-[
-    {
-    "userName": "Cajero",
-    "password": "soycajero"
-    }
-]
+ {
+    "userName": "Admin",
+    "password": "soyadmin"
+ }

@@ -1,133 +1,96 @@
 package ec.edu.espe.surefinventory.model;
 
+import java.util.Calendar;
 /**
  *
  * @author Benjamin Robalino <jabasteam>
  */
 public class Invoice {
+    private Calendar date;
     private Customer customer;
-    private String paymentMethod;
+    private String header;
     private int id;
-    private double total;
-    private double iva;
-     private Order description;
+    private double price;
+    private final int iva = 0;
+    private Order order;
+
+    public Invoice(Calendar date, Customer customer, String header, int id, double price, Order order) {
+        this.date = date;
+        this.customer = customer;
+        this.header = header;
+        this.id = id;
+        this.price = price;
+        this.order = order;
+    }
 
     @Override
     public String toString() {
-        return String.format(
-        "%-20s | %-20s | %-10s | %-15s | %-15s | %-30s%n" +
-        "----------------------------------------------------------------------------------%n" +
-        "%-20s | %-20s | %-10d | $%-14.2f | $%-14.2f | %-30s",
-        "Customer", "Payment Method", "ID", "Total", "IVA", "Description",
-        customer, paymentMethod, id, total, iva, description+
-                "\n"
-    );
-}
-
-    
-
-    
-
-    public Invoice(Customer customer, String paymentMethod, int id, Order description) {
-        this.customer = customer;
-        this.paymentMethod = paymentMethod;
-        this.id = id;
-        this.description = description;
+        return "Invoice Details:\n" +
+               "-------------------------\n" +
+               "Date: " + date.getTime() + "\n" +
+               "Customer: " + customer + "\n" +
+               "Header: " + header + "\n" +
+               "ID: " + id + "\n" +
+               "Price: $" + price + "\n" +
+               "IVA: " + iva + "%\n" +
+               "Order: " + order + "\n" +
+               "Total: $" + calculateTotal() + "\n" +
+               "-------------------------";
     }
-  
 
-    /**
-     * @return the customer
-     */
+    public double calculateTotal() {
+        return price + (price * iva / 100.0);
+    }
+
+    public Calendar getDate() {
+        return date;
+    }
+
+    public void setDate(Calendar date) {
+        this.date = date;
+    }
+
     public Customer getCustomer() {
         return customer;
     }
 
-    /**
-     * @param customer the customer to set
-     */
     public void setCustomer(Customer customer) {
         this.customer = customer;
     }
 
-    /**
-     * @return the paymentMethod
-     */
-    public String getPaymentMethod() {
-        return paymentMethod;
+    public String getHeader() {
+        return header;
     }
 
-    /**
-     * @param paymentMethod the paymentMethod to set
-     */
-    public void setPaymentMethod(String paymentMethod) {
-        this.paymentMethod = paymentMethod;
+    public void setHeader(String header) {
+        this.header = header;
     }
 
-    /**
-     * @return the id
-     */
     public int getId() {
         return id;
     }
 
-    /**
-     * @param id the id to set
-     */
     public void setId(int id) {
         this.id = id;
     }
 
-    /**
-     * @return the description
-     */
-    public Order getDescription() {
-        return description;
+    public double getPrice() {
+        return price;
     }
 
-    /**
-     * @param description the description to set
-     */
-    public void setDescription(Order description) {
-        this.description = description;
+    public void setPrice(double price) {
+        this.price = price;
     }
 
-    /**
-     * @return the total
-     */
-    public double getTotal() {
-        return total;
-    }
-
-    /**
-     * @param total the total to set
-     */
-    public void setTotal(double total) {
-        this.total = total;
-    }
-
-    /**
-     * @return the iva
-     */
-    public double getIva() {
+    public int getIva() {
         return iva;
     }
 
-    /**
-     * @param iva the iva to set
-     */
-    public void setIva(double iva) {
-        this.iva = iva;
+    public Order getOrder() {
+        return order;
     }
-    public void printInvoice() {
-    System.out.println("========== Invoice ==========");
-    System.out.println("Customer: " + customer);
-    System.out.println("Payment Method: " + paymentMethod);
-    System.out.println("Invoice ID: " + id);
-    System.out.println("Description: " + description);
-    System.out.printf("IVA: $%.2f%n", iva);
-    System.out.printf("Total: $%.2f%n", total);
-    System.out.println("=============================");
-}
-}
 
+    public void setOrder(Order order) {
+        this.order = order;
+    }
+}

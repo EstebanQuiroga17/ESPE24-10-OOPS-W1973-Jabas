@@ -4,14 +4,13 @@ package ec.edu.espe.surefinventory.utils;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
-import ec.edu.espe.surefinventory.model.Customer;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.lang.reflect.Type;
+import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 
 /**
@@ -21,11 +20,11 @@ import java.util.Scanner;
 public class JsonFileManager {
     
     Gson gson = new GsonBuilder().setPrettyPrinting().create();
-    String filePath;
+    Path filePath;
     
     
     public <T> ArrayList<T> decerializeJson(Class<T> clazz) {
-        try (FileReader reader = new FileReader(filePath)) {
+        try (FileReader reader = new FileReader(filePath.toString())) {
          
             Type listType = TypeToken.getParameterized(ArrayList.class, clazz).getType();           
             
@@ -79,7 +78,7 @@ public class JsonFileManager {
     
     
     public <T> void updateJsonFile(ArrayList<T> objects) {
-        try (FileWriter writer = new FileWriter(filePath)) {            
+        try (FileWriter writer = new FileWriter(filePath.toString())) {            
             String json = gson.toJson(objects);          
             writer.write(json);
             writer.flush();
@@ -93,7 +92,7 @@ public class JsonFileManager {
     }
     
     
-    public JsonFileManager(String filePath) {
+    public JsonFileManager(Path filePath) {
         this.filePath = filePath;
     }
     

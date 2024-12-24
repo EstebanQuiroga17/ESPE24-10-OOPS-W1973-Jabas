@@ -1,5 +1,8 @@
 package ec.edu.espe.surefinventory.model;
-
+/**
+ *
+ * @author Benjamin Robalino <jabasteam>
+ */
 import ec.edu.espe.surefinventory.model.*;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -97,6 +100,10 @@ public class DashBoard {
         System.out.println("4. Salir");
         
         dashBoardOption = scanner.nextInt();
+    }
+
+    public int getDashBoardOption() {
+        return dashBoardOption;
     }
     
 }
