@@ -1,5 +1,5 @@
 
-package sureinventoryapp.model;
+package ec.edu.espe.sureinveoryapp.model;
 
 import java.util.ArrayList;
 
@@ -17,29 +17,19 @@ public class Menu {
         this.productList = productList;
     }
     
-    public void addDish(Dish dish) {
-        productList.add(dish);
+
+    public String generateMenuString() {
+    StringBuilder dishesString = new StringBuilder();
+    for (Dish productListDishes : productList) {
+        dishesString.append(String.format("%-10d | %-20s | $%-10.2f%n",
+                productListDishes.getId(), productListDishes.getName(), productListDishes.getPrice()));
     }
 
-    @Override
-    public String toString() {
-        StringBuilder menuString = new StringBuilder();
-        
-        menuString.append(String.format(
-            "%-20s | %-20s%n" +
-            "-----------------------------------------%n",
-            "Product List", "Menu Name"));
+    return String.format(
+            "Name: %s%nDishes:%n%s",
+            name, dishesString.toString());
+}
 
-        for (Dish dish : productList) {
-            menuString.append(String.format("%-20s | %-20d | $%-10.2f%n", 
-                    dish.getName(), dish.getId(), dish.getPrice()));
-        }
-
-        if (productList.isEmpty()) {
-            menuString.append("No dishes available\n");
-        }
-    }
-     
 
     /**
      * @return the name
