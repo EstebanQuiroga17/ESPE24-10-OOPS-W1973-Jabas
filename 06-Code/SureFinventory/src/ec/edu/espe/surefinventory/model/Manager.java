@@ -29,7 +29,7 @@ public class Manager {
     }
     
     public void changeMenu(Menu menu){
-        System.out.println("El menú ha sido actualizado: " + menu.generateMenuString());
+        System.out.println("El menú ha sido actualizado: " + menu.showMenu());
     }
     
       public Order takeOrder(Customer customer, ArrayList<Dish> dishes){

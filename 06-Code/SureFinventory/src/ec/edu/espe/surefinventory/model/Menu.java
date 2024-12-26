@@ -1,6 +1,9 @@
 
 package ec.edu.espe.surefinventory.model;
 
+import ec.edu.espe.surefinventory.utils.JsonFileManager;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
 /**
@@ -14,21 +17,20 @@ public class Menu {
 
     public Menu(String name, ArrayList<Dish> productList) {
         this.name = name;
+        
+        Path filePath = Paths.get("data","menu.json"); 
+        JsonFileManager menuFileManager = new JsonFileManager(filePath);
+        
+        productList = menuFileManager.decerializeJson(Dish.class);
         this.productList = productList;
     }
     
 
-    public String generateMenuString() {
-    StringBuilder dishesString = new StringBuilder();
-    for (Dish productListDishes : productList) {
-        dishesString.append(String.format("%-10d | %-20s | $%-10.2f%n",
-                productListDishes.getId(), productListDishes.getName(), productListDishes.getPrice()));
-    }
-
-    return String.format(
-            "Name: %s%nDishes:%n%s",
-            name, dishesString.toString());
-}
+    public void showMenu() {
+    
+    JsonFileManager.printJson(productList);
+    
+   }
 
 
     /**

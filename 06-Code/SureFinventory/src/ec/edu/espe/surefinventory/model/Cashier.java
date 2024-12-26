@@ -110,5 +110,36 @@ public class Cashier {
         return false;
     }
     
+    public Order takeOrder(Customer customer, Menu menu){
+        
+        ArrayList<Dish> dishes = new ArrayList<>();
+        Scanner scanner = new Scanner(System.in);
+        
+        menu.showMenu();
+        
+        System.out.println("Selecciona un plato por su indice.");
+        int option = scanner.nextInt();
+        
+        Dish dish;
+        dish = JsonFileManager.searchObjectByIndex(menu.getProductList(), option);
+        dishes.add(dish);
+        
+        
+        System.out.println("Agrega otro producto.");
+        System.out.println("O pulsa 0 para salir.");
+        
+        while(option != 0){
+            
+        option = scanner.nextInt();
+        dish = JsonFileManager.searchObjectByIndex(menu.getProductList(), option);
+        dishes.add(dish);
+        }
+        
+        int orderId;
+        System.out.println("Ingrese un numero para esta orden.");
+        orderId = scanner.nextInt();
+        Order order =  new Order(dishes.size(), orderId, dishes, customer);
+        return order;
+    }
 
 }

@@ -2,7 +2,6 @@ package ec.edu.espe.surefinventory.model;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 
 public class Order {
     private int itemQuantity;
@@ -10,11 +9,6 @@ public class Order {
     private ArrayList<Dish> dishes;
     private Customer customer;
     
-    public Invoice createInvoice(){
-        
-    Invoice invoice = new Invoice()
-    return invoice;
-    }
     
     @Override
     public String toString() {
