@@ -1,7 +1,10 @@
 
-package ec.edu.espe.sureinveoryapp.model;
+package ec.edu.espe.surefinventory.model;
 
-import ec.edu.espe.sureinveoryapp.utils.JsonFileManager;
+import ec.edu.espe.surefinventory.utils.JsonFileManager;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Scanner;
 
 /**
  *
@@ -18,11 +21,13 @@ public class Manager {
 
     @Override
     public String toString() {
-        return "Manager{" + "username=" + username + ", password=" + password + '}';
+        return "Manager{" + "username=" + username +
+                ", password=" + password + '}';
+        
     }
     
     public void change(Menu menu){
-        System.out.println("El menú ha sido actualizado: " + menu.toMenuString());
+        System.out.println("El menú ha sido actualizado: " + menu.generateMenuString());
     }
     
       public Order takeOrder(Customer customer, ArrayList<Dish> dishes){

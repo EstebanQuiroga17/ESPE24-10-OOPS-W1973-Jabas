@@ -1,5 +1,6 @@
 package ec.edu.espe.surefinventory.model;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 

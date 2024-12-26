@@ -1,5 +1,5 @@
 
-package ec.edu.espe.sureinveoryapp.model;
+package ec.edu.espe.surefinventory.model;
 
 import java.util.ArrayList;
 
