@@ -1,7 +1,12 @@
 
-package ec.edu.espe.sureinveoryapp.model;
+package ec.edu.espe.surefinventory.model;
 
-import ec.edu.espe.sureinveoryapp.utils.JsonFileManager;
+import ec.edu.espe.surefinventory.utils.JsonFileManager;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Scanner;
 
 /**
  *
@@ -18,11 +23,13 @@ public class Manager {
 
     @Override
     public String toString() {
-        return "Manager{" + "username=" + username + ", password=" + password + '}';
+        return "Manager{" + "username=" + username +
+                ", password=" + password + '}';
+        
     }
     
-    public void change(Menu menu){
-        System.out.println("El menú ha sido actualizado: " + menu.toMenuString());
+    public void changeMenu(Menu menu){
+        System.out.println("El menú ha sido actualizado: " + menu.generateMenuString());
     }
     
       public Order takeOrder(Customer customer, ArrayList<Dish> dishes){
@@ -39,7 +46,7 @@ public class Manager {
     }
       
       public static boolean logIn(){
-        String filePath = "C:/Users/abner/Documents/ESPE2410-OOPSW1973-JABAS/06-Code/SureFinventory/data/admin.json";
+        Path filePath = Paths.get("data","manager.json");
         JsonFileManager jsonFileManager = new JsonFileManager(filePath);
         
         ArrayList<Cashier> cashiers = jsonFileManager.decerializeJson(Cashier.class);
@@ -57,7 +64,7 @@ public class Manager {
         String inputPassword = scanner.nextLine();
         
         for (Cashier cashier : cashiers) {
-            if (cashier.getUsername().equals(inputUsername) && cashier.getPassword().equals(inputPassword)) {
+            if (cashier.getuserName().equals(inputUsername) && cashier.getPassword().equals(inputPassword)) {
                 System.out.println("Login successful. WELCOME! " + inputUsername + "!");
                 return true;
             }

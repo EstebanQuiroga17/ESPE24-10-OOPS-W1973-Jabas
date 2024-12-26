@@ -6,7 +6,7 @@ package ec.edu.espe.surefinventory.model;
 public class Dish {
     private String name;
     private int id;
-    private double price;
+    private float price;
 
     // Constructor
     public Dish(int id, String name, double price) {

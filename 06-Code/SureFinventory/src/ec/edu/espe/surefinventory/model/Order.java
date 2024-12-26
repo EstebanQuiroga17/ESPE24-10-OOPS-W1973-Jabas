@@ -1,53 +1,31 @@
 package ec.edu.espe.surefinventory.model;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
 public class Order {
-    private double totalPrice;
     private int itemQuantity;
     private int id;
-    private List<Dish> mainDishes;
-    private Calendar date;
-
+    private ArrayList<Dish> dishes;
+    private Customer customer;
+    
+    public Invoice createInvoice(){
+        
+    Invoice invoice = new Invoice()
+    return invoice;
+    }
+    
     @Override
     public String toString() {
-        return String.format(
-        "%-15s | %-15s | %-10s | %-20s | %-20s%n" +
-        "----------------------------------------------------------------------------------%n" +
-        "$%-14.2f | %-15d | %-10d | %-20s | %-20s",
-        "Total Price", "Item Quantity", "ID", "Main Dishes", "Date",
-        totalPrice, itemQuantity, id, mainDishes, date.toString()+
-                "\n"
-              
-    );
-}
+        return "Order{" + "itemQuantity=" + itemQuantity + ", id=" + id + ", dishes=" + dishes + ", customer=" + customer + '}';
+    }
 
-
-    public Order(Customer totalPrice, ArrayList<Dish> itemQuantity) {
-        this.totalPrice = totalPrice;
+    public Order(int itemQuantity, int id, ArrayList<Dish> dishes, Customer customer) {
         this.itemQuantity = itemQuantity;
         this.id = id;
-        this.mainDishes = mainDishes;
-        this.date = date;
-    }
-
-    public void printOrder() {
-        System.out.println("Order ID: " + id);
-        System.out.println("Date: " + date.getTime());
-        System.out.println("Total Price: $" + totalPrice);
-        System.out.println("Items:");
-        for (Dish mainDish : mainDishes) {
-            System.out.println("- " + mainDish.getName() + " (Price: $" + mainDish.getPrice() + ")");
-        }
-    }
-
-    public double getTotalPrice() {
-        return totalPrice;
-    }
-
-    public void setTotalPrice(double totalPrice) {
-        this.totalPrice = totalPrice;
+        this.dishes = dishes;
+        this.customer = customer;
     }
 
     public int getItemQuantity() {
@@ -66,19 +44,21 @@ public class Order {
         this.id = id;
     }
 
-    public List<Dish> getMainDishList() {
-        return mainDishes;
+    public ArrayList<Dish> getDishes() {
+        return dishes;
     }
 
-    public void setMainDishList(List<Dish> mainDishList) {
-        this.mainDishes = mainDishList;
+    public void setDishes(ArrayList<Dish> dishes) {
+        this.dishes = dishes;
     }
 
-    public Calendar getDate() {
-        return date;
+    public Customer getCustomer() {
+        return customer;
     }
 
-    public void setDate(Calendar date) {
-        this.date = date;
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
+
+    
 }
