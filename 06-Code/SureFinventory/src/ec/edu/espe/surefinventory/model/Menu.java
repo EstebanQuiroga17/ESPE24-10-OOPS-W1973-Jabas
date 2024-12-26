@@ -18,7 +18,7 @@ public class Menu {
     }
     
 
-    public String generateMenuString() {
+    public String showMenuString() {
     StringBuilder dishesString = new StringBuilder();
     for (Dish productListDishes : productList) {
         dishesString.append(String.format("%-10d | %-20s | $%-10.2f%n",
