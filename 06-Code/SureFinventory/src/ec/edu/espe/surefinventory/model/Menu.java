@@ -26,7 +26,7 @@ public class Menu {
     }
     
 
-<<<<<<< HEAD
+
     public void showMenu() {
     
     JsonFileManager.printJson(productList);
