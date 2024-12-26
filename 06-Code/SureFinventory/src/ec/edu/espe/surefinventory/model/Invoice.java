@@ -7,37 +7,25 @@ import java.util.Calendar;
  */
 public class Invoice {
     private Calendar date;
-    private Customer customer;
     private String header;
     private int id;
-    private double price;
-    private final int iva = 0;
+    private float price;
     private Order order;
 
-    public Invoice(Calendar date, Customer customer, String header, int id, double price, Order order) {
+    @Override
+    public String toString() {
+        return "Invoice{" + "date=" + date + ", header=" + header + ", id=" + id + ", price=" + price + ", order=" + order + '}';
+    }
+
+    public Invoice(Calendar date, String header, int id, float price, Order order) {
         this.date = date;
-        this.customer = customer;
         this.header = header;
         this.id = id;
         this.price = price;
         this.order = order;
     }
 
-    @Override
-    public String toString() {
-        return "Invoice Details:\n" +
-               "-------------------------\n" +
-               "Date: " + date.getTime() + "\n" +
-               "Customer: " + customer + "\n" +
-               "Header: " + header + "\n" +
-               "ID: " + id + "\n" +
-               "Price: $" + price + "\n" +
-               "IVA: " + iva + "%\n" +
-               "Order: " + order + "\n" +
-               "Total: $" + calculateTotal() + "\n" +
-               "-------------------------";
-    }
-
+    
     public double calculateTotal() {
         return price + (price * iva / 100.0);
     }
@@ -48,14 +36,6 @@ public class Invoice {
 
     public void setDate(Calendar date) {
         this.date = date;
-    }
-
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
     }
 
     public String getHeader() {
@@ -74,16 +54,12 @@ public class Invoice {
         this.id = id;
     }
 
-    public double getPrice() {
+    public float getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(float price) {
         this.price = price;
-    }
-
-    public int getIva() {
-        return iva;
     }
 
     public Order getOrder() {
@@ -93,4 +69,6 @@ public class Invoice {
     public void setOrder(Order order) {
         this.order = order;
     }
+
+
 }
