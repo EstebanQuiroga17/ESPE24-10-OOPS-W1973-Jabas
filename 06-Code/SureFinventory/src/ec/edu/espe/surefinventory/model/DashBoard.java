@@ -3,9 +3,7 @@ package ec.edu.espe.surefinventory.model;
  *
  * @author Benjamin Robalino <jabasteam>
  */
-import ec.edu.espe.surefinventory.model.*;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
+
 import java.util.*;
 
 public class DashBoard {
@@ -19,6 +17,7 @@ public class DashBoard {
         System.out.println("2. Ingresar como cajero.");
         
         dashBoardOption = scanner.nextInt();
+
     }
 
     public void printManagerDashBoard() {

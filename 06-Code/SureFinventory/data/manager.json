@@ -1,4 +1,6 @@
- {
+ [
+     {
     "userName": "Admin",
     "password": "soyadmin"
  }
+ ]

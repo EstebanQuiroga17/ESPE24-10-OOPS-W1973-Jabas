@@ -46,12 +46,13 @@ public class Manager {
     }
       
       public static boolean logIn(){
+          
         Path filePath = Paths.get("data","manager.json");
         JsonFileManager jsonFileManager = new JsonFileManager(filePath);
         
-        ArrayList<Cashier> cashiers = jsonFileManager.decerializeJson(Cashier.class);
+        ArrayList<Manager> managers = jsonFileManager.decerializeJson(Manager.class);
         
-        if (cashiers == null || cashiers.isEmpty()) {
+        if (managers == null || managers.isEmpty()) {
             System.out.println(" There is no data in the JSON file ");
             return false;
         }
@@ -63,8 +64,8 @@ public class Manager {
         System.out.print("Enter your password: ");
         String inputPassword = scanner.nextLine();
         
-        for (Cashier cashier : cashiers) {
-            if (cashier.getuserName().equals(inputUsername) && cashier.getPassword().equals(inputPassword)) {
+        for (Manager manager : managers) {
+            if (manager.getUsername().equals(inputUsername) && manager.getPassword().equals(inputPassword)) {
                 System.out.println("Login successful. WELCOME! " + inputUsername + "!");
                 return true;
             }
