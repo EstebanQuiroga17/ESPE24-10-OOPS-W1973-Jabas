@@ -1,11 +1,12 @@
+
 package ec.edu.espe.surefinventory.model;
+
+import java.util.Scanner;
+
 /**
  *
- * @author Benjamin Robalino <jabasteam>
+ * @author Esteban Quiroga 
  */
-
-import java.util.*;
-
 public class DashBoard {
     int dashBoardOption;
     Scanner scanner = new Scanner(System.in);
@@ -17,7 +18,29 @@ public class DashBoard {
         System.out.println("2. Ingresar como cajero.");
         
         dashBoardOption = scanner.nextInt();
-
+        
+        switch(dashBoardOption){
+            case 1:{
+                if(Manager.logIn()){
+                    System.out.println("Acceso permitido");
+                    printManagerDashBoard();
+                }else System.out.println("Acceso denegado");
+            break;
+            }
+            
+            case 2: {
+            if(Cashier.logIn()){
+                    System.out.println("Acceso permitido");
+                    printCahierDashBoard();
+                }else System.out.println("Acceso denegado");
+            }
+            break;
+            
+            default: System.out.println("Opcion no valida");
+            break;
+                    
+        }
+  
     }
 
     public void printManagerDashBoard() {
@@ -31,6 +54,9 @@ public class DashBoard {
         
         dashBoardOption = scanner.nextInt();
 
+        switch(dashBoardOption){
+            case 1: 
+        }
     }
 
     public void printCahierDashBoard(){
@@ -104,5 +130,4 @@ public class DashBoard {
     public int getDashBoardOption() {
         return dashBoardOption;
     }
-    
 }

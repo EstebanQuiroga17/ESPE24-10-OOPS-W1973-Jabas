@@ -13,17 +13,17 @@ import java.util.Scanner;
  * @author abner
  */
 public class Manager {
-    private String username;
+    private String userName;
     private String password;
 
     public Manager(String username, String password) {
-        this.username = username;
+        this.userName = username;
         this.password = password;
     }
 
     @Override
     public String toString() {
-        return "Manager{" + "username=" + username +
+        return "Manager{" + "username=" + userName +
                 ", password=" + password + '}';
         
     }
@@ -74,6 +74,7 @@ public class Manager {
         System.out.println("INCORRECT ---> check username and password");
         return false;
     }
+      
       public void cancelOrder(Order order){
         System.out.println("La orden con ID " + order.getId() + " ha sido cancelada.");
     }
@@ -104,7 +105,7 @@ public class Manager {
      * @return the username
      */
     public String getUsername() {
-        return username;
+        return userName;
     }
 
     /**
@@ -118,7 +119,7 @@ public class Manager {
      * @param username the username to set
      */
     public void setUsername(String username) {
-        this.username = username;
+        this.userName = username;
     }
     
     
