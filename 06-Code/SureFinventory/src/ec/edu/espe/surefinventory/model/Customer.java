@@ -1,76 +1,84 @@
 package ec.edu.espe.surefinventory.model;
 
+import ec.edu.espe.surefinventory.utils.JsonFileManager;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Scanner;
+
 /**
  *
  * @author Esteban Quiroga
  */
 public class Customer {
    private String name;
+   private String lastName;
    private int phoneNumber;
    private int id;
 
-    public Customer(String name, int phoneNumber, int id) {
-        this.name = name;
-        this.phoneNumber = phoneNumber;
-        this.id = id;
-    }
-   
+   public static Customer searchCustomerByLastName(String lastName){
+       
+       ArrayList<Customer> customers = new ArrayList<>();
+       ArrayList<Customer> commonCustomers = new ArrayList<>();
+       Path filePath = Paths.get("data","customer.json");
+       Scanner scanner = new Scanner(System.in); 
+       int index;
+       
+       JsonFileManager customerFileManager = new JsonFileManager(filePath);
+       customers = customerFileManager.decerializeJson(Customer.class);
 
-    /**
-     * @return the name
-     */
+       for(Customer customer : customers){
+           if(customer.getLastName().equals(lastName)){
+               
+            commonCustomers.add(customer);
+               
+           }
+       }
+       
+       JsonFileManager.printJson(commonCustomers);
+       
+       System.out.println("Seleccione un cliente.");
+       index = scanner.nextInt();
+       
+       return JsonFileManager.searchObjectByIndex(commonCustomers, index);
+   }
+   
+    @Override
+    public String toString() {
+        return "Customer{" + "name=" + name + ", lastName=" + lastName + ", phoneNumber=" + phoneNumber + ", id=" + id + '}';
+    }
+
     public String getName() {
         return name;
     }
 
-    /**
-     * @param name the name to set
-     */
     public void setName(String name) {
         this.name = name;
     }
 
-    /**
-     * @return the phoneNumber
-     */
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
     public int getPhoneNumber() {
         return phoneNumber;
     }
 
-    /**
-     * @param phoneNumber the phoneNumber to set
-     */
     public void setPhoneNumber(int phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
-    /**
-     * @return the idNumber
-     */
-    public int getIdNumber() {
+    public int getId() {
         return id;
     }
 
-    /**
-     * @param idNumber the idNumber to set
-     */
-    public void setIdNumber(int idNumber) {
-        this.id = idNumber;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    @Override
-    public String toString() {
-    return String.format(
-        "%-10s | %-15s | %-10s%n" +
-        "---------------------------------%n" +
-        "%-10s | %-15s | %-10s",
-        "Name", "Phone", "ID", 
-        name, phoneNumber, id+
-                "\n"
-         
-    );
-}
-
-    
    
 }

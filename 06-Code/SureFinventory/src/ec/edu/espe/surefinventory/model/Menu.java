@@ -12,17 +12,16 @@ import java.util.ArrayList;
  */
 public class Menu {
     
-    private String name;
+    private final String name = "Menu";
     private ArrayList<Dish> productList;
 
-    public Menu(String name, ArrayList<Dish> productList) {
-        this.name = name;
-        
-        Path filePath = Paths.get("data","menu.json"); 
+    public Menu() {
+
+        Path filePath = Paths.get("data","dishesMenu.json"); 
         JsonFileManager menuFileManager = new JsonFileManager(filePath);
         
         productList = menuFileManager.decerializeJson(Dish.class);
-        this.productList = productList;
+        this.setProductList(productList);
     }
     
 
@@ -48,12 +47,6 @@ public class Menu {
         return productList;
     }
 
-    /**
-     * @param name the name to set
-     */
-    public void setName(String name) {
-        this.name = name;
-    }
 
     /**
      * @param productList the productList to set

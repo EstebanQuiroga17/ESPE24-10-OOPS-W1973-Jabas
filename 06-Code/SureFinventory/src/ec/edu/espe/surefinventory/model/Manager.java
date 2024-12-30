@@ -53,25 +53,25 @@ public class Manager {
         ArrayList<Manager> managers = jsonFileManager.decerializeJson(Manager.class);
         
         if (managers == null || managers.isEmpty()) {
-            System.out.println(" There is no data in the JSON file ");
+            System.out.println(" No existe ningun usuario. ");
             return false;
         }
         
         
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter your username ");
+        System.out.print("Ingresa tu nombre de usuario: ");
         String inputUsername = scanner.nextLine();
-        System.out.print("Enter your password: ");
+        System.out.print("Ingresa tu contrasena: ");
         String inputPassword = scanner.nextLine();
         
         for (Manager manager : managers) {
             if (manager.getUsername().equals(inputUsername) && manager.getPassword().equals(inputPassword)) {
-                System.out.println("Login successful. WELCOME! " + inputUsername + "!");
+                System.out.println("Que bueno verte " + inputUsername + "!");
                 return true;
             }
         }
         
-        System.out.println("INCORRECT ---> check username and password");
+        System.out.println("Algo anda mal! --> Revisa tu usuario o contrasena.");
         return false;
     }
       

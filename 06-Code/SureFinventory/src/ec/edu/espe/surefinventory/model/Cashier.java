@@ -6,7 +6,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
-import ec.edu.espe.surefinventory.model.Menu;
 
 
 /**
@@ -16,32 +15,18 @@ import ec.edu.espe.surefinventory.model.Menu;
 public class Cashier {
     private String userName;
     private String password;
-    private int id;
 
-    public Cashier(String username, String password, int id) {
+
+    public Cashier(String username, String password) {
         this.userName = username;
-        this.password = password;
-        this.id = id;
+        this.password = password;    
     }
 
     @Override
     public String toString() {
-        return String.format("%-10s | %-15s | %-10s%n" +
-            "---------------------------------%n" +
-            "%-10d | %-15s | %-10s",
-            "ID", "Username", "Password",
-            id, userName, password,
-            "\n"
-        );
+        return "Cashier{" + "userName=" + userName + ", password=" + password + '}';
     }
-       
-    
-    /**
-     * @return the id
-     */
-    public int getId() {
-        return id;
-    }
+
 
     /**
      * @return the password
@@ -57,12 +42,6 @@ public class Cashier {
         return userName;
     }
 
-    /**
-     * @param id the id to set
-     */
-    public void setId(int id) {
-        this.id = id;
-    }
 
     /**
      * @param password the password to set
@@ -78,7 +57,7 @@ public class Cashier {
         this.userName = username;
     }
     
-    public static boolean logIn(){
+    public static boolean logIn(Cashier cashier){
         
         Path filePath = Paths.get("data","cashier.json");
         
@@ -87,33 +66,40 @@ public class Cashier {
         ArrayList<Cashier> cashiers = jsonFileManager.decerializeJson(Cashier.class);
         
         if (cashiers == null || cashiers.isEmpty()) {
-            System.out.println(" There is no data in the JSON file ");
+            System.out.println(" No existe ningun usuario. ");
             return false;
         }
         
         
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter your username ");
+        System.out.print("Ingresa tu nombre de usuario: ");
         String inputUsername = scanner.nextLine();
-        System.out.print("Enter your password: ");
+        System.out.print("Ingresa tu contrasena: ");
         String inputPassword = scanner.nextLine();
         
-        for (Cashier cashier : cashiers) {
+        for (Cashier cashierUser : cashiers) {
             
-            if (cashier.getuserName().equals(inputUsername) && cashier.getPassword().equals(inputPassword)) {
-                System.out.println("Login successful. WELCOME! " + inputUsername + "!");
+            if (cashierUser.getuserName().equals(inputUsername) && cashierUser.getPassword().equals(inputPassword)) {
+                System.out.println("Que bueno verte " + inputUsername + "!");
+                
+                cashier.setuserName(inputUsername);
+                cashier.setPassword(inputPassword);
+                
                 return true;
             }
         }
         
-        System.out.println("INCORRECT ---> check username and password");
+        System.out.println("Algo anda mal! --> Revisa tu usuario o contrasena.");
         return false;
     }
     
     public Order takeOrder(Customer customer, Menu menu){
         
+        DashBoard dashBoard = new DashBoard();         
         ArrayList<Dish> dishes = new ArrayList<>();
         Scanner scanner = new Scanner(System.in);
+        
+        dashBoard.printCustomerDashBoard();
         
         menu.showMenu();
         
