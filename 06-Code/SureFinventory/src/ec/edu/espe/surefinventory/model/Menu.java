@@ -1,6 +1,8 @@
 
 package ec.edu.espe.surefinventory.model;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import ec.edu.espe.surefinventory.utils.JsonFileManager;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -26,11 +28,10 @@ public class Menu {
     
 
 
-    public void showMenu() {
-    
-    JsonFileManager.printJson(productList);
-    
-   }
+    public String showMenu() {
+    Gson gson = new GsonBuilder().setPrettyPrinting().create();
+    return gson.toJson(productList);
+}
 
 
     /**

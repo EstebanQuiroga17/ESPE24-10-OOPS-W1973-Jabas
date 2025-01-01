@@ -32,12 +32,13 @@ public class Manager {
         System.out.println("El menú ha sido actualizado: " + menu.showMenu());
     }
     
-      public Order takeOrder(Customer customer, ArrayList<Dish> dishes){
-        Order order = new Order(customer, dishes);
+     public Order takeOrder(Customer customer, ArrayList<Dish> dishes) {
+        int itemQuantity = dishes.size(); // Calculate quantity based on list size
+        int id = (int) (Math.random() * 10000); // Generate a unique ID
+        Order order = new Order(itemQuantity, id, dishes, customer);
         System.out.println("Orden tomada del cliente: " + customer.getName());
-        return order;
-        
-    }
+    return order;
+}
       
       public Cashier createCashier(String username, String password){
         Cashier cashier = new Cashier(username, password);
@@ -82,17 +83,20 @@ public class Manager {
         System.out.println("Se ha añadido un gasto: " + expense.toString());
       }
       
-      public AccountingReport createAccountingReport(Calendar fromDate, Calendar toDate){
-        ArrayList<Invoice> incomes = new ArrayList<>(); 
-        ArrayList<Expense> expenses = new ArrayList<>(); 
-        incomes.add(new Invoice(1000, fromDate));
-        expenses.add(new Expense(500, "Compra de suministros", fromDate, "Suministros", 1));
+    public AccountingReport createAccountingReport(Calendar fromDate, Calendar toDate, ArrayList<Order> orders) {
+        ArrayList<Invoice> incomes = new ArrayList<>();
+        ArrayList<Expense> expenses = new ArrayList<>();
+
+    
+        int invoiceId = 1; // Start with ID 1 for invoices
+        for (Order order : orders) {
+        incomes.add(new Invoice("Nueva Factura", invoiceId++, order));
+    }
 
         AccountingReport report = new AccountingReport(Calendar.getInstance(), incomes, expenses);
         System.out.println("Informe contable creado desde " + fromDate.getTime() + " hasta " + toDate.getTime());
         return report;
-    }
-      
+}
 
     /**
      * @return the password
