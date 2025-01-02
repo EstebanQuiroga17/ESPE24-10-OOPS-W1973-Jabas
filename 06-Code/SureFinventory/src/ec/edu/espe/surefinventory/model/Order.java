@@ -1,13 +1,18 @@
 package ec.edu.espe.surefinventory.model;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Calendar;
 
 public class Order {
     private int itemQuantity;
     private int id;
     private ArrayList<Dish> dishes;
     private Customer customer;
+    
+    public void saveOrder(){
+        Path filepath = Paths.get("data", "order.json");
+    }
     
     
     @Override

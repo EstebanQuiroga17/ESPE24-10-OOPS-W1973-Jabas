@@ -71,11 +71,19 @@ public class DashBoard {
         switch(dashBoardOption){
             case 1: {
                 Customer customer;
+                Order order;
                 
                 Menu menu = new Menu();
                 customer = printCustomerDashBoard();
                 
-                cashier.takeOrder(customer, menu);
+                order = cashier.takeOrder(customer, menu);
+                
+                System.out.println("Orden creada con exito.");
+                System.out.println("Crea una factura cuando sea pagada.");
+            break;
+            //TODO code case 2
+                
+            
             }            
         }
     }
