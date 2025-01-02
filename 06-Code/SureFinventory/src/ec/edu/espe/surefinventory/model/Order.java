@@ -1,5 +1,6 @@
 package ec.edu.espe.surefinventory.model;
 
+import ec.edu.espe.surefinventory.utils.JsonFileManager;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -12,6 +13,15 @@ public class Order {
     
     public void saveOrder(){
         Path filepath = Paths.get("data", "order.json");
+        JsonFileManager orderFileManager = new JsonFileManager(filepath);
+        ArrayList<Order> orders = new ArrayList<>();
+        
+        orders = orderFileManager.decerializeJson(Order.class);
+        
+        orders.add(this);
+        
+        orderFileManager.updateJsonFile(orders);
+        
     }
     
     

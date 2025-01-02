@@ -99,10 +99,8 @@ public class Cashier {
         ArrayList<Dish> dishes = new ArrayList<>();
         Scanner scanner = new Scanner(System.in);
        
-        
-        menu.showMenu();
-        
         System.out.println("Selecciona un plato por su indice.");
+        JsonFileManager.printJson(menu.getProductList());              
         
         int option = scanner.nextInt();
         
@@ -123,6 +121,8 @@ public class Cashier {
         System.out.println("Ingrese un numero para esta orden.");
         orderId = scanner.nextInt();
         Order order =  new Order(dishes.size(), orderId, dishes, customer);
+        
+        
         return order;
     }
 

@@ -1,8 +1,24 @@
 [
-    {
-    "itemQuantity": "Esteban Quiroga ",
-    "id": 888,
-    "dishes": ["cola","papasFritas"] ,
-    "customer": "Esteban Quiroga "
+  {
+    "itemQuantity": 2,
+    "id": 55,
+    "dishes": [
+      {
+        "name": "cola",
+        "id": 0,
+        "price": 1.0
+      },
+      {
+        "name": "papasFritas",
+        "id": 0,
+        "price": 2.0
+      }
+    ],
+    "customer": {
+      "name": "Juan",
+      "lastName": "Hidalgo",
+      "phoneNumber": 1234,
+      "id": 1234
     }
+  }
 ]

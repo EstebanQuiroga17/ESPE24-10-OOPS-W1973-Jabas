@@ -25,13 +25,6 @@ public class Menu {
         productList = menuFileManager.decerializeJson(Dish.class);
         this.setProductList(productList);
     }
-    
-
-
-    public String showMenu() {
-    Gson gson = new GsonBuilder().setPrettyPrinting().create();
-    return gson.toJson(productList);
-}
 
 
     /**

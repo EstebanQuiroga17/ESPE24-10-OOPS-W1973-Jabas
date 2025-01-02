@@ -78,6 +78,8 @@ public class DashBoard {
                 
                 order = cashier.takeOrder(customer, menu);
                 
+                order.saveOrder();
+                
                 System.out.println("Orden creada con exito.");
                 System.out.println("Crea una factura cuando sea pagada.");
             break;

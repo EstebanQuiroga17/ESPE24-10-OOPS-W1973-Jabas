@@ -28,8 +28,9 @@ public class Manager {
         
     }
     
-    public void changeMenu(Menu menu){
-        System.out.println("El menú ha sido actualizado: " + menu.showMenu());
+    public void changeMenu(Menu menu){               
+        System.out.println("El menú ha sido actualizado: "  );
+        JsonFileManager.printJson(menu.getProductList());
     }
     
      public Order takeOrder(Customer customer, ArrayList<Dish> dishes) {
