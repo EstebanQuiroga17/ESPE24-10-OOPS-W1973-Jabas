@@ -7,8 +7,9 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Scanner;
-
-/**
+import ec.edu.espe.surefinventory.model.Cashier;
+import ec.edu.espe.surefinventory.model.Order;
+/*
  *
  * @author abner
  */

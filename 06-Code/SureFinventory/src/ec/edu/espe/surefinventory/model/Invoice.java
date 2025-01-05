@@ -17,7 +17,7 @@ public class Invoice {
         return "Invoice{" + "date=" + date + ", header=" + header + ", id=" + id + ", price=" + price + ", order=" + order + '}';
     }
 
-    public Invoice(Calendar date, String header, int id, float price, Order order) {
+    public Invoice(int id, Calendar date) {
         this.date = date;
         this.header = header;
         this.id = id;

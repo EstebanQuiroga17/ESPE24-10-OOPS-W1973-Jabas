@@ -24,7 +24,12 @@ public class Expense {
 
     @Override
     public String toString() {
-        return "Expense{" + "price=" + price + ", description=" + description + ", date=" + date + ", name=" + name + ", id=" + id + '}';
+        return "Expense{" + 
+                "price=" + price + 
+                ", description=" + description + 
+                ", date=" + date + 
+                ", name=" + name + 
+                ", id=" + id + '}';
     }
     
     

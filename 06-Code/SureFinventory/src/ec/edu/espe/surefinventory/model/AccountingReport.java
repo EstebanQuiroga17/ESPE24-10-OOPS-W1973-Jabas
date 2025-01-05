@@ -21,7 +21,8 @@ public class AccountingReport {
 
     @Override
     public String toString() {
-        return "AccountingReport{" + "creationDate=" + creationDate + ", incomes=" + incomes + ", expenses=" + expenses + '}';
+        return "AccountingReport{" + "creationDate=" + creationDate 
+                + ", incomes=" + incomes + ", expenses=" + expenses + '}';
     }
     
     
