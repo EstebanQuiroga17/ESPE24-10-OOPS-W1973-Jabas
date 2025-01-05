@@ -72,25 +72,23 @@ public class Cashier {
         
         
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Ingresa tu nombre de usuario: ");
-        String inputUsername = scanner.nextLine();
-        System.out.print("Ingresa tu contrasena: ");
-        String inputPassword = scanner.nextLine();
-        
-        for (Cashier cashierUser : cashiers) {
-            
-            if (cashierUser.getuserName().equals(inputUsername) && cashierUser.getPassword().equals(inputPassword)) {
-                System.out.println("Que bueno verte " + inputUsername + "!");
-                
-                cashier.setuserName(inputUsername);
-                cashier.setPassword(inputPassword);
-                
-                return true;
+        while (true) {
+            System.out.print("Ingresa tu nombre de usuario: ");
+            String inputUsername = scanner.nextLine();
+            System.out.print("Ingresa tu contrasena: ");
+            String inputPassword = scanner.nextLine();
+
+            for (Cashier cashierUser : cashiers) {
+                if (cashierUser.getuserName().equals(inputUsername) && cashierUser.getPassword().equals(inputPassword)) {
+                    System.out.println("¡Qué bueno verte, " + inputUsername + "!");
+                    cashier.setuserName(inputUsername);
+                    cashier.setPassword(inputPassword);
+                    return true;
+                }
             }
+
+            System.out.println("Algo anda mal! --> Revisa tu usuario o contrasena.");
         }
-        
-        System.out.println("Algo anda mal! --> Revisa tu usuario o contrasena.");
-        return false;
     }
     
     public Order takeOrder(Customer customer, Menu menu){

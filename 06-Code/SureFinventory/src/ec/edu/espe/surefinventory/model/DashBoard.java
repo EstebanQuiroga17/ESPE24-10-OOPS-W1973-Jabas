@@ -5,7 +5,6 @@ import static java.awt.SystemColor.menu;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.InputMismatchException;
 import java.util.Scanner;
 /**
  *
@@ -15,21 +14,18 @@ public class DashBoard {
     int dashBoardOption;
     Scanner scanner = new Scanner(System.in);
 
-    private int getValidIntInput(String prompt) {
+    public int getValidIntInput(String prompt) {
         int input = -1;
-        boolean validOption = false;
-
-        while (!validOption) {
+        while (true) {
             System.out.println(prompt);
-
             try {
-                input = scanner.nextInt();
-                validOption = true;
-            } catch (InputMismatchException e) {
-                System.out.println("Entrada no valida. Por favor, ingrese una opcion disponible");
-                scanner.nextLine();
+                input = Integer.parseInt(scanner.nextLine().trim());
+                break; 
+            } catch (NumberFormatException e) {
+                System.out.println("Entrada no valida. Por favor, intente otra vez");
             }
         }
+
         return input;
     }
 

@@ -47,35 +47,37 @@ public class Manager {
         return cashier;    
     }
       
-      public static boolean logIn(){
-          
-        Path filePath = Paths.get("data","manager.json");
+    public static boolean logIn() {
+        Path filePath = Paths.get("data", "manager.json");
         JsonFileManager jsonFileManager = new JsonFileManager(filePath);
-        
-        ArrayList<Manager> managers = jsonFileManager.decerializeJson(Manager.class);
-        
+    
+         ArrayList<Manager> managers = jsonFileManager.decerializeJson(Manager.class);
+    
         if (managers == null || managers.isEmpty()) {
-            System.out.println(" No existe ningun usuario. ");
-            return false;
-        }
-        
-        
+        System.out.println("No existe ningun usuario.");
+        return false;
+    }
+
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Ingresa tu nombre de usuario: ");
-        String inputUsername = scanner.nextLine();
-        System.out.print("Ingresa tu contrasena: ");
-        String inputPassword = scanner.nextLine();
+
+        while (true) {
+            System.out.print("Ingresa tu nombre de usuario: ");
+            String inputUsername = scanner.nextLine();
+        
+            System.out.print("Ingresa tu contrasena: ");
+            String inputPassword = scanner.nextLine();
         
         for (Manager manager : managers) {
             if (manager.getUsername().equals(inputUsername) && manager.getPassword().equals(inputPassword)) {
-                System.out.println("Que bueno verte " + inputUsername + "!");
+                System.out.println("¡Qué bueno verte, " + inputUsername + "!");
                 return true;
             }
         }
-        
+
         System.out.println("Algo anda mal! --> Revisa tu usuario o contrasena.");
-        return false;
     }
+}
+
       
       public void cancelOrder(Order order){
         System.out.println("La orden con ID " + order.getId() + " ha sido cancelada.");
