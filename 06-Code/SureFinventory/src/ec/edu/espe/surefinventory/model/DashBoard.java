@@ -130,6 +130,7 @@ public class DashBoard {
                     break;
 
                 case 3:
+                    printLogInDashBoard();
                     validOption = true;
                     break;
 
