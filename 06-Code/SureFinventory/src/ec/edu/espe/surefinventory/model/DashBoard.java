@@ -77,18 +77,19 @@ public class DashBoard {
 
             switch (dashBoardOption) {
                 case 1:
-                    validOption = true;
+                    printMenuDashBoard();
                     break;
                 case 2:
-                    validOption = true;
+                    printOrderDashBoard();                    
                     break;
                 case 3:
-                    validOption = true;
+                    printManageUsersDashBoard();
                     break;
                 case 4:
-                    validOption = true;
+                    printAccountingReportDashBoard();                   
                     break;
                 case 5:
+                    System.out.println("Saliendo del sistema con exito....");
                     validOption = true;
                     break;
                 default:
@@ -304,6 +305,7 @@ public class DashBoard {
     }
 
     public Customer printCustomerDashBoard() {
+        System.out.println("====== Gestion de clientes ======");
         System.out.println("1. Buscar un cliente por su apellido.");
         System.out.println("2. Agregar un nuevo cliente.");
         System.out.println("3. Borrar un cliente.");
