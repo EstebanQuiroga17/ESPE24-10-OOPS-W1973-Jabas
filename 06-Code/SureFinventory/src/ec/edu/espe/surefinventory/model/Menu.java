@@ -1,6 +1,11 @@
 
 package ec.edu.espe.surefinventory.model;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import ec.edu.espe.surefinventory.utils.JsonFileManager;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
 /**
@@ -9,26 +14,17 @@ import java.util.ArrayList;
  */
 public class Menu {
     
-    private String name;
+    private final String name = "Menu";
     private ArrayList<Dish> productList;
 
-    public Menu(String name, ArrayList<Dish> productList) {
-        this.name = name;
-        this.productList = productList;
-    }
-    
+    public Menu() {
 
-    public String generateMenuString() {
-    StringBuilder dishesString = new StringBuilder();
-    for (Dish productListDishes : productList) {
-        dishesString.append(String.format("%-10d | %-20s | $%-10.2f%n",
-                productListDishes.getId(), productListDishes.getName(), productListDishes.getPrice()));
+        Path filePath = Paths.get("data","dishesMenu.json"); 
+        JsonFileManager menuFileManager = new JsonFileManager(filePath);
+        
+        productList = menuFileManager.decerializeJson(Dish.class);
+        this.setProductList(productList);
     }
-
-    return String.format(
-            "Name: %s%nDishes:%n%s",
-            name, dishesString.toString());
-}
 
 
     /**
@@ -45,12 +41,6 @@ public class Menu {
         return productList;
     }
 
-    /**
-     * @param name the name to set
-     */
-    public void setName(String name) {
-        this.name = name;
-    }
 
     /**
      * @param productList the productList to set

@@ -38,7 +38,7 @@ public class JsonFileManager {
         return null;
     }
     
-    public <T> void printJson(ArrayList<T> arrayList){
+    public static <T> void printJson(ArrayList<T> arrayList){
         int index = 1; 
             for(T object : arrayList)
             {

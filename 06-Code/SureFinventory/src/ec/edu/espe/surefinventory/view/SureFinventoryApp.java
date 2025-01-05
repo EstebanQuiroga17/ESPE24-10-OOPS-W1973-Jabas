@@ -3,6 +3,8 @@ package ec.edu.espe.surefinventory.view;
 
 import ec.edu.espe.surefinventory.model.Cashier;
 import ec.edu.espe.surefinventory.model.DashBoard;
+import ec.edu.espe.surefinventory.model.Manager;
+import ec.edu.espe.surefinventory.utils.JsonFileManager;
 
 /**
  *
@@ -10,22 +12,10 @@ import ec.edu.espe.surefinventory.model.DashBoard;
  */
 public class SureFinventoryApp {
     public static void main(String[] args) {
-        DashBoard dashboard = new DashBoard();
+        DashBoard dashBoard = new DashBoard();
         
-        dashboard.printLogInDashBoard();
+        dashBoard.printLogInDashBoard();
         
-        switch(dashboard.getDashBoardOption()){
-            case 1:
-            break;
-            case 2: {
-                if (Cashier.logIn()) {
-                System.out.println("Access granted ");
-                System.out.println("Accessing the system");
-                } else System.out.println("Acceso denegado");            
-            }
-            break;
-            
-        }
         
     }
 }

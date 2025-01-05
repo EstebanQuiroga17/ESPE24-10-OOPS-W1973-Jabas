@@ -9,7 +9,7 @@ public class Dish {
     private float price;
 
     // Constructor
-    public Dish(int id, String name, double price) {
+    public Dish(int id, String name, float price) {
         this.id = id;
         this.name = name;
         this.price =  price;
@@ -37,7 +37,7 @@ public class Dish {
         this.id = id;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(float price) {
         this.price = price;
     }
 

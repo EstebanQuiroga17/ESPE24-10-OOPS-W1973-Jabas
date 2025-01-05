@@ -1,6 +1,8 @@
 package ec.edu.espe.surefinventory.model;
 
 import java.util.Calendar;
+import java.util.HashSet;
+import java.util.Set;
 /**
  *
  * @author Benjamin Robalino <jabasteam>
@@ -17,18 +19,30 @@ public class Invoice {
         return "Invoice{" + "date=" + date + ", header=" + header + ", id=" + id + ", price=" + price + ", order=" + order + '}';
     }
 
+<<<<<<< HEAD
     public Invoice(int id, Calendar date) {
         this.date = date;
         this.header = header;
+=======
+    public Invoice(String header, int id, Order order) {
+        date = Calendar.getInstance();
+        this.setDate(date);
+        
+        
+        header = "Nueva factura";
+        this.setHeader(header);
+        
+>>>>>>> 19802efede3dedb03f8790de1712b8d9f9520646
         this.id = id;
-        this.price = price;
+        
+        for(Dish dish : order.getDishes()){
+           price += dish.getPrice();    
+        }
+        this.setPrice(price);
+        
         this.order = order;
     }
 
-    
-    public double calculateTotal() {
-        return price + (price * iva / 100.0);
-    }
 
     public Calendar getDate() {
         return date;

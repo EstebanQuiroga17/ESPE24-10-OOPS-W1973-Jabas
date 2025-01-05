@@ -1,8 +1,9 @@
 package ec.edu.espe.surefinventory.model;
 
+import ec.edu.espe.surefinventory.utils.JsonFileManager;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
 
 public class Order {
     private int itemQuantity;
@@ -10,11 +11,19 @@ public class Order {
     private ArrayList<Dish> dishes;
     private Customer customer;
     
-    public Invoice createInvoice(){
+    public void saveOrder(){
+        Path filepath = Paths.get("data", "order.json");
+        JsonFileManager orderFileManager = new JsonFileManager(filepath);
+        ArrayList<Order> orders = new ArrayList<>();
         
-    Invoice invoice = new Invoice()
-    return invoice;
+        orders = orderFileManager.decerializeJson(Order.class);
+        
+        orders.add(this);
+        
+        orderFileManager.updateJsonFile(orders);
+        
     }
+    
     
     @Override
     public String toString() {

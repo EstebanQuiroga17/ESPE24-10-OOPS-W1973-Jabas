@@ -1,6 +1,11 @@
 [
     {
         "name": "cola",
-        "price": 25
+        "price": 1
+    },
+    
+    {
+        "name": "papasFritas",
+        "price": 2
     }
 ]

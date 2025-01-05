@@ -1,11 +1,13 @@
 [
   {
-    "name": "juan",
+    "name": "Juan",
+    "lastName": "Hidalgo",
     "phoneNumber": 1234,
     "id": 1234
   },
   {
-    "name": "roro",
+    "name": "Roro",
+    "lastName": "Mesias",
     "phoneNumber": 1234,
     "id": 96
   }
