@@ -19,11 +19,6 @@ public class Invoice {
         return "Invoice{" + "date=" + date + ", header=" + header + ", id=" + id + ", price=" + price + ", order=" + order + '}';
     }
 
-<<<<<<< HEAD
-    public Invoice(int id, Calendar date) {
-        this.date = date;
-        this.header = header;
-=======
     public Invoice(String header, int id, Order order) {
         date = Calendar.getInstance();
         this.setDate(date);
@@ -32,7 +27,7 @@ public class Invoice {
         header = "Nueva factura";
         this.setHeader(header);
         
->>>>>>> 19802efede3dedb03f8790de1712b8d9f9520646
+
         this.id = id;
         
         for(Dish dish : order.getDishes()){
