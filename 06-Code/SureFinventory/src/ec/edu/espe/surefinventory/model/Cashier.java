@@ -1,7 +1,9 @@
+package ec.edu.espe.surefinventory.model;
 
-package ec.edu.espe.sureinveoryapp.model;
 
-import ec.edu.espe.sureinveoryapp.utils.JsonFileManager;
+package ec.edu.espe.surefinventory.model;
+
+import ec.edu.espe.surefinventory.utils.JsonFileManager;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
