@@ -1,35 +1,35 @@
 package ec.edu.espe.surefinventory.model;
 
-
-package ec.edu.espe.surefinventory.model;
-
+import ec.edu.espe.surefinventory.model.Customer;
+import ec.edu.espe.surefinventory.model.DashBoard;
+import ec.edu.espe.surefinventory.model.Dish;
+import ec.edu.espe.surefinventory.model.Invoice;
+import ec.edu.espe.surefinventory.model.Menu;
+import ec.edu.espe.surefinventory.model.Order;
 import ec.edu.espe.surefinventory.utils.JsonFileManager;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-
-
 /**
  *
  * @author abner
  */
 public class Cashier {
+
     private String userName;
     private String password;
 
-
     public Cashier(String username, String password) {
         this.userName = username;
-        this.password = password;    
+        this.password = password;
     }
 
     @Override
     public String toString() {
         return "Cashier{" + "userName=" + userName + ", password=" + password + '}';
     }
-
 
     /**
      * @return the password
@@ -45,7 +45,6 @@ public class Cashier {
         return userName;
     }
 
-
     /**
      * @param password the password to set
      */
@@ -59,21 +58,20 @@ public class Cashier {
     public void setuserName(String username) {
         this.userName = username;
     }
-    
-    public static boolean logIn(Cashier cashier){
-        
-        Path filePath  = Paths.get("data","cashier.json");
-        
+
+    public static boolean logIn(Cashier cashier) {
+
+        Path filePath = Paths.get("data", "cashier.json");
+
         JsonFileManager jsonFileManager = new JsonFileManager(filePath);
-        
+
         ArrayList<Cashier> cashiers = jsonFileManager.decerializeJson(Cashier.class);
-        
+
         if (cashiers == null || cashiers.isEmpty()) {
             System.out.println(" No existe ningun usuario. ");
             return false;
         }
-        
-        
+
         Scanner scanner = new Scanner(System.in);
         while (true) {
             System.out.print("Ingresa tu nombre de usuario: ");
@@ -93,80 +91,77 @@ public class Cashier {
             System.out.println("Algo anda mal! --> Revisa tu usuario o contrasena.");
         }
     }
-    
-    public Order takeOrder(Customer customer, Menu menu){
-        
-        DashBoard dashBoard = new DashBoard();         
+
+    public Order takeOrder(Customer customer, Menu menu) {
+
+        DashBoard dashBoard = new DashBoard();
         ArrayList<Dish> dishes = new ArrayList<>();
         Scanner scanner = new Scanner(System.in);
-       
+
         System.out.println("Selecciona un plato por su indice.");
-        JsonFileManager.printJson(menu.getProductList());              
-        
+        JsonFileManager.printJson(menu.getProductList());
+
         int option = scanner.nextInt();
-        
-        do{
-        Dish dish;
-        dish = JsonFileManager.searchObjectByIndex(menu.getProductList(), option);
-        dishes.add(dish);
-        
-        
-        System.out.println("Agrega otro producto.");
-        System.out.println("O pulsa 0 para salir.");
-        
-        option = scanner.nextInt();
-        
-        }while(option != 0);
-        
+
+        do {
+            Dish dish;
+            dish = JsonFileManager.searchObjectByIndex(menu.getProductList(), option);
+            dishes.add(dish);
+
+            System.out.println("Agrega otro producto.");
+            System.out.println("O pulsa 0 para salir.");
+
+            option = scanner.nextInt();
+
+        } while (option != 0);
+
         int orderId;
         System.out.println("Ingrese un numero para esta orden.");
         orderId = scanner.nextInt();
-        Order order =  new Order(dishes.size(), orderId, dishes, customer);
-        
-    public static Order chooseOrder(ArrayList<Order> orders) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Seleccione una orden por su ID:");
-        for (Order order : orders) {
-            System.out.println(order);
-    }
+        Order order = new Order(dishes.size(), orderId, dishes, customer);
 
-        int selectedId = scanner.nextInt();
-        for (Order order : orders) {
-        if (order.getId() == selectedId) {
-            return order;
-        }
-    }
-         System.out.println("Orden no encontrada.");
-         return null;
-    }   
-        
         return order;
     }
 
-public static void createAndSaveInvoice(Order order) {
-    if (order == null) {
-        System.out.println("No se puede crear una factura para una orden nula.");
-        return;
+    public static Order chooseOrder() {
+
+        Path filePath = Paths.get("data", "order.json");
+        JsonFileManager jsonFileManager = new JsonFileManager(filePath);
+        ArrayList<Order> orders = jsonFileManager.decerializeJson(Order.class);
+
+        if (orders == null || orders.isEmpty()) {
+            System.out.println("No hay órdenes disponibles.");
+            return null;
+        }
+
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Seleccione una orden por su ID:");
+
+        for (Order order : orders) {
+            System.out.println(order);
+        }
+
+        int selectedId = scanner.nextInt();
+
+        for (Order order : orders) {
+            if (order.getId() == selectedId) {
+                return order;
+            }
+        }
+
+        System.out.println("Orden no encontrada.");
+        return null;
+    }
+
+    public static void saveInvoiceToJson(Invoice invoice) {
+        Path filePath = Paths.get("data", "invoice.json");
+        JsonFileManager jsonFileManager = new JsonFileManager(filePath);
+        ArrayList<Invoice> invoices = jsonFileManager.decerializeJson(Invoice.class);
+
+        invoices.add(invoice);
+        jsonFileManager.updateJsonFile(invoices);
+        System.out.println("Factura guardada exitosamente.");
     }
     
-    Invoice invoice = new Invoice("Factura Generada", order.getId(), order);
-    saveInvoiceToJson(invoice);
 }
-
-public static void saveInvoiceToJson(Invoice invoice) {
-    Path filePath = Paths.get("data", "invoice.json");
-    JsonFileManager jsonFileManager = new JsonFileManager(filePath);
-    ArrayList<Invoice> invoices = jsonFileManager.decerializeJson(Invoice.class);
-
-    if (invoices == null) {
-        invoices = new ArrayList<>();
-    }
-
-    invoices.add(invoice);
-    jsonFileManager.updateJsonFile(invoices);
-    System.out.println("Factura guardada exitosamente.");
-}
-        
-
- }
-
+    
