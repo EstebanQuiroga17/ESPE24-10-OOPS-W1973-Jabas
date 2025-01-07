@@ -123,11 +123,12 @@ public class Cashier {
         return order;
     }
 
-    public static Order chooseOrder() {
+    public Order chooseOrder() {
 
         Path filePath = Paths.get("data", "order.json");
-        JsonFileManager jsonFileManager = new JsonFileManager(filePath);
-        ArrayList<Order> orders = jsonFileManager.decerializeJson(Order.class);
+        JsonFileManager orderFileManager = new JsonFileManager(filePath);
+        ArrayList<Order> orders = orderFileManager.decerializeJson(Order.class);
+        Order order;
 
         if (orders == null || orders.isEmpty()) {
             System.out.println("No hay órdenes disponibles.");
@@ -137,23 +138,17 @@ public class Cashier {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Seleccione una orden por su ID:");
 
-        for (Order order : orders) {
-            System.out.println(order);
-        }
+        JsonFileManager.printJson(orders);
 
         int selectedId = scanner.nextInt();
 
-        for (Order order : orders) {
-            if (order.getId() == selectedId) {
-                return order;
-            }
-        }
+        order = JsonFileManager.searchObjectByIndex(orders, selectedId);
 
-        System.out.println("Orden no encontrada.");
-        return null;
+        return order;
     }
 
-    public static void saveInvoiceToJson(Invoice invoice) {
+    
+    public void saveInvoiceToJson(Invoice invoice) {
         Path filePath = Paths.get("data", "invoice.json");
         JsonFileManager jsonFileManager = new JsonFileManager(filePath);
         ArrayList<Invoice> invoices = jsonFileManager.decerializeJson(Invoice.class);

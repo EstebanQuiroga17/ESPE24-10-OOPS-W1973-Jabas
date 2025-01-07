@@ -1,7 +1,6 @@
 package ec.edu.espe.surefinventory.model;
 
 import ec.edu.espe.surefinventory.utils.JsonFileManager;
-import static java.awt.SystemColor.menu;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -127,8 +126,25 @@ public class DashBoard {
                     break;
 
                 case 2:
+                    int id;
+                    Path invoicePath = Paths.get("data","invoice.json");
+                    JsonFileManager invoiceFileManager = new JsonFileManager(invoicePath);
+                    ArrayList<Invoice> invoices = new ArrayList<>();
+                    order = cashier.chooseOrder();
+                    
+                    System.out.println("Ingrese el id de la factura.");
+                    id = scanner.nextInt();
+                    
+                    Invoice invoice = new Invoice(id, order);
+                    
+                    invoices = invoiceFileManager.decerializeJson(Invoice.class);
+                    invoices.add(invoice);
+                    invoiceFileManager.updateJsonFile(invoices);
+                    
+                    System.out.println("Factura creada con exito.");
                     validOption = true;
                     break;
+
 
                 case 3:
                     printLogInDashBoard();

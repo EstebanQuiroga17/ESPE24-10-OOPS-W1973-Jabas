@@ -41,20 +41,13 @@ public class Dish {
         this.price = price;
     }
 
-   
-   
-    
     @Override
     public String toString() {
-        return String.format(
-        "%-10s | %-20s | %-10s%n" +
-        "---------------------------------%n" +
-        "%-10d | %-20s | $%-10.2f",
-        "ID", "Name", "Price", 
-        id, name, price,
-                "\n"
-    );
-        }
+        return "Dish{" + "name=" + name + ", id=" + id + ", price=" + price + '}';
+    }
+
+   
+    
 
 }
 

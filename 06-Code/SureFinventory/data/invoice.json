@@ -1,3 +1,37 @@
-{
-    "name": "Esteban Quiroga "
-}
+[
+  {
+    "date": {
+      "year": 2025,
+      "month": 0,
+      "dayOfMonth": 7,
+      "hourOfDay": 16,
+      "minute": 52,
+      "second": 3
+    },
+    "header": "Nueva factura",
+    "id": 901,
+    "price": 3.0,
+    "order": {
+      "itemQuantity": 2,
+      "id": 55,
+      "dishes": [
+        {
+          "name": "cola",
+          "id": 0,
+          "price": 1.0
+        },
+        {
+          "name": "papasFritas",
+          "id": 0,
+          "price": 2.0
+        }
+      ],
+      "customer": {
+        "name": "Juan",
+        "lastName": "Hidalgo",
+        "phoneNumber": 1234,
+        "id": 1234
+      }
+    }
+  }
+]

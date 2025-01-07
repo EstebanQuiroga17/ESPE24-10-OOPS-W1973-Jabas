@@ -19,13 +19,13 @@ public class Invoice {
         return "Invoice{" + "date=" + date + ", header=" + header + ", id=" + id + ", price=" + price + ", order=" + order + '}';
     }
 
-    public Invoice(String header, int id, Order order) {
+    public Invoice(int id, Order order) {
         date = Calendar.getInstance();
-        this.setDate(date);
+        this.date = date;
         
         
         header = "Nueva factura";
-        this.setHeader(header);
+        this.header = header;
         
 
         this.id = id;
@@ -33,7 +33,7 @@ public class Invoice {
         for(Dish dish : order.getDishes()){
            price += dish.getPrice();    
         }
-        this.setPrice(price);
+        this.price = price;
         
         this.order = order;
     }
