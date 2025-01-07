@@ -119,7 +119,7 @@ public class Cashier {
         System.out.println("Ingrese un numero para esta orden.");
         orderId = scanner.nextInt();
         Order order = new Order(dishes.size(), orderId, dishes, customer);
-
+        
         return order;
     }
 
