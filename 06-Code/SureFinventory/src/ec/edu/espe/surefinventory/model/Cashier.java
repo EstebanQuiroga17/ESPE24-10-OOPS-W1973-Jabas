@@ -1,11 +1,12 @@
 
-package ec.edu.espe.surefinventory.model;
+package ec.edu.espe.sureinveoryapp.model;
 
-import ec.edu.espe.surefinventory.utils.JsonFileManager;
+import ec.edu.espe.sureinveoryapp.utils.JsonFileManager;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
+
 
 
 /**
@@ -59,7 +60,7 @@ public class Cashier {
     
     public static boolean logIn(Cashier cashier){
         
-        Path filePath = Paths.get("data","cashier.json");
+        Path filePath  = Paths.get("data","cashier.json");
         
         JsonFileManager jsonFileManager = new JsonFileManager(filePath);
         
@@ -120,8 +121,50 @@ public class Cashier {
         orderId = scanner.nextInt();
         Order order =  new Order(dishes.size(), orderId, dishes, customer);
         
+    public static Order chooseOrder(ArrayList<Order> orders) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Seleccione una orden por su ID:");
+        for (Order order : orders) {
+            System.out.println(order);
+    }
+
+        int selectedId = scanner.nextInt();
+        for (Order order : orders) {
+        if (order.getId() == selectedId) {
+            return order;
+        }
+    }
+         System.out.println("Orden no encontrada.");
+         return null;
+    }   
         
         return order;
     }
 
+public static void createAndSaveInvoice(Order order) {
+    if (order == null) {
+        System.out.println("No se puede crear una factura para una orden nula.");
+        return;
+    }
+    
+    Invoice invoice = new Invoice("Factura Generada", order.getId(), order);
+    saveInvoiceToJson(invoice);
 }
+
+public static void saveInvoiceToJson(Invoice invoice) {
+    Path filePath = Paths.get("data", "invoice.json");
+    JsonFileManager jsonFileManager = new JsonFileManager(filePath);
+    ArrayList<Invoice> invoices = jsonFileManager.decerializeJson(Invoice.class);
+
+    if (invoices == null) {
+        invoices = new ArrayList<>();
+    }
+
+    invoices.add(invoice);
+    jsonFileManager.updateJsonFile(invoices);
+    System.out.println("Factura guardada exitosamente.");
+}
+        
+
+ }
+
