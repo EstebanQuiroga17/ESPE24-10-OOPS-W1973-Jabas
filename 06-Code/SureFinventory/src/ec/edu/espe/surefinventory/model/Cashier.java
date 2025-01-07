@@ -1,8 +1,12 @@
-package ec.edu.espe.surefinventory.model;
-
 
 package ec.edu.espe.surefinventory.model;
 
+import ec.edu.espe.surefinventory.model.Customer;
+import ec.edu.espe.surefinventory.model.DashBoard;
+import ec.edu.espe.surefinventory.model.Dish;
+import ec.edu.espe.surefinventory.model.Invoice;
+import ec.edu.espe.surefinventory.model.Menu;
+import ec.edu.espe.surefinventory.model.Order;
 import ec.edu.espe.surefinventory.utils.JsonFileManager;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -122,6 +126,8 @@ public class Cashier {
         System.out.println("Ingrese un numero para esta orden.");
         orderId = scanner.nextInt();
         Order order =  new Order(dishes.size(), orderId, dishes, customer);
+        return order;
+    }
         
     public static Order chooseOrder(ArrayList<Order> orders) {
         Scanner scanner = new Scanner(System.in);
@@ -140,8 +146,7 @@ public class Cashier {
          return null;
     }   
         
-        return order;
-    }
+    
 
 public static void createAndSaveInvoice(Order order) {
     if (order == null) {
@@ -157,10 +162,6 @@ public static void saveInvoiceToJson(Invoice invoice) {
     Path filePath = Paths.get("data", "invoice.json");
     JsonFileManager jsonFileManager = new JsonFileManager(filePath);
     ArrayList<Invoice> invoices = jsonFileManager.decerializeJson(Invoice.class);
-
-    if (invoices == null) {
-        invoices = new ArrayList<>();
-    }
 
     invoices.add(invoice);
     jsonFileManager.updateJsonFile(invoices);
