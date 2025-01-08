@@ -1,6 +1,7 @@
 package ec.edu.espe.surefinventory.model;
 
 import ec.edu.espe.surefinventory.utils.JsonFileManager;
+import static java.awt.SystemColor.menu;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -76,16 +77,16 @@ public class DashBoard {
 
             switch (dashBoardOption) {
                 case 1:
-                    printMenuDashBoard();
+                    printMenuDashBoard(); //TODO
                     break;
                 case 2:
-                    printOrderDashBoard();                    
+                    printOrderDashBoard();  //DONE                    
                     break;
                 case 3:
-                    printManageUsersDashBoard();
+                    printManageUsersDashBoard();  //DONE
                     break;
                 case 4:
-                    printAccountingReportDashBoard();                   
+                    printAccountingReportDashBoard();   //TODO                
                     break;
                 case 5:
                     System.out.println("Saliendo del sistema con exito....");
@@ -175,9 +176,11 @@ public class DashBoard {
                     validOption = true;
                     break;
                 case 2:
+                    
                     validOption = true;
                     break;
                 case 3:
+                    System.out.println("Saliendo del sistema con exito....");
                     validOption = true;
                     break;
                 default:
@@ -257,6 +260,9 @@ public class DashBoard {
 
     public void printOrderDashBoard() {
         boolean validOption = false;
+        Path filePath = Paths.get("data", "order.json");
+        JsonFileManager orderFileManager = new JsonFileManager(filePath);
+        ArrayList<Order> orders = orderFileManager.decerializeJson(Order.class);
 
         while (!validOption) {
             System.out.println("====== Ordenes ======");
@@ -269,15 +275,93 @@ public class DashBoard {
 
             switch (dashBoardOption) {
                 case 1:
+                    Scanner scanner = new Scanner(System.in);
+                
+                    System.out.print("Ingrese el apellido del cliente: ");
+                    String lastName = scanner.nextLine();
+                    Customer customer = Customer.searchCustomerByLastName(lastName);
+
+                    Menu menu = new Menu();
+                    ArrayList<Dish> selectedDishes = new ArrayList<>();
+                    System.out.println("Seleccione los platos para el pedido.");
+                    JsonFileManager.printJson(menu.getProductList());
+
+                    int option;
+                    do {
+                    System.out.print("Seleccione el índice del plato (0 para salir): ");
+                    option = scanner.nextInt();
+
+                    if (option != 0) {
+                        Dish dish = JsonFileManager.searchObjectByIndex(menu.getProductList(), option);
+                        selectedDishes.add(dish);
+                    }
+                    } while (option != 0);
+
+                    if (!selectedDishes.isEmpty()) {
+                    Order order = new Order(selectedDishes.size(), (int) (Math.random() * 10000), selectedDishes, customer);
+                    order.saveOrder();
+                    System.out.println("Pedido tomado exitosamente: " + order);
+                    } else {
+                    System.out.println("No se seleccionaron platos. El pedido no se registró.");
+                    }
                     validOption = true;
                     break;
                 case 2:
+                    scanner = new Scanner(System.in);
+
+                    if (orders == null || orders.isEmpty()) {
+                    System.out.println("No hay órdenes disponibles para cancelar.");
+                    break;
+                    }
+
+                    System.out.println("Seleccione la orden a cancelar por ID:");
+                    JsonFileManager.printJson(orders);
+
+                    int selectedId = scanner.nextInt();
+                    Order orderToCancel = JsonFileManager.searchObjectByIndex(orders, selectedId);
+
+                    if (orderToCancel != null) {
+                    orders.remove(orderToCancel);
+                    orderFileManager.updateJsonFile(orders);
+                    System.out.println("Orden cancelada: " + orderToCancel);
+                    } else {
+                    System.out.println("Orden no encontrada.");
+                    }
                     validOption = true;
                     break;
-                case 3:
+                case 3:                
+                    Path orderFilePath = Paths.get("data", "order.json");
+                    if (orders != null && !orders.isEmpty()) {
+                    JsonFileManager.printJson(orders);
+                    Scanner inputScanner = new Scanner(System.in);
+                    System.out.print("Selecciona un pedido (por ID): ");
+                    int orderId = inputScanner.nextInt();
+                
+                    Order selectedOrder = null;
+                    for (Order order : orders) {
+                     if (order.getId() == orderId) {
+                    selectedOrder = order;
+                    break;
+            }
+        }
+        
+                    if (selectedOrder != null) {
+                    Invoice invoice = new Invoice(orders.indexOf(selectedOrder) + 1, selectedOrder);  
+                    invoice.saveInvoice(); 
+            
+                    System.out.println("Factura creada con éxito: " + invoice);
+                    } else 
+        {
+                    System.out.println("No se encontró un pedido con el ID proporcionado.");
+              }
+                    } else        
+        {
+                    System.out.println("No hay pedidos disponibles.");
+                }
                     validOption = true;
                     break;
                 case 4:
+                    System.out.println("Saliendo del sistema con exito....");
                     validOption = true;
                     break;
                 default:
@@ -289,6 +373,9 @@ public class DashBoard {
 
     public void printManageUsersDashBoard() {
         boolean validOption = false;
+        
+        Path filePath = Paths.get("data", "cashier.json");
+        JsonFileManager jsonFileManager = new JsonFileManager(filePath);
 
         while (!validOption) {
             System.out.println("====== Administrador de usuarios ======");
@@ -302,15 +389,59 @@ public class DashBoard {
 
             switch (dashBoardOption) {
                 case 1:
-                    validOption = true;
+                    System.out.print("Ingrese el nombre de usuario para el nuevo cajero: ");
+                    String newUsername = scanner.nextLine();
+                    System.out.print("Ingrese la contraseña para el nuevo cajero: ");
+                    String newPassword = scanner.nextLine();
+           
+                    Cashier newCashier = new Manager("", "").createCashier(newUsername, newPassword);
+                
+                    ArrayList<Cashier> cashiers = jsonFileManager.decerializeJson(Cashier.class);
+                    if (cashiers == null) {
+                    cashiers = new ArrayList<>();
+                    }
+                    cashiers.add(newCashier);
+                    jsonFileManager.updateJsonFile(cashiers);
+                    System.out.println("Cajero creado exitosamente.");
                     break;
                 case 2:
-                    validOption = true;
+                    System.out.print("Ingrese el nombre de usuario del cajero a modificar: ");
+                    String usernameToChange = scanner.nextLine();
+                    System.out.print("Ingrese el nuevo nombre de usuario: ");
+                    String newUsernameForCashier = scanner.nextLine();
+              
+                    ArrayList<Cashier> cashiersForUpdate = jsonFileManager.decerializeJson(Cashier.class);
+                     if (cashiersForUpdate != null) {
+                        for (Cashier cashier : cashiersForUpdate) {
+                          if (cashier.getuserName().equals(usernameToChange)) {
+                            JsonFileManager.changeAttribute(cashier, "userName", newUsernameForCashier);
+                            jsonFileManager.updateJsonFile(cashiersForUpdate);
+                            System.out.println("Nombre de usuario cambiado con éxito.");
+                            break;
+                        }
+                    }
+                }
                     break;
                 case 3:
-                    validOption = true;
+                    System.out.print("Ingrese el nombre de usuario del cajero para cambiar la contraseña: ");
+                    String usernameForPasswordChange = scanner.nextLine();
+                    System.out.print("Ingrese la nueva contraseña: ");
+                    String newPasswordForCashier = scanner.nextLine();
+                
+                    ArrayList<Cashier> cashiersForPasswordChange = jsonFileManager.decerializeJson(Cashier.class);
+                     if (cashiersForPasswordChange != null) {
+                        for (Cashier cashier : cashiersForPasswordChange) {
+                          if (cashier.getuserName().equals(usernameForPasswordChange)) {
+                            JsonFileManager.changeAttribute(cashier, "password", newPasswordForCashier);
+                            jsonFileManager.updateJsonFile(cashiersForPasswordChange);
+                            System.out.println("Contraseña cambiada con éxito.");
+                            break;
+                        }
+                    }
+                }
                     break;
                 case 4:
+                    System.out.println("Saliendo del sistema con exito....");
                     validOption = true;
                     break;
                 default:

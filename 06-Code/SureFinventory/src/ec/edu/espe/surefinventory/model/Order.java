@@ -11,18 +11,17 @@ public class Order {
     private ArrayList<Dish> dishes;
     private Customer customer;
     
-    public void saveOrder(){
-        Path filepath = Paths.get("data", "order.json");
-        JsonFileManager orderFileManager = new JsonFileManager(filepath);
-        ArrayList<Order> orders = new ArrayList<>();
-        
-        orders = orderFileManager.decerializeJson(Order.class);
-        
-        orders.add(this);
-        
-        orderFileManager.updateJsonFile(orders);
-        
+public void saveOrder(){
+    Path filepath = Paths.get("data", "order.json");
+    JsonFileManager orderFileManager = new JsonFileManager(filepath);
+    ArrayList<Order> orders = orderFileManager.decerializeJson(Order.class);
+    if (orders == null) {
+        orders = new ArrayList<>();
     }
+    orders.add(this);
+    orderFileManager.updateJsonFile(orders);
+}
+
     
     
     @Override

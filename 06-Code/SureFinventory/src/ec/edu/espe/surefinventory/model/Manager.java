@@ -129,8 +129,4 @@ public class Manager {
     public void setUsername(String username) {
         this.userName = username;
     }
-    
-    
-    
-
 }
