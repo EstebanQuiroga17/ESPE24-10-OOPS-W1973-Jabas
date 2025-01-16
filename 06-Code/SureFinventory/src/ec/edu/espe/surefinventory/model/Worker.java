@@ -16,12 +16,12 @@ import java.util.Scanner;
  *
  * @author abner
  */
-public class Cashier {
+public class Worker {
 
     private String userName;
     private String password;
 
-    public Cashier(String username, String password) {
+    public Worker(String username, String password) {
         this.userName = username;
         this.password = password;
     }
@@ -59,13 +59,13 @@ public class Cashier {
         this.userName = username;
     }
 
-    public static boolean logIn(Cashier cashier) {
+    public static boolean logIn(Worker cashier) {
 
         Path filePath = Paths.get("data", "cashier.json");
 
         JsonFileManager jsonFileManager = new JsonFileManager(filePath);
 
-        ArrayList<Cashier> cashiers = jsonFileManager.decerializeJson(Cashier.class);
+        ArrayList<Worker> cashiers = jsonFileManager.decerializeJson(Worker.class);
 
         if (cashiers == null || cashiers.isEmpty()) {
             System.out.println(" No existe ningun usuario. ");
@@ -79,7 +79,7 @@ public class Cashier {
             System.out.print("Ingresa tu contrasena: ");
             String inputPassword = scanner.nextLine();
 
-            for (Cashier cashierUser : cashiers) {
+            for (Worker cashierUser : cashiers) {
                 if (cashierUser.getuserName().equals(inputUsername) && cashierUser.getPassword().equals(inputPassword)) {
                     System.out.println("¡Qué bueno verte, " + inputUsername + "!");
                     cashier.setuserName(inputUsername);

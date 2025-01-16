@@ -48,8 +48,8 @@ public class DashBoard {
                     break;
 
                 case 2:
-                    Cashier cashier = new Cashier("", "");
-                    if (Cashier.logIn(cashier)) {
+                    Worker cashier = new Worker("", "");
+                    if (Worker.logIn(cashier)) {
                         printCashierDashBoard(cashier);
                     }
                     validOption = true;
@@ -99,7 +99,7 @@ public class DashBoard {
         }
     }
 
-    public void printCashierDashBoard(Cashier cashier) {
+    public void printCashierDashBoard(Worker cashier) {
         boolean validOption = false;
 
         while (!validOption) {
@@ -394,9 +394,9 @@ public class DashBoard {
                     System.out.print("Ingrese la contraseña para el nuevo cajero: ");
                     String newPassword = scanner.nextLine();
            
-                    Cashier newCashier = new Manager("", "").createCashier(newUsername, newPassword);
+                    Worker newCashier = new Manager("", "").createCashier(newUsername, newPassword);
                 
-                    ArrayList<Cashier> cashiers = jsonFileManager.decerializeJson(Cashier.class);
+                    ArrayList<Worker> cashiers = jsonFileManager.decerializeJson(Worker.class);
                     if (cashiers == null) {
                     cashiers = new ArrayList<>();
                     }
@@ -410,9 +410,9 @@ public class DashBoard {
                     System.out.print("Ingrese el nuevo nombre de usuario: ");
                     String newUsernameForCashier = scanner.nextLine();
               
-                    ArrayList<Cashier> cashiersForUpdate = jsonFileManager.decerializeJson(Cashier.class);
+                    ArrayList<Worker> cashiersForUpdate = jsonFileManager.decerializeJson(Worker.class);
                      if (cashiersForUpdate != null) {
-                        for (Cashier cashier : cashiersForUpdate) {
+                        for (Worker cashier : cashiersForUpdate) {
                           if (cashier.getuserName().equals(usernameToChange)) {
                             JsonFileManager.changeAttribute(cashier, "userName", newUsernameForCashier);
                             jsonFileManager.updateJsonFile(cashiersForUpdate);
@@ -428,9 +428,9 @@ public class DashBoard {
                     System.out.print("Ingrese la nueva contraseña: ");
                     String newPasswordForCashier = scanner.nextLine();
                 
-                    ArrayList<Cashier> cashiersForPasswordChange = jsonFileManager.decerializeJson(Cashier.class);
+                    ArrayList<Worker> cashiersForPasswordChange = jsonFileManager.decerializeJson(Worker.class);
                      if (cashiersForPasswordChange != null) {
-                        for (Cashier cashier : cashiersForPasswordChange) {
+                        for (Worker cashier : cashiersForPasswordChange) {
                           if (cashier.getuserName().equals(usernameForPasswordChange)) {
                             JsonFileManager.changeAttribute(cashier, "password", newPasswordForCashier);
                             jsonFileManager.updateJsonFile(cashiersForPasswordChange);

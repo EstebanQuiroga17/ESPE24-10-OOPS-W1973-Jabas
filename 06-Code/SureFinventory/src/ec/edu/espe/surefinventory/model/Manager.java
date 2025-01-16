@@ -7,26 +7,16 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Scanner;
-import ec.edu.espe.surefinventory.model.Cashier;
+import ec.edu.espe.surefinventory.model.Worker;
 import ec.edu.espe.surefinventory.model.Order;
 /*
  *
  * @author abner
  */
-public class Manager {
-    private String userName;
-    private String password;
+public class Manager extends Worker {
 
     public Manager(String username, String password) {
-        this.userName = username;
-        this.password = password;
-    }
-
-    @Override
-    public String toString() {
-        return "Manager{" + "username=" + userName +
-                ", password=" + password + '}';
-        
+        super(username, password);
     }
     
     public void changeMenu(Menu menu){               
@@ -42,8 +32,8 @@ public class Manager {
     return order;
 }
       
-      public Cashier createCashier(String username, String password){
-        Cashier cashier = new Cashier(username, password);
+      public Worker createCashier(String username, String password){
+        Worker cashier = new Worker(username, password);
         System.out.println("Nuevo cajero creado con username: " + username);
         return cashier;    
     }
