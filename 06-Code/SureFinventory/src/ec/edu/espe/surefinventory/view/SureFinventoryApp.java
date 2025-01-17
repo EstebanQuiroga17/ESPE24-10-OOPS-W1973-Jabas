@@ -1,7 +1,7 @@
 
 package ec.edu.espe.surefinventory.view;
 
-import ec.edu.espe.surefinventory.model.Cashier;
+import ec.edu.espe.surefinventory.model.Worker;
 import ec.edu.espe.surefinventory.model.DashBoard;
 import ec.edu.espe.surefinventory.model.Manager;
 import ec.edu.espe.surefinventory.utils.JsonFileManager;
