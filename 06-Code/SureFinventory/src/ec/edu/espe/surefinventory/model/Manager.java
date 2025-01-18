@@ -1,4 +1,4 @@
-
+ 
 package ec.edu.espe.surefinventory.model;
 
 import ec.edu.espe.surefinventory.utils.JsonFileManager;
