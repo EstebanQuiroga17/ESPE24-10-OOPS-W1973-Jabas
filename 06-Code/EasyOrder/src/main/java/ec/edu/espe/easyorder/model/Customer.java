@@ -26,14 +26,14 @@ public class Customer {
     /**
      * @return the naeme
      */
-    public String getNaeme() {
+    public String getName() {
         return name;
     }
 
     /**
      * @param naeme the naeme to set
      */
-    public void setNaeme(String naeme) {
+    public void setName(String naeme) {
         this.name = naeme;
     }
 

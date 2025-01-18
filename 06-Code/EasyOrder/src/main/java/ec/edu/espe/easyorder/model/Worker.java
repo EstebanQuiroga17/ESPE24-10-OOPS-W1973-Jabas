@@ -8,7 +8,7 @@ public class Worker {
 
     private String userName;
     private String password;
-    private char type;
+    private int type[]; // 1 is for Manager, 0 for cashier
 
     public Worker(String username, String password) {
         this.userName = username;
@@ -20,15 +20,7 @@ public class Worker {
         return "Cashier{" + "userName=" + userName + ", password=" + password + '}';
     }
 
-    public char getType() {
-        return type;
-    }
 
-    public void setType(char type) {
-        this.type = type;
-    }
-
-    
     /**
      * @return the password
      */

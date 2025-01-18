@@ -18,8 +18,9 @@ public class FrmLogIn extends javax.swing.JFrame {
 
     String username;
     String password;
-    WorkerController workerController;
+    WorkerController workerController = new WorkerController();
     List<Document> users;
+    int option;
     
     /**
      * Creates new form FrmLogIn
@@ -163,11 +164,27 @@ public class FrmLogIn extends javax.swing.JFrame {
         username = txtUserName.getText();
         password = txtPassword.getText();
         
+        
         users = MongoDbManager.getAll("Worker");
         isLoggedIn = workerController.logIn(users, username, password);
         
+        option = workerController.getType(users, username, password);
+        
         if(isLoggedIn){
             JOptionPane.showMessageDialog(rootPane, "Bienvenido!");
+            
+            switch(option){
+                case 0:{
+                    //TODO code "open cashier menu"
+                }
+                break;
+                case 1:{
+                    //TODO code "open manager menu"
+                    FrmManager managerMenu = new FrmManager();
+                    managerMenu.setVisible(true);
+                    this.dispose();
+                }
+            }
         }else{
             JOptionPane.showMessageDialog(rootPane, "Acceso denegado.");
         }
