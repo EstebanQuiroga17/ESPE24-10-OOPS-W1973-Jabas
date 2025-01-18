@@ -9,8 +9,8 @@ public class Customer {
     private int id;
     private int phoneNumber;
 
-    public Customer(String naeme, int id, int phoneNumber) {
-        this.name = naeme;
+    public Customer(String name, int id, int phoneNumber) {
+        this.name = name;
         this.id = id;
         this.phoneNumber = phoneNumber;
     }
