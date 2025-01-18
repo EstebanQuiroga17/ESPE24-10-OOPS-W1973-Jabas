@@ -4,17 +4,29 @@
  */
 package ec.edu.espe.easyorder.view;
 
+import ec.edu.espe.easyorder.controller.WorkerController;
+import java.util.List;
+import javax.swing.JOptionPane;
+import org.bson.Document;
+import utils.MongoDbManager;
+
 /**
  *
  * @author abner
  */
 public class FrmLogIn extends javax.swing.JFrame {
 
+    String username;
+    String password;
+    WorkerController workerController;
+    List<Document> users;
+    
     /**
      * Creates new form FrmLogIn
      */
     public FrmLogIn() {
         initComponents();
+        
     }
 
     /**
@@ -32,7 +44,7 @@ public class FrmLogIn extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        txtName = new javax.swing.JTextField();
+        txtUserName = new javax.swing.JTextField();
         txtPassword = new javax.swing.JTextField();
         btnLogIn = new javax.swing.JButton();
 
@@ -42,7 +54,6 @@ public class FrmLogIn extends javax.swing.JFrame {
 
         ttlPrincipal.setFont(new java.awt.Font("Franklin Gothic Medium", 0, 36)); // NOI18N
         ttlPrincipal.setForeground(new java.awt.Color(255, 255, 255));
-        ttlPrincipal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/edu/espe/easyorder/view/ProyectImage1.png"))); // NOI18N
         ttlPrincipal.setText("Easy Order");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -52,7 +63,7 @@ public class FrmLogIn extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(ttlPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 570, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -69,16 +80,25 @@ public class FrmLogIn extends javax.swing.JFrame {
 
         jLabel3.setText("Contraseña:");
 
-        txtName.setToolTipText("Ingrese su nombre de usuario");
+        txtUserName.setToolTipText("Ingrese su nombre de usuario");
 
         txtPassword.setToolTipText("Ingrese su contraseña");
 
         btnLogIn.setText("LOGIN");
+        btnLogIn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLogInActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addGap(242, 242, 242))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -87,17 +107,13 @@ public class FrmLogIn extends javax.swing.JFrame {
                             .addComponent(jLabel3)
                             .addComponent(jLabel1))
                         .addGap(44, 44, 44)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtUserName, javax.swing.GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE)
+                            .addComponent(txtPassword)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(89, 89, 89)
+                        .addGap(53, 53, 53)
                         .addComponent(btnLogIn)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel2)
-                .addGap(242, 242, 242))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -108,7 +124,7 @@ public class FrmLogIn extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel1)
-                            .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addComponent(jLabel3))
                     .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -139,6 +155,24 @@ public class FrmLogIn extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnLogInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogInActionPerformed
+        // TODO add your handling code here:
+        boolean isLoggedIn;
+        
+        username = txtUserName.getText();
+        password = txtPassword.getText();
+        
+        users = MongoDbManager.getAll("Worker");
+        isLoggedIn = workerController.logIn(users, username, password);
+        
+        if(isLoggedIn){
+            JOptionPane.showMessageDialog(rootPane, "Bienvenido!");
+        }else{
+            JOptionPane.showMessageDialog(rootPane, "Acceso denegado.");
+        }
+        
+    }//GEN-LAST:event_btnLogInActionPerformed
 
     /**
      * @param args the command line arguments
@@ -190,7 +224,7 @@ public class FrmLogIn extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel ttlPrincipal;
-    private javax.swing.JTextField txtName;
     private javax.swing.JTextField txtPassword;
+    private javax.swing.JTextField txtUserName;
     // End of variables declaration//GEN-END:variables
 }
