@@ -2,7 +2,7 @@ package ec.edu.espe.easyorder.model;
 
 /**
  *
- * @author abner
+ * @author Esteban Quiroga
  */
 public class Worker {
 
