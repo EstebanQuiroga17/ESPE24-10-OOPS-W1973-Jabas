@@ -65,15 +65,18 @@
     </Container>
     <Menu class="javax.swing.JMenuBar" name="jMenuBar1">
       <SubComponents>
-        <Menu class="javax.swing.JMenu" name="jMenu2">
+        <Menu class="javax.swing.JMenu" name="mnuOpenInvoices">
           <Properties>
             <Property name="text" type="java.lang.String" value="Facturas"/>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem5">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Crear Facturas"/>
+                <Property name="text" type="java.lang.String" value="Abrir Facturas"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem5ActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>
@@ -81,18 +84,48 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Gastos"/>
           </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="mnuOpenExpenses">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Abrir Gastos"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuOpenExpensesActionPerformed"/>
+              </Events>
+            </MenuItem>
+          </SubComponents>
         </Menu>
         <Menu class="javax.swing.JMenu" name="jMenu8">
           <Properties>
             <Property name="text" type="java.lang.String" value="Reportes"/>
           </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="mnuOpenReports">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Abrir Reportes"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuOpenReportsActionPerformed"/>
+              </Events>
+            </MenuItem>
+          </SubComponents>
         </Menu>
         <Menu class="javax.swing.JMenu" name="jMenu9">
           <Properties>
             <Property name="text" type="java.lang.String" value="Clientes"/>
           </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="mnuOpenClients">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Abrir Clientes"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuOpenClientsActionPerformed"/>
+              </Events>
+            </MenuItem>
+          </SubComponents>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="jMenu10">
+        <Menu class="javax.swing.JMenu" name="mnuOpenMenu">
           <Properties>
             <Property name="text" type="java.lang.String" value="Menu"/>
           </Properties>
@@ -108,6 +141,13 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Ordenes"/>
           </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="mnuOpenOrders">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Abrir Ordenes"/>
+              </Properties>
+            </MenuItem>
+          </SubComponents>
         </Menu>
       </SubComponents>
     </Menu>

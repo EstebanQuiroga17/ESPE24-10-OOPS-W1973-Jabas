@@ -36,14 +36,18 @@ public class FrmManager extends javax.swing.JFrame {
         jMenu6 = new javax.swing.JMenu();
         jMenu7 = new javax.swing.JMenu();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu2 = new javax.swing.JMenu();
+        mnuOpenInvoices = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
+        mnuOpenExpenses = new javax.swing.JMenuItem();
         jMenu8 = new javax.swing.JMenu();
+        mnuOpenReports = new javax.swing.JMenuItem();
         jMenu9 = new javax.swing.JMenu();
-        jMenu10 = new javax.swing.JMenu();
+        mnuOpenClients = new javax.swing.JMenuItem();
+        mnuOpenMenu = new javax.swing.JMenu();
         jMenuItem8 = new javax.swing.JMenuItem();
         jMenu11 = new javax.swing.JMenu();
+        mnuOpenOrders = new javax.swing.JMenuItem();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -74,30 +78,66 @@ public class FrmManager extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jMenu2.setText("Facturas");
+        mnuOpenInvoices.setText("Facturas");
 
-        jMenuItem5.setText("Crear Facturas");
-        jMenu2.add(jMenuItem5);
+        jMenuItem5.setText("Abrir Facturas");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
+        mnuOpenInvoices.add(jMenuItem5);
 
-        jMenuBar1.add(jMenu2);
+        jMenuBar1.add(mnuOpenInvoices);
 
         jMenu5.setText("Gastos");
+
+        mnuOpenExpenses.setText("Abrir Gastos");
+        mnuOpenExpenses.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuOpenExpensesActionPerformed(evt);
+            }
+        });
+        jMenu5.add(mnuOpenExpenses);
+
         jMenuBar1.add(jMenu5);
 
         jMenu8.setText("Reportes");
+
+        mnuOpenReports.setText("Abrir Reportes");
+        mnuOpenReports.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuOpenReportsActionPerformed(evt);
+            }
+        });
+        jMenu8.add(mnuOpenReports);
+
         jMenuBar1.add(jMenu8);
 
         jMenu9.setText("Clientes");
+
+        mnuOpenClients.setText("Abrir Clientes");
+        mnuOpenClients.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuOpenClientsActionPerformed(evt);
+            }
+        });
+        jMenu9.add(mnuOpenClients);
+
         jMenuBar1.add(jMenu9);
 
-        jMenu10.setText("Menu");
+        mnuOpenMenu.setText("Menu");
 
         jMenuItem8.setText("Abrir Menú");
-        jMenu10.add(jMenuItem8);
+        mnuOpenMenu.add(jMenuItem8);
 
-        jMenuBar1.add(jMenu10);
+        jMenuBar1.add(mnuOpenMenu);
 
         jMenu11.setText("Ordenes");
+
+        mnuOpenOrders.setText("Abrir Ordenes");
+        jMenu11.add(mnuOpenOrders);
+
         jMenuBar1.add(jMenu11);
 
         setJMenuBar(jMenuBar1);
@@ -115,6 +155,22 @@ public class FrmManager extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void mnuOpenClientsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuOpenClientsActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mnuOpenClientsActionPerformed
+
+    private void mnuOpenReportsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuOpenReportsActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mnuOpenReportsActionPerformed
+
+    private void mnuOpenExpensesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuOpenExpensesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mnuOpenExpensesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -153,9 +209,7 @@ public class FrmManager extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu jMenu10;
     private javax.swing.JMenu jMenu11;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
@@ -171,5 +225,11 @@ public class FrmManager extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JMenuItem mnuOpenClients;
+    private javax.swing.JMenuItem mnuOpenExpenses;
+    private javax.swing.JMenu mnuOpenInvoices;
+    private javax.swing.JMenu mnuOpenMenu;
+    private javax.swing.JMenuItem mnuOpenOrders;
+    private javax.swing.JMenuItem mnuOpenReports;
     // End of variables declaration//GEN-END:variables
 }
