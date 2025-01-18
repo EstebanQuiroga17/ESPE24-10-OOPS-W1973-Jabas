@@ -26,8 +26,8 @@ public class MongoDbManager {
             
             mongoClient = MongoClients.create(CONNECTION_STRING);
             
-            database = mongoClient.getDatabase("oop");
-            System.out.println("Connected to MongoDB database: oop");
+            database = mongoClient.getDatabase("EasyOrder");
+            System.out.println("Connected to MongoDB database: EasyOrder");
         } catch (Exception e) {
             System.err.println("Error connecting to MongoDB: " + e.getMessage());
         }
