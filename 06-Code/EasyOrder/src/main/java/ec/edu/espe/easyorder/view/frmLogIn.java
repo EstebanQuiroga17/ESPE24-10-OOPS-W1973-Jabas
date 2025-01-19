@@ -174,6 +174,7 @@ public class FrmLogIn extends javax.swing.JFrame {
             switch(option){
                 case 0:{
                     //TODO code "open cashier menu"
+                    
                 }
                 break;
                 case 1:{
