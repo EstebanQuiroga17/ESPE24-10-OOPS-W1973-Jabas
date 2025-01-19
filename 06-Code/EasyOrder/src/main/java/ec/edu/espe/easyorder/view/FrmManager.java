@@ -143,6 +143,11 @@ public class FrmManager extends javax.swing.JFrame {
         mnuOrders.setText("Ordenes");
 
         itmOpenOrders.setText("Abrir Ordenes");
+        itmOpenOrders.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itmOpenOrdersActionPerformed(evt);
+            }
+        });
         mnuOrders.add(itmOpenOrders);
 
         jMenuBar1.add(mnuOrders);
@@ -181,29 +186,43 @@ public class FrmManager extends javax.swing.JFrame {
 
     private void itmOpenClientsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmOpenClientsActionPerformed
         // TODO add your handling code here:
+        FrmCustomer frmCustomer = new FrmCustomer();
+        frmCustomer.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_itmOpenClientsActionPerformed
 
     private void itmOpenReportsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmOpenReportsActionPerformed
         // TODO add your handling code here:
+        FrmAccountingReport frmAccountingReport = new FrmAccountingReport();
+        frmAccountingReport.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_itmOpenReportsActionPerformed
 
     private void itmOpenExpensesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmOpenExpensesActionPerformed
         // TODO add your handling code here:
+        FrmExpense frmExpense = new FrmExpense();
+        frmExpense.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_itmOpenExpensesActionPerformed
 
     private void itmGoToLogInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmGoToLogInActionPerformed
         // TODO add your handling code here:
-        FrmLogIn logIn = new FrmLogIn();
-        logIn.setVisible(true);
+        FrmLogIn frmLogIn = new FrmLogIn();
+        frmLogIn.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_itmGoToLogInActionPerformed
 
     private void itmOpenMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmOpenMenuActionPerformed
         // TODO add your handling code here:
-        FrmMenu menu = new FrmMenu();
-        menu.setVisible(true);
+        FrmMenu frmMenu = new FrmMenu();
+        frmMenu.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_itmOpenMenuActionPerformed
+
+    private void itmOpenOrdersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmOpenOrdersActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_itmOpenOrdersActionPerformed
 
     /**
      * @param args the command line arguments

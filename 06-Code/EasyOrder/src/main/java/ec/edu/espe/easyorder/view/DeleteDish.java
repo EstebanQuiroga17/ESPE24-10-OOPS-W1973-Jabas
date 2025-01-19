@@ -144,7 +144,7 @@ public class DeleteDish extends javax.swing.JFrame {
         String idText = txtDeleteId.getText();
         try {
             int id = Integer.parseInt(idText);
-            DefaultTableModel model = FrmDish.getTableModel();
+            DefaultTableModel model = FrmMenu.getTableModel();
             boolean found = false;
 
             for (int i = 0; i < model.getRowCount(); i++) {

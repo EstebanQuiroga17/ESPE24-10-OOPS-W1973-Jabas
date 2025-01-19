@@ -173,7 +173,7 @@ public class AddDish extends javax.swing.JFrame {
         try {
             Float price = Float.parseFloat(priceText);
 
-            FrmDish.AddRowToJTable(new Object[]{id, dishName, price});
+            FrmMenu.AddRowToJTable(new Object[]{id, dishName, price});
 
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "El precio debe ser un número válido.");
