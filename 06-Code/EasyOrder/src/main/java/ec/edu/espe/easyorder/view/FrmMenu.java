@@ -47,7 +47,7 @@ public class FrmMenu extends javax.swing.JFrame {
         bntSearch = new javax.swing.JButton();
         bntDelete = new javax.swing.JButton();
         btnAdd = new javax.swing.JButton();
-        bntSave = new javax.swing.JButton();
+        bntUptade = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -124,11 +124,11 @@ public class FrmMenu extends javax.swing.JFrame {
             }
         });
 
-        bntSave.setText("Guardar");
-        bntSave.setPreferredSize(new java.awt.Dimension(95, 30));
-        bntSave.addActionListener(new java.awt.event.ActionListener() {
+        bntUptade.setText("Actualizar");
+        bntUptade.setPreferredSize(new java.awt.Dimension(95, 30));
+        bntUptade.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bntSaveActionPerformed(evt);
+                bntUptadeActionPerformed(evt);
             }
         });
 
@@ -150,7 +150,7 @@ public class FrmMenu extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(bntSave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(bntUptade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -163,7 +163,7 @@ public class FrmMenu extends javax.swing.JFrame {
                     .addComponent(bntSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(bntDelete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bntSave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(bntUptade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(30, Short.MAX_VALUE))
         );
 
@@ -213,9 +213,9 @@ public class FrmMenu extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnAddActionPerformed
 
-    private void bntSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntSaveActionPerformed
+    private void bntUptadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntUptadeActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_bntSaveActionPerformed
+    }//GEN-LAST:event_bntUptadeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -257,8 +257,8 @@ public class FrmMenu extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private static javax.swing.JTable TableDish;
     private javax.swing.JButton bntDelete;
-    private javax.swing.JButton bntSave;
     private javax.swing.JButton bntSearch;
+    private javax.swing.JButton bntUptade;
     private javax.swing.JButton btnAdd;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

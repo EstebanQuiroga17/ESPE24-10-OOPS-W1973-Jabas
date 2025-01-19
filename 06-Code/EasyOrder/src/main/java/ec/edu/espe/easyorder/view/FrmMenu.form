@@ -134,7 +134,7 @@
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="btnAdd" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="bntSave" min="-2" max="-2" attributes="0"/>
+                  <Component id="bntUptade" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -149,7 +149,7 @@
                       <Component id="bntSearch" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="bntDelete" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnAdd" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="bntSave" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="bntUptade" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="30" max="32767" attributes="0"/>
               </Group>
@@ -198,15 +198,15 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAddActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="bntSave">
+        <Component class="javax.swing.JButton" name="bntUptade">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Guardar"/>
+            <Property name="text" type="java.lang.String" value="Actualizar"/>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[95, 30]"/>
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bntSaveActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bntUptadeActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
