@@ -179,7 +179,7 @@ public class FrmLogIn extends javax.swing.JFrame {
                 }
                 break;
                 case 1:{
-                    //TODO code "open manager menu"
+//                    
                     FrmManager managerMenu = new FrmManager();
                     managerMenu.setVisible(true);
                     this.dispose();

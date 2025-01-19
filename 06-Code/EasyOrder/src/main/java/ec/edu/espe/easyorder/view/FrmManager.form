@@ -65,87 +65,105 @@
     </Container>
     <Menu class="javax.swing.JMenuBar" name="jMenuBar1">
       <SubComponents>
-        <Menu class="javax.swing.JMenu" name="mnuOpenInvoices">
+        <Menu class="javax.swing.JMenu" name="mnuInvoices">
           <Properties>
             <Property name="text" type="java.lang.String" value="Facturas"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem5">
+            <MenuItem class="javax.swing.JMenuItem" name="itmOpenInvoices">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Abrir Facturas"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem5ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itmOpenInvoicesActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="jMenu5">
+        <Menu class="javax.swing.JMenu" name="mnuExpenses">
           <Properties>
             <Property name="text" type="java.lang.String" value="Gastos"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="mnuOpenExpenses">
+            <MenuItem class="javax.swing.JMenuItem" name="itmOpenExpenses">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Abrir Gastos"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuOpenExpensesActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itmOpenExpensesActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="jMenu8">
+        <Menu class="javax.swing.JMenu" name="mnuReports">
           <Properties>
             <Property name="text" type="java.lang.String" value="Reportes"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="mnuOpenReports">
+            <MenuItem class="javax.swing.JMenuItem" name="itmOpenReports">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Abrir Reportes"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuOpenReportsActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itmOpenReportsActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="jMenu9">
+        <Menu class="javax.swing.JMenu" name="mnuClients">
           <Properties>
             <Property name="text" type="java.lang.String" value="Clientes"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="mnuOpenClients">
+            <MenuItem class="javax.swing.JMenuItem" name="itmOpenClients">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Abrir Clientes"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuOpenClientsActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itmOpenClientsActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="mnuOpenMenu">
+        <Menu class="javax.swing.JMenu" name="itmMenu">
           <Properties>
             <Property name="text" type="java.lang.String" value="Menu"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem8">
+            <MenuItem class="javax.swing.JMenuItem" name="itmOpenMenu">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Abrir Men&#xfa;"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itmOpenMenuActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="jMenu11">
+        <Menu class="javax.swing.JMenu" name="mnuOrders">
           <Properties>
             <Property name="text" type="java.lang.String" value="Ordenes"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="mnuOpenOrders">
+            <MenuItem class="javax.swing.JMenuItem" name="itmOpenOrders">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Abrir Ordenes"/>
               </Properties>
+            </MenuItem>
+          </SubComponents>
+        </Menu>
+        <Menu class="javax.swing.JMenu" name="mnuConfigurations">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Ajustes"/>
+          </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="itmGoToLogIn">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Volver Al LogIn"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itmGoToLogInActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>
