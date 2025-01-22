@@ -1,7 +1,9 @@
 
 package ec.edu.espe.easyorder.view;
 
+import ec.edu.espe.easyorder.view.FrmMenu;
 import javax.swing.JOptionPane;
+import utils.MongoDbManager;
 
 /**
  *
@@ -173,7 +175,12 @@ public class AddDish extends javax.swing.JFrame {
         try {
             Float price = Float.parseFloat(priceText);
 
-            FrmMenu.AddRowToJTable(new Object[]{id, dishName, price});
+            boolean success = MongoDbManager.insertDish(id, dishName, price);
+
+            if (success) {
+ 
+                FrmMenu.AddRowToJTable(new Object[]{id, dishName, price});
+            }
 
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "El precio debe ser un número válido.");

@@ -84,4 +84,21 @@ public class MongoDbManager {
             System.out.println("MongoDB connection closed.");
         }
     }
+    
+    public static boolean insertDish(int id, String name, float price) {
+    try {
+        MongoCollection<Document> collection = database.getCollection("Menu");
+
+        Document dishDocument = new Document("id", id)
+            .append("name", name)
+            .append("price", price);
+
+        collection.insertOne(dishDocument);
+        System.out.println("Dish inserted into collection: Menu");
+        return true;
+    } catch (Exception e) {
+        System.err.println("Error inserting dish: " + e.getMessage());
+        return false;
+    }
+}
 }
