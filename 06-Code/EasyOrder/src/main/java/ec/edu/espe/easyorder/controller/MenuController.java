@@ -28,7 +28,7 @@ public class MenuController {
         String name = dish.getString("name");
         float price = dish.getDouble("price").floatValue();
 
-        FrmMenu.AddRowToJTable(new Object[]{id, name, price});
+        FrmMenu.AddRowToJTableDish(new Object[]{id, name, price});
     }
 
 }

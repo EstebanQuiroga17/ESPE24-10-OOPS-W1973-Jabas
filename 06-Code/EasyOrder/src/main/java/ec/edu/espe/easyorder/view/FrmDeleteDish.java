@@ -2,6 +2,7 @@ package ec.edu.espe.easyorder.view;
 
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import utils.MongoDbManager;
 
 /**
  *
@@ -33,7 +34,7 @@ public class FrmDeleteDish extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        txtDeleteId = new javax.swing.JTextField();
+        txtDeleteID = new javax.swing.JTextField();
         bntConfirmDelete = new javax.swing.JButton();
         bntCancelDelete = new javax.swing.JButton();
 
@@ -98,8 +99,8 @@ public class FrmDeleteDish extends javax.swing.JFrame {
                         .addGap(53, 53, 53)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtDeleteId, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(txtDeleteID, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(269, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -107,7 +108,7 @@ public class FrmDeleteDish extends javax.swing.JFrame {
                 .addGap(14, 14, 14)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(txtDeleteId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtDeleteID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(64, 64, 64)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bntConfirmDelete)
@@ -141,7 +142,8 @@ public class FrmDeleteDish extends javax.swing.JFrame {
 
     private void bntConfirmDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntConfirmDeleteActionPerformed
 
-        String idText = txtDeleteId.getText();
+        String idText = txtDeleteID.getText();
+        txtDeleteID.setText("");
         try {
             int id = Integer.parseInt(idText);
             DefaultTableModel model = FrmMenu.getTableModel();
@@ -156,9 +158,15 @@ public class FrmDeleteDish extends javax.swing.JFrame {
             }
 
             if (found) {
-                JOptionPane.showMessageDialog(this, "Plato eliminado con éxito.");
+                boolean dbDeleted = MongoDbManager.deleteDish(id);
+
+                if (dbDeleted) {
+                    JOptionPane.showMessageDialog(this, "Plato eliminado con éxito.");
+                } else {
+                    JOptionPane.showMessageDialog(this, "Error al eliminar el plato de la base de datos.");
+                }
             } else {
-                JOptionPane.showMessageDialog(this, "ID no encontrado.");
+                JOptionPane.showMessageDialog(this, "ID no encontrado en la tabla.");
             }
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Por favor, ingrese un ID válido.");
@@ -217,7 +225,7 @@ public class FrmDeleteDish extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JSpinner jSpinner1;
-    private javax.swing.JTextField txtDeleteId;
+    private javax.swing.JTextField txtDeleteID;
     // End of variables declaration//GEN-END:variables
 
 }

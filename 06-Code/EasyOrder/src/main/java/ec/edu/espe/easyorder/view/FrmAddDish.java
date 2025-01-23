@@ -1,7 +1,6 @@
 
 package ec.edu.espe.easyorder.view;
 
-import ec.edu.espe.easyorder.view.FrmMenu;
 import javax.swing.JOptionPane;
 import utils.MongoDbManager;
 
@@ -179,7 +178,8 @@ public class FrmAddDish extends javax.swing.JFrame {
 
             if (success) {
  
-                FrmMenu.AddRowToJTable(new Object[]{id, dishName, price});
+                FrmMenu.AddRowToJTableDish(new Object[]{id, dishName, price});
+                JOptionPane.showMessageDialog(this, "Plato agregado con exito.");
             }
 
         } catch (NumberFormatException e) {
