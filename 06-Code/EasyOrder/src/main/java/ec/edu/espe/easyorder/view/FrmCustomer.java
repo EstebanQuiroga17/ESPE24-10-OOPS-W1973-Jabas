@@ -8,7 +8,7 @@ import utils.MongoDbManager;
 
 /**
  *
- * @author abner
+ * @author Matias Rojas
  */
 public class FrmCustomer extends javax.swing.JFrame {
     

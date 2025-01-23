@@ -9,7 +9,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author USUARIO
+ * @author Matias Rojas
  */
 public class FrmDeleteIncomes extends javax.swing.JFrame {
 

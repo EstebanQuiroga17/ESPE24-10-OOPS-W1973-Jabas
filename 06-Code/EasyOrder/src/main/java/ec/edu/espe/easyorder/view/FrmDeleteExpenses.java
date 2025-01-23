@@ -6,7 +6,7 @@ package ec.edu.espe.easyorder.view;
 
 /**
  *
- * @author USUARIO
+ * @author Matias Rojas
  */
 public class FrmDeleteExpenses extends javax.swing.JFrame {
 
