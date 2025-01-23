@@ -1,8 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package ec.edu.espe.easyorder.view;
+
+import ec.edu.espe.easyorder.model.Expense;
+import java.util.Calendar;
 
 /**
  *
@@ -16,6 +16,9 @@ public class FrmExpense extends javax.swing.JFrame {
     public FrmExpense() {
         initComponents();
     }
+
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -41,7 +44,6 @@ public class FrmExpense extends javax.swing.JFrame {
         jTextField3 = new javax.swing.JTextField();
         jTextField5 = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        bntSearch1 = new javax.swing.JButton();
         bntDelete = new javax.swing.JButton();
         btnAdd = new javax.swing.JButton();
         bntSave = new javax.swing.JButton();
@@ -99,14 +101,6 @@ public class FrmExpense extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("Franklin Gothic Medium", 3, 14)); // NOI18N
         jLabel8.setText("Opciones de Gastos");
 
-        bntSearch1.setText("Buscar");
-        bntSearch1.setPreferredSize(new java.awt.Dimension(95, 30));
-        bntSearch1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bntSearch1ActionPerformed(evt);
-            }
-        });
-
         bntDelete.setText("Eliminar");
         bntDelete.setPreferredSize(new java.awt.Dimension(95, 30));
         bntDelete.addActionListener(new java.awt.event.ActionListener() {
@@ -156,9 +150,7 @@ public class FrmExpense extends javax.swing.JFrame {
                                 .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel4)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(108, 108, 108)
-                        .addComponent(bntSearch1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addGap(221, 221, 221)
                         .addComponent(bntDelete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -195,7 +187,6 @@ public class FrmExpense extends javax.swing.JFrame {
                 .addComponent(jLabel8)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(bntSearch1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(bntDelete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(bntSave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -230,20 +221,40 @@ public class FrmExpense extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_bntSearchActionPerformed
 
-    private void bntSearch1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntSearch1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_bntSearch1ActionPerformed
-
     private void bntDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntDeleteActionPerformed
-
+        try {
+        int id = Integer.parseInt(jTextField1.getText());
+        System.out.println("Gasto eliminado con ID: " + id);
+        javax.swing.JOptionPane.showMessageDialog(this, "Gasto eliminado con éxito.");
+    } catch (NumberFormatException e) {
+        javax.swing.JOptionPane.showMessageDialog(this, "Por favor, revisa que el ID sea un número válido.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+    } catch (Exception e) {
+        javax.swing.JOptionPane.showMessageDialog(this, "Error al eliminar el gasto: " + e.getMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+    }
     }//GEN-LAST:event_bntDeleteActionPerformed
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+try {
+        int id = Integer.parseInt(jTextField1.getText());
+        String name = jTextField2.getText();
+        float price = Float.parseFloat(jTextField3.getText());
+        String description = jTextField5.getText();
 
+        Expense expense = new Expense(price, description, name, Calendar.getInstance(), id);
+
+        System.out.println("Gasto añadido: " + expense);
+        javax.swing.JOptionPane.showMessageDialog(this, "Gasto añadido con éxito.");
+    } catch (NumberFormatException e) {
+        javax.swing.JOptionPane.showMessageDialog(this, "Por favor, revisa los campos numéricos (ID y Precio).", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+    }
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void bntSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntSaveActionPerformed
-        // TODO add your handling code here:
+       try {
+        javax.swing.JOptionPane.showMessageDialog(this, "Datos guardados exitosamente.");
+    } catch (Exception e) {
+        javax.swing.JOptionPane.showMessageDialog(this, "Error al guardar los datos: " + e.getMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+    }
     }//GEN-LAST:event_bntSaveActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
@@ -289,7 +300,6 @@ public class FrmExpense extends javax.swing.JFrame {
     private javax.swing.JButton bntDelete;
     private javax.swing.JButton bntSave;
     private javax.swing.JButton bntSearch;
-    private javax.swing.JButton bntSearch1;
     private javax.swing.JButton btnAdd;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
