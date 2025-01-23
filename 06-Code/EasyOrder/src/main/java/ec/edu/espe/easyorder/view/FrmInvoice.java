@@ -15,6 +15,7 @@ public class FrmInvoice extends javax.swing.JFrame {
      */
     public FrmInvoice() {
         initComponents();
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
     }
 
     /**

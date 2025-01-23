@@ -18,6 +18,7 @@ public class FrmDeleteIncomes extends javax.swing.JFrame {
      */
     public FrmDeleteIncomes() {
         initComponents();
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
     }
 
     /**

@@ -15,6 +15,7 @@ public class FrmSearchDish extends javax.swing.JFrame {
      */
     public FrmSearchDish() {
         initComponents();
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
     }
 
     /**

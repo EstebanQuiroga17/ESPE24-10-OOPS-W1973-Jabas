@@ -25,7 +25,8 @@ public class FrmOrder extends javax.swing.JFrame {
         initComponents();
          populateDishesComboBox();
           updateDate();
-    updateOrderId();
+        updateOrderId();
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
     }
     private void addDishToTable() {
         // Retrieve selected dish from the combo box

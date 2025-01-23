@@ -39,6 +39,7 @@ public class FrmMenu extends javax.swing.JFrame {
     public FrmMenu() {
         initComponents();
         loadDishesFromDatabase();
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
     }
 
     /**
