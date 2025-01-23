@@ -12,12 +12,21 @@ public class Order {
      private ArrayList<Dish> dishes;
      private Calendar CurrentDate;
 
+<<<<<<< HEAD
+    public Order(int itemQuantity, int id, ArrayList<Dish> dishes, Customer CurrentDate) {
+    this.itemQuantity = itemQuantity;
+    this.id = id;
+    this.dishes = dishes;
+    this.customer = customer;
+    
+=======
     public Order(int itemQuantity, int id, ArrayList<Dish> dishes, Calendar CurrentDate) {
         this.itemQuantity = itemQuantity;
         this.id = id;
         this.dishes = dishes;
         this.CurrentDate = CurrentDate;
     }
+>>>>>>> e085a6c3e6e123ae3d94482313c1c93be5724e9d
 
     @Override
     public String toString() {
@@ -69,8 +78,14 @@ public class Order {
     /**
      * @return the CurrentDate
      */
+<<<<<<< HEAD
+
+    public Customer getCustomer() {
+        return customer;
+=======
     public Calendar getCurrentDate() {
         return CurrentDate;
+>>>>>>> e085a6c3e6e123ae3d94482313c1c93be5724e9d
     }
 
     /**
@@ -79,6 +94,15 @@ public class Order {
     public void setCurrentDate(Calendar CurrentDate) {
         this.CurrentDate = CurrentDate;
     }
+<<<<<<< HEAD
+     
+       
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+   
+=======
       
+>>>>>>> e085a6c3e6e123ae3d94482313c1c93be5724e9d
     
 }

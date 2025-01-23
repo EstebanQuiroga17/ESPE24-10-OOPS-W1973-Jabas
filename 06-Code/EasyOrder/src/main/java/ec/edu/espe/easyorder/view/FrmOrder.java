@@ -23,10 +23,17 @@ public class FrmOrder extends javax.swing.JFrame {
      */
     public FrmOrder() {
         initComponents();
+<<<<<<< HEAD
+        populateDishesComboBox();
+        updateDate();
+        updateOrderId();
+        
+=======
 
         populateDishesComboBox();
         updateDate();
         updateOrderId();
+>>>>>>> e085a6c3e6e123ae3d94482313c1c93be5724e9d
          populateDishesComboBox();
           updateDate();
         updateOrderId();
