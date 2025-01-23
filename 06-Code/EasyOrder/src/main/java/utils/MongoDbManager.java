@@ -25,7 +25,10 @@ public class MongoDbManager {
     private static final String CONNECTION_STRING = "mongodb+srv://arobalino:arobalino@cluster0.uhcya.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
     private static MongoClient mongoClient;
     private static MongoDatabase database;
-
+    public static void insertDocument(String collectionName, Document document) {
+        MongoCollection<Document> collection = database.getCollection(collectionName);
+        collection.insertOne(document);  // Insert a single document into the collection
+    }
     static {
         try {
 

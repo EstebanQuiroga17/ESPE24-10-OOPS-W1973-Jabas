@@ -1,30 +1,29 @@
 package ec.edu.espe.easyorder.model;
 
 import java.util.ArrayList;
-
+import java.util.Calendar;
 /**
  *
  * @author Matias Rojas
  */
 public class Order {
-    private int itemQuantity;
-    private int id;
-    private ArrayList<Dish> dishes;
-    private Customer customer;
+     private int itemQuantity;
+     private int id;
+     private ArrayList<Dish> dishes;
+     private Calendar CurrentDate;
 
-    public Order(int itemQuantity, int id, ArrayList<Dish> dishes, Customer customer) {
+    public Order(int itemQuantity, int id, ArrayList<Dish> dishes, Calendar CurrentDate) {
         this.itemQuantity = itemQuantity;
         this.id = id;
         this.dishes = dishes;
-        this.customer = customer;
+        this.CurrentDate = CurrentDate;
     }
 
     @Override
     public String toString() {
-        return "Order{" + "itemQuantity=" + itemQuantity + ", id=" + id + ", dishes=" + dishes + ", customer=" + customer + '}';
+        return "Order{" + "itemQuantity=" + itemQuantity + ", id=" + id + ", dishes=" + dishes + ", CurrentDate=" + CurrentDate + '}';
     }
 
-    
     /**
      * @return the itemQuantity
      */
@@ -68,18 +67,22 @@ public class Order {
     }
 
     /**
-     * @return the customer
+     * @return the CurrentDate
      */
-    public Customer getCustomer() {
-        return customer;
+    public Calendar getCurrentDate() {
+        return CurrentDate;
     }
 
     /**
-     * @param customer the customer to set
+     * @param CurrentDate the CurrentDate to set
      */
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
+    public void setCurrentDate(Calendar CurrentDate) {
+        this.CurrentDate = CurrentDate;
     }
+     
+    
+
+  
     
     
     
