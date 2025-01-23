@@ -58,7 +58,7 @@ public class FrmAddDish extends javax.swing.JFrame {
             }
         });
 
-        bntConfirm.setText("Confirmar");
+        bntConfirm.setText("Actualizar");
         bntConfirm.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bntConfirmActionPerformed(evt);

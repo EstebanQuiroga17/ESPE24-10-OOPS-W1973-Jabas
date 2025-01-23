@@ -136,7 +136,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Franklin Gothic Medium" size="18" style="3"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="A&#xd1;ADIR PLATO"/>
+            <Property name="text" type="java.lang.String" value="A&#xd1;ADIR CLIENTE"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel2">
@@ -181,7 +181,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="bntConfirmAddCustomer">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Confirmar"/>
+            <Property name="text" type="java.lang.String" value="Actualizar"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bntConfirmAddCustomerActionPerformed"/>

@@ -1,4 +1,3 @@
-
 package ec.edu.espe.easyorder.view;
 
 /**
@@ -16,6 +15,7 @@ import org.bson.Document;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.util.List;
+
 public class FrmOrder extends javax.swing.JFrame {
 
     /**
@@ -23,10 +23,11 @@ public class FrmOrder extends javax.swing.JFrame {
      */
     public FrmOrder() {
         initComponents();
-         populateDishesComboBox();
-          updateDate();
-    updateOrderId();
+        populateDishesComboBox();
+        updateDate();
+        updateOrderId();
     }
+
     private void addDishToTable() {
         // Retrieve selected dish from the combo box
         String selectedDish = (String) cmbDishes.getSelectedItem();
@@ -60,14 +61,17 @@ public class FrmOrder extends javax.swing.JFrame {
         // Optionally, clear the quantity field after adding the item
         txtQuantity.setText("");
     }
+
     private void updateOrderId() {
-    String uniqueOrderId = new OrderController().generateOrderId();
-    lblOrderId.setText(" " + uniqueOrderId);
-}
+        String uniqueOrderId = new OrderController().generateOrderId();
+        lblOrderId.setText(" " + uniqueOrderId);
+    }
+
     private void updateDate() {
-    String currentDate = new OrderController().getCurrentDate();
-    lblDate.setText(" " + currentDate);
-}
+        String currentDate = new OrderController().getCurrentDate();
+        lblDate.setText(" " + currentDate);
+    }
+
     private void populateDishesComboBox() {
         try {
             // Fetch menu items from the database
@@ -103,9 +107,9 @@ public class FrmOrder extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Error loading menu: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
-    
+
     private void clearForm() {
-    // Clear the table
+        // Clear the table
         DefaultTableModel model = (DefaultTableModel) jtOrders.getModel();
         model.setRowCount(1);  // Remove all rows from the table
 
@@ -117,10 +121,10 @@ public class FrmOrder extends javax.swing.JFrame {
             cmbDishes.setSelectedIndex(0);  // Set combo box to default value (first item)
         }
         txtQuantity.setEnabled(true);   // Enable quantity field
-    // Update the order ID and date again (for the next order)
-    updateOrderId();
-    updateDate();
-}
+        // Update the order ID and date again (for the next order)
+        updateOrderId();
+        updateDate();
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -447,7 +451,7 @@ public class FrmOrder extends javax.swing.JFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error saving order: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
-        
+
     }//GEN-LAST:event_btnSaveOrderActionPerformed
 
     private void btnSeeOrdersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeeOrdersActionPerformed
@@ -455,24 +459,24 @@ public class FrmOrder extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSeeOrdersActionPerformed
 
     private void btnReturnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReturnActionPerformed
-         System.exit(0);// TODO add your handling code here:
+        System.exit(0);// TODO add your handling code here:
     }//GEN-LAST:event_btnReturnActionPerformed
 
     private void txtQuantityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtQuantityActionPerformed
-      String quantityText = txtQuantity.getText();
-    try {
-        int quantity = Integer.parseInt(quantityText);
-        if (quantity <= 0) {
-            JOptionPane.showMessageDialog(this, "Quantity must be greater than 0.", "Invalid Input", JOptionPane.WARNING_MESSAGE);
+        String quantityText = txtQuantity.getText();
+        try {
+            int quantity = Integer.parseInt(quantityText);
+            if (quantity <= 0) {
+                JOptionPane.showMessageDialog(this, "Quantity must be greater than 0.", "Invalid Input", JOptionPane.WARNING_MESSAGE);
+                txtQuantity.setText(""); // Clear invalid input
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Please enter a numeric value for quantity.", "Invalid Input", JOptionPane.WARNING_MESSAGE);
             txtQuantity.setText(""); // Clear invalid input
         }
-    } catch (NumberFormatException e) {
-        JOptionPane.showMessageDialog(this, "Please enter a numeric value for quantity.", "Invalid Input", JOptionPane.WARNING_MESSAGE);
-        txtQuantity.setText(""); // Clear invalid input
-    }
     }//GEN-LAST:event_txtQuantityActionPerformed
 
-    
+
     private void btnAddDishActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddDishActionPerformed
         // Get selected dish and quantity
         String selectedDish = (String) cmbDishes.getSelectedItem();  // ComboBox value
@@ -511,11 +515,9 @@ public class FrmOrder extends javax.swing.JFrame {
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Please enter a valid number for quantity.", "Invalid Input", JOptionPane.WARNING_MESSAGE);
         }
-        
-    }//GEN-LAST:event_btnAddDishActionPerformed
- 
 
-   
+    }//GEN-LAST:event_btnAddDishActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -547,7 +549,7 @@ public class FrmOrder extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new FrmOrder().setVisible(true);
-                
+
             }
         });
     }
@@ -574,5 +576,4 @@ public class FrmOrder extends javax.swing.JFrame {
     private javax.swing.JTextField txtQuantity;
     // End of variables declaration//GEN-END:variables
 
-   
 }

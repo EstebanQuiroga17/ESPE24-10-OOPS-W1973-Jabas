@@ -49,7 +49,7 @@ public class FrmAddCustomer extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Franklin Gothic Medium", 3, 18)); // NOI18N
-        jLabel1.setText("AÑADIR PLATO");
+        jLabel1.setText("AÑADIR CLIENTE");
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
         jLabel2.setText("ID:");
@@ -63,7 +63,7 @@ public class FrmAddCustomer extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
         jLabel7.setText("Numero de telefono:");
 
-        bntConfirmAddCustomer.setText("Confirmar");
+        bntConfirmAddCustomer.setText("Actualizar");
         bntConfirmAddCustomer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bntConfirmAddCustomerActionPerformed(evt);

@@ -10,18 +10,18 @@ public class Order {
      private int itemQuantity;
      private int id;
      private ArrayList<Dish> dishes;
-     private Calendar CurrentDate;
+     private Customer customer;
 
-    public Order(int itemQuantity, int id, ArrayList<Dish> dishes, Calendar CurrentDate) {
-        this.itemQuantity = itemQuantity;
-        this.id = id;
-        this.dishes = dishes;
-        this.CurrentDate = CurrentDate;
+    public Order(int itemQuantity, int id, ArrayList<Dish> dishes, Customer CurrentDate) {
+    this.itemQuantity = itemQuantity;
+    this.id = id;
+    this.dishes = dishes;
+    this.customer = customer;
     }
 
     @Override
     public String toString() {
-        return "Order{" + "itemQuantity=" + itemQuantity + ", id=" + id + ", dishes=" + dishes + ", CurrentDate=" + CurrentDate + '}';
+        return "Order{" + "itemQuantity=" + itemQuantity + ", id=" + id + ", dishes=" + dishes + ", customer=" + customer + '}';
     }
 
     /**
@@ -69,21 +69,17 @@ public class Order {
     /**
      * @return the CurrentDate
      */
-    public Calendar getCurrentDate() {
-        return CurrentDate;
+    public Customer getCustomer() {
+        return customer;
     }
 
     /**
      * @param CurrentDate the CurrentDate to set
      */
-    public void setCurrentDate(Calendar CurrentDate) {
-        this.CurrentDate = CurrentDate;
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
      
-    
-
-  
-    
-    
+       
     
 }
