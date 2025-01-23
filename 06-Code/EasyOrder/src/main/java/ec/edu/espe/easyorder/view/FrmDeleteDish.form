@@ -119,10 +119,10 @@
                           <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
                           <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="txtDeleteId" min="-2" pref="132" max="-2" attributes="0"/>
+                          <Component id="txtDeleteID" min="-2" pref="130" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="269" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -132,7 +132,7 @@
                   <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtDeleteId" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtDeleteID" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="64" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -153,7 +153,7 @@
             <Property name="text" type="java.lang.String" value="ID del plato a eliminar:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtDeleteId">
+        <Component class="javax.swing.JTextField" name="txtDeleteID">
         </Component>
         <Component class="javax.swing.JButton" name="bntConfirmDelete">
           <Properties>

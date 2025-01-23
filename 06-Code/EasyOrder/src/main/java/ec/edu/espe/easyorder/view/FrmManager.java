@@ -35,6 +35,7 @@ public class FrmManager extends javax.swing.JFrame {
         jMenuBar3 = new javax.swing.JMenuBar();
         jMenu6 = new javax.swing.JMenu();
         jMenu7 = new javax.swing.JMenu();
+        filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 32767));
         jMenuBar1 = new javax.swing.JMenuBar();
         mnuInvoices = new javax.swing.JMenu();
         itmOpenInvoices = new javax.swing.JMenuItem();
@@ -261,6 +262,7 @@ public class FrmManager extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.Box.Filler filler1;
     private javax.swing.JMenuItem itmGoToLogIn;
     private javax.swing.JMenu itmMenu;
     private javax.swing.JMenuItem itmOpenClients;

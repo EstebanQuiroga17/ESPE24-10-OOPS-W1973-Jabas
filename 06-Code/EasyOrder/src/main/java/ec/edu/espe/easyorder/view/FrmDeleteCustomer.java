@@ -2,17 +2,18 @@ package ec.edu.espe.easyorder.view;
 
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import utils.MongoDbManager;
 
 /**
  *
  * @author abner
  */
-public class DeleteDish extends javax.swing.JFrame {
+public class FrmDeleteCustomer extends javax.swing.JFrame {
 
     /**
-     * Creates new form DeleteDish
+     * Creates new form FrmDeleteCustomer
      */
-    public DeleteDish() {
+    public FrmDeleteCustomer() {
         initComponents();
     }
 
@@ -25,94 +26,81 @@ public class DeleteDish extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jSpinner1 = new javax.swing.JSpinner();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
-        jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        txtDeleteId = new javax.swing.JTextField();
-        bntConfirmDelete = new javax.swing.JButton();
-        bntCancelDelete = new javax.swing.JButton();
-
-        jMenu1.setText("File");
-        jMenuBar1.add(jMenu1);
-
-        jMenu2.setText("Edit");
-        jMenuBar1.add(jMenu2);
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setResizable(false);
+        txtDeleteCustomer = new javax.swing.JTextField();
+        bntConfirmDeleteCustomer = new javax.swing.JButton();
+        btnCancelDeleteCustomer = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Franklin Gothic Medium", 3, 18)); // NOI18N
         jLabel1.setText("ELIMINAR PLATO");
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jLabel2.setFont(new java.awt.Font("Franklin Gothic Medium", 3, 18)); // NOI18N
+        jLabel2.setText("ELIMINAR CLIENTE");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(230, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(225, 225, 225))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(214, 214, 214)
+                .addComponent(jLabel2)
+                .addContainerGap(216, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(jLabel1)
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addGap(17, 17, 17)
+                .addComponent(jLabel2)
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
-        jLabel3.setText("ID del plato a eliminar:");
+        jLabel3.setText("ID del cliente a eliminar:");
 
-        bntConfirmDelete.setText("Confirmar");
-        bntConfirmDelete.addActionListener(new java.awt.event.ActionListener() {
+        bntConfirmDeleteCustomer.setText("Confirmar");
+        bntConfirmDeleteCustomer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bntConfirmDeleteActionPerformed(evt);
+                bntConfirmDeleteCustomerActionPerformed(evt);
             }
         });
 
-        bntCancelDelete.setText("Cancelar");
-        bntCancelDelete.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bntCancelDeleteActionPerformed(evt);
-            }
-        });
+        btnCancelDeleteCustomer.setText("Cancelar");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(51, 51, 51)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(31, 31, 31)
-                        .addComponent(bntConfirmDelete)
+                        .addComponent(bntConfirmDeleteCustomer)
                         .addGap(18, 18, 18)
-                        .addComponent(bntCancelDelete))
+                        .addComponent(btnCancelDeleteCustomer))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(53, 53, 53)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtDeleteId, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtDeleteCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(14, 14, 14)
+                .addGap(31, 31, 31)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(txtDeleteId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(64, 64, 64)
+                    .addComponent(txtDeleteCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(bntConfirmDelete)
-                    .addComponent(bntCancelDelete))
-                .addContainerGap(28, Short.MAX_VALUE))
+                    .addComponent(bntConfirmDeleteCustomer)
+                    .addComponent(btnCancelDeleteCustomer))
+                .addGap(16, 16, 16))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -121,32 +109,34 @@ public class DeleteDish extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void bntConfirmDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntConfirmDeleteActionPerformed
+    private void bntConfirmDeleteCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntConfirmDeleteCustomerActionPerformed
 
-        String idText = txtDeleteId.getText();
+        String idText = txtDeleteCustomer.getText();
+        txtDeleteCustomer.setText("");
+
         try {
             int id = Integer.parseInt(idText);
-            DefaultTableModel model = FrmMenu.getTableModel();
+            DefaultTableModel model = FrmCustomer.getTableModel();
             boolean found = false;
 
+            // Buscar el ID en las filas de la tabla
             for (int i = 0; i < model.getRowCount(); i++) {
                 if (model.getValueAt(i, 0).equals(id)) {
                     model.removeRow(i);
@@ -156,19 +146,24 @@ public class DeleteDish extends javax.swing.JFrame {
             }
 
             if (found) {
-                JOptionPane.showMessageDialog(this, "Plato eliminado con éxito.");
+              
+                boolean dbDeleted = MongoDbManager.deleteCustomer(id);
+
+                if (dbDeleted) {
+                    JOptionPane.showMessageDialog(this, "Cliente eliminado con éxito.");
+                } else {
+                    JOptionPane.showMessageDialog(this, "Error al eliminar el cliente de la base de datos.");
+                }
             } else {
-                JOptionPane.showMessageDialog(this, "ID no encontrado.");
+
+                JOptionPane.showMessageDialog(this, "ID no encontrado en la tabla.");
             }
         } catch (NumberFormatException e) {
+
             JOptionPane.showMessageDialog(this, "Por favor, ingrese un ID válido.");
         }
 
-    }//GEN-LAST:event_bntConfirmDeleteActionPerformed
-
-    private void bntCancelDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntCancelDeleteActionPerformed
-        this.dispose();
-    }//GEN-LAST:event_bntCancelDeleteActionPerformed
+    }//GEN-LAST:event_bntConfirmDeleteCustomerActionPerformed
 
     /**
      * @param args the command line arguments
@@ -187,36 +182,32 @@ public class DeleteDish extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(DeleteDish.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmDeleteCustomer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(DeleteDish.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmDeleteCustomer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(DeleteDish.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmDeleteCustomer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(DeleteDish.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmDeleteCustomer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new DeleteDish().setVisible(true);
+                new FrmDeleteCustomer().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton bntCancelDelete;
-    private javax.swing.JButton bntConfirmDelete;
+    private javax.swing.JButton bntConfirmDeleteCustomer;
+    private javax.swing.JButton btnCancelDeleteCustomer;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JSpinner jSpinner1;
-    private javax.swing.JTextField txtDeleteId;
+    private javax.swing.JTextField txtDeleteCustomer;
     // End of variables declaration//GEN-END:variables
-
 }
