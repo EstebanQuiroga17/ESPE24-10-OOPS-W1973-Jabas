@@ -7,7 +7,10 @@ import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Filters;
 import static com.mongodb.client.model.Filters.eq;
 import com.mongodb.client.result.DeleteResult;
+import ec.edu.espe.easyorder.model.Expense;
+import ec.edu.espe.easyorder.model.Invoice;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import org.bson.Document;
 import org.bson.conversions.Bson;
@@ -181,13 +184,63 @@ public class MongoDbManager {
     try {
         MongoCollection<Document> collection = database.getCollection("Customer");
         
-        // Se busca por el campo "id" que has definido en el documento
         return collection.find(Filters.eq("id", id)).first();
     } catch (Exception e) {
-        System.err.println("Error finding customer: " + e.getMessage());
+        System.err.println("Error al encontrar un cliente: " + e.getMessage());
         return null;
     }
 }
+   public static boolean updateById(String collectionName, int id, Document updatedDoc) {
+    try {
+        MongoCollection<Document> collection = database.getCollection(collectionName);
+        Bson filter = Filters.eq("id", id);
+        collection.updateOne(filter, new Document("$set", updatedDoc));
+        System.out.println("Documento actualizado en la coleccion: " + collectionName);
+        return true;
+    } catch (Exception e) {
+        System.err.println("Error al actualizar el documento: " + e.getMessage());
+        return false;
+    }
+}
+
+public static boolean deleteById(String collectionName, int id) {
+    try {
+        MongoCollection<Document> collection = database.getCollection(collectionName);
+        Bson filter = Filters.eq("id", id);
+        DeleteResult result = collection.deleteOne(filter);
+        if (result.getDeletedCount() > 0) {
+            System.out.println("Eliminado de la coleccion: " + collectionName);
+            return true;
+        }
+        return false;
+    } catch (Exception e) {
+        System.err.println("Error al eliminar el documento: " + e.getMessage());
+        return false;
+    }
+}
+
+public static boolean deleteDocumentById(String collectionName, int id) {
+    try {
+        MongoCollection<Document> collection = database.getCollection(collectionName);
+
+        Bson filter = Filters.eq("id", id);
+
+        DeleteResult result = collection.deleteOne(filter);
+
+        if (result.getDeletedCount() > 0) {
+            System.out.println("Document deleted from collection: " + collectionName);
+            return true;
+        } else {
+            System.out.println("Document with ID " + id + " not found in collection: " + collectionName);
+            return false;
+        }
+    } catch (Exception e) {
+        System.err.println("Error deleting document: " + e.getMessage());
+        return false;
+    }
+}
+
+
 }
 
 
