@@ -215,14 +215,14 @@ public class FrmMenu extends javax.swing.JFrame {
 
     private void bntDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntDeleteActionPerformed
 
-        DeleteDish deleteDish = new DeleteDish();
+        FrmDeleteDish deleteDish = new FrmDeleteDish();
         deleteDish.setVisible(true);
 
     }//GEN-LAST:event_bntDeleteActionPerformed
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
 
-        AddDish addDish = new AddDish();
+        FrmAddDish addDish = new FrmAddDish();
         addDish.setVisible(true);
 
     }//GEN-LAST:event_btnAddActionPerformed

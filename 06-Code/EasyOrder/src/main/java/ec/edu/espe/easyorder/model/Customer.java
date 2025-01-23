@@ -7,9 +7,9 @@ package ec.edu.espe.easyorder.model;
 public class Customer {
     private String name;
     private int id;
-    private int phoneNumber;
+    private String phoneNumber;
 
-    public Customer(String name, int id, int phoneNumber) {
+    public Customer(String name, int id, String phoneNumber) {
         this.name = name;
         this.id = id;
         this.phoneNumber = phoneNumber;
@@ -54,14 +54,14 @@ public class Customer {
     /**
      * @return the phoneNumber
      */
-    public int getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
     /**
      * @param phoneNumber the phoneNumber to set
      */
-    public void setPhoneNumber(int phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
     

@@ -1,14 +1,36 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package ec.edu.espe.easyorder.view;
+
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import org.bson.Document;
+import utils.MongoDbManager;
 
 /**
  *
- * @author abner
+ * @author Matias Rojas 
  */
 public class FrmCustomer extends javax.swing.JFrame {
+    public void addRowToCustomerTable(Object[] dataRow) {
+        DefaultTableModel model = (DefaultTableModel) tableCustomer.getModel();
+        model.addRow(dataRow);
+    }
+
+    
+    public void loadCustomersFromDatabase() {
+        
+        List<Document> customers = MongoDbManager.getAll("Customers");
+
+       
+        for (Document customer : customers) {
+            String id = customer.getString("id");
+            String name = customer.getString("name");
+            String phoneNumber = customer.getString("phoneNumber");
+
+            
+            addRowToCustomerTable(new Object[]{id, name, phoneNumber});
+        }
+    }
 
     /**
      * Creates new form FrmCustomer
@@ -30,7 +52,7 @@ public class FrmCustomer extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tableCustomer = new javax.swing.JTable();
         jLabel7 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
@@ -60,18 +82,26 @@ public class FrmCustomer extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tableCustomer.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Nombre", "Celular ", "ID"
             }
-        ));
-        jScrollPane1.setViewportView(jTable1);
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tableCustomer);
 
         jLabel7.setFont(new java.awt.Font("Franklin Gothic Medium", 3, 14)); // NOI18N
         jLabel7.setText("Opciones del cliente");
@@ -214,6 +244,6 @@ public class FrmCustomer extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tableCustomer;
     // End of variables declaration//GEN-END:variables
 }
