@@ -10,19 +10,18 @@ public class Order {
      private int itemQuantity;
      private int id;
      private ArrayList<Dish> dishes;
-     private Customer customer;
+     private Calendar CurrentDate;
 
-    public Order(int itemQuantity, int id, ArrayList<Dish> dishes, Customer customer) {
-    this.itemQuantity = itemQuantity;
-    this.id = id;
-    this.dishes = dishes;
-    this.customer = customer;
-
+    public Order(int itemQuantity, int id, ArrayList<Dish> dishes, Calendar CurrentDate) {
+        this.itemQuantity = itemQuantity;
+        this.id = id;
+        this.dishes = dishes;
+        this.CurrentDate = CurrentDate;
     }
 
     @Override
     public String toString() {
-        return "Order{" + "itemQuantity=" + itemQuantity + ", id=" + id + ", dishes=" + dishes + ", customer=" + customer + '}';
+        return "Order{" + "itemQuantity=" + itemQuantity + ", id=" + id + ", dishes=" + dishes + ", CurrentDate=" + CurrentDate + '}';
     }
 
     /**
@@ -67,30 +66,19 @@ public class Order {
         this.dishes = dishes;
     }
 
-<<<<<<< HEAD
     /**
      * @return the CurrentDate
      */
-=======
->>>>>>> 16650937cbcf3a060fdc85b83c0d0ef2cd92b080
-    public Customer getCustomer() {
-        return customer;
+    public Calendar getCurrentDate() {
+        return CurrentDate;
     }
 
-<<<<<<< HEAD
     /**
      * @param CurrentDate the CurrentDate to set
      */
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
+    public void setCurrentDate(Calendar CurrentDate) {
+        this.CurrentDate = CurrentDate;
     }
-     
-       
-=======
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
-   
->>>>>>> 16650937cbcf3a060fdc85b83c0d0ef2cd92b080
+      
     
 }
