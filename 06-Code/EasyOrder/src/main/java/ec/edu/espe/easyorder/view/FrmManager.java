@@ -187,7 +187,7 @@ public class FrmManager extends javax.swing.JFrame {
 
     private void itmOpenClientsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmOpenClientsActionPerformed
         // TODO add your handling code here:
-        FrmCustomer frmCustomer = new FrmCustomer();
+        FrmCustomerNet frmCustomer = new FrmCustomerNet();
         frmCustomer.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_itmOpenClientsActionPerformed

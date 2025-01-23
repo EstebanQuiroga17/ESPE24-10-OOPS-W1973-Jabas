@@ -27,22 +27,22 @@ public class FrmAddCustomer extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        ttlAddCustomer = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
         txtCustomerID = new javax.swing.JTextField();
         txtCustomerName = new javax.swing.JTextField();
         txtCustomerLastname = new javax.swing.JTextField();
         txtCustomerPhone = new javax.swing.JTextField();
-        bntConfirmAddClient = new javax.swing.JButton();
-        btnCancelAddClient = new javax.swing.JButton();
+        ConfirmAddCustomer = new javax.swing.JButton();
+        CancelAddCustomer = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        ttlAddCustomer.setFont(new java.awt.Font("Franklin Gothic Medium", 3, 18)); // NOI18N
-        ttlAddCustomer.setText("AÑADIR CLIENTE");
+        jLabel1.setFont(new java.awt.Font("Franklin Gothic Medium", 3, 18)); // NOI18N
+        jLabel1.setText("AÑADIR CLIENTE");
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
         jLabel2.setText("ID:");
@@ -51,22 +51,28 @@ public class FrmAddCustomer extends javax.swing.JFrame {
         jLabel3.setText("Nombre:");
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
-        jLabel4.setText("Apellido");
+        jLabel4.setText("Numero de telefono");
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
-        jLabel1.setText("Numero telefonico:");
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
+        jLabel5.setText("Apellido:");
 
-        bntConfirmAddClient.setText("Confirmar");
-        bntConfirmAddClient.addActionListener(new java.awt.event.ActionListener() {
+        txtCustomerID.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bntConfirmAddClientActionPerformed(evt);
+                txtCustomerIDActionPerformed(evt);
             }
         });
 
-        btnCancelAddClient.setText("Cancelar");
-        btnCancelAddClient.addActionListener(new java.awt.event.ActionListener() {
+        ConfirmAddCustomer.setText("Actualizar");
+        ConfirmAddCustomer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelAddClientActionPerformed(evt);
+                ConfirmAddCustomerActionPerformed(evt);
+            }
+        });
+
+        CancelAddCustomer.setText("Cancelar");
+        CancelAddCustomer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CancelAddCustomerActionPerformed(evt);
             }
         });
 
@@ -74,42 +80,39 @@ public class FrmAddCustomer extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(225, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(235, 235, 235))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(46, 46, 46)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel2)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel4)
-                        .addComponent(jLabel3))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(1, 1, 1)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 83, Short.MAX_VALUE)
-                        .addComponent(ttlAddCustomer)
-                        .addGap(218, 218, 218))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(45, 45, 45)
+                        .addGap(55, 55, 55)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel2)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtCustomerID)
                             .addComponent(txtCustomerName)
                             .addComponent(txtCustomerLastname)
-                            .addComponent(txtCustomerPhone, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(61, 61, 61)
-                .addComponent(bntConfirmAddClient)
-                .addGap(18, 18, 18)
-                .addComponent(btnCancelAddClient)
-                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(txtCustomerPhone, javax.swing.GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(32, 32, 32)
+                        .addComponent(ConfirmAddCustomer)
+                        .addGap(27, 27, 27)
+                        .addComponent(CancelAddCustomer)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addComponent(ttlAddCustomer)
-                .addGap(59, 59, 59)
+                .addGap(14, 14, 14)
+                .addComponent(jLabel1)
+                .addGap(40, 40, 40)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtCustomerID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -117,19 +120,21 @@ public class FrmAddCustomer extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(txtCustomerName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(txtCustomerLastname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(txtCustomerLastname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
                     .addComponent(txtCustomerPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(43, 43, 43)
+                .addGap(59, 59, 59))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(bntConfirmAddClient)
-                    .addComponent(btnCancelAddClient))
-                .addContainerGap(27, Short.MAX_VALUE))
+                    .addComponent(ConfirmAddCustomer)
+                    .addComponent(CancelAddCustomer))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -145,67 +150,71 @@ public class FrmAddCustomer extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void bntConfirmAddClientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntConfirmAddClientActionPerformed
+    private void txtCustomerIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCustomerIDActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCustomerIDActionPerformed
+
+    private void ConfirmAddCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmAddCustomerActionPerformed
 
     String idText = txtCustomerID.getText();
-    String customerName = txtCustomerName.getText();
-    String customerLastname = txtCustomerLastname.getText();
-    String customerPhonenumberText = txtCustomerPhone.getText();
-    txtCustomerID.setText("");
-    txtCustomerName.setText("");
-    txtCustomerLastname.setText("");
-    txtCustomerPhone.setText("");
-
-    if (idText.isEmpty() || customerName.isEmpty() || customerLastname.isEmpty() || customerPhonenumberText.isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Por favor, complete todos los campos.");
-        return;
-    }
+        String customerName = txtCustomerName.getText();
+        String customerLastname = txtCustomerLastname.getText();
+        String customerPhonenumberText = txtCustomerPhone.getText();
+        txtCustomerID.setText("");
+        txtCustomerName.setText("");
+        txtCustomerLastname.setText("");
+        txtCustomerPhone.setText("");
     
-    if (customerName.matches(".*\\d.*")) {
-        JOptionPane.showMessageDialog(this, "El nombre del cliente no debe contener números.");
-        return;
-    }
-    
-    if (customerLastname.matches(".*\\d.*")) {
-        JOptionPane.showMessageDialog(this, "El apellido del cliente no debe contener números.");
-        return;
-    }
-
-    try {
-        Integer id = Integer.parseInt(idText);
-
-        try {
-
-        Integer phoneNumber = Integer.parseInt(customerPhonenumberText);
-
-        boolean success = MongoDbManager.insertCustomer(id, customerName, customerLastname, phoneNumber);
-
-        if (success) {
-
-            FrmCustomer.AddRowToJTableCustomer(new Object[]{id, customerName, customerLastname, phoneNumber});
-            JOptionPane.showMessageDialog(this, "Cliente agregado con exito.");
+        if (idText.isEmpty() || customerName.isEmpty() || customerLastname.isEmpty() || customerPhonenumberText.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Por favor, complete todos los campos.");
+            return;
         }
-
-    } catch (NumberFormatException e) {
-        JOptionPane.showMessageDialog(this, "El número de teléfono debe ser un número válido.");
-    }
-
-} catch (NumberFormatException e) {
-    JOptionPane.showMessageDialog(this, "El ID debe ser un número válido.");
-}
         
-    }//GEN-LAST:event_bntConfirmAddClientActionPerformed
+        if (customerName.matches(".*\\d.*")) {
+            JOptionPane.showMessageDialog(this, "El nombre del cliente no debe contener números.");
+            return;
+        }
+        
+        if (customerLastname.matches(".*\\d.*")) {
+            JOptionPane.showMessageDialog(this, "El apellido del cliente no debe contener números.");
+            return;
+        }
+    
+        try {
+            Integer id = Integer.parseInt(idText);
+    
+            try {
+    
+            Integer phoneNumber = Integer.parseInt(customerPhonenumberText);
+    
+            boolean success = MongoDbManager.insertCustomer(id, customerName, customerLastname, phoneNumber);
+    
+            if (success) {
+    
+                FrmCustomer.AddRowToJTableCustomer(new Object[]{id, customerName, customerLastname, phoneNumber});
+                JOptionPane.showMessageDialog(this, "Cliente agregado con exito.");
+            }
+    
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "El número de teléfono debe ser un número válido.");
+        }
+    
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "El ID debe ser un número válido.");
+    }
+        
+    }//GEN-LAST:event_ConfirmAddCustomerActionPerformed
 
-    private void btnCancelAddClientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelAddClientActionPerformed
-    this.dispose();
-    }//GEN-LAST:event_btnCancelAddClientActionPerformed
+    private void CancelAddCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelAddCustomerActionPerformed
+           this.dispose();
+    }//GEN-LAST:event_CancelAddCustomerActionPerformed
 
     /**
      * @param args the command line arguments
@@ -243,14 +252,14 @@ public class FrmAddCustomer extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton bntConfirmAddClient;
-    private javax.swing.JButton btnCancelAddClient;
+    private javax.swing.JButton CancelAddCustomer;
+    private javax.swing.JButton ConfirmAddCustomer;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JLabel ttlAddCustomer;
     private javax.swing.JTextField txtCustomerID;
     private javax.swing.JTextField txtCustomerLastname;
     private javax.swing.JTextField txtCustomerName;
