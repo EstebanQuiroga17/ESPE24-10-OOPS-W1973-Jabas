@@ -15,6 +15,7 @@ public class FrmAddDish extends javax.swing.JFrame {
      */
     public FrmAddDish() {
         initComponents();
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
     }
 
     /**

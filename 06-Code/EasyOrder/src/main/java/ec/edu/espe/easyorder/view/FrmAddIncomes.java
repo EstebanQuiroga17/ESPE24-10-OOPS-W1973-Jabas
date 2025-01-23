@@ -9,7 +9,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author USUARIO
+ * @author Matias Rojas
  */
 public class FrmAddIncomes extends javax.swing.JFrame {
 
@@ -18,6 +18,7 @@ public class FrmAddIncomes extends javax.swing.JFrame {
      */
     public FrmAddIncomes() {
         initComponents();
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
     }
 
     /**

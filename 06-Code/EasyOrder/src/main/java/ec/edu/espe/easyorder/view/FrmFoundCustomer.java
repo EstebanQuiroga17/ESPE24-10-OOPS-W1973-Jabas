@@ -16,6 +16,7 @@ public class FrmFoundCustomer extends javax.swing.JFrame {
 
     public FrmFoundCustomer() {
         initComponents();
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
     }
 
     /**
