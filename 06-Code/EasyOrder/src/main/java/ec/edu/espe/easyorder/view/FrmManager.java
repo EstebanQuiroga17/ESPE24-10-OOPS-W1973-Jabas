@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package ec.edu.espe.easyorder.view;
 
 /**
@@ -187,7 +184,7 @@ public class FrmManager extends javax.swing.JFrame {
 
     private void itmOpenClientsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmOpenClientsActionPerformed
         // TODO add your handling code here:
-        FrmCustomerNet frmCustomer = new FrmCustomerNet();
+        FrmCustomer frmCustomer = new FrmCustomer();
         frmCustomer.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_itmOpenClientsActionPerformed
