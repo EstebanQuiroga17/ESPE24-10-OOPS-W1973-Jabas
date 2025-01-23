@@ -8,7 +8,7 @@ import javax.swing.JLabel;
 
 /**
  *
- * @author abner
+ * @author Matias Rojas
  */
 public class FrmAccountingReport extends javax.swing.JFrame {
 
