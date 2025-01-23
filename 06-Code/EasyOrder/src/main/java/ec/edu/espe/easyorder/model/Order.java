@@ -12,7 +12,7 @@ public class Order {
      private ArrayList<Dish> dishes;
      private Customer customer;
 
-    public Order(int itemQuantity, int id, ArrayList<Dish> dishes, Customer customer) {
+    public Order(int itemQuantity, int id, ArrayList<Dish> dishes, Calendar customer) {
         this.itemQuantity = itemQuantity;
         this.id = id;
         this.dishes = dishes;
