@@ -43,7 +43,9 @@ public class WorkerController {
         }
         return 0;
     } 
+    
     public Order takeOrder(Customer customer, ArrayList<Dish> dishes) {
+
         int itemQuantity = dishes.size(); // Calculate quantity based on list size
         int id = (int) (Math.random() * 10000); // Generate a unique ID
         Calendar CurrentDate = null;

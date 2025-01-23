@@ -27,8 +27,8 @@ public class FrmOrder extends javax.swing.JFrame {
         populateDishesComboBox();
         updateDate();
         updateOrderId();
-         populateDishesComboBox();
-          updateDate();
+        populateDishesComboBox();
+        updateDate();
         updateOrderId();
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
     }

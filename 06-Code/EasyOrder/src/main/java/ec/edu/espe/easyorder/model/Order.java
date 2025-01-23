@@ -69,6 +69,7 @@ public class Order {
     /**
      * @return the CurrentDate
      */
+
     public Calendar getCurrentDate() {
         return CurrentDate;
     }
@@ -79,6 +80,6 @@ public class Order {
     public void setCurrentDate(Calendar CurrentDate) {
         this.CurrentDate = CurrentDate;
     }
-      
+
     
 }
