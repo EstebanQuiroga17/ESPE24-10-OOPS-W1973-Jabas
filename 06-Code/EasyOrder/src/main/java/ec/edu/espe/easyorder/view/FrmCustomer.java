@@ -1,20 +1,45 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package ec.edu.espe.easyorder.view;
+
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import org.bson.Document;
+import utils.MongoDbManager;
 
 /**
  *
- * @author USUARIO
+ * @author abner
  */
 public class FrmCustomer extends javax.swing.JFrame {
+    
+    public static void AddRowToJTableCustomer(Object[] dataRow) {
+        DefaultTableModel model = (DefaultTableModel) TableCustomer.getModel();
+        model.addRow(dataRow);
+    }
+    
+    public static void AddRowToJTableCustomerDelete(Object[] dataRow) {
+        DefaultTableModel model = getTableModel();
+        model.addRow(dataRow);
+    }
+    
+    public void loadCustomersFromDatabase() {
+        List<Document> customers = MongoDbManager.getAll("Customer");
+        
+        for (Document customer : customers) {
+            int id = customer.getInteger("id");
+            String name = customer.getString("name");
+            String lastname = customer.getString("lastname");
+            int phoneNumber = customer.getInteger("phoneNumber");
+            
+            FrmCustomer.AddRowToJTableCustomer(new Object[]{id, name, lastname, phoneNumber});
+        }
+    }
 
     /**
      * Creates new form FrmCustomer
      */
     public FrmCustomer() {
         initComponents();
+        loadCustomersFromDatabase();
     }
 
     /**
@@ -26,90 +51,171 @@ public class FrmCustomer extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tableCustomer = new javax.swing.JTable();
-        btnSearch = new javax.swing.JButton();
-        btnDelete = new javax.swing.JButton();
-        btnAdd = new javax.swing.JButton();
-        btnUpdate = new javax.swing.JButton();
+        TableCustomer = new javax.swing.JTable();
+        jLabel7 = new javax.swing.JLabel();
+        bntSeachCustomer = new javax.swing.JButton();
+        btnDeleteCustomer = new javax.swing.JButton();
+        bntAddCustomer = new javax.swing.JButton();
+        btnUptadeCustomer = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Franklin Gothic Medium", 3, 18)); // NOI18N
         jLabel1.setText("CLIENTES ATENDIDOS");
+        jLabel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        tableCustomer.setModel(new javax.swing.table.DefaultTableModel(
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(53, 53, 53)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(15, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addContainerGap())
+        );
+
+        TableCustomer.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "ID", "Nombre", "Apellido", "Numero de telefono "
+                "ID", "Nombre", "Apellido", "Numero de telefono"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(tableCustomer);
+        jScrollPane1.setViewportView(TableCustomer);
 
-        btnSearch.setText("Buscar");
+        jLabel7.setFont(new java.awt.Font("Franklin Gothic Medium", 3, 14)); // NOI18N
+        jLabel7.setText("Opciones del cliente");
 
-        btnDelete.setText("Eliminar");
+        bntSeachCustomer.setText("Buscar");
+        bntSeachCustomer.setPreferredSize(new java.awt.Dimension(95, 30));
+        bntSeachCustomer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bntSeachCustomerActionPerformed(evt);
+            }
+        });
 
-        btnAdd.setText("Añadir");
+        btnDeleteCustomer.setText("Eliminar");
+        btnDeleteCustomer.setPreferredSize(new java.awt.Dimension(95, 30));
+        btnDeleteCustomer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteCustomerActionPerformed(evt);
+            }
+        });
 
-        btnUpdate.setText("Actualizar");
+        bntAddCustomer.setText("Añadir");
+        bntAddCustomer.setPreferredSize(new java.awt.Dimension(95, 30));
+        bntAddCustomer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bntAddCustomerActionPerformed(evt);
+            }
+        });
+
+        btnUptadeCustomer.setText("Actualizar");
+        btnUptadeCustomer.setPreferredSize(new java.awt.Dimension(95, 30));
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(108, 108, 108)
+                        .addComponent(bntSeachCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnDeleteCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(bntAddCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnUptadeCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 139, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1)))
+                .addContainerGap())
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(jLabel7)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(39, 39, 39)
+                .addComponent(jLabel7)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(bntSeachCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnDeleteCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bntAddCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnUptadeCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(33, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 485, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(btnSearch)
-                                .addGap(36, 36, 36)
-                                .addComponent(btnDelete)
-                                .addGap(51, 51, 51)
-                                .addComponent(btnAdd)
-                                .addGap(46, 46, 46)
-                                .addComponent(btnUpdate)
-                                .addGap(35, 35, 35)))))
-                .addContainerGap(15, Short.MAX_VALUE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnUpdate)
-                    .addComponent(btnAdd)
-                    .addComponent(btnDelete)
-                    .addComponent(btnSearch))
-                .addGap(66, 66, 66))
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void bntAddCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntAddCustomerActionPerformed
+        
+        FrmAddCustomer addCustomer = new FrmAddCustomer();
+        addCustomer.setVisible(true);
+
+    }//GEN-LAST:event_bntAddCustomerActionPerformed
+
+    private void bntSeachCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntSeachCustomerActionPerformed
+        
+        FrmSearchCustomer searchCustomer = new FrmSearchCustomer();
+        searchCustomer.setVisible(true);
+        
+    }//GEN-LAST:event_bntSeachCustomerActionPerformed
+
+    private void btnDeleteCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteCustomerActionPerformed
+        
+        FrmDeleteCustomer deleteCustomer = new FrmDeleteCustomer();
+        deleteCustomer.setVisible(true);
+
+    }//GEN-LAST:event_btnDeleteCustomerActionPerformed
 
     /**
      * @param args the command line arguments
@@ -147,13 +253,22 @@ public class FrmCustomer extends javax.swing.JFrame {
         });
     }
 
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAdd;
-    private javax.swing.JButton btnDelete;
-    private javax.swing.JButton btnSearch;
-    private javax.swing.JButton btnUpdate;
+    private static javax.swing.JTable TableCustomer;
+    private javax.swing.JButton bntAddCustomer;
+    private javax.swing.JButton bntSeachCustomer;
+    private javax.swing.JButton btnDeleteCustomer;
+    private javax.swing.JButton btnUptadeCustomer;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tableCustomer;
     // End of variables declaration//GEN-END:variables
+
+    public static DefaultTableModel getTableModel() {
+        return (DefaultTableModel) TableCustomer.getModel();
+        
+    }
 }
