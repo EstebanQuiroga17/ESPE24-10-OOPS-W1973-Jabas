@@ -1,4 +1,10 @@
 
+<<<<<<< HEAD
+    package ec.edu.espe.easyorder.view;
+    import javax.swing.JOptionPane;
+    import utils.MongoDbManager;
+    
+=======
 package ec.edu.espe.easyorder.view;
 
 import javax.swing.JOptionPane;
@@ -10,12 +16,73 @@ import utils.MongoDbManager;
  */
 public class FrmAddCustomer extends javax.swing.JFrame {
 
+>>>>>>> 1ccc17833ffd4c1fe2cbb112d55bbdb73711c8da
     /**
      * Creates new form FrmAddCustomer
      */
     public FrmAddCustomer() {
         initComponents();
     }
+<<<<<<< HEAD
+            
+        }                                                   
+    
+        private void btnCancelAddClientActionPerformed(java.awt.event.ActionEvent evt) {                                                   
+        this.dispose();
+        }                                                  
+    
+        /**
+         * @param args the command line arguments
+         */
+        public static void main(String args[]) {
+            /* Set the Nimbus look and feel */
+            //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+            /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+             * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+             */
+            try {
+                for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                    if ("Nimbus".equals(info.getName())) {
+                        javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                        break;
+                    }
+                }
+            } catch (ClassNotFoundException ex) {
+                java.util.logging.Logger.getLogger(FrmAddCustomer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            } catch (InstantiationException ex) {
+                java.util.logging.Logger.getLogger(FrmAddCustomer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            } catch (IllegalAccessException ex) {
+                java.util.logging.Logger.getLogger(FrmAddCustomer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+                java.util.logging.Logger.getLogger(FrmAddCustomer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            }
+            //</editor-fold>
+    
+            /* Create and display the form */
+            java.awt.EventQueue.invokeLater(new Runnable() {
+                public void run() {
+                    new FrmAddCustomer().setVisible(true);
+                }
+            });
+        }
+    
+        // Variables declaration - do not modify                     
+        private javax.swing.JButton bntConfirmAddClient;
+        private javax.swing.JButton btnCancelAddClient;
+        private javax.swing.JLabel jLabel1;
+        private javax.swing.JLabel jLabel2;
+        private javax.swing.JLabel jLabel3;
+        private javax.swing.JLabel jLabel4;
+        private javax.swing.JPanel jPanel1;
+        private javax.swing.JLabel ttlAddCustomer;
+        private javax.swing.JTextField txtCustomerID;
+        private javax.swing.JTextField txtCustomerLastname;
+        private javax.swing.JTextField txtCustomerName;
+        private javax.swing.JTextField txtCustomerPhone;
+        // End of variables declaration                   
+    }
+    
+=======
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -266,3 +333,4 @@ public class FrmAddCustomer extends javax.swing.JFrame {
     private javax.swing.JTextField txtCustomerPhone;
     // End of variables declaration//GEN-END:variables
 }
+>>>>>>> 1ccc17833ffd4c1fe2cbb112d55bbdb73711c8da
