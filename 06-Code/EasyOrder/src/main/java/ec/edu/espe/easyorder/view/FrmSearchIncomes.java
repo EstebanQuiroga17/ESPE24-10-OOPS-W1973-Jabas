@@ -15,6 +15,7 @@ public class FrmSearchIncomes extends javax.swing.JFrame {
      */
     public FrmSearchIncomes() {
         initComponents();
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
     }
 
     /**

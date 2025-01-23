@@ -23,9 +23,16 @@ public class FrmOrder extends javax.swing.JFrame {
      */
     public FrmOrder() {
         initComponents();
+<<<<<<< HEAD
         populateDishesComboBox();
         updateDate();
         updateOrderId();
+=======
+         populateDishesComboBox();
+          updateDate();
+        updateOrderId();
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+>>>>>>> 16650937cbcf3a060fdc85b83c0d0ef2cd92b080
     }
 
     private void addDishToTable() {
@@ -416,36 +423,27 @@ public class FrmOrder extends javax.swing.JFrame {
             DefaultTableModel model = (DefaultTableModel) jtOrders.getModel();
             List<Document> dishesList = new ArrayList<>();
 
-            // Debugging: Check if rows are populated correctly
             for (int i = 0; i < model.getRowCount(); i++) {
                 String dishName = (String) model.getValueAt(i, 0); // Get dish from table
                 Object quantityObj = model.getValueAt(i, 1); // Get quantity from table
 
-                System.out.println("Row " + i + ": Dish - " + dishName + ", Quantity - " + quantityObj);
 
                 if (dishName == null || quantityObj == null) {
                     JOptionPane.showMessageDialog(this, "Dish or Quantity is missing!", "Invalid Input", JOptionPane.WARNING_MESSAGE);
                     return;
                 }
-
-                // Convert quantity to integer
                 int quantity = Integer.parseInt(quantityObj.toString());
-
-                // Create MongoDB document for each dish
                 Document dish = new Document("name", dishName).append("quantity", quantity);
                 dishesList.add(dish); // Add to dishes list
             }
 
-            // Create the order document
             Document orderDocument = new Document("orderId", orderId)
                     .append("date", orderDate)
                     .append("dishes", dishesList);
 
-            // Save to MongoDB
             MongoDbManager.insertDocument("Order", orderDocument);
             JOptionPane.showMessageDialog(this, "Order saved successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
 
-            // Clear the form
             clearForm();
 
         } catch (Exception e) {
@@ -478,15 +476,8 @@ public class FrmOrder extends javax.swing.JFrame {
 
 
     private void btnAddDishActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddDishActionPerformed
-        // Get selected dish and quantity
         String selectedDish = (String) cmbDishes.getSelectedItem();  // ComboBox value
         String quantityText = txtQuantity.getText();  // Quantity from text field
-
-        // Debugging: Print values before adding to the table
-        System.out.println("Selected Dish: " + selectedDish);
-        System.out.println("Quantity: " + quantityText);
-
-        // Validate if both dish and quantity are properly entered
         if (selectedDish == null || selectedDish.trim().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Please select a valid dish.", "Invalid Input", JOptionPane.WARNING_MESSAGE);
             return;
@@ -496,8 +487,6 @@ public class FrmOrder extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Please enter a valid quantity.", "Invalid Input", JOptionPane.WARNING_MESSAGE);
             return;
         }
-
-        // Validate if quantity is a number and greater than 0
         try {
             int quantity = Integer.parseInt(quantityText);
             if (quantity <= 0) {
@@ -505,11 +494,8 @@ public class FrmOrder extends javax.swing.JFrame {
                 return;
             }
 
-            // Add the dish and quantity to the table
             DefaultTableModel model = (DefaultTableModel) jtOrders.getModel();
             model.addRow(new Object[]{selectedDish, quantity});
-
-            // Clear the quantity field after adding
             txtQuantity.setText("");
 
         } catch (NumberFormatException e) {

@@ -15,6 +15,7 @@ public class FrmExpense extends javax.swing.JFrame {
      */
     public FrmExpense() {
         initComponents();
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
     }
 
     

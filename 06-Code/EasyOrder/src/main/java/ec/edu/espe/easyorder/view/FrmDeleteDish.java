@@ -15,6 +15,7 @@ public class FrmDeleteDish extends javax.swing.JFrame {
      */
     public FrmDeleteDish() {
         initComponents();
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
     }
 
     /**

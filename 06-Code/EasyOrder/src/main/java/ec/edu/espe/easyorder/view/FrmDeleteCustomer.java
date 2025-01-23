@@ -16,6 +16,7 @@ public class FrmDeleteCustomer extends javax.swing.JFrame {
      */
     public FrmDeleteCustomer() {
         initComponents();
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
     }
 
     /**

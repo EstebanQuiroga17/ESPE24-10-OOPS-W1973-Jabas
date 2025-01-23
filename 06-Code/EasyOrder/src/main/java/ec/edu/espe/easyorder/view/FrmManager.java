@@ -180,6 +180,9 @@ public class FrmManager extends javax.swing.JFrame {
 
     private void itmOpenInvoicesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmOpenInvoicesActionPerformed
         // TODO add your handling code here:
+        FrmInvoice frmInvoice = new FrmInvoice();
+        frmInvoice.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_itmOpenInvoicesActionPerformed
 
     private void itmOpenClientsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmOpenClientsActionPerformed
@@ -219,7 +222,9 @@ public class FrmManager extends javax.swing.JFrame {
 
     private void itmOpenOrdersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmOpenOrdersActionPerformed
         // TODO add your handling code here:
-        
+        FrmOrder frmOrder = new FrmOrder();
+        frmOrder.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_itmOpenOrdersActionPerformed
 
     /**

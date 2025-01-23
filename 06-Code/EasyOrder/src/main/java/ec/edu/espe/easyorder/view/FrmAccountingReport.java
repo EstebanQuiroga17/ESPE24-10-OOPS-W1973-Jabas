@@ -17,6 +17,7 @@ public class FrmAccountingReport extends javax.swing.JFrame {
      */
     public FrmAccountingReport() {
         initComponents();
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
     }
 
 
