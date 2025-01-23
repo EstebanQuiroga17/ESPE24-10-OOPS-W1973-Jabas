@@ -5,6 +5,7 @@ import ec.edu.espe.easyorder.model.Customer;
 import ec.edu.espe.easyorder.model.Dish;
 import ec.edu.espe.easyorder.model.Order;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import org.bson.Document;
 
@@ -46,7 +47,8 @@ public class WorkerController {
     public Order takeOrder(Customer customer, ArrayList<Dish> dishes) {
         int itemQuantity = dishes.size(); // Calculate quantity based on list size
         int id = (int) (Math.random() * 10000); // Generate a unique ID
-        Order order = new Order(itemQuantity, id, dishes, customer);
+        Calendar CurrentDate = null;
+        Order order = new Order(itemQuantity, id, dishes, CurrentDate);
         System.out.println("Orden tomada del cliente: " + customer.getName());
     return order;
 }
