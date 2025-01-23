@@ -129,10 +129,11 @@ public class FrmSearchCustomer extends javax.swing.JFrame {
 
     private void btnConfirmCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmCustomerActionPerformed
 
-            String idStr = txtSeachCustomerId.getText();
+        String idStr = txtSeachCustomerId.getText();
         txtSeachCustomerId.setText("");
         try {
             int id = Integer.parseInt(idStr);
+
             Document customer = MongoDbManager.findCustomerById(id);
 
             if (customer != null) {
@@ -140,7 +141,6 @@ public class FrmSearchCustomer extends javax.swing.JFrame {
                 String lastname = customer.getString("lastname");
                 int phoneNumber = customer.getInteger("phoneNumber");
                 Object[] dataRow = new Object[]{id, name, lastname, phoneNumber};
-
 
                 FrmFoundCustomer foundCustomer = new FrmFoundCustomer();
                 FrmFoundCustomer.addRowToTblShowCustomer(dataRow);

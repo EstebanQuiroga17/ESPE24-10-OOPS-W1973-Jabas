@@ -5,11 +5,13 @@ import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Filters;
+import static com.mongodb.client.model.Filters.eq;
 import com.mongodb.client.result.DeleteResult;
 import java.util.ArrayList;
 import java.util.List;
 import org.bson.Document;
 import org.bson.conversions.Bson;
+import org.bson.types.ObjectId;
 
 /**
  *
@@ -175,16 +177,17 @@ public class MongoDbManager {
     }
     
     
-    public static Document findCustomerById(int id) {
-        try {
-            MongoCollection<Document> collection = database.getCollection("Customers");
-
-            return collection.find(Filters.eq("id", id)).first();  // Buscar cliente por ID
-        } catch (Exception e) {
-            System.err.println("Error finding customer: " + e.getMessage());
-            return null;  // Retornar null en caso de error
-        }
+   public static Document findCustomerById(int id) {
+    try {
+        MongoCollection<Document> collection = database.getCollection("Customer");
+        
+        // Se busca por el campo "id" que has definido en el documento
+        return collection.find(Filters.eq("id", id)).first();
+    } catch (Exception e) {
+        System.err.println("Error finding customer: " + e.getMessage());
+        return null;
     }
+}
 }
 
 
