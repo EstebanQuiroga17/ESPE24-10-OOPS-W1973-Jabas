@@ -140,25 +140,26 @@ public class FrmWorker extends javax.swing.JFrame {
 
     private void itmOpenInvoicesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmOpenInvoicesActionPerformed
         // TODO add your handling code here:
+        FrmInvoice frmInvoice = new FrmInvoice();
+        frmInvoice.setVisible(true);
     }//GEN-LAST:event_itmOpenInvoicesActionPerformed
 
     private void itmGoToLogInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmGoToLogInActionPerformed
         // TODO add your handling code here:
         FrmLogIn frmLogIn = new FrmLogIn();
         frmLogIn.setVisible(true);
-        this.dispose();
     }//GEN-LAST:event_itmGoToLogInActionPerformed
 
     private void itmOpenMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmOpenMenuActionPerformed
         // TODO add your handling code here:
         FrmMenu frmMenu = new FrmMenu();
         frmMenu.setVisible(true);
-        this.dispose();
     }//GEN-LAST:event_itmOpenMenuActionPerformed
 
     private void itmOpenOrdersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmOpenOrdersActionPerformed
         // TODO add your handling code here:
-        
+        FrmOrder frmOrder = new FrmOrder();
+        frmOrder.setVisible(true);
     }//GEN-LAST:event_itmOpenOrdersActionPerformed
 
     /**

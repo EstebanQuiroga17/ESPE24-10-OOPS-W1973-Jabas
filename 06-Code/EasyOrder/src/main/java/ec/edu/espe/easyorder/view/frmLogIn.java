@@ -166,14 +166,15 @@ public class FrmLogIn extends javax.swing.JFrame {
             
             switch(option){
                 case 0:{
-                    //TODO code "open cashier menu"
-                    
+                    FrmWorker frmWorker = new FrmWorker();
+                    frmWorker.setVisible(true);
+                    this.dispose();
                 }
                 break;
                 case 1:{
 //                    
-                    FrmManager managerMenu = new FrmManager();
-                    managerMenu.setVisible(true);
+                    FrmManager frmManager = new FrmManager();
+                    frmManager.setVisible(true);
                     this.dispose();
                 }
             }
