@@ -1,6 +1,5 @@
 
     package ec.edu.espe.easyorder.view;
-    
     import javax.swing.JOptionPane;
     import utils.MongoDbManager;
     
@@ -258,7 +257,3 @@
         // End of variables declaration                   
     }
     
-    
-}
-
-import ec.edu.espe.easyorder.view.FrmCustomer;
