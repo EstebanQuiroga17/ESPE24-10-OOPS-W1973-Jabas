@@ -12,19 +12,12 @@ public class Order {
      private ArrayList<Dish> dishes;
      private Customer customer;
 
-<<<<<<< HEAD
-    public Order(int itemQuantity, int id, ArrayList<Dish> dishes, Customer CurrentDate) {
+    public Order(int itemQuantity, int id, ArrayList<Dish> dishes, Customer customer) {
     this.itemQuantity = itemQuantity;
     this.id = id;
     this.dishes = dishes;
     this.customer = customer;
-=======
-    public Order(int itemQuantity, int id, ArrayList<Dish> dishes, Calendar customer) {
-        this.itemQuantity = itemQuantity;
-        this.id = id;
-        this.dishes = dishes;
-        this.customer = customer;
->>>>>>> 16650937cbcf3a060fdc85b83c0d0ef2cd92b080
+
     }
 
     @Override

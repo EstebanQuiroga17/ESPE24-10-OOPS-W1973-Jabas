@@ -6,7 +6,6 @@ package ec.edu.espe.easyorder.controller;
  *
  * @author Benjamin Robalino <jabasteam>
  */
-import ec.edu.espe.easyorder.model.Order;
 import utils.MongoDbManager;
 import org.bson.Document;
 import java.util.List;
