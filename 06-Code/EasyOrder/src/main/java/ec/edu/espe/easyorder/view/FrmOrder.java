@@ -22,111 +22,58 @@ public class FrmOrder extends javax.swing.JFrame {
      * Creates new form FrmOrder
      */
     public FrmOrder() {
-        initComponents();
-
-        populateDishesComboBox();
-        updateDate();
-        updateOrderId();
-        populateDishesComboBox();
-        updateDate();
-        updateOrderId();
+         initComponents();
+        initializeForm();
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+    }private void initializeForm() {
+        populateDishesComboBox();
+        updateDate();
+        updateOrderId();
     }
 
-    private void addDishToTable() {
-        // Retrieve selected dish from the combo box
-        String selectedDish = (String) cmbDishes.getSelectedItem();
-
-        // Retrieve the quantity from the text field
-        String quantityText = txtQuantity.getText();
-
-        // Check if quantity is valid
-        if (selectedDish == null || selectedDish.isEmpty() || quantityText.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Please select a dish and enter a quantity.", "Input Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        // Convert quantity to an integer, and handle potential parsing errors
-        int quantity = 0;
-        try {
-            quantity = Integer.parseInt(quantityText);
-            if (quantity <= 0) {
-                JOptionPane.showMessageDialog(this, "Quantity must be a positive number.", "Input Error", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-        } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(this, "Invalid quantity entered. Please enter a valid number.", "Input Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        // Add the dish and quantity to the table
+    private void addDishToTable(String selectedDish, int quantity) {
         DefaultTableModel model = (DefaultTableModel) jtOrders.getModel();
         model.addRow(new Object[]{selectedDish, quantity});
-
-        // Optionally, clear the quantity field after adding the item
-        txtQuantity.setText("");
-    }
+        txtQuantity.setText(""); }
 
     private void updateOrderId() {
-        String uniqueOrderId = new OrderController().generateOrderId();
-        lblOrderId.setText(" " + uniqueOrderId);
+        lblOrderId.setText(" " + new OrderController().generateOrderId());
     }
 
     private void updateDate() {
-        String currentDate = new OrderController().getCurrentDate();
-        lblDate.setText(" " + currentDate);
+        lblDate.setText(" " + new OrderController().getCurrentDate());
     }
 
     private void populateDishesComboBox() {
         try {
-            // Fetch menu items from the database
             List<Document> menuItems = MongoDbManager.getAll("Menu");
-
-            // Debug log
-            System.out.println("Menu Items Retrieved: " + menuItems.size());
-
-            // Clear the combo box to prevent duplicate entries
             cmbDishes.removeAllItems();
 
-            // If no items are fetched, show an error message
             if (menuItems.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "No dishes found in the menu.", "Error", JOptionPane.WARNING_MESSAGE);
                 return;
             }
 
-            // Add each dish to the combo box
             for (Document dish : menuItems) {
-                String dishName = dish.getString("name");
-                System.out.println("Adding dish: " + dishName);  // Debug log for each dish
-                cmbDishes.addItem(dishName);
+                cmbDishes.addItem(dish.getString("name"));
             }
-
-            // Select the first dish by default
-            cmbDishes.setSelectedIndex(0); // Select the first item to prevent null selection
-
-            // Enable the quantity field after populating the combo box
+            cmbDishes.setSelectedIndex(0);
             txtQuantity.setEnabled(true);
 
         } catch (Exception e) {
-            // Show any exceptions that occur during loading
             JOptionPane.showMessageDialog(this, "Error loading menu: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
     private void clearForm() {
-        // Clear the table
         DefaultTableModel model = (DefaultTableModel) jtOrders.getModel();
-        model.setRowCount(1);  // Remove all rows from the table
+        model.setRowCount(0); // Clear all rows in the table
 
-        // Clear the quantity field
-        txtQuantity.setText("");
-
-        // Re-enable the combo box and quantity field
+        txtQuantity.setText(""); // Clear quantity input
         if (cmbDishes.getItemCount() > 0) {
-            cmbDishes.setSelectedIndex(0);  // Set combo box to default value (first item)
+            cmbDishes.setSelectedIndex(0); // Reset combo box to first item
         }
-        txtQuantity.setEnabled(true);   // Enable quantity field
-        // Update the order ID and date again (for the next order)
+        txtQuantity.setEnabled(true);
         updateOrderId();
         updateDate();
     }
@@ -163,7 +110,7 @@ public class FrmOrder extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel2.setText("LISTA DE PEDIDOS");
         jLabel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
 
@@ -172,21 +119,26 @@ public class FrmOrder extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(257, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel2)
-                .addContainerGap())
+                .addGap(101, 101, 101))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(23, Short.MAX_VALUE)
+                .addContainerGap(21, Short.MAX_VALUE)
                 .addComponent(jLabel2)
-                .addGap(16, 16, 16))
+                .addGap(18, 18, 18))
         );
 
         jLabel1.setText("Elegir Platillo:");
 
         cmbDishes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbDishes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbDishesActionPerformed(evt);
+            }
+        });
 
         btnAddDish.setText("Añadir");
         btnAddDish.addActionListener(new java.awt.event.ActionListener() {
@@ -264,6 +216,11 @@ public class FrmOrder extends javax.swing.JFrame {
         });
 
         btnDeleteDish.setText("Borrar Plato");
+        btnDeleteDish.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteDishActionPerformed(evt);
+            }
+        });
 
         btnSaveOrder.setText("Guardar Orden");
         btnSaveOrder.addActionListener(new java.awt.event.ActionListener() {
@@ -392,7 +349,7 @@ public class FrmOrder extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(6, 6, 6)
                                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
+                                .addGap(0, 13, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGap(318, 318, 318)))))
@@ -414,40 +371,38 @@ public class FrmOrder extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSaveOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveOrderActionPerformed
-        try {
-            String orderId = lblOrderId.getText().trim(); // Get order ID
-            String orderDate = lblDate.getText().trim(); // Get order date
+       try {
+            String orderId = lblOrderId.getText().trim();
+            String orderDate = lblDate.getText().trim();
 
             DefaultTableModel model = (DefaultTableModel) jtOrders.getModel();
             List<Document> dishesList = new ArrayList<>();
 
             for (int i = 0; i < model.getRowCount(); i++) {
-                String dishName = (String) model.getValueAt(i, 0); // Get dish from table
-                Object quantityObj = model.getValueAt(i, 1); // Get quantity from table
-
+                String dishName = (String) model.getValueAt(i, 0);
+                Object quantityObj = model.getValueAt(i, 1);
 
                 if (dishName == null || quantityObj == null) {
                     JOptionPane.showMessageDialog(this, "Dish or Quantity is missing!", "Invalid Input", JOptionPane.WARNING_MESSAGE);
                     return;
                 }
+
                 int quantity = Integer.parseInt(quantityObj.toString());
-                Document dish = new Document("name", dishName).append("quantity", quantity);
-                dishesList.add(dish); // Add to dishes list
+                dishesList.add(new Document("name", dishName).append("quantity", quantity));
             }
 
             Document orderDocument = new Document("orderId", orderId)
-                    .append("date", orderDate)
-                    .append("dishes", dishesList);
+                .append("date", orderDate)
+                .append("dishes", dishesList);
 
             MongoDbManager.insertDocument("Order", orderDocument);
             JOptionPane.showMessageDialog(this, "Order saved successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
-
             clearForm();
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error saving order: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
-
+    
     }//GEN-LAST:event_btnSaveOrderActionPerformed
 
     private void btnSeeOrdersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeeOrdersActionPerformed
@@ -464,27 +419,24 @@ public class FrmOrder extends javax.swing.JFrame {
             int quantity = Integer.parseInt(quantityText);
             if (quantity <= 0) {
                 JOptionPane.showMessageDialog(this, "Quantity must be greater than 0.", "Invalid Input", JOptionPane.WARNING_MESSAGE);
-                txtQuantity.setText(""); // Clear invalid input
+                txtQuantity.setText(""); 
             }
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Please enter a numeric value for quantity.", "Invalid Input", JOptionPane.WARNING_MESSAGE);
-            txtQuantity.setText(""); // Clear invalid input
+            txtQuantity.setText(""); 
         }
     }//GEN-LAST:event_txtQuantityActionPerformed
 
 
     private void btnAddDishActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddDishActionPerformed
-        String selectedDish = (String) cmbDishes.getSelectedItem();  // ComboBox value
-        String quantityText = txtQuantity.getText();  // Quantity from text field
+        String selectedDish = (String) cmbDishes.getSelectedItem();
+        String quantityText = txtQuantity.getText();
+
         if (selectedDish == null || selectedDish.trim().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Please select a valid dish.", "Invalid Input", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
-        if (quantityText == null || quantityText.trim().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Please enter a valid quantity.", "Invalid Input", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
         try {
             int quantity = Integer.parseInt(quantityText);
             if (quantity <= 0) {
@@ -492,15 +444,34 @@ public class FrmOrder extends javax.swing.JFrame {
                 return;
             }
 
-            DefaultTableModel model = (DefaultTableModel) jtOrders.getModel();
-            model.addRow(new Object[]{selectedDish, quantity});
-            txtQuantity.setText("");
+            addDishToTable(selectedDish, quantity);
 
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Please enter a valid number for quantity.", "Invalid Input", JOptionPane.WARNING_MESSAGE);
         }
 
     }//GEN-LAST:event_btnAddDishActionPerformed
+
+    private void btnDeleteDishActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteDishActionPerformed
+        int selectedRow = jtOrders.getSelectedRow(); // Get the selected row index
+
+        if (selectedRow == -1) { // No row is selected
+            JOptionPane.showMessageDialog(this, "Please select a dish to delete.", "No Selection", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        // Confirm deletion
+        int confirm = JOptionPane.showConfirmDialog(this, "Are you sure you want to delete this dish?", "Confirm Deletion", JOptionPane.YES_NO_OPTION);
+        if (confirm == JOptionPane.YES_OPTION) {
+            DefaultTableModel model = (DefaultTableModel) jtOrders.getModel();
+            model.removeRow(selectedRow); // Remove the selected row
+            JOptionPane.showMessageDialog(this, "Dish deleted successfully.", "Success", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_btnDeleteDishActionPerformed
+
+    private void cmbDishesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbDishesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbDishesActionPerformed
 
     /**
      * @param args the command line arguments

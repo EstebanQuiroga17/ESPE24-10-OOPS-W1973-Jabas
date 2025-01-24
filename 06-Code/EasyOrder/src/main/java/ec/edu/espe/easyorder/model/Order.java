@@ -8,11 +8,11 @@ import java.util.Calendar;
  */
 public class Order {
      private int itemQuantity;
-     private int id;
+     private String id;
      private ArrayList<Dish> dishes;
      private Calendar CurrentDate;
 
-    public Order(int itemQuantity, int id, ArrayList<Dish> dishes, Calendar CurrentDate) {
+    public Order(int itemQuantity, String id, ArrayList<Dish> dishes, Calendar CurrentDate) {
         this.itemQuantity = itemQuantity;
         this.id = id;
         this.dishes = dishes;
@@ -41,14 +41,14 @@ public class Order {
     /**
      * @return the id
      */
-    public int getId() {
+    public String getId() {
         return id;
     }
 
     /**
      * @param id the id to set
      */
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -79,6 +79,10 @@ public class Order {
      */
     public void setCurrentDate(Calendar CurrentDate) {
         this.CurrentDate = CurrentDate;
+    }
+
+    Object getDate() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     

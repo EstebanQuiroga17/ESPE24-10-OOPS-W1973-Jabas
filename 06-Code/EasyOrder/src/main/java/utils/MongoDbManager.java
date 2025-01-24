@@ -70,7 +70,15 @@ public class MongoDbManager {
             System.err.println("Error retrieving documents: " + e.getMessage());
         }
     }
-
+    public static Document getDocumentByField(String collectionName, String fieldName, Object value) {
+        try {
+            MongoCollection<Document> collection = database.getCollection(collectionName);
+            return collection.find(Filters.eq(fieldName, value)).first();
+        } catch (Exception e) {
+            System.err.println("Error retrieving document from collection: " + e.getMessage());
+            return null;
+        }
+    }
     public static List<Document> getAll(String collectionName) {
         List<Document> resultList = new ArrayList<>();
         try {

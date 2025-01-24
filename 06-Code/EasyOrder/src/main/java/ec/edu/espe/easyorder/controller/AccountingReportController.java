@@ -17,14 +17,7 @@ import java.util.List;
 
 public class AccountingReportController {
 
-    public boolean createInvoice(Invoice invoice) {
-        Document doc = new Document()
-                .append("date", invoice.getDate().getTime())
-                .append("price", invoice.getPrice())
-                .append("header", invoice.getHeader())
-                .append("id", invoice.getId());
-        return MongoDbManager.insert("Invoices", doc);
-    }
+   
 
     public boolean createExpense(Expense expense) {
         Document doc = new Document()
@@ -36,21 +29,7 @@ public class AccountingReportController {
         return MongoDbManager.insert("Expenses", doc);
     }
 
-    public List<Invoice> readInvoices() {
-        List<Document> docs = MongoDbManager.getAll("Invoices");
-        List<Invoice> invoices = new ArrayList<>();
-        for (Document doc : docs) {
-            Invoice invoice = new Invoice(
-                    Calendar.getInstance(),
-                    doc.getDouble("price").floatValue(),
-                    null,
-                    doc.getString("header"),
-                    doc.getInteger("id")
-            );
-            invoices.add(invoice);
-        }
-        return invoices;
-    }
+    
 
     public List<Expense> readExpenses() {
         List<Document> docs = MongoDbManager.getAll("Expenses");
@@ -68,13 +47,7 @@ public class AccountingReportController {
         return expenses;
     }
 
-    public boolean updateInvoice(Invoice updatedInvoice) {
-        Document updatedDoc = new Document()
-                .append("date", updatedInvoice.getDate().getTime())
-                .append("price", updatedInvoice.getPrice())
-                .append("header", updatedInvoice.getHeader());
-        return MongoDbManager.updateById("Invoices", updatedInvoice.getId(), updatedDoc);
-    }
+    
 
     public boolean updateExpense(Expense updatedExpense) {
         Document updatedDoc = new Document()
@@ -93,35 +66,7 @@ public class AccountingReportController {
         return MongoDbManager.deleteById("Expenses", id);
     }
     
-    public boolean addInvoiceWithConfirmation(String header, Object order, float price, int id) {
-       
-        boolean isConfirmed = confirmAction("Estas seguro de guardar la informacion?");
-        if (isConfirmed) {
-            
-            Invoice invoice = new Invoice(Calendar.getInstance(), price, (Order) order, header, id);
-
-           
-            Document document = new Document()
-                    .append("header", header)
-                    .append("order", order.toString()) 
-                    .append("price", price)
-                    .append("id", id)
-                    .append("date", Calendar.getInstance().getTime()); 
-
-           
-            boolean isInserted = MongoDbManager.insert("Invoices", document);
-            if (isInserted) {
-                System.out.println("Invoice successfully added.");
-                return true;
-            } else {
-                System.err.println("Error while adding invoice.");
-                return false;
-            }
-        } else {
-            System.out.println("Invoice creation canceled.");
-            return false;
-        }
-    }
+  
 
      public boolean deleteInvoiceWithConfirmation(int id) {
         boolean isConfirmed = confirmAction("Estas seguroo de borrar el ingreso que tiene como ID: " + id + "?");
