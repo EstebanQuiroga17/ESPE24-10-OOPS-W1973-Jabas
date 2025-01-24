@@ -45,22 +45,28 @@ public List<Expense> getAllExpenses() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy"); 
 
         for (Document doc : documents) {
-            float price = ((Double) doc.getDouble("price")).floatValue();
-            String description = doc.getString("description");
-            String name = doc.getString("name");
-            Calendar date = Calendar.getInstance();
-            String formattedDate = doc.getString("date");
-            date.setTime(dateFormat.parse(formattedDate)); 
-            int id = doc.getInteger("id");
+            try {
+                float price = ((Double) doc.getDouble("price")).floatValue(); 
+                String description = doc.getString("description");
+                String name = doc.getString("name"); 
+                int id = doc.getInteger("id"); 
 
-            Expense expense = new Expense(price, description, name, date, id);
-            expenses.add(expense);
+                String formattedDate = doc.getString("date"); 
+                Calendar date = Calendar.getInstance();
+                date.setTime(dateFormat.parse(formattedDate)); 
+
+                Expense expense = new Expense(price, description, name, date, id);
+                expenses.add(expense);
+            } catch (Exception e) {
+                System.err.println("Error al procesar un documento: " + e.getMessage());
+            }
         }
     } catch (Exception e) {
-        System.err.println("Error : " + e.getMessage());
+        System.err.println("Error al obtener los gastos: " + e.getMessage());
     }
     return expenses;
 }
+
 
 
 
@@ -83,8 +89,8 @@ public Expense searchExpense(int id) {
             String name = doc.getString("name");
             Calendar date = Calendar.getInstance();
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-            String formattedDate = doc.getString("date"); // Fecha formateada
-            date.setTime(dateFormat.parse(formattedDate)); // Convierte a Calendar
+            String formattedDate = doc.getString("date"); 
+            date.setTime(dateFormat.parse(formattedDate));
             int expenseId = doc.getInteger("id");
 
             return new Expense(price, description, name, date, expenseId);

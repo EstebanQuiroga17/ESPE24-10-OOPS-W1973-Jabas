@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package ec.edu.espe.easyorder.view;
 
 import ec.edu.espe.easyorder.controller.AccountingReportController;
@@ -38,7 +35,6 @@ public class FrmDeleteExpense extends javax.swing.JFrame {
         txtIdDelete = new javax.swing.JTextField();
         btnConfirmDeleteExpenses = new javax.swing.JButton();
         btnCancelDeleteExpenses = new javax.swing.JButton();
-        btnReturn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -85,13 +81,6 @@ public class FrmDeleteExpense extends javax.swing.JFrame {
             }
         });
 
-        btnReturn.setText("Regresar");
-        btnReturn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnReturnActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -107,9 +96,7 @@ public class FrmDeleteExpense extends javax.swing.JFrame {
                 .addComponent(btnConfirmDeleteExpenses)
                 .addGap(48, 48, 48)
                 .addComponent(btnCancelDeleteExpenses)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnReturn)
-                .addGap(15, 15, 15))
+                .addGap(15, 214, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -121,8 +108,7 @@ public class FrmDeleteExpense extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnConfirmDeleteExpenses)
-                    .addComponent(btnCancelDeleteExpenses)
-                    .addComponent(btnReturn))
+                    .addComponent(btnCancelDeleteExpenses))
                 .addGap(39, 39, 39))
         );
 
@@ -188,12 +174,6 @@ try {
     }
     }//GEN-LAST:event_btnConfirmDeleteExpensesActionPerformed
 
-    private void btnReturnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReturnActionPerformed
-        this.dispose(); 
-        FrmExpense mainFrame = new FrmExpense(); 
-        mainFrame.setVisible(true);
-    }//GEN-LAST:event_btnReturnActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -233,7 +213,6 @@ try {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelDeleteExpenses;
     private javax.swing.JButton btnConfirmDeleteExpenses;
-    private javax.swing.JButton btnReturn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;

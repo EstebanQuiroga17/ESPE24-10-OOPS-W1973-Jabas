@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package ec.edu.espe.easyorder.view;
 
 import ec.edu.espe.easyorder.model.Expense;
@@ -9,7 +6,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author USUARIO
+ * @author Matias Rojas
  */
 public class FrmFoundExpense extends javax.swing.JFrame {
 
@@ -18,6 +15,7 @@ public class FrmFoundExpense extends javax.swing.JFrame {
      */
     public FrmFoundExpense() {
         initComponents();
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
     }
 
     /**

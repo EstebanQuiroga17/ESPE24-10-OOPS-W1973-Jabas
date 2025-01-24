@@ -3,6 +3,7 @@ package ec.edu.espe.easyorder.view;
 
 import ec.edu.espe.easyorder.controller.ExpenseController;
 import ec.edu.espe.easyorder.model.Expense;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
@@ -17,6 +18,7 @@ public class FrmExpense extends javax.swing.JFrame {
      */
     public FrmExpense() {
         initComponents();
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
     }
 
     /**
@@ -50,11 +52,11 @@ public class FrmExpense extends javax.swing.JFrame {
                 {null, null, null, null, null}
             },
             new String [] {
-                "ID", "Nombre", "Precio", "Description", "Date"
+                "ID", "Nombre", "Precio", "Description", "Fecha"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.Float.class, java.lang.String.class, java.lang.Object.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.Float.class, java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -154,37 +156,47 @@ public class FrmExpense extends javax.swing.JFrame {
     private void btnAddExpenseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddExpenseActionPerformed
         FrmAddExpense addExpense = new FrmAddExpense();
         addExpense.setVisible(true);
-        this.dispose();
     }//GEN-LAST:event_btnAddExpenseActionPerformed
 
     private void btnDeleteExpenseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteExpenseActionPerformed
         FrmDeleteExpense deleteExpense = new FrmDeleteExpense();
         deleteExpense.setVisible(true);
-        this.dispose();
     }//GEN-LAST:event_btnDeleteExpenseActionPerformed
 
     private void btnSearchExpenseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchExpenseActionPerformed
         FrmSearchExpense searchExpense = new FrmSearchExpense();
         searchExpense.setVisible(true);
-        this.dispose();
     }//GEN-LAST:event_btnSearchExpenseActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
-        ExpenseController expenseController = new ExpenseController();
-        List<Expense> expenses = expenseController.getAllExpenses();
+       ExpenseController expenseController = new ExpenseController();
+    List<Expense> expenses = expenseController.getAllExpenses();
 
-        DefaultTableModel model = (DefaultTableModel) tblExpenses.getModel();
-        model.setRowCount(0); 
+    // Obtener el modelo de la tabla
+    DefaultTableModel model = (DefaultTableModel) tblExpenses.getModel();
+    model.setRowCount(0); // Limpiar las filas existentes
 
-        for (Expense expense : expenses) {
+    // Formateador de fecha para convertir el long a String
+    SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+
+    // Iterar sobre los gastos y agregarlos al modelo
+    for (Expense expense : expenses) {
+        try {
+            // Convertir la fecha a String
+            String formattedDate = dateFormat.format(expense.getDate().getTime());
+
+            // Agregar los datos al modelo
             model.addRow(new Object[]{
-                    expense.getId(),
-                    expense.getName(),
-                    expense.getPrice(),
-                    expense.getDescription(),
-                    expense.getDate().getTime()
+                expense.getId(),                  // ID (int)
+                expense.getName(),                // Nombre (String)
+                expense.getPrice(),               // Precio (float)
+                expense.getDescription(),         // Descripción (String)
+                formattedDate                     // Fecha (String)
             });
+        } catch (Exception e) {
+            System.err.println("Error al agregar un gasto a la tabla: " + e.getMessage());
         }
+    }
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     /**

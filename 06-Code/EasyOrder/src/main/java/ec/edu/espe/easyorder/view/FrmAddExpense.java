@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package ec.edu.espe.easyorder.view;
 
 import ec.edu.espe.easyorder.controller.ExpenseController;
@@ -11,7 +8,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author USUARIO
+ * @author Matias Rojas
  */
 public class FrmAddExpense extends javax.swing.JFrame {
 
@@ -20,6 +17,7 @@ public class FrmAddExpense extends javax.swing.JFrame {
      */
     public FrmAddExpense() {
         initComponents();
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
     }
 
     /**
@@ -43,7 +41,6 @@ public class FrmAddExpense extends javax.swing.JFrame {
         txtDescription = new javax.swing.JTextField();
         btnConfirm = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
-        btnReturn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -88,13 +85,6 @@ public class FrmAddExpense extends javax.swing.JFrame {
             }
         });
 
-        btnReturn.setText("Regressar");
-        btnReturn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnReturnActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -128,13 +118,8 @@ public class FrmAddExpense extends javax.swing.JFrame {
                             .addComponent(txtPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(19, 19, 19))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnReturn)
-                        .addGap(32, 32, 32))))
+                .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(19, 19, 19))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -160,8 +145,7 @@ public class FrmAddExpense extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnConfirm)
-                    .addComponent(btnCancel)
-                    .addComponent(btnReturn))
+                    .addComponent(btnCancel))
                 .addGap(41, 41, 41))
         );
 
@@ -229,12 +213,6 @@ public class FrmAddExpense extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnCancelActionPerformed
 
-    private void btnReturnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReturnActionPerformed
-        this.dispose(); 
-        FrmExpense mainFrame = new FrmExpense(); 
-        mainFrame.setVisible(true);
-    }//GEN-LAST:event_btnReturnActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -274,7 +252,6 @@ public class FrmAddExpense extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnConfirm;
-    private javax.swing.JButton btnReturn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package ec.edu.espe.easyorder.view;
 
 import ec.edu.espe.easyorder.controller.ExpenseController;
@@ -38,7 +35,6 @@ public class FrmSearchExpense extends javax.swing.JFrame {
         txtIdSearch = new javax.swing.JTextField();
         btnConfirmSearchExpense = new javax.swing.JButton();
         btnCancelSearchExpense = new javax.swing.JButton();
-        btnReturn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -85,13 +81,6 @@ public class FrmSearchExpense extends javax.swing.JFrame {
             }
         });
 
-        btnReturn.setText("Regresar");
-        btnReturn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnReturnActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -107,9 +96,7 @@ public class FrmSearchExpense extends javax.swing.JFrame {
                 .addComponent(btnConfirmSearchExpense)
                 .addGap(57, 57, 57)
                 .addComponent(btnCancelSearchExpense)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnReturn)
-                .addGap(28, 28, 28))
+                .addGap(28, 191, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -121,8 +108,7 @@ public class FrmSearchExpense extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnConfirmSearchExpense)
-                    .addComponent(btnCancelSearchExpense)
-                    .addComponent(btnReturn))
+                    .addComponent(btnCancelSearchExpense))
                 .addGap(55, 55, 55))
         );
 
@@ -190,12 +176,6 @@ public class FrmSearchExpense extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtIdSearchActionPerformed
 
-    private void btnReturnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReturnActionPerformed
-        this.dispose(); 
-        FrmExpense mainFrame = new FrmExpense(); 
-        mainFrame.setVisible(true);
-    }//GEN-LAST:event_btnReturnActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -237,7 +217,6 @@ public class FrmSearchExpense extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelSearchExpense;
     private javax.swing.JButton btnConfirmSearchExpense;
-    private javax.swing.JButton btnReturn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
