@@ -171,13 +171,13 @@ this.dispose();    }//GEN-LAST:event_btnCancelAddIncomesActionPerformed
     float price = Float.parseFloat(priceTextField.getText()); 
     Object order = orderComboBox.getSelectedItem();
     AccountingReportController controller = new AccountingReportController();
-    boolean success = controller.addInvoiceWithConfirmation(header, order, price, id);
+    //boolean success = controller.addInvoiceWithConfirmation(header, order, price, id);
 
-    if (success) {
-        JOptionPane.showMessageDialog(null, "Invoice added successfully.");
-    } else {
-        JOptionPane.showMessageDialog(null, "Failed to add invoice.");
-    
+    //if (success) {
+      //  JOptionPane.showMessageDialog(null, "Invoice added successfully.");
+    //} else {
+      //  JOptionPane.showMessageDialog(null, "Failed to add invoice.");
+      {
     }//GEN-LAST:event_btnConfirmAddIncomesActionPerformed
 
     /**

@@ -22,7 +22,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.release>23</maven.compiler.release>
-        <exec.mainClass>ec.edu.espe.easyorder.EasyOrder</exec.mainClass>
+        <exec.mainClass>ec.edu.espe.easyorder.view.FrmLogIn</exec.mainClass>
     </properties>
 <dependencies>
         <dependency>
