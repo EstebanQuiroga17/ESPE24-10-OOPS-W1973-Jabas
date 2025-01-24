@@ -97,60 +97,6 @@ public class MongoDbManager {
         return database;
     }
 
-
-    public static boolean insertCustomer(int id, String name, String lastname, int phoneNumber) {
-        try {
-
-            MongoCollection<Document> collection = database.getCollection("Customer");
-
-            Document customerDocument = new Document("id", id)
-                    .append("name", name)
-                    .append("lastname", lastname)
-                    .append("phoneNumber", phoneNumber);
-
-            collection.insertOne(customerDocument);
-            System.out.println("Customer inserted into collection: Customer");
-
-            return true;
-        } catch (Exception e) {
-
-            System.err.println("Error inserting customer: " + e.getMessage());
-            return false;
-        }
-    }
-
-    public static boolean deleteCustomer(int id) {
-        try {
-            MongoCollection<Document> collection = database.getCollection("Customer");
-
-            Bson filter = Filters.eq("id", id);
-
-            DeleteResult result = collection.deleteOne(filter);
-
-            if (result.getDeletedCount() > 0) {
-                System.out.println("Customer deleted from collection: Customer");
-                return true;
-            } else {
-                System.out.println("Customer with id " + id + " not found.");
-                return false;
-            }
-        } catch (Exception e) {
-            System.err.println("Error deleting customer: " + e.getMessage());
-            return false;
-        }
-    }
-
-    public static Document findCustomerById(int id) {
-        try {
-            MongoCollection<Document> collection = database.getCollection("Customer");
-
-            return collection.find(Filters.eq("id", id)).first();
-        } catch (Exception e) {
-            System.err.println("Error al encontrar un cliente: " + e.getMessage());
-            return null;
-        }
-    }
-
     public static boolean updateById(String collectionName, int id, Document updatedDoc) {
         try {
             MongoCollection<Document> collection = database.getCollection(collectionName);

@@ -1,5 +1,6 @@
 package ec.edu.espe.easyorder.view;
 
+import ec.edu.espe.easyorder.controller.CustomerController;
 import javax.swing.JOptionPane;
 import utils.MongoDbManager;
 
@@ -185,7 +186,7 @@ public class FrmAddCustomer extends javax.swing.JFrame {
 
                 Integer phoneNumber = Integer.parseInt(customerPhonenumberText);
 
-                boolean success = MongoDbManager.insertCustomer(id, customerName, customerLastname, phoneNumber);
+                boolean success = CustomerController.insertCustomer(id, customerName, customerLastname, phoneNumber);
 
                 if (success) {
 

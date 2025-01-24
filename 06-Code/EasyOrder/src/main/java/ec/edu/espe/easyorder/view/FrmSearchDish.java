@@ -1,8 +1,8 @@
 package ec.edu.espe.easyorder.view;
 
+import ec.edu.espe.easyorder.controller.MenuController;
 import javax.swing.JOptionPane;
 import org.bson.Document;
-import utils.MongoDbManager;
 
 /**
  *
@@ -129,6 +129,7 @@ public class FrmSearchDish extends javax.swing.JFrame {
 
         String idStr = txtSeachID.getText();
         txtSeachID.setText("");
+
         try {
             int id = Integer.parseInt(idStr);
             Document dish = MenuController.findDishById(id);

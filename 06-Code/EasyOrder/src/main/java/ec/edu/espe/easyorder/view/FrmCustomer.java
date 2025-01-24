@@ -1,10 +1,9 @@
 
 package ec.edu.espe.easyorder.view;
 
-import java.util.List;
+import ec.edu.espe.easyorder.controller.CustomerController;
+import ec.edu.espe.easyorder.controller.MenuController;
 import javax.swing.table.DefaultTableModel;
-import org.bson.Document;
-import utils.MongoDbManager;
 
 /**
  *
@@ -17,30 +16,13 @@ public class FrmCustomer extends javax.swing.JFrame {
         model.addRow(dataRow);
     }
     
-    public static void AddRowToJTableCustomerDelete(Object[] dataRow) {
-        DefaultTableModel model = getTableModel();
-        model.addRow(dataRow);
-    }
-    
-    public void loadCustomersFromDatabase() {
-        List<Document> customers = MongoDbManager.getAll("Customer");
-        
-        for (Document customer : customers) {
-            int id = customer.getInteger("id");
-            String name = customer.getString("name");
-            String lastname = customer.getString("lastname");
-            int phoneNumber = customer.getInteger("phoneNumber");
-            
-            FrmCustomer.AddRowToJTableCustomer(new Object[]{id, name, lastname, phoneNumber});
-        }
-    }
 
     public FrmCustomer() {
         initComponents();
-        loadCustomersFromDatabase();
+        CustomerController customerController = new CustomerController();
+        customerController.loadCustomersFromDatabase();
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
     }
-
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -59,7 +41,7 @@ public class FrmCustomer extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Franklin Gothic Medium", 3, 18)); // NOI18N
-        jLabel1.setText("CLIENTES ATENDIDOS ");
+        jLabel1.setText("REGISTRAR CLIENTES");
         jLabel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);

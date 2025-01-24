@@ -1,8 +1,8 @@
 package ec.edu.espe.easyorder.view;
 
+import ec.edu.espe.easyorder.controller.CustomerController;
 import javax.swing.JOptionPane;
 import org.bson.Document;
-import utils.MongoDbManager;
 
 /**
  *
@@ -132,10 +132,10 @@ public class FrmSearchCustomer extends javax.swing.JFrame {
 
         String idStr = txtSeachCustomerId.getText();
         txtSeachCustomerId.setText("");
+
         try {
             int id = Integer.parseInt(idStr);
-
-            Document customer = MongoDbManager.findCustomerById(id);
+            Document customer = CustomerController.findCustomerById(id);
 
             if (customer != null) {
                 String name = customer.getString("name");
@@ -144,7 +144,7 @@ public class FrmSearchCustomer extends javax.swing.JFrame {
                 Object[] dataRow = new Object[]{id, name, lastname, phoneNumber};
 
                 FrmFoundCustomer foundCustomer = new FrmFoundCustomer();
-                FrmFoundCustomer.addRowToTblShowCustomer(dataRow);
+                foundCustomer.addRowToTblShowCustomer(dataRow); // Asegúrate de que este método exista en la clase FrmFoundCustomer
                 foundCustomer.setVisible(true);
             } else {
                 JOptionPane.showMessageDialog(this, "Cliente no encontrado", "Error", JOptionPane.ERROR_MESSAGE);

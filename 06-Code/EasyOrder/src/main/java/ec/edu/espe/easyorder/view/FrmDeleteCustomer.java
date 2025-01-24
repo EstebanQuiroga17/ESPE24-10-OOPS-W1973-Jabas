@@ -1,6 +1,6 @@
-
 package ec.edu.espe.easyorder.view;
 
+import ec.edu.espe.easyorder.controller.CustomerController;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import utils.MongoDbManager;
@@ -110,7 +110,7 @@ public class FrmDeleteCustomer extends javax.swing.JFrame {
 
     private void btnConfirmDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmDeleteActionPerformed
 
-    String idText = txtDeleteIDCustomer.getText();
+        String idText = txtDeleteIDCustomer.getText();
         txtDeleteIDCustomer.setText("");
 
         try {
@@ -118,7 +118,6 @@ public class FrmDeleteCustomer extends javax.swing.JFrame {
             DefaultTableModel model = FrmCustomer.getTableModel();
             boolean found = false;
 
-            // Buscar el ID en las filas de la tabla
             for (int i = 0; i < model.getRowCount(); i++) {
                 if (model.getValueAt(i, 0).equals(id)) {
                     model.removeRow(i);
@@ -128,8 +127,8 @@ public class FrmDeleteCustomer extends javax.swing.JFrame {
             }
 
             if (found) {
-              
-                boolean dbDeleted = MongoDbManager.deleteCustomer(id);
+
+                boolean dbDeleted = CustomerController.deleteCustomer(id);
 
                 if (dbDeleted) {
                     JOptionPane.showMessageDialog(this, "Cliente eliminado con éxito.");
@@ -137,18 +136,16 @@ public class FrmDeleteCustomer extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(this, "Error al eliminar el cliente de la base de datos.");
                 }
             } else {
-
                 JOptionPane.showMessageDialog(this, "ID no encontrado en la tabla.");
             }
         } catch (NumberFormatException e) {
-
             JOptionPane.showMessageDialog(this, "Por favor, ingrese un ID válido.");
         }
-        
+
     }//GEN-LAST:event_btnConfirmDeleteActionPerformed
 
     private void btnCancelDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelDeleteActionPerformed
-        this.dispose();     
+        this.dispose();
     }//GEN-LAST:event_btnCancelDeleteActionPerformed
 
     /**

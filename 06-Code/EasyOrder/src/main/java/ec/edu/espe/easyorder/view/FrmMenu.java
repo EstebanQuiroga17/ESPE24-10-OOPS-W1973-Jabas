@@ -17,9 +17,7 @@ public class FrmMenu extends javax.swing.JFrame {
         model.addRow(dataRow);
     }
 
-    /**
-     * Creates new form FrmDish
-     */
+
     public FrmMenu() {
         initComponents();
         MenuController menuController = new MenuController();
