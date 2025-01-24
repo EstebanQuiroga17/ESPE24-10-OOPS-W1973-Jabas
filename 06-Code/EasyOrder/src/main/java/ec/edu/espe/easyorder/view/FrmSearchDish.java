@@ -131,7 +131,7 @@ public class FrmSearchDish extends javax.swing.JFrame {
         txtSeachID.setText("");
         try {
             int id = Integer.parseInt(idStr);
-            Document dish = MongoDbManager.findDishById(id);
+            Document dish = MenuController.findDishById(id);
 
             if (dish != null) {
                 String name = dish.getString("name");

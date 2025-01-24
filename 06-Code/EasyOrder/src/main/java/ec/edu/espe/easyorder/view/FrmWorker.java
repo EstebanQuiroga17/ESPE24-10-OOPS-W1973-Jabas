@@ -148,6 +148,7 @@ public class FrmWorker extends javax.swing.JFrame {
         // TODO add your handling code here:
         FrmLogIn frmLogIn = new FrmLogIn();
         frmLogIn.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_itmGoToLogInActionPerformed
 
     private void itmOpenMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmOpenMenuActionPerformed

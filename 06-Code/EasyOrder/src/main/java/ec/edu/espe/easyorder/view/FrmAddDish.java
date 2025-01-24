@@ -1,8 +1,8 @@
 
 package ec.edu.espe.easyorder.view;
 
+import ec.edu.espe.easyorder.controller.MenuController;
 import javax.swing.JOptionPane;
-import utils.MongoDbManager;
 
 /**
  *
@@ -175,7 +175,7 @@ public class FrmAddDish extends javax.swing.JFrame {
         try {
             Float price = Float.parseFloat(priceText);
 
-            boolean success = MongoDbManager.insertDish(id, dishName, price);
+            boolean success = MenuController.insertDish(id, dishName, price);
 
             if (success) {
  
