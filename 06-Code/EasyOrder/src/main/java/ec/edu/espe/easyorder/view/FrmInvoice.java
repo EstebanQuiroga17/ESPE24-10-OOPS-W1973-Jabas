@@ -28,6 +28,7 @@ public class FrmInvoice extends javax.swing.JFrame {
         initComponents();
         populateCustomersComboBox();
         populateOrderIdComboBox();
+          setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
     }
     private void populateOrderIdComboBox() {
         try {
@@ -101,9 +102,6 @@ public class FrmInvoice extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         txtInvoice = new javax.swing.JTextArea();
         jPanel3 = new javax.swing.JPanel();
-        btnSave = new javax.swing.JButton();
-        btnReturn = new javax.swing.JButton();
-        btnPrintInvoice = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -196,44 +194,15 @@ public class FrmInvoice extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        btnSave.setText("Guardar Factura");
-        btnSave.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSaveActionPerformed(evt);
-            }
-        });
-
-        btnReturn.setText("Volver");
-        btnReturn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnReturnActionPerformed(evt);
-            }
-        });
-
-        btnPrintInvoice.setText("Imprimir Factura");
-
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(53, 53, 53)
-                .addComponent(btnSave)
-                .addGap(58, 58, 58)
-                .addComponent(btnPrintInvoice)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnReturn)
-                .addGap(78, 78, 78))
+            .addGap(0, 578, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(21, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSave)
-                    .addComponent(btnPrintInvoice)
-                    .addComponent(btnReturn))
-                .addGap(19, 19, 19))
+            .addGap(0, 63, Short.MAX_VALUE)
         );
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
@@ -280,46 +249,38 @@ public class FrmInvoice extends javax.swing.JFrame {
 
     private void btnGenerateInvoiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerateInvoiceActionPerformed
         try {
-            // Retrieve the selected customer ID and name from the combo box
             String selectedCustomer = (String) cmbCustomer.getSelectedItem();
             if (selectedCustomer == null || selectedCustomer.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Please select a customer.", "Error", JOptionPane.WARNING_MESSAGE);
                 return;
             }
-
-            // Extract customer ID from the combo box value (assumes format: "id - name")
             String[] customerParts = selectedCustomer.split(" - ");
             int customerId = Integer.parseInt(customerParts[0]);
 
-            // Retrieve the selected order ID from the combo box
             String selectedOrderId = (String) cmbOrderId.getSelectedItem();
             if (selectedOrderId == null || selectedOrderId.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Please select an order.", "Error", JOptionPane.WARNING_MESSAGE);
                 return;
             }
 
-            // Fetch the customer document from the database
             Document customerDoc = MongoDbManager.getDocumentByField("Customer", "id", customerId);
             if (customerDoc == null) {
                 JOptionPane.showMessageDialog(this, "Customer not found.", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
 
-            // Convert the customer document into a Customer object
             Customer customer = new Customer(
                     customerDoc.getString("name"),
                     customerDoc.getInteger("id"),
                     customerDoc.get("phoneNumber").toString()
             );
 
-            // Fetch the order document from the database
             Document orderDoc = MongoDbManager.getDocumentByField("Order", "orderId", selectedOrderId);
             if (orderDoc == null) {
                 JOptionPane.showMessageDialog(this, "Order not found.", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
 
-            // Convert the order document into an Order object
             ArrayList<Dish> dishes = new ArrayList<>();
             List<Document> dishDocs = (List<Document>) orderDoc.get("dishes");
             for (Document dishDoc : dishDocs) {
@@ -328,17 +289,13 @@ public class FrmInvoice extends javax.swing.JFrame {
                 dishes.add(new Dish(dishName, dishPrice));
             }
 
-            // Use the String `orderId` as is
             String orderId = orderDoc.getString("orderId");
 
-            // Create the Order object
             Order order = new Order(dishes.size(), orderId, dishes, Calendar.getInstance());
 
-            // Generate the invoice
             Invoice invoice = new Invoice(customer, order);
             String invoiceText = invoice.generateInvoice();
 
-            // Display the invoice in the txtInvoice text area
             txtInvoice.setText(invoiceText);
 
         } catch (Exception e) {
@@ -346,64 +303,6 @@ public class FrmInvoice extends javax.swing.JFrame {
             e.printStackTrace();
         }
     }//GEN-LAST:event_btnGenerateInvoiceActionPerformed
-
-    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
-        try {
-            // Retrieve the displayed invoice
-            String invoiceText = txtInvoice.getText();
-            if (invoiceText == null || invoiceText.isEmpty()) {
-                JOptionPane.showMessageDialog(this, "No invoice to save. Please generate an invoice first.", "Error", JOptionPane.WARNING_MESSAGE);
-                return;
-            }
-
-            // Fetch the customer and order objects used in the generated invoice
-            String selectedCustomer = (String) cmbCustomer.getSelectedItem();
-            String[] customerParts = selectedCustomer.split(" - ");
-            int customerId = Integer.parseInt(customerParts[0]);
-
-            Document customerDoc = MongoDbManager.getDocumentByField("Customer", "id", customerId);
-            Customer customer = new Customer(
-                    customerDoc.getString("name"),
-                    customerDoc.getInteger("id"),
-                    customerDoc.get("phoneNumber").toString()
-            );
-
-            String selectedOrderId = (String) cmbOrderId.getSelectedItem();
-            Document orderDoc = MongoDbManager.getDocumentByField("Order", "orderId", selectedOrderId);
-
-            ArrayList<Dish> dishes = new ArrayList<>();
-            List<Document> dishDocs = (List<Document>) orderDoc.get("dishes");
-            for (Document dishDoc : dishDocs) {
-                String dishName = dishDoc.getString("name");
-                float dishPrice = dishDoc.getDouble("price").floatValue();
-                dishes.add(new Dish(dishName, dishPrice));
-            }
-
-            String orderId = orderDoc.getString("orderId");
-            Calendar orderDate = Calendar.getInstance();
-            orderDate.setTimeInMillis(orderDoc.getLong("date"));
-
-            Order order = new Order(dishes.size(), orderId, dishes, orderDate);
-
-            Invoice invoice = new Invoice(customer, order);
-
-            // Convert the invoice to a MongoDB document
-            Document invoiceDoc = invoice.toDocument();
-
-            // Save the document to the database
-            MongoDbManager.insertDocument("Invoice", invoiceDoc);
-
-            JOptionPane.showMessageDialog(this, "Invoice saved successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
-
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Error saving invoice: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-            e.printStackTrace();
-        }
-    }//GEN-LAST:event_btnSaveActionPerformed
-
-    private void btnReturnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReturnActionPerformed
-       System.exit(0); // TODO add your handling code here:
-    }//GEN-LAST:event_btnReturnActionPerformed
 
     private void cmbCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbCustomerActionPerformed
         // TODO add your handling code here:
@@ -450,9 +349,6 @@ public class FrmInvoice extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGenerateInvoice;
-    private javax.swing.JButton btnPrintInvoice;
-    private javax.swing.JButton btnReturn;
-    private javax.swing.JButton btnSave;
     private javax.swing.JComboBox<String> cmbCustomer;
     private javax.swing.JComboBox<String> cmbOrderId;
     private javax.swing.JLabel jLabel1;
