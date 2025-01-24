@@ -11,31 +11,19 @@ import utils.MongoDbManager;
  * @author abner
  */
 public class FrmMenu extends javax.swing.JFrame {
-    
-     public static void AddRowToJTableDish(Object[] dataRow) {
+
+    public static void AddRowToJTableDish(Object[] dataRow) {
         DefaultTableModel model = (DefaultTableModel) TableDish.getModel();
         model.addRow(dataRow);
     }
-     
-    public void loadDishesFromDatabase() {
-        List<Document> dishes = MongoDbManager.getAll("Menu");
 
-        for (Document dish : dishes) {
-            int id = dish.getInteger("id");
-            String name = dish.getString("name");
-            float price = dish.getDouble("price").floatValue();
-
-            FrmMenu.AddRowToJTableDish(new Object[]{id, name, price});
-        }
-    }
-     
-     
-     /**
+    /**
      * Creates new form FrmDish
      */
     public FrmMenu() {
         initComponents();
-        loadDishesFromDatabase();
+        MenuController menuController = new MenuController();
+        menuController.loadDishesFromDatabase();
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
     }
 

@@ -1,8 +1,8 @@
 package ec.edu.espe.easyorder.view;
 
+import ec.edu.espe.easyorder.controller.MenuController;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import utils.MongoDbManager;
 
 /**
  *
@@ -159,7 +159,7 @@ public class FrmDeleteDish extends javax.swing.JFrame {
             }
 
             if (found) {
-                boolean dbDeleted = MongoDbManager.deleteDish(id);
+                boolean dbDeleted = MenuController.deleteDish(id);
 
                 if (dbDeleted) {
                     JOptionPane.showMessageDialog(this, "Plato eliminado con éxito.");

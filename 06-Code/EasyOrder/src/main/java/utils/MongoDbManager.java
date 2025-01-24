@@ -25,10 +25,12 @@ public class MongoDbManager {
     private static final String CONNECTION_STRING = "mongodb+srv://arobalino:arobalino@cluster0.uhcya.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
     private static MongoClient mongoClient;
     private static MongoDatabase database;
+
     public static void insertDocument(String collectionName, Document document) {
         MongoCollection<Document> collection = database.getCollection(collectionName);
         collection.insertOne(document);  // Insert a single document into the collection
     }
+
     static {
         try {
 
@@ -91,54 +93,10 @@ public class MongoDbManager {
         }
     }
 
-    public static boolean insertDish(int id, String name, float price) {
-        try {
-            MongoCollection<Document> collection = database.getCollection("Menu");
-
-            Document dishDocument = new Document("id", id)
-                    .append("name", name)
-                    .append("price", price);
-
-            collection.insertOne(dishDocument);
-            System.out.println("Dish inserted into collection: Menu");
-            return true;
-        } catch (Exception e) {
-            System.err.println("Error inserting dish: " + e.getMessage());
-            return false;
-        }
+    public static MongoDatabase getDatabase() {
+        return database;
     }
 
-    public static boolean deleteDish(int id) {
-        try {
-            MongoCollection<Document> collection = database.getCollection("Menu");
-
-            Bson filter = Filters.eq("id", id);
-
-            DeleteResult result = collection.deleteOne(filter);
-
-            if (result.getDeletedCount() > 0) {
-                System.out.println("Dish deleted from collection: Menu");
-                return true;
-            } else {
-                System.out.println("Dish with id " + id + " not found.");
-                return false;
-            }
-        } catch (Exception e) {
-            System.err.println("Error deleting dish: " + e.getMessage());
-            return false;
-        }
-    }
-
-    public static Document findDishById(int id) {
-        try {
-            MongoCollection<Document> collection = database.getCollection("Menu");
-
-            return collection.find(Filters.eq("id", id)).first();
-        } catch (Exception e) {
-            System.err.println("Error finding dish: " + e.getMessage());
-            return null;
-        }
-    }
 
     public static boolean insertCustomer(int id, String name, String lastname, int phoneNumber) {
         try {
@@ -181,69 +139,66 @@ public class MongoDbManager {
             return false;
         }
     }
-    
-    
-   public static Document findCustomerById(int id) {
-    try {
-        MongoCollection<Document> collection = database.getCollection("Customer");
-        
-        return collection.find(Filters.eq("id", id)).first();
-    } catch (Exception e) {
-        System.err.println("Error al encontrar un cliente: " + e.getMessage());
-        return null;
-    }
-}
-   public static boolean updateById(String collectionName, int id, Document updatedDoc) {
-    try {
-        MongoCollection<Document> collection = database.getCollection(collectionName);
-        Bson filter = Filters.eq("id", id);
-        collection.updateOne(filter, new Document("$set", updatedDoc));
-        System.out.println("Documento actualizado en la coleccion: " + collectionName);
-        return true;
-    } catch (Exception e) {
-        System.err.println("Error al actualizar el documento: " + e.getMessage());
-        return false;
-    }
-}
 
-public static boolean deleteById(String collectionName, int id) {
-    try {
-        MongoCollection<Document> collection = database.getCollection(collectionName);
-        Bson filter = Filters.eq("id", id);
-        DeleteResult result = collection.deleteOne(filter);
-        if (result.getDeletedCount() > 0) {
-            System.out.println("Eliminado de la coleccion: " + collectionName);
-            return true;
+    public static Document findCustomerById(int id) {
+        try {
+            MongoCollection<Document> collection = database.getCollection("Customer");
+
+            return collection.find(Filters.eq("id", id)).first();
+        } catch (Exception e) {
+            System.err.println("Error al encontrar un cliente: " + e.getMessage());
+            return null;
         }
-        return false;
-    } catch (Exception e) {
-        System.err.println("Error al eliminar el documento: " + e.getMessage());
-        return false;
     }
-}
 
-public static boolean deleteDocumentById(String collectionName, int id) {
-    try {
-        MongoCollection<Document> collection = database.getCollection(collectionName);
-
-        Bson filter = Filters.eq("id", id);
-
-        DeleteResult result = collection.deleteOne(filter);
-
-        if (result.getDeletedCount() > 0) {
-            System.out.println("Document deleted from collection: " + collectionName);
+    public static boolean updateById(String collectionName, int id, Document updatedDoc) {
+        try {
+            MongoCollection<Document> collection = database.getCollection(collectionName);
+            Bson filter = Filters.eq("id", id);
+            collection.updateOne(filter, new Document("$set", updatedDoc));
+            System.out.println("Documento actualizado en la coleccion: " + collectionName);
             return true;
-        } else {
-            System.out.println("Document with ID " + id + " not found in collection: " + collectionName);
+        } catch (Exception e) {
+            System.err.println("Error al actualizar el documento: " + e.getMessage());
             return false;
         }
-    } catch (Exception e) {
-        System.err.println("Error deleting document: " + e.getMessage());
-        return false;
     }
+
+    public static boolean deleteById(String collectionName, int id) {
+        try {
+            MongoCollection<Document> collection = database.getCollection(collectionName);
+            Bson filter = Filters.eq("id", id);
+            DeleteResult result = collection.deleteOne(filter);
+            if (result.getDeletedCount() > 0) {
+                System.out.println("Eliminado de la coleccion: " + collectionName);
+                return true;
+            }
+            return false;
+        } catch (Exception e) {
+            System.err.println("Error al eliminar el documento: " + e.getMessage());
+            return false;
+        }
+    }
+
+    public static boolean deleteDocumentById(String collectionName, int id) {
+        try {
+            MongoCollection<Document> collection = database.getCollection(collectionName);
+
+            Bson filter = Filters.eq("id", id);
+
+            DeleteResult result = collection.deleteOne(filter);
+
+            if (result.getDeletedCount() > 0) {
+                System.out.println("Document deleted from collection: " + collectionName);
+                return true;
+            } else {
+                System.out.println("Document with ID " + id + " not found in collection: " + collectionName);
+                return false;
+            }
+        } catch (Exception e) {
+            System.err.println("Error deleting document: " + e.getMessage());
+            return false;
+        }
+    }
+
 }
-
-
-}
-
-
