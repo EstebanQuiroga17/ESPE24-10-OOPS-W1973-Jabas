@@ -5,18 +5,19 @@
 package ec.edu.espe.easyorder.view;
 
 import ec.edu.espe.easyorder.controller.AccountingReportController;
+import ec.edu.espe.easyorder.controller.ExpenseController;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author Matias Rojas
  */
-public class FrmDeleteIncomes extends javax.swing.JFrame {
+public class FrmDeleteExpense extends javax.swing.JFrame {
 
     /**
      * Creates new form FrmDeleteIncomes
      */
-    public FrmDeleteIncomes() {
+    public FrmDeleteExpense() {
         initComponents();
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
     }
@@ -34,14 +35,15 @@ public class FrmDeleteIncomes extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        txtDeleteIdIncomes = new javax.swing.JTextField();
-        btnConfirmDeleteIncomes = new javax.swing.JButton();
-        btnCancelDeleteIncomes = new javax.swing.JButton();
+        txtIdDelete = new javax.swing.JTextField();
+        btnConfirmDeleteExpenses = new javax.swing.JButton();
+        btnCancelDeleteExpenses = new javax.swing.JButton();
+        btnReturn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel3.setFont(new java.awt.Font("Franklin Gothic Medium", 3, 18)); // NOI18N
-        jLabel3.setText("ELIMINAR UN INGRESO");
+        jLabel3.setText("ELIMINAR UN EGRESO");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -63,23 +65,30 @@ public class FrmDeleteIncomes extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
         jLabel1.setText("Ingrese el ID que desea eliminar: ");
 
-        txtDeleteIdIncomes.addActionListener(new java.awt.event.ActionListener() {
+        txtIdDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtDeleteIdIncomesActionPerformed(evt);
+                txtIdDeleteActionPerformed(evt);
             }
         });
 
-        btnConfirmDeleteIncomes.setText("Confirmar");
-        btnConfirmDeleteIncomes.addActionListener(new java.awt.event.ActionListener() {
+        btnConfirmDeleteExpenses.setText("Confirmar");
+        btnConfirmDeleteExpenses.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnConfirmDeleteIncomesActionPerformed(evt);
+                btnConfirmDeleteExpensesActionPerformed(evt);
             }
         });
 
-        btnCancelDeleteIncomes.setText("Cancelar");
-        btnCancelDeleteIncomes.addActionListener(new java.awt.event.ActionListener() {
+        btnCancelDeleteExpenses.setText("Cancelar");
+        btnCancelDeleteExpenses.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelDeleteIncomesActionPerformed(evt);
+                btnCancelDeleteExpensesActionPerformed(evt);
+            }
+        });
+
+        btnReturn.setText("Regresar");
+        btnReturn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReturnActionPerformed(evt);
             }
         });
 
@@ -88,18 +97,19 @@ public class FrmDeleteIncomes extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtDeleteIdIncomes, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(48, 48, 48)
-                        .addComponent(btnConfirmDeleteIncomes)
-                        .addGap(48, 48, 48)
-                        .addComponent(btnCancelDeleteIncomes)))
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(txtIdDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(48, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(48, 48, 48)
+                .addComponent(btnConfirmDeleteExpenses)
+                .addGap(48, 48, 48)
+                .addComponent(btnCancelDeleteExpenses)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnReturn)
+                .addGap(15, 15, 15))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -107,11 +117,12 @@ public class FrmDeleteIncomes extends javax.swing.JFrame {
                 .addGap(23, 23, 23)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtDeleteIdIncomes, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtIdDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnConfirmDeleteIncomes)
-                    .addComponent(btnCancelDeleteIncomes))
+                    .addComponent(btnConfirmDeleteExpenses)
+                    .addComponent(btnCancelDeleteExpenses)
+                    .addComponent(btnReturn))
                 .addGap(39, 39, 39))
         );
 
@@ -139,28 +150,49 @@ public class FrmDeleteIncomes extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtDeleteIdIncomesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDeleteIdIncomesActionPerformed
+    private void txtIdDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdDeleteActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtDeleteIdIncomesActionPerformed
+    }//GEN-LAST:event_txtIdDeleteActionPerformed
 
-    private void btnCancelDeleteIncomesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelDeleteIncomesActionPerformed
-        this.dispose();
-    }//GEN-LAST:event_btnCancelDeleteIncomesActionPerformed
+    private void btnCancelDeleteExpensesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelDeleteExpensesActionPerformed
+        try {
+        txtIdDelete.setText("");
 
-    private void btnConfirmDeleteIncomesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmDeleteIncomesActionPerformed
-        int id = Integer.parseInt(txtDeleteIdIncomes.getText()); 
+        JOptionPane.showMessageDialog(null, "Operación cancelada. El campo ha sido restablecido.", "Cancelar", JOptionPane.INFORMATION_MESSAGE);
 
-    AccountingReportController controller = new AccountingReportController();
-
-   
-    boolean success = controller.deleteInvoiceWithConfirmation(id);
-
-    if (success) {
-        JOptionPane.showMessageDialog(null, "Invoice deleted successfully.");
-    } else {
-        JOptionPane.showMessageDialog(null, "Failed to delete invoice. Please check the ID.");
+    } catch (Exception ex) {
+        JOptionPane.showMessageDialog(null, "Ocurrió un error al cancelar: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
     }
-    }//GEN-LAST:event_btnConfirmDeleteIncomesActionPerformed
+    }//GEN-LAST:event_btnCancelDeleteExpensesActionPerformed
+
+    private void btnConfirmDeleteExpensesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmDeleteExpensesActionPerformed
+try {
+        
+        int id = Integer.parseInt(txtIdDelete.getText());
+
+        ExpenseController expenseController = new ExpenseController();
+        boolean success = expenseController.deleteExpense(id);
+
+        if (success) {
+            JOptionPane.showMessageDialog(null, "Egreso eliminado correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null, "No se encontró un egreso con el ID especificado.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+
+        txtIdDelete.setText("");
+
+    } catch (NumberFormatException ex) {
+        JOptionPane.showMessageDialog(null, "Por favor, ingresa un valor numérico válido para el ID.", "Error de Formato", JOptionPane.WARNING_MESSAGE);
+    } catch (Exception ex) {
+        JOptionPane.showMessageDialog(null, "Ocurrió un error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+    }
+    }//GEN-LAST:event_btnConfirmDeleteExpensesActionPerformed
+
+    private void btnReturnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReturnActionPerformed
+        this.dispose(); 
+        FrmExpense mainFrame = new FrmExpense(); 
+        mainFrame.setVisible(true);
+    }//GEN-LAST:event_btnReturnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -179,31 +211,33 @@ public class FrmDeleteIncomes extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrmDeleteIncomes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmDeleteExpense.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrmDeleteIncomes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmDeleteExpense.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrmDeleteIncomes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmDeleteExpense.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrmDeleteIncomes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmDeleteExpense.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrmDeleteIncomes().setVisible(true);
+                new FrmDeleteExpense().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCancelDeleteIncomes;
-    private javax.swing.JButton btnConfirmDeleteIncomes;
+    private javax.swing.JButton btnCancelDeleteExpenses;
+    private javax.swing.JButton btnConfirmDeleteExpenses;
+    private javax.swing.JButton btnReturn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JTextField txtDeleteIdIncomes;
+    private javax.swing.JTextField txtIdDelete;
     // End of variables declaration//GEN-END:variables
 }

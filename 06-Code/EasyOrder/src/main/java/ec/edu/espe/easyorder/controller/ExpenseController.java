@@ -2,13 +2,16 @@ package ec.edu.espe.easyorder.controller;
 
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
+import com.mongodb.client.model.Filters;
 import ec.edu.espe.easyorder.model.Expense;
+import java.text.SimpleDateFormat;
 import org.bson.Document;
 import utils.MongoDbManager;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import org.bson.conversions.Bson;
 /**
  *
  * @author Matias Rojas
@@ -17,31 +20,37 @@ import java.util.List;
 public class ExpenseController {
 
     public boolean addExpense(Expense expense) {
-        try {
-            Document document = new Document("price", expense.getPrice())
-                    .append("description", expense.getDescription())
-                    .append("name", expense.getName())
-                    .append("date", expense.getDate().getTimeInMillis()) 
-                    .append("id", expense.getId());
+    try {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy"); 
+        String formattedDate = dateFormat.format(expense.getDate().getTime()); 
 
-            return MongoDbManager.insert("Expenses", document);
-        } catch (Exception e) {
-            System.err.println("Error : " + e.getMessage());
-            return false;
-        }
+        Document document = new Document("price", expense.getPrice())
+                .append("description", expense.getDescription())
+                .append("name", expense.getName())
+                .append("date", formattedDate) 
+                .append("id", expense.getId());
+
+        return MongoDbManager.insert("Expenses", document);
+    } catch (Exception e) {
+        System.err.println("Error : " + e.getMessage());
+        return false;
     }
+}
+
 
 public List<Expense> getAllExpenses() {
     List<Expense> expenses = new ArrayList<>();
     try {
         List<Document> documents = MongoDbManager.getAll("Expenses");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy"); 
 
         for (Document doc : documents) {
-            float price = ((Double) doc.getDouble("price")).floatValue(); 
+            float price = ((Double) doc.getDouble("price")).floatValue();
             String description = doc.getString("description");
             String name = doc.getString("name");
             Calendar date = Calendar.getInstance();
-            date.setTimeInMillis(doc.getLong("date"));
+            String formattedDate = doc.getString("date");
+            date.setTime(dateFormat.parse(formattedDate)); 
             int id = doc.getInteger("id");
 
             Expense expense = new Expense(price, description, name, date, id);
@@ -51,6 +60,58 @@ public List<Expense> getAllExpenses() {
         System.err.println("Error : " + e.getMessage());
     }
     return expenses;
+}
+
+
+
+public boolean deleteExpense(int id) {
+        try {
+            return MongoDbManager.deleteById("Expenses", id);
+        } catch (Exception e) {
+            System.err.println("Error deleting expense: " + e.getMessage());
+            return false;
+        }
+    }
+
+public Expense searchExpense(int id) {
+    try {
+        Document doc = MongoDbManager.getDocumentByField("Expenses", "id", id);
+
+        if (doc != null) {
+            float price = ((Double) doc.getDouble("price")).floatValue();
+            String description = doc.getString("description");
+            String name = doc.getString("name");
+            Calendar date = Calendar.getInstance();
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            String formattedDate = doc.getString("date"); // Fecha formateada
+            date.setTime(dateFormat.parse(formattedDate)); // Convierte a Calendar
+            int expenseId = doc.getInteger("id");
+
+            return new Expense(price, description, name, date, expenseId);
+        }
+    } catch (Exception e) {
+        System.err.println("Error searching for expense: " + e.getMessage());
+    }
+    return null;
+}
+
+
+   public boolean updateExpense(Expense expense) {
+    try {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        String formattedDate = dateFormat.format(expense.getDate().getTime()); 
+
+        Document updatedDocument = new Document("price", expense.getPrice())
+                .append("description", expense.getDescription())
+                .append("name", expense.getName())
+                .append("date", formattedDate) 
+                .append("id", expense.getId());
+
+        return MongoDbManager.updateById("Expenses", expense.getId(), updatedDocument);
+    } catch (Exception e) {
+        System.err.println("Error updating expense: " + e.getMessage());
+        return false;
+    }
 }
 
 }

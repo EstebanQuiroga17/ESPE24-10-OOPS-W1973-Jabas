@@ -194,7 +194,7 @@ public class FrmManager extends javax.swing.JFrame {
     }//GEN-LAST:event_itmOpenReportsActionPerformed
 
     private void itmOpenExpensesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmOpenExpensesActionPerformed
-        FrmExpense frmExpense = new FrmExpense();
+        FrmAddExpense frmExpense = new FrmAddExpense();
         frmExpense.setVisible(true);
     }//GEN-LAST:event_itmOpenExpensesActionPerformed
 

@@ -74,7 +74,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Franklin Gothic Medium" size="18" style="3"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="ELIMINAR UN INGRESO"/>
+            <Property name="text" type="java.lang.String" value="ELIMINAR UN EGRESO"/>
           </Properties>
         </Component>
       </SubComponents>
@@ -85,21 +85,20 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jLabel1" min="-2" pref="186" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="txtDeleteIdIncomes" min="-2" pref="212" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
-                          <Component id="btnConfirmDeleteIncomes" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
-                          <Component id="btnCancelDeleteIncomes" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jLabel1" min="-2" pref="186" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Component id="txtIdDelete" min="-2" pref="212" max="-2" attributes="0"/>
                   <EmptySpace pref="48" max="32767" attributes="0"/>
+              </Group>
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
+                  <Component id="btnConfirmDeleteExpenses" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
+                  <Component id="btnCancelDeleteExpenses" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
+                  <Component id="btnReturn" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -109,12 +108,13 @@
                   <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel1" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                      <Component id="txtDeleteIdIncomes" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                      <Component id="txtIdDelete" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="44" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="btnConfirmDeleteIncomes" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="btnCancelDeleteIncomes" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnConfirmDeleteExpenses" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnCancelDeleteExpenses" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnReturn" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
               </Group>
@@ -130,25 +130,33 @@
             <Property name="text" type="java.lang.String" value="Ingrese el ID que desea eliminar: "/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtDeleteIdIncomes">
+        <Component class="javax.swing.JTextField" name="txtIdDelete">
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtDeleteIdIncomesActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtIdDeleteActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="btnConfirmDeleteIncomes">
+        <Component class="javax.swing.JButton" name="btnConfirmDeleteExpenses">
           <Properties>
             <Property name="text" type="java.lang.String" value="Confirmar"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnConfirmDeleteIncomesActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnConfirmDeleteExpensesActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="btnCancelDeleteIncomes">
+        <Component class="javax.swing.JButton" name="btnCancelDeleteExpenses">
           <Properties>
             <Property name="text" type="java.lang.String" value="Cancelar"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCancelDeleteIncomesActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCancelDeleteExpensesActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="btnReturn">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Regresar"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnReturnActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

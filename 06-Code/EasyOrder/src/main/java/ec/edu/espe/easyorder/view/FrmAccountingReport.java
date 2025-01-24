@@ -177,13 +177,13 @@ public class FrmAccountingReport extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAddAccountinReportActionPerformed
 
     private void btnDeleteAccountingReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteAccountingReportActionPerformed
-        FrmDeleteIncomes deleteIncomes = new FrmDeleteIncomes();
+        FrmDeleteExpense deleteIncomes = new FrmDeleteExpense();
         deleteIncomes.setVisible(true);
         
     }//GEN-LAST:event_btnDeleteAccountingReportActionPerformed
 
     private void btnSearchAccountingReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchAccountingReportActionPerformed
-        FrmSearchIncomes searchIncomes = new FrmSearchIncomes();
+        FrmSearchExpense searchIncomes = new FrmSearchExpense();
         searchIncomes.setVisible(true);
     }//GEN-LAST:event_btnSearchAccountingReportActionPerformed
 
