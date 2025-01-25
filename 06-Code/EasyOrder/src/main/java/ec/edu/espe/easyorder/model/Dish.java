@@ -8,19 +8,18 @@ public class Dish {
     private String name;
     private int id;
     private float price;
-    private int quantity;
+    private int Quantity;
 
     public Dish(String name, float price) {
         this.name = name;
         this.price = price;
     }
-
-        public Dish(String name, float price, int quantity) {
+    public Dish(String name, float price, int quantity) {
         this.name = name;
         this.price = price;  // You can set a default price or fetch it from another source
-        this.quantity = quantity;
+        this.Quantity = quantity;
     }
-
+        
 
     @Override
     public String toString() {

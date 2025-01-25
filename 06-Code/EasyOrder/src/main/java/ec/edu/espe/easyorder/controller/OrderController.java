@@ -11,44 +11,52 @@ import org.bson.Document;
 import java.util.List;
 import java.util.Calendar;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
 
 public class OrderController {
-
-    /**
-     * Generates a unique order ID based on the current date and time.
-     * Format: YYYYMMDD-HHMMSS-<timestamp>
-     * Example: 20250123-154530-1632948500205
-     * 
-     * @return A unique order ID string
-     */
-    public String generateOrderId() {
-        Calendar calendar = Calendar.getInstance();
-        
-        // Get current date in format YYYYMMDD
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
-        String date = dateFormat.format(calendar.getTime());
-        
-        // Get current time in format HHMMSS
-        SimpleDateFormat timeFormat = new SimpleDateFormat("HHmmss");
-        String time = timeFormat.format(calendar.getTime());
-        
-        // Generate a unique timestamp
-        long timestamp = System.currentTimeMillis();
-        
-        // Combine date, time, and timestamp to form a unique ID
-        String orderId = date + "-" + time + "-" + timestamp;
-        
-        return orderId;
-    }
     
-    /**
-     * Retrieves the current date in YYYY-MM-DD format.
-     * 
-     * @return Current date in YYYY-MM-DD format.
-     */
-    public String getCurrentDate() {
-        Calendar calendar = Calendar.getInstance();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        return dateFormat.format(calendar.getTime());
+        public String generateOrderId() {
+            Calendar calendar = Calendar.getInstance();
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
+            String date = dateFormat.format(calendar.getTime());
+            SimpleDateFormat timeFormat = new SimpleDateFormat("HHmmss");
+            String time = timeFormat.format(calendar.getTime());
+            long timestamp = System.currentTimeMillis();
+            return date + "-" + time + "-" + timestamp;
+        }
+
+        public String getCurrentDate() {
+            Calendar calendar = Calendar.getInstance();
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            return dateFormat.format(calendar.getTime());
+        }
+
+        public List<String> getMenuDishes() {
+            try {
+                List<Document> menuItems = MongoDbManager.getAll("Menu");
+                List<String> dishNames = new ArrayList<>();
+                for (Document dish : menuItems) {
+                    dishNames.add(dish.getString("name"));
+                }
+                return dishNames;
+            } catch (Exception e) {
+                throw new RuntimeException("Error loading menu: " + e.getMessage());
+            }
+        }
+
+        public void saveOrder(String orderId, String orderDate, List<Document> dishesList) {
+            try {
+                Document orderDocument = new Document("orderId", orderId)
+                        .append("date", orderDate)
+                        .append("dishes", dishesList);
+
+                MongoDbManager.insertDocument("Order", orderDocument);
+            } catch (Exception e) {
+                throw new RuntimeException("Error saving order: " + e.getMessage());
+            }
+        }
+        public void addDishToTable(DefaultTableModel model, String selectedDish, int quantity) {
+        model.addRow(new Object[]{selectedDish, quantity});
     }
 }

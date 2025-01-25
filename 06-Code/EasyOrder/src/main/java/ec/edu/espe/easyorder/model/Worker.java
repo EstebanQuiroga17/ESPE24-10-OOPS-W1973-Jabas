@@ -8,7 +8,7 @@ public class Worker {
 
     private String userName;
     private String password;
-    private int type[]; // 1 is for Manager, 0 for cashier
+    private int type[]; 
 
     public Worker(String username, String password) {
         this.userName = username;

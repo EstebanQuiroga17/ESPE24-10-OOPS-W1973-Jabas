@@ -21,8 +21,10 @@ public class FrmOrder extends javax.swing.JFrame {
     /**
      * Creates new form FrmOrder
      */
+    private OrderController orderController;
     public FrmOrder() {
-         initComponents();
+        orderController = new OrderController();
+        initComponents();
         initializeForm();
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
     }private void initializeForm() {
@@ -31,11 +33,7 @@ public class FrmOrder extends javax.swing.JFrame {
         updateOrderId();
     }
 
-    private void addDishToTable(String selectedDish, int quantity) {
-        DefaultTableModel model = (DefaultTableModel) jtOrders.getModel();
-        model.addRow(new Object[]{selectedDish, quantity});
-        txtQuantity.setText(""); }
-
+    
     private void updateOrderId() {
         lblOrderId.setText(" " + new OrderController().generateOrderId());
     }
@@ -67,11 +65,11 @@ public class FrmOrder extends javax.swing.JFrame {
 
     private void clearForm() {
         DefaultTableModel model = (DefaultTableModel) jtOrders.getModel();
-        model.setRowCount(0); // Clear all rows in the table
+        model.setRowCount(0); 
 
-        txtQuantity.setText(""); // Clear quantity input
+        txtQuantity.setText(""); 
         if (cmbDishes.getItemCount() > 0) {
-            cmbDishes.setSelectedIndex(0); // Reset combo box to first item
+            cmbDishes.setSelectedIndex(0); 
         }
         txtQuantity.setEnabled(true);
         updateOrderId();
@@ -371,10 +369,9 @@ public class FrmOrder extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSaveOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveOrderActionPerformed
-       try {
+        try {
             String orderId = lblOrderId.getText().trim();
             String orderDate = lblDate.getText().trim();
-
             DefaultTableModel model = (DefaultTableModel) jtOrders.getModel();
             List<Document> dishesList = new ArrayList<>();
 
@@ -388,30 +385,33 @@ public class FrmOrder extends javax.swing.JFrame {
                 }
 
                 int quantity = Integer.parseInt(quantityObj.toString());
-                dishesList.add(new Document("name", dishName).append("quantity", quantity));
+
+                // Retrieve dish details from Menu collection
+                Document menuItem = MongoDbManager.getDocumentByField("Menu", "name", dishName);
+                if (menuItem == null) {
+                    JOptionPane.showMessageDialog(this, "Dish not found in menu: " + dishName, "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
+                // Extract price
+                Number priceNumber = (Number) menuItem.get("price");
+                float price = priceNumber.floatValue();
+
+                // Create document with name, quantity, and price
+                dishesList.add(new Document("name", dishName)
+                        .append("quantity", quantity)
+                        .append("price", price));
             }
 
-            Document orderDocument = new Document("orderId", orderId)
-                .append("date", orderDate)
-                .append("dishes", dishesList);
+            orderController.saveOrder(orderId, orderDate, dishesList);
 
-            MongoDbManager.insertDocument("Order", orderDocument);
             JOptionPane.showMessageDialog(this, "Order saved successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
             clearForm();
-
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Error saving order: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     
     }//GEN-LAST:event_btnSaveOrderActionPerformed
-
-    private void btnSeeOrdersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeeOrdersActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnSeeOrdersActionPerformed
-
-    private void btnReturnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReturnActionPerformed
-        System.exit(0);// TODO add your handling code here:
-    }//GEN-LAST:event_btnReturnActionPerformed
 
     private void txtQuantityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtQuantityActionPerformed
         String quantityText = txtQuantity.getText();
@@ -444,7 +444,8 @@ public class FrmOrder extends javax.swing.JFrame {
                 return;
             }
 
-            addDishToTable(selectedDish, quantity);
+            orderController.addDishToTable((DefaultTableModel) jtOrders.getModel(), selectedDish, quantity);
+            txtQuantity.setText("");
 
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Please enter a valid number for quantity.", "Invalid Input", JOptionPane.WARNING_MESSAGE);
@@ -472,6 +473,14 @@ public class FrmOrder extends javax.swing.JFrame {
     private void cmbDishesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbDishesActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cmbDishesActionPerformed
+
+    private void btnReturnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReturnActionPerformed
+        System.exit(0);// TODO add your handling code here:
+    }//GEN-LAST:event_btnReturnActionPerformed
+
+    private void btnSeeOrdersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeeOrdersActionPerformed
+        new FrmViewOrders().setVisible(true);
+    }//GEN-LAST:event_btnSeeOrdersActionPerformed
 
     /**
      * @param args the command line arguments

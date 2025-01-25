@@ -8,8 +8,17 @@ import ec.edu.espe.easyorder.model.Customer;
 import ec.edu.espe.easyorder.model.Dish;
 import ec.edu.espe.easyorder.model.Invoice;
 import ec.edu.espe.easyorder.model.Order;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.print.PageFormat;
+import java.awt.print.Printable;
+import static java.awt.print.Printable.PAGE_EXISTS;
+import java.awt.print.PrinterException;
+import java.awt.print.PrinterJob;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
 import org.bson.Document;
@@ -102,6 +111,8 @@ public class FrmInvoice extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         txtInvoice = new javax.swing.JTextArea();
         jPanel3 = new javax.swing.JPanel();
+        btnSaveInvoice = new javax.swing.JButton();
+        btnPrintInvoice = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -194,15 +205,38 @@ public class FrmInvoice extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        btnSaveInvoice.setText("Guardar Factura");
+        btnSaveInvoice.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveInvoiceActionPerformed(evt);
+            }
+        });
+
+        btnPrintInvoice.setText("Imprimir Factura");
+        btnPrintInvoice.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPrintInvoiceActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 578, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addComponent(btnSaveInvoice)
+                .addGap(172, 172, 172)
+                .addComponent(btnPrintInvoice)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 63, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnSaveInvoice)
+                    .addComponent(btnPrintInvoice))
+                .addGap(0, 40, Short.MAX_VALUE))
         );
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
@@ -256,48 +290,40 @@ public class FrmInvoice extends javax.swing.JFrame {
             }
             String[] customerParts = selectedCustomer.split(" - ");
             int customerId = Integer.parseInt(customerParts[0]);
-
             String selectedOrderId = (String) cmbOrderId.getSelectedItem();
             if (selectedOrderId == null || selectedOrderId.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Please select an order.", "Error", JOptionPane.WARNING_MESSAGE);
                 return;
             }
-
+            
             Document customerDoc = MongoDbManager.getDocumentByField("Customer", "id", customerId);
             if (customerDoc == null) {
                 JOptionPane.showMessageDialog(this, "Customer not found.", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
-
             Customer customer = new Customer(
                     customerDoc.getString("name"),
                     customerDoc.getInteger("id"),
                     customerDoc.get("phoneNumber").toString()
             );
-
             Document orderDoc = MongoDbManager.getDocumentByField("Order", "orderId", selectedOrderId);
             if (orderDoc == null) {
                 JOptionPane.showMessageDialog(this, "Order not found.", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
-
             ArrayList<Dish> dishes = new ArrayList<>();
             List<Document> dishDocs = (List<Document>) orderDoc.get("dishes");
             for (Document dishDoc : dishDocs) {
                 String dishName = dishDoc.getString("name");
-                float dishPrice = 0.0f; // Placeholder price since no price is provided
-                dishes.add(new Dish(dishName, dishPrice));
+                float dishPrice = ((Number) dishDoc.get("price")).floatValue();
+                int quantity = dishDoc.getInteger("quantity");
+                dishes.add(new Dish(dishName, dishPrice, quantity));
             }
-
             String orderId = orderDoc.getString("orderId");
-
             Order order = new Order(dishes.size(), orderId, dishes, Calendar.getInstance());
-
             Invoice invoice = new Invoice(customer, order);
             String invoiceText = invoice.generateInvoice();
-
             txtInvoice.setText(invoiceText);
-
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error generating invoice: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             e.printStackTrace();
@@ -311,6 +337,83 @@ public class FrmInvoice extends javax.swing.JFrame {
     private void cmbOrderIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbOrderIdActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cmbOrderIdActionPerformed
+
+    private void btnSaveInvoiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveInvoiceActionPerformed
+        try {
+            String invoiceText = txtInvoice.getText();
+            if (invoiceText.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "No invoice to save.", "Error", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            // Create invoice document
+            Document invoiceDoc = new Document()
+                    .append("customer", cmbCustomer.getSelectedItem())
+                    .append("orderId", cmbOrderId.getSelectedItem())
+                    .append("invoiceText", invoiceText)
+                    .append("dateGenerated", new Date());
+
+            // Save to MongoDB
+            MongoDbManager.insertDocument("Invoice", invoiceDoc);
+
+            JOptionPane.showMessageDialog(this, "Invoice saved successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error saving invoice: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+        }
+
+    }//GEN-LAST:event_btnSaveInvoiceActionPerformed
+
+    private void btnPrintInvoiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrintInvoiceActionPerformed
+        try {
+            String invoiceText = txtInvoice.getText();
+            if (invoiceText.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "No invoice to print.", "Error", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            // Create a PrinterJob
+            PrinterJob printerJob = PrinterJob.getPrinterJob();
+
+            // Create a Printable object
+            Printable printable = new Printable() {
+                @Override
+                public int print(Graphics graphics, PageFormat pageFormat, int pageIndex) throws PrinterException {
+                    if (pageIndex > 0) {
+                        return NO_SUCH_PAGE;
+                    }
+
+                    Graphics2D g2d = (Graphics2D) graphics;
+                    g2d.setFont(new Font("Monospaced", Font.PLAIN, 10));
+
+                    // Set print area and margins
+                    g2d.translate(pageFormat.getImageableX(), pageFormat.getImageableY());
+
+                    // Split invoice text into lines
+                    String[] lines = invoiceText.split("\n");
+                    int y = 20;
+                    for (String line : lines) {
+                        g2d.drawString(line, 10, y);
+                        y += 15;
+                    }
+
+                    return PAGE_EXISTS;
+                }
+            };
+
+            // Set the Printable object
+            printerJob.setPrintable(printable);
+
+            // Show print dialog
+            if (printerJob.printDialog()) {
+                printerJob.print();
+                JOptionPane.showMessageDialog(this, "Invoice printed successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+            }
+        } catch (PrinterException e) {
+            JOptionPane.showMessageDialog(this, "Error printing invoice: " + e.getMessage(), "Print Error", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+        }  // TODO add your handling code here:
+    }//GEN-LAST:event_btnPrintInvoiceActionPerformed
 
     /**
      * @param args the command line arguments
@@ -349,6 +452,8 @@ public class FrmInvoice extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGenerateInvoice;
+    private javax.swing.JButton btnPrintInvoice;
+    private javax.swing.JButton btnSaveInvoice;
     private javax.swing.JComboBox<String> cmbCustomer;
     private javax.swing.JComboBox<String> cmbOrderId;
     private javax.swing.JLabel jLabel1;

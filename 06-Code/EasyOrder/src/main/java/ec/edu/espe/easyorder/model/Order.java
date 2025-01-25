@@ -7,7 +7,7 @@ import java.util.Calendar;
  * @author Matias Rojas
  */
 public class Order {
-     private int itemQuantity;
+    private int itemQuantity;
      private String id;
      private ArrayList<Dish> dishes;
      private Calendar CurrentDate;
@@ -81,9 +81,6 @@ public class Order {
         this.CurrentDate = CurrentDate;
     }
 
-    Object getDate() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
     
+  
 }
