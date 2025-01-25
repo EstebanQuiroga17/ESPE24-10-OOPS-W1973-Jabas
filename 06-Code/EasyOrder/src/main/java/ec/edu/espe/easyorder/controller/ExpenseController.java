@@ -1,8 +1,5 @@
 package ec.edu.espe.easyorder.controller;
 
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoCursor;
-import com.mongodb.client.model.Filters;
 import ec.edu.espe.easyorder.model.Expense;
 import java.text.SimpleDateFormat;
 import org.bson.Document;
@@ -11,7 +8,6 @@ import utils.MongoDbManager;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-import org.bson.conversions.Bson;
 /**
  *
  * @author Matias Rojas

@@ -4,10 +4,8 @@
  */
 package ec.edu.espe.easyorder.view;
 
-import ec.edu.espe.easyorder.model.Customer;
-import ec.edu.espe.easyorder.model.Dish;
+import ec.edu.espe.easyorder.controller.InvoiceController;
 import ec.edu.espe.easyorder.model.Invoice;
-import ec.edu.espe.easyorder.model.Order;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -16,13 +14,8 @@ import java.awt.print.Printable;
 import static java.awt.print.Printable.PAGE_EXISTS;
 import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
-import org.bson.Document;
-import utils.MongoDbManager;
 
 /**
  *
@@ -30,65 +23,44 @@ import utils.MongoDbManager;
  */
 public class FrmInvoice extends javax.swing.JFrame {
 
-    /**
-     * Creates new form FrmInvoice
-     */
+    private InvoiceController invoiceController;
+
     public FrmInvoice() {
+        invoiceController = new InvoiceController();
         initComponents();
         populateCustomersComboBox();
         populateOrderIdComboBox();
-          setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
     }
-    private void populateOrderIdComboBox() {
-        try {
-            List<Document> orders = MongoDbManager.getAll("Order");
-            cmbOrderId.removeAllItems();
 
-            if (orders.isEmpty()) {
-                JOptionPane.showMessageDialog(this, "No orders found.", "Error", JOptionPane.WARNING_MESSAGE);
-                return;
-            }
-
-            for (Document orderDoc : orders) {
-                String orderId = orderDoc.getString("orderId");
-                if (orderId != null && !orderId.isEmpty()) {
-                    cmbOrderId.addItem(orderId);
-                } else {
-                    System.out.println("Skipping order with missing or invalid orderId: " + orderDoc);
-                }
-            }
-
-            if (cmbOrderId.getItemCount() > 0) {
-                cmbOrderId.setSelectedIndex(0);
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Error loading orders: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        }
-    }
     private void populateCustomersComboBox() {
-      try {
-        List<Document> menuItems = MongoDbManager.getAll("Customer");
         cmbCustomer.removeAllItems();
-
-        if (menuItems.isEmpty()) {
+        List<String> customers = invoiceController.getCustomerList();
+        if (customers.isEmpty()) {
             JOptionPane.showMessageDialog(this, "No customers found.", "Error", JOptionPane.WARNING_MESSAGE);
             return;
         }
-
-        for (Document customerDoc : menuItems) {
-            String name = customerDoc.getString("name");
-            int id = customerDoc.getInteger("id");
-
-            String customerDisplay = id + " - " + name;
-
-            cmbCustomer.addItem(customerDisplay);
+        for (String customer : customers) {
+            cmbCustomer.addItem(customer);
         }
-
-        cmbCustomer.setSelectedIndex(0);
-
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(this, "Error loading customers: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        if (cmbCustomer.getItemCount() > 0) {
+            cmbCustomer.setSelectedIndex(0);
+        }
     }
+
+    private void populateOrderIdComboBox() {
+        cmbOrderId.removeAllItems();
+        List<String> orderIds = invoiceController.getOrderIdList();
+        if (orderIds.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "No orders found.", "Error", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        for (String orderId : orderIds) {
+            cmbOrderId.addItem(orderId);
+        }
+        if (cmbOrderId.getItemCount() > 0) {
+            cmbOrderId.setSelectedIndex(0);
+        }
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -288,42 +260,18 @@ public class FrmInvoice extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Please select a customer.", "Error", JOptionPane.WARNING_MESSAGE);
                 return;
             }
-            String[] customerParts = selectedCustomer.split(" - ");
-            int customerId = Integer.parseInt(customerParts[0]);
+
             String selectedOrderId = (String) cmbOrderId.getSelectedItem();
             if (selectedOrderId == null || selectedOrderId.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Please select an order.", "Error", JOptionPane.WARNING_MESSAGE);
                 return;
             }
-            
-            Document customerDoc = MongoDbManager.getDocumentByField("Customer", "id", customerId);
-            if (customerDoc == null) {
-                JOptionPane.showMessageDialog(this, "Customer not found.", "Error", JOptionPane.ERROR_MESSAGE);
-                return;
+
+            Invoice invoice = invoiceController.generateInvoice(selectedCustomer, selectedOrderId);
+            if (invoice != null) {
+                String invoiceText = invoice.generateInvoice();
+                txtInvoice.setText(invoiceText);
             }
-            Customer customer = new Customer(
-                    customerDoc.getString("name"),
-                    customerDoc.getInteger("id"),
-                    customerDoc.get("phoneNumber").toString()
-            );
-            Document orderDoc = MongoDbManager.getDocumentByField("Order", "orderId", selectedOrderId);
-            if (orderDoc == null) {
-                JOptionPane.showMessageDialog(this, "Order not found.", "Error", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-            ArrayList<Dish> dishes = new ArrayList<>();
-            List<Document> dishDocs = (List<Document>) orderDoc.get("dishes");
-            for (Document dishDoc : dishDocs) {
-                String dishName = dishDoc.getString("name");
-                float dishPrice = ((Number) dishDoc.get("price")).floatValue();
-                int quantity = dishDoc.getInteger("quantity");
-                dishes.add(new Dish(dishName, dishPrice, quantity));
-            }
-            String orderId = orderDoc.getString("orderId");
-            Order order = new Order(dishes.size(), orderId, dishes, Calendar.getInstance());
-            Invoice invoice = new Invoice(customer, order);
-            String invoiceText = invoice.generateInvoice();
-            txtInvoice.setText(invoiceText);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error generating invoice: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             e.printStackTrace();
@@ -346,17 +294,11 @@ public class FrmInvoice extends javax.swing.JFrame {
                 return;
             }
 
-            // Create invoice document
-            Document invoiceDoc = new Document()
-                    .append("customer", cmbCustomer.getSelectedItem())
-                    .append("orderId", cmbOrderId.getSelectedItem())
-                    .append("invoiceText", invoiceText)
-                    .append("dateGenerated", new Date());
-
-            // Save to MongoDB
-            MongoDbManager.insertDocument("Invoice", invoiceDoc);
-
-            JOptionPane.showMessageDialog(this, "Invoice saved successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+            invoiceController.saveInvoice(
+                    (String) cmbCustomer.getSelectedItem(),
+                    (String) cmbOrderId.getSelectedItem(),
+                    invoiceText
+            );
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error saving invoice: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             e.printStackTrace();
@@ -372,10 +314,8 @@ public class FrmInvoice extends javax.swing.JFrame {
                 return;
             }
 
-            // Create a PrinterJob
             PrinterJob printerJob = PrinterJob.getPrinterJob();
 
-            // Create a Printable object
             Printable printable = new Printable() {
                 @Override
                 public int print(Graphics graphics, PageFormat pageFormat, int pageIndex) throws PrinterException {
@@ -386,10 +326,8 @@ public class FrmInvoice extends javax.swing.JFrame {
                     Graphics2D g2d = (Graphics2D) graphics;
                     g2d.setFont(new Font("Monospaced", Font.PLAIN, 10));
 
-                    // Set print area and margins
                     g2d.translate(pageFormat.getImageableX(), pageFormat.getImageableY());
 
-                    // Split invoice text into lines
                     String[] lines = invoiceText.split("\n");
                     int y = 20;
                     for (String line : lines) {
@@ -401,10 +339,8 @@ public class FrmInvoice extends javax.swing.JFrame {
                 }
             };
 
-            // Set the Printable object
             printerJob.setPrintable(printable);
 
-            // Show print dialog
             if (printerJob.printDialog()) {
                 printerJob.print();
                 JOptionPane.showMessageDialog(this, "Invoice printed successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
@@ -412,7 +348,7 @@ public class FrmInvoice extends javax.swing.JFrame {
         } catch (PrinterException e) {
             JOptionPane.showMessageDialog(this, "Error printing invoice: " + e.getMessage(), "Print Error", JOptionPane.ERROR_MESSAGE);
             e.printStackTrace();
-        }  // TODO add your handling code here:
+        }  
     }//GEN-LAST:event_btnPrintInvoiceActionPerformed
 
     /**

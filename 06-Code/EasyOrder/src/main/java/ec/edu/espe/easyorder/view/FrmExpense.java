@@ -172,20 +172,15 @@ public class FrmExpense extends javax.swing.JFrame {
        ExpenseController expenseController = new ExpenseController();
     List<Expense> expenses = expenseController.getAllExpenses();
 
-    // Obtener el modelo de la tabla
     DefaultTableModel model = (DefaultTableModel) tblExpenses.getModel();
     model.setRowCount(0); // Limpiar las filas existentes
 
-    // Formateador de fecha para convertir el long a String
     SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
-    // Iterar sobre los gastos y agregarlos al modelo
     for (Expense expense : expenses) {
         try {
-            // Convertir la fecha a String
             String formattedDate = dateFormat.format(expense.getDate().getTime());
 
-            // Agregar los datos al modelo
             model.addRow(new Object[]{
                 expense.getId(),                  // ID (int)
                 expense.getName(),                // Nombre (String)

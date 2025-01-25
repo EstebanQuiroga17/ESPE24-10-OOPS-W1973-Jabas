@@ -386,18 +386,15 @@ public class FrmOrder extends javax.swing.JFrame {
 
                 int quantity = Integer.parseInt(quantityObj.toString());
 
-                // Retrieve dish details from Menu collection
                 Document menuItem = MongoDbManager.getDocumentByField("Menu", "name", dishName);
                 if (menuItem == null) {
                     JOptionPane.showMessageDialog(this, "Dish not found in menu: " + dishName, "Error", JOptionPane.ERROR_MESSAGE);
                     return;
                 }
 
-                // Extract price
                 Number priceNumber = (Number) menuItem.get("price");
                 float price = priceNumber.floatValue();
 
-                // Create document with name, quantity, and price
                 dishesList.add(new Document("name", dishName)
                         .append("quantity", quantity)
                         .append("price", price));
