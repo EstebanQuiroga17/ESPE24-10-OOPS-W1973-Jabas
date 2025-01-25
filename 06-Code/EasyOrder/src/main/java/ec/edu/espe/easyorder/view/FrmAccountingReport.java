@@ -4,7 +4,10 @@
  */
 package ec.edu.espe.easyorder.view;
 
-import javax.swing.JLabel;
+import ec.edu.espe.easyorder.model.Expense;
+import ec.edu.espe.easyorder.model.Invoice;
+import java.util.ArrayList;
+import java.util.Calendar;
 
 /**
  *
@@ -12,6 +15,12 @@ import javax.swing.JLabel;
  */
 public class FrmAccountingReport extends javax.swing.JFrame {
 
+    Calendar beginningDate;
+    Calendar endingDate;
+    Calendar creationDate;
+    ArrayList<Invoice> incomes;
+    ArrayList<Expense> expenses;
+    String name;
     /**
      * Creates new form FrmAccountingReport
      */
@@ -37,9 +46,12 @@ public class FrmAccountingReport extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblIncomes = new javax.swing.JTable();
-        btnAddAccountinReport = new javax.swing.JButton();
+        btnCreateAccountinReport = new javax.swing.JButton();
         btnDeleteAccountingReport = new javax.swing.JButton();
         btnSearchAccountingReport = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tblExpense = new javax.swing.JTable();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -89,11 +101,11 @@ public class FrmAccountingReport extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tblIncomes);
 
-        btnAddAccountinReport.setText("Añadir");
-        btnAddAccountinReport.setPreferredSize(new java.awt.Dimension(95, 30));
-        btnAddAccountinReport.addActionListener(new java.awt.event.ActionListener() {
+        btnCreateAccountinReport.setText("Create");
+        btnCreateAccountinReport.setPreferredSize(new java.awt.Dimension(95, 30));
+        btnCreateAccountinReport.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAddAccountinReportActionPerformed(evt);
+                btnCreateAccountinReportActionPerformed(evt);
             }
         });
 
@@ -112,6 +124,21 @@ public class FrmAccountingReport extends javax.swing.JFrame {
             }
         });
 
+        tblExpense.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(tblExpense);
+
+        jLabel2.setText("DETALLES DE EGRESOS:");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -120,28 +147,41 @@ public class FrmAccountingReport extends javax.swing.JFrame {
                 .addGap(27, 27, 27)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(btnAddAccountinReport, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(32, 32, 32)
-                        .addComponent(btnDeleteAccountingReport, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(36, 36, 36)
-                        .addComponent(btnSearchAccountingReport, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(lblCreationDate)
-                    .addComponent(jLabel3)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 534, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(56, Short.MAX_VALUE))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(btnCreateAccountinReport, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(32, 32, 32)
+                                .addComponent(btnDeleteAccountingReport, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(36, 36, 36)
+                                .addComponent(btnSearchAccountingReport, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lblCreationDate))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 534, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 568, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(19, 19, 19))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(16, 16, 16)
+                .addGap(55, 55, 55)
                 .addComponent(lblCreationDate)
-                .addGap(57, 57, 57)
-                .addComponent(jLabel3)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 112, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAddAccountinReport, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel2))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 115, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnCreateAccountinReport, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnDeleteAccountingReport, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSearchAccountingReport, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26))
@@ -153,9 +193,11 @@ public class FrmAccountingReport extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -171,10 +213,17 @@ public class FrmAccountingReport extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnAddAccountinReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddAccountinReportActionPerformed
-        FrmAddIncomes addIncomes = new FrmAddIncomes();
-        addIncomes.setVisible(true);
-    }//GEN-LAST:event_btnAddAccountinReportActionPerformed
+    private void btnCreateAccountinReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateAccountinReportActionPerformed
+        FrmCreateAccountingReport frmCreateAccountingReport = new FrmCreateAccountingReport();
+        frmCreateAccountingReport.setVisible(true);
+        
+        beginningDate = frmCreateAccountingReport.getBeginningDate();
+        endingDate = frmCreateAccountingReport.getEndingDate();
+        name = frmCreateAccountingReport.getName();
+        creationDate = Calendar.getInstance();
+        
+        
+    }//GEN-LAST:event_btnCreateAccountinReportActionPerformed
 
     private void btnDeleteAccountingReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteAccountingReportActionPerformed
         FrmDeleteExpense deleteIncomes = new FrmDeleteExpense();
@@ -223,15 +272,18 @@ public class FrmAccountingReport extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAddAccountinReport;
+    private javax.swing.JButton btnCreateAccountinReport;
     private javax.swing.JButton btnDeleteAccountingReport;
     private javax.swing.JButton btnSearchAccountingReport;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblCreationDate;
+    private javax.swing.JTable tblExpense;
     private javax.swing.JTable tblIncomes;
     // End of variables declaration//GEN-END:variables
 }

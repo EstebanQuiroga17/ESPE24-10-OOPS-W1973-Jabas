@@ -9,21 +9,30 @@ import java.util.Calendar;
  */
 public class AccountingReport {
     private Calendar creationDate;
+    private Calendar beginningDate;
+    private Calendar endingDate;
     private ArrayList<Invoice> incomes;
     private ArrayList<Expense> expenses;
+    private String name;
 
-    public AccountingReport(Calendar creationDate, ArrayList<Invoice> incomes, ArrayList<Expense> expenses) {
+    public AccountingReport(Calendar creationDate, Calendar beginningDate, Calendar endingDate, ArrayList<Invoice> incomes, ArrayList<Expense> expenses, String name) {
         this.creationDate = creationDate;
+        this.beginningDate = beginningDate;
+        this.endingDate = endingDate;
         this.incomes = incomes;
         this.expenses = expenses;
+        this.name = name;
     }
-
-    @Override
-    public String toString() {
-        return "AccountingReport{" + "creationDate=" + creationDate + ", incomes=" + incomes + ", expenses=" + expenses + '}';
-    }
-
     
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     
     /**
      * @return the creationDate
@@ -65,6 +74,34 @@ public class AccountingReport {
      */
     public void setExpenses(ArrayList<Expense> expenses) {
         this.expenses = expenses;
+    }
+
+    /**
+     * @return the beginningDate
+     */
+    public Calendar getBeginningDate() {
+        return beginningDate;
+    }
+
+    /**
+     * @param beginningDate the beginningDate to set
+     */
+    public void setBeginningDate(Calendar beginningDate) {
+        this.beginningDate = beginningDate;
+    }
+
+    /**
+     * @return the endingDate
+     */
+    public Calendar getEndingDate() {
+        return endingDate;
+    }
+
+    /**
+     * @param endingDate the endingDate to set
+     */
+    public void setEndingDate(Calendar endingDate) {
+        this.endingDate = endingDate;
     }
     
     
