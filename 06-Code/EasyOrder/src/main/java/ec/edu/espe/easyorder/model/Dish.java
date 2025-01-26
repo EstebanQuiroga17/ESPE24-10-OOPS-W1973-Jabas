@@ -68,6 +68,13 @@ public class Dish {
     public void setPrice(float price) {
         this.price = price;
     }
+
+    /**
+     * @return the Quantity
+     */
+    public int getQuantity() {
+        return Quantity;
+    }
     
     
     

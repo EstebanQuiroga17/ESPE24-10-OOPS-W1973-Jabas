@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package ec.edu.espe.easyorder.view;
 
 import ec.edu.espe.easyorder.controller.InvoiceController;
@@ -16,6 +13,8 @@ import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
 import java.util.List;
 import javax.swing.JOptionPane;
+import org.bson.Document;
+import utils.MongoDbManager;
 
 /**
  *
@@ -35,13 +34,17 @@ public class FrmInvoice extends javax.swing.JFrame {
 
     private void populateCustomersComboBox() {
         cmbCustomer.removeAllItems();
-        List<String> customers = invoiceController.getCustomerList();
+        List<Document> customers = MongoDbManager.getAll("Customer");
         if (customers.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "No customers found.", "Error", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "No se encontró clientes", "Error", JOptionPane.WARNING_MESSAGE);
             return;
         }
-        for (String customer : customers) {
-            cmbCustomer.addItem(customer);
+        for (Document customerDoc : customers) {
+            int id = customerDoc.getInteger("id");
+            String name = customerDoc.getString("name");
+            String lastname = customerDoc.getString("lastname");
+            String customerDisplay = id + " - " + name + " " + lastname;
+            cmbCustomer.addItem(customerDisplay);
         }
         if (cmbCustomer.getItemCount() > 0) {
             cmbCustomer.setSelectedIndex(0);
@@ -49,18 +52,31 @@ public class FrmInvoice extends javax.swing.JFrame {
     }
 
     private void populateOrderIdComboBox() {
-        cmbOrderId.removeAllItems();
-        List<String> orderIds = invoiceController.getOrderIdList();
-        if (orderIds.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "No orders found.", "Error", JOptionPane.WARNING_MESSAGE);
-            return;
+        try {
+            List<Document> orders = MongoDbManager.getAll("Order");
+            cmbOrderId.removeAllItems();
+
+            if (orders.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "No orders found.", "Error", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            for (Document orderDoc : orders) {
+                String orderId = orderDoc.getString("orderId");
+                if (orderId != null && !orderId.isEmpty()) {
+                    cmbOrderId.addItem(orderId);
+                } else {
+                    System.out.println("Skipping order with missing or invalid orderId: " + orderDoc);
+                }
+            }
+
+            if (cmbOrderId.getItemCount() > 0) {
+                cmbOrderId.setSelectedIndex(0);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error cargando ordenes: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
-        for (String orderId : orderIds) {
-            cmbOrderId.addItem(orderId);
-        }
-        if (cmbOrderId.getItemCount() > 0) {
-            cmbOrderId.setSelectedIndex(0);
-        }
+
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -85,6 +101,7 @@ public class FrmInvoice extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         btnSaveInvoice = new javax.swing.JButton();
         btnPrintInvoice = new javax.swing.JButton();
+        btnReturn = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -191,6 +208,13 @@ public class FrmInvoice extends javax.swing.JFrame {
             }
         });
 
+        btnReturn.setText("Volver");
+        btnReturn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReturnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -198,16 +222,19 @@ public class FrmInvoice extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(27, 27, 27)
                 .addComponent(btnSaveInvoice)
-                .addGap(172, 172, 172)
+                .addGap(54, 54, 54)
                 .addComponent(btnPrintInvoice)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnReturn)
+                .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSaveInvoice)
-                    .addComponent(btnPrintInvoice))
+                    .addComponent(btnPrintInvoice)
+                    .addComponent(btnReturn))
                 .addGap(0, 40, Short.MAX_VALUE))
         );
 
@@ -230,7 +257,9 @@ public class FrmInvoice extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(81, 81, 81)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -257,23 +286,20 @@ public class FrmInvoice extends javax.swing.JFrame {
         try {
             String selectedCustomer = (String) cmbCustomer.getSelectedItem();
             if (selectedCustomer == null || selectedCustomer.isEmpty()) {
-                JOptionPane.showMessageDialog(this, "Please select a customer.", "Error", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Porfavor selecciones un cliente.", "Error", JOptionPane.WARNING_MESSAGE);
                 return;
             }
-
             String selectedOrderId = (String) cmbOrderId.getSelectedItem();
             if (selectedOrderId == null || selectedOrderId.isEmpty()) {
-                JOptionPane.showMessageDialog(this, "Please select an order.", "Error", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Porfavor seleccione una orden.", "Error", JOptionPane.WARNING_MESSAGE);
                 return;
             }
-
             Invoice invoice = invoiceController.generateInvoice(selectedCustomer, selectedOrderId);
             if (invoice != null) {
-                String invoiceText = invoice.generateInvoice();
-                txtInvoice.setText(invoiceText);
+                txtInvoice.setText(invoiceController.generateInvoiceText(invoice));
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Error generating invoice: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Error al generar Factura: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             e.printStackTrace();
         }
     }//GEN-LAST:event_btnGenerateInvoiceActionPerformed
@@ -290,17 +316,17 @@ public class FrmInvoice extends javax.swing.JFrame {
         try {
             String invoiceText = txtInvoice.getText();
             if (invoiceText.isEmpty()) {
-                JOptionPane.showMessageDialog(this, "No invoice to save.", "Error", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(this, "No hay facturas que guardar.", "Error", JOptionPane.WARNING_MESSAGE);
                 return;
             }
 
             invoiceController.saveInvoice(
                     (String) cmbCustomer.getSelectedItem(),
-                    (String) cmbOrderId.getSelectedItem(),
-                    invoiceText
+                    (String) cmbOrderId.getSelectedItem()
+                    
             );
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Error saving invoice: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Error al guardar factura: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             e.printStackTrace();
         }
 
@@ -310,7 +336,7 @@ public class FrmInvoice extends javax.swing.JFrame {
         try {
             String invoiceText = txtInvoice.getText();
             if (invoiceText.isEmpty()) {
-                JOptionPane.showMessageDialog(this, "No invoice to print.", "Error", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(this, "No se ha seleccionado factura para imprimir.", "Error", JOptionPane.WARNING_MESSAGE);
                 return;
             }
 
@@ -343,13 +369,19 @@ public class FrmInvoice extends javax.swing.JFrame {
 
             if (printerJob.printDialog()) {
                 printerJob.print();
-                JOptionPane.showMessageDialog(this, "Invoice printed successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Factura impresa con éxito!", "Success", JOptionPane.INFORMATION_MESSAGE);
             }
         } catch (PrinterException e) {
-            JOptionPane.showMessageDialog(this, "Error printing invoice: " + e.getMessage(), "Print Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Error al imprimir la factura: " + e.getMessage(), "Print Error", JOptionPane.ERROR_MESSAGE);
             e.printStackTrace();
         }  
     }//GEN-LAST:event_btnPrintInvoiceActionPerformed
+
+    private void btnReturnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReturnActionPerformed
+        this.setVisible(false);
+        FrmManager managerFrame = new FrmManager();
+        managerFrame.setVisible(true);   
+    }//GEN-LAST:event_btnReturnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -389,6 +421,7 @@ public class FrmInvoice extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGenerateInvoice;
     private javax.swing.JButton btnPrintInvoice;
+    private javax.swing.JButton btnReturn;
     private javax.swing.JButton btnSaveInvoice;
     private javax.swing.JComboBox<String> cmbCustomer;
     private javax.swing.JComboBox<String> cmbOrderId;

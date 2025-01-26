@@ -3,9 +3,6 @@ package ec.edu.espe.easyorder.model;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.ArrayList;
-import java.util.List;
-import org.bson.Document;
-import ec.edu.espe.easyorder.view.FrmOrder;
 
 /**
  *
@@ -20,58 +17,13 @@ public class Invoice {
     private Order order;
     private String header;
 
-    public Invoice(Customer customer, Order order) {
+    public Invoice(Customer customer, Order order, float totalPrice) {
         this.customer = customer;
         this.order = order;
         this.header = "PADMITOS VEGETARIAN AND VEGAN FOOD";  
         this.id = order.getId();  
         this.currentDate = Calendar.getInstance();  
-        this.totalPrice = calculateTotalPrice(order.getDishes());  
-    }
-
-    private float calculateTotalPrice(ArrayList<Dish> dishes) {
-        float total = 0;
-        for (Dish dish : dishes) {
-            total += dish.getPrice();
-        }
-        return total;
-    }
-
-    public String generateInvoice() {
-        StringBuilder invoice = new StringBuilder();
-        
-        invoice.append("\n")
-               .append("****************************************************\n")
-               .append("*                ").append(header).append("                *\n")
-               .append("****************************************************\n\n");
-        
-        invoice.append("Invoice ID: ").append(id).append("\n");
-        
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        invoice.append("Date: ").append(dateFormat.format(currentDate.getTime())).append("\n");
-        
-        invoice.append("\nCustomer Details:\n")
-               .append("Name: ").append(customer.getName()).append("\n")
-               .append("Customer ID: ").append(customer.getId()).append("\n")
-               .append("Phone: ").append(customer.getPhoneNumber()).append("\n");
-        
-        invoice.append("\nOrder Details:\n")
-               .append("Dishes Ordered:\n");
-        for (Dish dish : order.getDishes()) {
-            invoice.append("  - ").append(dish.getName())
-                   .append(" ($").append(dish.getPrice()).append(")\n");
-        }
-        
-        invoice.append("\n----------------------------------------------------\n")
-               .append("Total Price: $").append(totalPrice).append("\n")
-               .append("IVA: $0.00\n")
-               .append("Total to Pay: $").append(totalPrice).append("\n");
-        
-        invoice.append("\n****************************************************\n")
-               .append("*                   THANK YOU!                    *\n")
-               .append("****************************************************\n");
-        
-        return invoice.toString();
+        this.totalPrice = totalPrice;  
     }
 
     /**
@@ -157,27 +109,5 @@ public class Invoice {
     public void setHeader(String header) {
         this.header = header;
     }
-        public Document toDocument() {
-        Document customerDoc = new Document("name", customer.getName())
-                .append("id", customer.getId())
-                .append("phoneNumber", customer.getPhoneNumber());
-        
-        List<Document> dishDocs = new ArrayList<>();
-        for (Dish dish : order.getDishes()) {
-            dishDocs.add(new Document("name", dish.getName()).append("price", dish.getPrice()));
-        }
-
-        Document orderDoc;
-        orderDoc = new Document("id", order.getId())
-                .append("dishes", dishDocs)
-                ;
-
-        return new Document("id", id)
-                .append("date", currentDate.getTimeInMillis())
-                .append("customer", customerDoc)
-                .append("totalPrice", totalPrice)
-                .append("order", orderDoc)
-                .append("header", header);
-    }
-
+   
 }

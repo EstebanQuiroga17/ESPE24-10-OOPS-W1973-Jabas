@@ -12,10 +12,37 @@ import java.util.List;
 import java.util.Calendar;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 public class OrderController {
-    
+    public List<String> populateDishesComboBox() {
+        try {
+            List<Document> menuItems = MongoDbManager.getAll("Menu");
+            List<String> dishNames = new ArrayList<>();
+            for (Document dish : menuItems) {
+                dishNames.add(dish.getString("name"));
+            }
+            return dishNames;
+        } catch (Exception e) {
+            throw new RuntimeException("Error loading dishes: " + e.getMessage());
+        }
+    }
+
+    public void resetOrderDetails(DefaultTableModel model, JComboBox<String> dishComboBox, JTextField quantityField, JLabel orderIdLabel, JLabel dateLabel) {
+        model.setRowCount(0);
+
+        if (dishComboBox.getItemCount() > 0) {
+            dishComboBox.setSelectedIndex(0);
+        }
+
+        quantityField.setText("");
+
+        orderIdLabel.setText(" " + generateOrderId());
+        dateLabel.setText(" " + getCurrentDate());
+    }
         public String generateOrderId() {
             Calendar calendar = Calendar.getInstance();
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
