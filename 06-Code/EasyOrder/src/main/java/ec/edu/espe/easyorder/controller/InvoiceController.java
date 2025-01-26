@@ -3,8 +3,10 @@
 package ec.edu.espe.easyorder.controller;
 import ec.edu.espe.easyorder.model.Customer;
 import ec.edu.espe.easyorder.model.Dish;
+import ec.edu.espe.easyorder.model.Expense;
 import ec.edu.espe.easyorder.model.Invoice;
 import ec.edu.espe.easyorder.model.Order;
+import java.text.SimpleDateFormat;
 import org.bson.Document;
 import utils.MongoDbManager;
 
@@ -115,4 +117,5 @@ public class InvoiceController {
             JOptionPane.showMessageDialog(null, "Error saving invoice: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
+    
 }

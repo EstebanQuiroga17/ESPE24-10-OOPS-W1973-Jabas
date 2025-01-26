@@ -4,10 +4,13 @@
  */
 package ec.edu.espe.easyorder.view;
 
+import ec.edu.espe.easyorder.controller.ExpenseController;
+import ec.edu.espe.easyorder.controller.InvoiceController;
 import ec.edu.espe.easyorder.model.Expense;
 import ec.edu.espe.easyorder.model.Invoice;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 /**
  *
@@ -18,9 +21,11 @@ public class FrmAccountingReport extends javax.swing.JFrame {
     Calendar beginningDate;
     Calendar endingDate;
     Calendar creationDate;
-    ArrayList<Invoice> incomes;
-    ArrayList<Expense> expenses;
+    List<Invoice> incomes = new ArrayList<>();
+    List<Expense> expenses = new ArrayList<>();
     String name;
+    ExpenseController expenseController = new ExpenseController();
+    InvoiceController invoiceController = new InvoiceController();
     /**
      * Creates new form FrmAccountingReport
      */
@@ -222,6 +227,7 @@ public class FrmAccountingReport extends javax.swing.JFrame {
         name = frmCreateAccountingReport.getName();
         creationDate = Calendar.getInstance();
         
+        expenses = expenseController.getAllExpenses();
         
     }//GEN-LAST:event_btnCreateAccountinReportActionPerformed
 

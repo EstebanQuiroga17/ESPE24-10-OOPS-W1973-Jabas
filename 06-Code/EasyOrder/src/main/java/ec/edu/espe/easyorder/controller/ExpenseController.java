@@ -7,6 +7,7 @@ import utils.MongoDbManager;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 /**
  *
@@ -33,6 +34,40 @@ public class ExpenseController {
     }
 }
 
+    public List<Expense> getByDate(Calendar beginningDate, Calendar endingDate){
+        List<Expense> expenses = new ArrayList<>();
+        
+        try {
+        List<Document> documents = MongoDbManager.getAll("Expenses");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy"); 
+        Date mongoDate;
+        Calendar invoiceDate = Calendar.getInstance();
+        for (Document doc : documents) {
+            try {
+                mongoDate = doc.getDate("date");
+                invoiceDate.setTime(mongoDate);
+                if(invoiceDate.compareTo(beginningDate) >= 0 && invoiceDate.compareTo(endingDate) <=0){
+                    float price = ((Double) doc.getDouble("price")).floatValue(); 
+                    String description = doc.getString("description");
+                    String name = doc.getString("name"); 
+                    int id = doc.getInteger("id"); 
+
+                    String formattedDate = doc.getString("date"); 
+                    Calendar date = Calendar.getInstance();
+                    date.setTime(dateFormat.parse(formattedDate)); 
+
+                    Expense expense = new Expense(price, description, name, date, id);
+                    expenses.add(expense);
+                }
+            } catch (Exception e) {
+                System.err.println("Error al procesar un documento: " + e.getMessage());
+            }
+        }
+    } catch (Exception e) {
+        System.err.println("Error al obtener los gastos: " + e.getMessage());
+    }
+    return expenses;
+    }
 
 public List<Expense> getAllExpenses() {
     List<Expense> expenses = new ArrayList<>();
@@ -96,6 +131,7 @@ public Expense searchExpense(int id) {
     }
     return null;
 }
+
 
 
    public boolean updateExpense(Expense expense) {
