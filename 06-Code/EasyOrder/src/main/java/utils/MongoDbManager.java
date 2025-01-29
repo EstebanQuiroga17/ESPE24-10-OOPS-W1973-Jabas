@@ -1,5 +1,6 @@
 package utils;
 
+import com.google.gson.Gson;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
@@ -149,5 +150,16 @@ public class MongoDbManager {
             return false;
         }
     }
-
+    
+    public static <T> List<T> getAllObjects(List<Document> documents, Class<T> clazz){
+        Gson gson = new Gson();
+        List<T> objects = new ArrayList<>();
+        for(Document doc : documents){
+            String json;
+            json = doc.toJson();            
+            objects.add(gson.fromJson(json,clazz));
+        }
+        
+        return objects;
+    }
 }

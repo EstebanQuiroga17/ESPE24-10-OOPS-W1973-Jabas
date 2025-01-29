@@ -4,10 +4,15 @@
  */
 package ec.edu.espe.easyorder.view;
 
+import com.google.gson.Gson;
+import ec.edu.espe.easyorder.controller.AccountingReportController;
+import ec.edu.espe.easyorder.model.AccountingReport;
 import ec.edu.espe.easyorder.model.Expense;
 import ec.edu.espe.easyorder.model.Invoice;
-import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
+import org.bson.Document;
+import utils.MongoDbManager;
 
 /**
  *
@@ -17,27 +22,23 @@ public class FrmCreateAccountingReport extends javax.swing.JFrame {
 
     Calendar endingDate;
     Calendar beginningDate;
+    Calendar creationDate;
+    List<Invoice> incomes;
+    List<Expense> expenses;
     String name;
-    
-    
-    public Calendar getBeginningDate() {
-        return beginningDate;
-    }
+    Document doc;
+    AccountingReportController reportController = new AccountingReportController();
+    Gson gson = new Gson();
 
-    public Calendar getEndingDate() {
-        return endingDate;
-    }
-
-    public String getName() {
-        return name;
-    }
-    
     /**
      * Creates new form FrmCreateAccountingReport
      */
     public FrmCreateAccountingReport() {
         initComponents();
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
+
+ 
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -179,7 +180,15 @@ public class FrmCreateAccountingReport extends javax.swing.JFrame {
         // TODO add your handling code here:
         beginningDate = dteBeginningDate.getCalendar();
         endingDate = dteEndingDate.getCalendar();
-        name = txtName.getText();
+        expenses = reportController.getExpensesByDate(beginningDate, endingDate);
+        incomes = reportController.getInvoicesByDate(beginningDate, endingDate);
+        Document mongoDoc = new Document();
+        
+        AccountingReport accountingReport = new AccountingReport(creationDate, beginningDate, endingDate, incomes, expenses, name);
+        String json;
+        json = gson.toJson(accountingReport);
+        doc = Document.parse(json);
+        MongoDbManager.insert("AccountingReport", doc);
     }//GEN-LAST:event_btnCreateActionPerformed
 
     /**

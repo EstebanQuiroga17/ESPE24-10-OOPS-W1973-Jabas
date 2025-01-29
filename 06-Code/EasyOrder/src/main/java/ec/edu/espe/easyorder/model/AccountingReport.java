@@ -2,6 +2,7 @@ package ec.edu.espe.easyorder.model;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 /**
  *
@@ -11,11 +12,11 @@ public class AccountingReport {
     private Calendar creationDate;
     private Calendar beginningDate;
     private Calendar endingDate;
-    private ArrayList<Invoice> incomes;
-    private ArrayList<Expense> expenses;
+    private List<Invoice> incomes;
+    private List<Expense> expenses;
     private String name;
 
-    public AccountingReport(Calendar creationDate, Calendar beginningDate, Calendar endingDate, ArrayList<Invoice> incomes, ArrayList<Expense> expenses, String name) {
+    public AccountingReport(Calendar creationDate, Calendar beginningDate, Calendar endingDate, List<Invoice> incomes, List<Expense> expenses, String name) {
         this.creationDate = creationDate;
         this.beginningDate = beginningDate;
         this.endingDate = endingDate;
@@ -23,7 +24,46 @@ public class AccountingReport {
         this.expenses = expenses;
         this.name = name;
     }
-    
+
+    public Calendar getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(Calendar creationDate) {
+        this.creationDate = creationDate;
+    }
+
+    public Calendar getBeginningDate() {
+        return beginningDate;
+    }
+
+    public void setBeginningDate(Calendar beginningDate) {
+        this.beginningDate = beginningDate;
+    }
+
+    public Calendar getEndingDate() {
+        return endingDate;
+    }
+
+    public void setEndingDate(Calendar endingDate) {
+        this.endingDate = endingDate;
+    }
+
+    public List<Invoice> getIncomes() {
+        return incomes;
+    }
+
+    public void setIncomes(List<Invoice> incomes) {
+        this.incomes = incomes;
+    }
+
+    public List<Expense> getExpenses() {
+        return expenses;
+    }
+
+    public void setExpenses(List<Expense> expenses) {
+        this.expenses = expenses;
+    }
 
     public String getName() {
         return name;
@@ -33,78 +73,6 @@ public class AccountingReport {
         this.name = name;
     }
 
-    
-    /**
-     * @return the creationDate
-     */
-    public Calendar getCreationDate() {
-        return creationDate;
-    }
-
-    /**
-     * @param creationDate the creationDate to set
-     */
-    public void setCreationDate(Calendar creationDate) {
-        this.creationDate = creationDate;
-    }
-
-    /**
-     * @return the incomes
-     */
-    public ArrayList<Invoice> getIncomes() {
-        return incomes;
-    }
-
-    /**
-     * @param incomes the incomes to set
-     */
-    public void setIncomes(ArrayList<Invoice> incomes) {
-        this.incomes = incomes;
-    }
-
-    /**
-     * @return the expenses
-     */
-    public ArrayList<Expense> getExpenses() {
-        return expenses;
-    }
-
-    /**
-     * @param expenses the expenses to set
-     */
-    public void setExpenses(ArrayList<Expense> expenses) {
-        this.expenses = expenses;
-    }
-
-    /**
-     * @return the beginningDate
-     */
-    public Calendar getBeginningDate() {
-        return beginningDate;
-    }
-
-    /**
-     * @param beginningDate the beginningDate to set
-     */
-    public void setBeginningDate(Calendar beginningDate) {
-        this.beginningDate = beginningDate;
-    }
-
-    /**
-     * @return the endingDate
-     */
-    public Calendar getEndingDate() {
-        return endingDate;
-    }
-
-    /**
-     * @param endingDate the endingDate to set
-     */
-    public void setEndingDate(Calendar endingDate) {
-        this.endingDate = endingDate;
-    }
-    
-    
-    
+   
     
 }

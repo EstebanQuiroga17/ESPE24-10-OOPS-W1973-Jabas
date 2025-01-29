@@ -4,13 +4,13 @@
  */
 package ec.edu.espe.easyorder.view;
 
-import ec.edu.espe.easyorder.controller.ExpenseController;
-import ec.edu.espe.easyorder.controller.InvoiceController;
+import ec.edu.espe.easyorder.controller.AccountingReportController;
 import ec.edu.espe.easyorder.model.Expense;
 import ec.edu.espe.easyorder.model.Invoice;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -24,8 +24,16 @@ public class FrmAccountingReport extends javax.swing.JFrame {
     List<Invoice> incomes = new ArrayList<>();
     List<Expense> expenses = new ArrayList<>();
     String name;
-    ExpenseController expenseController = new ExpenseController();
-    InvoiceController invoiceController = new InvoiceController();
+    AccountingReportController reportController = new AccountingReportController();
+
+    public void setBeginningDate(Calendar beginningDate) {
+        this.beginningDate = beginningDate;
+    }
+
+    public void setEndingDate(Calendar endingDate) {
+        this.endingDate = endingDate;
+    }
+    
     /**
      * Creates new form FrmAccountingReport
      */
@@ -131,15 +139,23 @@ public class FrmAccountingReport extends javax.swing.JFrame {
 
         tblExpense.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Id", "Name", "Date", "Price", "Description"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.Object.class, java.lang.Float.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
         jScrollPane2.setViewportView(tblExpense);
 
         jLabel2.setText("DETALLES DE EGRESOS:");
@@ -222,12 +238,21 @@ public class FrmAccountingReport extends javax.swing.JFrame {
         FrmCreateAccountingReport frmCreateAccountingReport = new FrmCreateAccountingReport();
         frmCreateAccountingReport.setVisible(true);
         
-        beginningDate = frmCreateAccountingReport.getBeginningDate();
-        endingDate = frmCreateAccountingReport.getEndingDate();
-        name = frmCreateAccountingReport.getName();
-        creationDate = Calendar.getInstance();
+        expenses = reportController.getExpensesByDate(beginningDate, endingDate);
         
-        expenses = expenseController.getAllExpenses();
+        String[] columnsNames = {"Id","Name","Date","Price","Description"};
+        DefaultTableModel tableModel = new DefaultTableModel(null,columnsNames );
+        tblExpense.setModel(tableModel);
+        
+        while(!expenses.isEmpty()){
+            int i = 0;
+            Expense expense = expenses.get(i);
+            Object [] data = {expense.getId(),
+                    expense.getName(),
+                    expense.getPrice(),
+                    expense.getDescription()};
+            tableModel.addRow(data);
+        }
         
     }//GEN-LAST:event_btnCreateAccountinReportActionPerformed
 
