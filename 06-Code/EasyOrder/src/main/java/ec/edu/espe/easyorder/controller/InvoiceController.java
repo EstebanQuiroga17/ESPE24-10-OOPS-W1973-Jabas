@@ -3,6 +3,7 @@
 package ec.edu.espe.easyorder.controller;
 import ec.edu.espe.easyorder.model.Customer;
 import ec.edu.espe.easyorder.model.Dish;
+import ec.edu.espe.easyorder.model.Expense;
 import ec.edu.espe.easyorder.model.Invoice;
 import ec.edu.espe.easyorder.model.Order;
 import java.text.SimpleDateFormat;

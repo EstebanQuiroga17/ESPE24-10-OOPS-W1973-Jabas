@@ -238,7 +238,6 @@ public class FrmAccountingReport extends javax.swing.JFrame {
         FrmCreateAccountingReport frmCreateAccountingReport = new FrmCreateAccountingReport();
         frmCreateAccountingReport.setVisible(true);
         
-        expenses = reportController.getExpensesByDate(beginningDate, endingDate);
         
         String[] columnsNames = {"Id","Name","Date","Price","Description"};
         DefaultTableModel tableModel = new DefaultTableModel(null,columnsNames );

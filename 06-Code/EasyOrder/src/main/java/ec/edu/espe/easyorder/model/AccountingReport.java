@@ -73,6 +73,5 @@ public class AccountingReport {
         this.name = name;
     }
 
-   
     
 }

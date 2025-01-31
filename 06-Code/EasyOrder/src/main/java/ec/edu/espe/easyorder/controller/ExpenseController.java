@@ -1,5 +1,6 @@
 package ec.edu.espe.easyorder.controller;
 
+import com.google.gson.Gson;
 import ec.edu.espe.easyorder.model.Expense;
 import java.text.SimpleDateFormat;
 import org.bson.Document;
@@ -15,19 +16,41 @@ import java.util.List;
  */
 
 public class ExpenseController {
-
+    
+    public static Expense docToExpense(Document doc){
+        String json = doc.toJson();
+        double doublePrice = doc.getDouble("price");
+        float price = (float) doublePrice;
+        String description = doc.getString("description");
+        String name = doc.getString("name");
+        Calendar date = MongoDbManager.descerializeDate(doc);
+        int id = doc.getInteger("id");
+        
+        Expense expense = new Expense(price, description, name, date, id);
+        return expense;
+    }
+    
+    public static List<Expense> docListToExpense(List<Document> docs){
+        List<Expense> expenses = new ArrayList<>();
+        Expense expense;
+        for(Document doc : docs){
+            expense = ExpenseController.docToExpense(doc);
+            expenses.add(expense);
+        }
+        return expenses;
+    }
     public boolean addExpense(Expense expense) {
     try {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy"); 
-        String formattedDate = dateFormat.format(expense.getDate().getTime()); 
-
-        Document document = new Document("price", expense.getPrice())
-                .append("description", expense.getDescription())
-                .append("name", expense.getName())
-                .append("date", formattedDate) 
-                .append("id", expense.getId());
-
-        return MongoDbManager.insert("Expenses", document);
+        String json;
+        Gson gson = new Gson();
+        Document doc;
+        boolean success;
+        
+        json = gson.toJson(expense);
+        doc = Document.parse(json);
+        success = MongoDbManager.insert("Expenses", doc);
+        
+        return success;
     } catch (Exception e) {
         System.err.println("Error : " + e.getMessage());
         return false;

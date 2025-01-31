@@ -15,41 +15,24 @@ import java.util.List;
  */
 
 public class AccountingReportController {
-
-   public List<Expense> getExpensesByDate(Calendar beginningDate, Calendar endingDate){
-       List<Document> expensesDoc = new ArrayList<>();
-       List<Expense> expenses = new ArrayList<>();
-       List<Expense> sortedExpenses = new ArrayList<>();
-       
-       expensesDoc = MongoDbManager.getAll("Expenses");
-       expenses = MongoDbManager.getAllObjects(expensesDoc, Expense.class);
-       
-       for(Expense expense : expenses){
-           Calendar expenseDate;
-           expenseDate = expense.getDate();
-           if(expenseDate.before(endingDate) && expenseDate.after(beginningDate)){
+    
+    public List<Expense> sortExpensesByDate(Calendar beginningDate, Calendar endingDate){
+        List<Expense> sortedExpenses = new ArrayList<>();
+        List<Expense> allExpenses = new ArrayList<>();
+        List<Document> expenseDocuments = new ArrayList<>();
+        Calendar expenseDate;
+        
+        expenseDocuments = MongoDbManager.getAll("Expenses");
+        allExpenses = ExpenseController.docListToExpense(expenseDocuments);
+        
+        for(Expense expense : allExpenses){
+            expenseDate = Calendar.getInstance();
+            if(expenseDate.compareTo(endingDate) < 0 && expenseDate.compareTo(beginningDate)>0){
                sortedExpenses.add(expense);
             }
         }
-        return sortedExpenses;  
+        return sortedExpenses;
     }
-   
-   public List<Invoice> getInvoicesByDate(Calendar beginningDate, Calendar endingDate){
-       List<Document> invoicesDoc = new ArrayList<>();
-       List<Invoice> invoices = new ArrayList<>();
-       List<Invoice> sortedInvoices = new ArrayList<>();
-       
-       invoicesDoc = MongoDbManager.getAll("Invoice");
-       invoices = MongoDbManager.getAllObjects(invoicesDoc, Invoice.class);
-       
-       for(Invoice invoice : invoices){
-           Calendar expenseDate;
-           expenseDate = invoice.getCurrentDate();
-           if(expenseDate.before(endingDate) && expenseDate.after(beginningDate)){
-               sortedInvoices.add(invoice);
-            }
-        }
-        return sortedInvoices;  
-    }
-   
+    
+    
 }

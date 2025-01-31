@@ -1,6 +1,5 @@
 package utils;
 
-import com.google.gson.Gson;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
@@ -8,6 +7,7 @@ import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Filters;
 import com.mongodb.client.result.DeleteResult;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import org.bson.Document;
 import org.bson.conversions.Bson;
@@ -151,15 +151,25 @@ public class MongoDbManager {
         }
     }
     
-    public static <T> List<T> getAllObjects(List<Document> documents, Class<T> clazz){
-        Gson gson = new Gson();
-        List<T> objects = new ArrayList<>();
-        for(Document doc : documents){
-            String json;
-            json = doc.toJson();            
-            objects.add(gson.fromJson(json,clazz));
-        }
+    public static Calendar descerializeDate(Document doc){
+        Calendar calendar = Calendar.getInstance();
+        int year;
+        int month;
+        int dayOfMonth;
+        int hourOfDay;
+        int minute;
+        int second;
+        Document date = (Document)doc.get("date");
         
-        return objects;
+        year = date.getInteger("year");
+        month = date.getInteger("month");
+        dayOfMonth = date.getInteger("dayOfMonth");
+        hourOfDay = date.getInteger("hourOfDay");
+        minute = date.getInteger("minute");
+        second = date.getInteger("second");
+        
+        calendar.set(year, month, minute, hourOfDay, minute, second);
+        
+        return calendar;
     }
 }

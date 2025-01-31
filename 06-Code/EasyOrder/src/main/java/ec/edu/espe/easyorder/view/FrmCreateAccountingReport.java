@@ -180,12 +180,10 @@ public class FrmCreateAccountingReport extends javax.swing.JFrame {
         // TODO add your handling code here:
         beginningDate = dteBeginningDate.getCalendar();
         endingDate = dteEndingDate.getCalendar();
-        expenses = reportController.getExpensesByDate(beginningDate, endingDate);
-        incomes = reportController.getInvoicesByDate(beginningDate, endingDate);
-        Document mongoDoc = new Document();
+        expenses = reportController.sortExpensesByDate(beginningDate, endingDate);
+        String json;
         
         AccountingReport accountingReport = new AccountingReport(creationDate, beginningDate, endingDate, incomes, expenses, name);
-        String json;
         json = gson.toJson(accountingReport);
         doc = Document.parse(json);
         MongoDbManager.insert("AccountingReport", doc);
