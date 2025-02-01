@@ -148,15 +148,25 @@ public class InvoiceController {
             Order orderObj = new Order(dishes.size(), orderId, (ArrayList<Dish>) dishes, Calendar.getInstance());
             float totalPrice = calculateTotalPrice((ArrayList<Dish>) dishes);
             Invoice invoice = new Invoice(customerObj, orderObj, totalPrice);
-             Document invoiceDocument = new Document("id", invoice.getId())
-                .append("currentDate", invoice.getCurrentDate().getTimeInMillis())
-                .append("customer", new Document("name", customerObj.getName())
-                        .append("id", customerObj.getId())
-                        .append("phoneNumber", customerObj.getPhoneNumber()))
-                .append("totalPrice", invoice.getTotalPrice())
-                .append("order", new Document("id", orderObj.getId())
-                        .append("dishes", dishDocs))
-                .append("header", invoice.getHeader());
+            Calendar currentDate = invoice.getCurrentDate();
+            Document dateDocument = new Document()
+                    .append("year", currentDate.get(Calendar.YEAR))
+                    .append("month", currentDate.get(Calendar.MONTH))
+                    .append("dayOfMonth", currentDate.get(Calendar.DAY_OF_MONTH))
+                    .append("hourOfDay", currentDate.get(Calendar.HOUR_OF_DAY))
+                    .append("minute", currentDate.get(Calendar.MINUTE))
+                    .append("second", currentDate.get(Calendar.SECOND));
+
+            Document invoiceDocument = new Document("id", invoice.getId())
+                    .append("currentDate", dateDocument)
+                    .append("customer", new Document("name", customerObj.getName())
+                            .append("id", customerObj.getId())
+                            .append("phoneNumber", customerObj.getPhoneNumber()))
+                    .append("totalPrice", invoice.getTotalPrice())
+                    .append("order", new Document("id", orderObj.getId())
+                            .append("dishes", dishDocs))
+                    .append("header", invoice.getHeader());
+
             MongoDbManager.insertDocument("Invoice", invoiceDocument);
 
             JOptionPane.showMessageDialog(null, "Factura guardada con éxito!", "Listo", JOptionPane.INFORMATION_MESSAGE);

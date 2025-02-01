@@ -448,7 +448,6 @@ public class FrmOrder extends javax.swing.JFrame {
             return;
         }
 
-        // Confirm deletion
         int confirm = JOptionPane.showConfirmDialog(this, "Seguro que quiere eliminar este plato?", "Confirm Deletion", JOptionPane.YES_NO_OPTION);
         if (confirm == JOptionPane.YES_OPTION) {
             DefaultTableModel model = (DefaultTableModel) jtOrders.getModel();
