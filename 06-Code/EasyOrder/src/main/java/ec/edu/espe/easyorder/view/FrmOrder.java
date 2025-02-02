@@ -5,9 +5,6 @@ package ec.edu.espe.easyorder.view;
  * @author Benjamin Robalino <jabasteam>
  */
 import ec.edu.espe.easyorder.controller.OrderController;
-import java.util.ArrayList;
-import utils.MongoDbManager;
-import org.bson.Document;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -24,25 +21,25 @@ public class FrmOrder extends javax.swing.JFrame {
         initComponents();
         initializeForm();
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-    }private void initializeForm() {
-        List<String> dishNames = orderController.populateDishesComboBox();
+    }
+    private void initializeForm() {
         cmbDishes.removeAllItems();
-         updateDate();
-        updateOrderId();
+        updateOrderIdAndDate();
 
+        List<String> dishNames = orderController.getMenuDishes();
         if (dishNames.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "No se han encontrado Platos.", "Error", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "No dishes found.", "Error", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
         for (String dishName : dishNames) {
             cmbDishes.addItem(dishName);
         }
-
-        cmbDishes.setSelectedIndex(0);
-        txtQuantity.setEnabled(true);
     }
-
+    private void updateOrderIdAndDate() {
+        lblOrderId.setText(orderController.generateOrderId());
+        lblDate.setText(orderController.getCurrentDate());
+    }
     private void clearForm() {
         orderController.resetOrderDetails(
                 (DefaultTableModel) jtOrders.getModel(),
@@ -143,7 +140,7 @@ public class FrmOrder extends javax.swing.JFrame {
                 {null, null}
             },
             new String [] {
-                "Dish", "Quantity"
+                "Plato", "Cantidad"
             }
         ) {
             Class[] types = new Class [] {
@@ -363,35 +360,13 @@ public class FrmOrder extends javax.swing.JFrame {
             String orderId = lblOrderId.getText().trim();
             String orderDate = lblDate.getText().trim();
             DefaultTableModel model = (DefaultTableModel) jtOrders.getModel();
-            List<Document> dishesList = new ArrayList<>();
 
-            for (int i = 0; i < model.getRowCount(); i++) {
-                String dishName = (String) model.getValueAt(i, 0);
-                Object quantityObj = model.getValueAt(i, 1);
-
-                if (dishName == null || quantityObj == null) {
-                    JOptionPane.showMessageDialog(this, "Plato o cantidad faltante!", "Invalid Input", JOptionPane.WARNING_MESSAGE);
-                    return;
-                }
-
-                int quantity = Integer.parseInt(quantityObj.toString());
-
-                Document menuItem = MongoDbManager.getDocumentByField("Menu", "name", dishName);
-                if (menuItem == null) {
-                    JOptionPane.showMessageDialog(this, "Plato no encontrado en el menu: " + dishName, "Error", JOptionPane.ERROR_MESSAGE);
-                    return;
-                }
-
-                Number priceNumber = (Number) menuItem.get("price");
-                float price = priceNumber.floatValue();
-
-                dishesList.add(new Document("name", dishName)
-                        .append("quantity", quantity)
-                        .append("price", price));
+            if (model.getRowCount() == 0) {
+                JOptionPane.showMessageDialog(this, "Porfavor añadir al menos un plato!", "Warning", JOptionPane.WARNING_MESSAGE);
+                return;
             }
 
-            orderController.saveOrder(orderId, orderDate, dishesList);
-
+            orderController.saveOrder(orderId, orderDate, model);
             JOptionPane.showMessageDialog(this, "Orden guardada con éxito!", "Success", JOptionPane.INFORMATION_MESSAGE);
             clearForm();
         } catch (Exception e) {
@@ -420,14 +395,14 @@ public class FrmOrder extends javax.swing.JFrame {
         String quantityText = txtQuantity.getText();
 
         if (selectedDish == null || selectedDish.trim().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Por favor selecciones un Plato válido.", "Invalid Input", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Porfavor selecciones un Plato valido.", "Invalid Input", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
         try {
             int quantity = Integer.parseInt(quantityText);
             if (quantity <= 0) {
-                JOptionPane.showMessageDialog(this, "La cantidad debe ser mayor a 0.", "Invalid Input", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Cantidad debe ser mayor a 0.", "Invalid Input", JOptionPane.WARNING_MESSAGE);
                 return;
             }
 
@@ -435,24 +410,24 @@ public class FrmOrder extends javax.swing.JFrame {
             txtQuantity.setText("");
 
         } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Por favor ingrese un valor númerico entero", "Invalid Input", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Por favor ingrese un numero entero.", "Invalid Input", JOptionPane.WARNING_MESSAGE);
         }
 
     }//GEN-LAST:event_btnAddDishActionPerformed
 
     private void btnDeleteDishActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteDishActionPerformed
-        int selectedRow = jtOrders.getSelectedRow(); // Get the selected row index
+        int selectedRow = jtOrders.getSelectedRow();
 
-        if (selectedRow == -1) { 
-            JOptionPane.showMessageDialog(this, "Por favor selecciones un plato a eliminar.", "No Selection", JOptionPane.WARNING_MESSAGE);
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(this, "Por favor seleccione un plato a borrar.", "No Selection", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
-        int confirm = JOptionPane.showConfirmDialog(this, "Seguro que quiere eliminar este plato?", "Confirm Deletion", JOptionPane.YES_NO_OPTION);
+        int confirm = JOptionPane.showConfirmDialog(this, "Seguro quiere borrar este plato?", "Confirm Deletion", JOptionPane.YES_NO_OPTION);
         if (confirm == JOptionPane.YES_OPTION) {
             DefaultTableModel model = (DefaultTableModel) jtOrders.getModel();
             model.removeRow(selectedRow);
-            JOptionPane.showMessageDialog(this, "Plato borrado con éxito.", "Success", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Borrado.", "Success", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_btnDeleteDishActionPerformed
 

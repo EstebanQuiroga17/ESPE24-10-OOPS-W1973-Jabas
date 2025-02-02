@@ -1,60 +1,34 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package ec.edu.espe.easyorder.view;
 
+import ec.edu.espe.easyorder.controller.OrderController;
 import java.util.List;
-import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import org.bson.Document;
-import utils.MongoDbManager;
 
 /**
  *
  * @author Benjamin Robalino <jabasteam>
  */
 public class FrmViewOrders extends javax.swing.JFrame {
+    private OrderController orderController;
 
     /**
      * Creates new form FrmViewOrders
      */
     public FrmViewOrders() {
+        orderController = new OrderController();
         initComponents();
-        loadOrders(); // Add this line
+        loadOrders();
         setTitle("Order List");
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
     }
     private void loadOrders() {
-        try {
-            List<Document> orders = MongoDbManager.getAll("Order");
-            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-            model.setRowCount(0);
+        List<String[]> orders = orderController.getOrderList();
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.setRowCount(0);
 
-            for (Document order : orders) {
-                String orderId = order.getString("orderId");
-                String date = order.getString("date");
-                List<Document> dishes = (List<Document>) order.get("dishes");
-
-                StringBuilder dishDetails = new StringBuilder();
-                for (Document dish : dishes) {
-                    dishDetails.append(dish.getString("name"))
-                            .append(" (")
-                            .append(dish.getInteger("quantity"))
-                            .append("), ");
-                }
-
-                if (dishDetails.length() > 2) {
-                    dishDetails.setLength(dishDetails.length() - 2);
-                }
-
-                model.addRow(new Object[]{orderId, date, dishDetails.toString()});
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this,
-                    "Error loading orders: " + e.getMessage(),
-                    "Error",
-                    JOptionPane.ERROR_MESSAGE);
+        for (String[] order : orders) {
+            model.addRow(order);
         }
     }
     /**
