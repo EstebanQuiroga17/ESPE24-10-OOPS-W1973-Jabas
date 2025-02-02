@@ -4,7 +4,6 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.model.Filters;
 import com.mongodb.client.result.DeleteResult;
 import ec.edu.espe.easyorder.view.FrmCustomer;
-import ec.edu.espe.easyorder.view.FrmFoundCustomer;
 import java.util.List;
 import org.bson.Document;
 import org.bson.conversions.Bson;
@@ -22,20 +21,20 @@ public class CustomerController {
         for (Document customer : customers) {
             int id = customer.getInteger("id");
             String name = customer.getString("name");
-            String lastname = customer.getString("lastname");
+            String lastName = customer.getString("lastName");
             int phoneNumber = customer.getInteger("phoneNumber");
 
-            FrmCustomer.AddRowToJTableCustomer(new Object[]{id, name, lastname, phoneNumber});
+            FrmCustomer.AddRowToJTableCustomer(new Object[]{id, name, lastName, phoneNumber});
         }
     }
 
-    public static boolean insertCustomer(int id, String name, String lastname, int phoneNumber) {
+    public static boolean insertCustomer(int id, String name, String lastName, int phoneNumber) {
         try {
             MongoCollection<Document> collection = MongoDbManager.getDatabase().getCollection("Customer");
 
             Document customerDocument = new Document("id", id)
                     .append("name", name)
-                    .append("lastname", lastname)
+                    .append("lastName", lastName)
                     .append("phoneNumber", phoneNumber);
 
             collection.insertOne(customerDocument);
@@ -65,9 +64,9 @@ public class CustomerController {
                 for (Document customer : customers) {
                     int customerId = customer.getInteger("id");
                     String name = customer.getString("name");
-                    String lastname = customer.getString("lastname");
+                    String lastName = customer.getString("lastName");
                     int phoneNumber = customer.getInteger("phoneNumber");
-                    FrmCustomer.getTableModel().addRow(new Object[]{customerId, name, lastname, phoneNumber});
+                    FrmCustomer.getTableModel().addRow(new Object[]{customerId, name, lastName, phoneNumber});
                 }
 
                 return true;

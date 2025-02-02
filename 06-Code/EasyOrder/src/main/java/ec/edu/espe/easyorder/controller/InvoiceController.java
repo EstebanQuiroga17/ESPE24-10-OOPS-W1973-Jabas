@@ -42,7 +42,8 @@ public class InvoiceController {
             Customer customer = new Customer(
                     customerDoc.getString("name"),
                     customerDoc.getInteger("id"),
-                    customerDoc.get("phoneNumber").toString()
+                    customerDoc.get("phoneNumber").toString(),
+                    customerDoc.getString("lastName")
             );
 
             List<Document> dishDocs = (List<Document>) orderDoc.get("dishes");
@@ -74,6 +75,7 @@ public class InvoiceController {
                 .append("Fecha: ").append(dateFormat.format(invoice.getCurrentDate().getTime())).append("\n\n")
                 .append("Datos Cliente:\n")
                 .append("Nombre: ").append(invoice.getCustomer().getName()).append("\n")
+                .append("Apellido: ").append(invoice.getCustomer().getLastName()).append("\n")
                 .append("ID: ").append(invoice.getCustomer().getId()).append("\n")
                 .append("Numero Celular: ").append(invoice.getCustomer().getPhoneNumber()).append("\n\n")
                 .append("Detalles Orden:\n")
@@ -110,8 +112,10 @@ public class InvoiceController {
             Document invoiceDocument = new Document("id", invoice.getId())
                     .append("currentDate", dateDocument)
                     .append("customer", new Document("name", invoice.getCustomer().getName())
+                            .append("lastName", invoice.getCustomer().getLastName())
                             .append("id", invoice.getCustomer().getId())
                             .append("phoneNumber", invoice.getCustomer().getPhoneNumber()))
+                    
                     .append("totalPrice", invoice.getTotalPrice())
                     .append("order", new Document("id", invoice.getOrder().getId())
                             .append("dishes", invoice.getOrder().getDishes()))
