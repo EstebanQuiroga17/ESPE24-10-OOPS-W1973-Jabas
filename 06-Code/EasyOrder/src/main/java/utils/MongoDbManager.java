@@ -168,7 +168,7 @@ public class MongoDbManager {
         minute = date.getInteger("minute");
         second = date.getInteger("second");
         
-        calendar.set(year, month, minute, hourOfDay, minute, second);
+        calendar.set(year, month, dayOfMonth, hourOfDay, minute, second);
         
         return calendar;
     }

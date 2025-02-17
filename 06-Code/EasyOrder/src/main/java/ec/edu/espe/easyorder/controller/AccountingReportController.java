@@ -25,7 +25,7 @@ public class AccountingReportController {
         allExpenses = ExpenseController.docListToExpense(expenseDocuments);
 
         for (Expense expense : allExpenses) {
-            expenseDate = Calendar.getInstance();
+            expenseDate = expense.getDate();
             if (expenseDate.compareTo(endingDate) < 0 && expenseDate.compareTo(beginningDate) > 0) {
                 sortedExpenses.add(expense);
             }
