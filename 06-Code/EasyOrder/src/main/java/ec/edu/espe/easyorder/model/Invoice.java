@@ -1,8 +1,6 @@
 package ec.edu.espe.easyorder.model;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.ArrayList;
 
 /**
  *
