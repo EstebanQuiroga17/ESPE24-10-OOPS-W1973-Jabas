@@ -172,4 +172,26 @@ public class MongoDbManager {
         
         return calendar;
     }
+    
+    public static Calendar descerializeDateInvoice(Document doc){
+        Calendar calendar = Calendar.getInstance();
+        int year;
+        int month;
+        int dayOfMonth;
+        int hourOfDay;
+        int minute;
+        int second;
+        Document date = (Document)doc.get("currentDate");
+        
+        year = date.getInteger("year");
+        month = date.getInteger("month");
+        dayOfMonth = date.getInteger("dayOfMonth");
+        hourOfDay = date.getInteger("hourOfDay");
+        minute = date.getInteger("minute");
+        second = date.getInteger("second");
+        
+        calendar.set(year, month, dayOfMonth, hourOfDay, minute, second);
+        
+        return calendar;
+    }
 }

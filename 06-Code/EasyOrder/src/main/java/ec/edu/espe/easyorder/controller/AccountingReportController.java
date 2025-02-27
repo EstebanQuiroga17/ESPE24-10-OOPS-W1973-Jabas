@@ -32,5 +32,23 @@ public class AccountingReportController {
         }
         return sortedExpenses;
     }
+    
+     public List<Invoice> sortInvoicesByDate(Calendar beginningDate, Calendar endingDate) {
+        List<Invoice> sortedInvoices = new ArrayList<>();
+        List<Invoice> allInvoices = new ArrayList<>();
+        List<Document> invoiceDocuments = new ArrayList<>();
+        Calendar expenseDate;
+
+        invoiceDocuments = MongoDbManager.getAll("Invoice");
+        allInvoices = InvoiceController.docListToInvoice(invoiceDocuments);
+
+        for (Invoice invoice : allInvoices) {
+            expenseDate = invoice.getCurrentDate();
+            if (expenseDate.compareTo(endingDate) < 0 && expenseDate.compareTo(beginningDate) > 0) {
+                sortedInvoices.add(invoice);
+            }
+        }
+        return sortedInvoices;
+    }
 
 }

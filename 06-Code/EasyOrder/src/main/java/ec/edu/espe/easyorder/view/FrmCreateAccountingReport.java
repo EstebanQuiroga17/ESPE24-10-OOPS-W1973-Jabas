@@ -181,6 +181,8 @@ public class FrmCreateAccountingReport extends javax.swing.JFrame {
         beginningDate = dteBeginningDate.getCalendar();
         endingDate = dteEndingDate.getCalendar();
         expenses = reportController.sortExpensesByDate(beginningDate, endingDate);
+        incomes = reportController.sortInvoicesByDate(beginningDate, endingDate);
+        name = txtName.getText();
         String json;
         
         AccountingReport accountingReport = new AccountingReport(creationDate, beginningDate, endingDate, incomes, expenses, name);

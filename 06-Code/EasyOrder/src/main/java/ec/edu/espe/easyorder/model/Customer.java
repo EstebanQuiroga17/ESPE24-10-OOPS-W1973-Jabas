@@ -9,8 +9,7 @@ public class Customer {
     private int id;
     private String phoneNumber;
     private String lastName;
-
-   
+    
 
     public Customer(String name, int id, String phoneNumber, String lastName) {
         this.name = name;

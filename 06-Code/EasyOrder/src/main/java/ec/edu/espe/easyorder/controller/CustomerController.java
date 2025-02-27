@@ -14,6 +14,7 @@ import utils.MongoDbManager;
  * @author abner
  */
 public class CustomerController {
+    
 
     public void loadCustomersFromDatabase() {
         List<Document> customers = MongoDbManager.getAll("Customer");

@@ -26,6 +26,15 @@ public class Invoice {
         this.totalPrice = totalPrice;  
     }
 
+    public Invoice(Calendar currentDate, String id, Customer customer, float totalPrice, Order order) {
+        this.currentDate = currentDate;
+        this.id = id;
+        this.customer = customer;
+        this.totalPrice = totalPrice;
+        this.order = order;
+        this.header = "PADMITOS VEGETARIAN AND VEGAN FOOD";
+    }
+
     /**
      * @return the currentDate
      */

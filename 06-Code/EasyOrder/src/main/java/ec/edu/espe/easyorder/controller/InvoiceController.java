@@ -1,7 +1,9 @@
 package ec.edu.espe.easyorder.controller;
 
+import com.google.gson.Gson;
 import ec.edu.espe.easyorder.model.Customer;
 import ec.edu.espe.easyorder.model.Dish;
+import ec.edu.espe.easyorder.model.Expense;
 import ec.edu.espe.easyorder.model.Invoice;
 import ec.edu.espe.easyorder.model.Order;
 import org.bson.Document;
@@ -128,4 +130,39 @@ public class InvoiceController {
             e.printStackTrace();
         }
     }
+    
+    public static List<Invoice> docListToInvoice(List<Document> docs){
+        List<Invoice> invoices = new ArrayList<>();
+        Invoice invoice;
+        for(Document doc : docs){
+            invoice = InvoiceController.docToExpense(doc);
+            invoices.add(invoice);
+        }
+        return invoices;
+    }
+    
+    public static Invoice docToExpense(Document doc){
+        String jsonObject;
+        Document documentObject;
+        Gson gson = new Gson();
+        
+        double doublePrice = doc.getDouble("totalPrice");
+        float price = (float) doublePrice;
+        
+        documentObject = (Document)doc.get("customer");
+        jsonObject = documentObject.toJson();
+        Customer customer = gson.fromJson(jsonObject, Customer.class);
+        
+        documentObject = (Document)doc.get("order");
+        jsonObject = documentObject.toJson();
+        Order order = gson.fromJson(jsonObject, Order.class);
+        
+        Calendar currentDate = MongoDbManager.descerializeDateInvoice(doc);
+        String id = doc.getString("id");        
+        
+        Invoice invoice = new Invoice(currentDate, id, customer, price, order);
+        return invoice;
+    }
+    
+    
 }
