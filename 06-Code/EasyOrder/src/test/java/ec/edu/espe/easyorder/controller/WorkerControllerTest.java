@@ -1,6 +1,7 @@
 
 package ec.edu.espe.easyorder.controller;
 
+import utils.MongoDbManager;
 import java.util.List;
 import org.bson.Document;
 import org.junit.jupiter.api.Test;
@@ -12,6 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 public class WorkerControllerTest {
     
+    
     public WorkerControllerTest() {
     }
 
@@ -21,14 +23,13 @@ public class WorkerControllerTest {
     @Test
     public void testLogIn() {
         System.out.println("logIn");
-        List<Document> workers = null;
-        String userName = "";
-        String password = "";
+        List<Document> workers = MongoDbManager.getAll("Worker");
+        String userName = "juan";
+        String password = "juan123";
         boolean expResult = false;
         boolean result = WorkerController.logIn(workers, userName, password);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
     }
 
     /**
@@ -37,15 +38,14 @@ public class WorkerControllerTest {
     @Test
     public void testGetType() {
         System.out.println("getType");
-        List<Document> workers = null;
-        String userName = "";
-        String password = "";
+        List<Document> workers = MongoDbManager.getAll("Worker");
+        String userName = "pepe";
+        String password = "pepe2";
         WorkerController instance = new WorkerController();
         int expResult = 0;
         int result = instance.getType(workers, userName, password);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
     }
     
 }
