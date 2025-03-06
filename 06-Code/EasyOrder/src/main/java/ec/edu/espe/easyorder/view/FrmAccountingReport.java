@@ -5,6 +5,7 @@
 package ec.edu.espe.easyorder.view;
 
 import ec.edu.espe.easyorder.controller.AccountingReportController;
+import ec.edu.espe.easyorder.model.AccountingReport;
 import ec.edu.espe.easyorder.model.Expense;
 import ec.edu.espe.easyorder.model.Invoice;
 import java.util.ArrayList;
@@ -25,6 +26,12 @@ public class FrmAccountingReport extends javax.swing.JFrame {
     List<Expense> expenses = new ArrayList<>();
     String name;
     AccountingReportController reportController = new AccountingReportController();
+    AccountingReport selectedAccountingReport;
+
+    public FrmAccountingReport() {
+        initComponents();
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+    }
 
     public void setBeginningDate(Calendar beginningDate) {
         this.beginningDate = beginningDate;
@@ -37,9 +44,10 @@ public class FrmAccountingReport extends javax.swing.JFrame {
     /**
      * Creates new form FrmAccountingReport
      */
-    public FrmAccountingReport() {
+    public FrmAccountingReport(AccountingReport selectedAccountingReport) {
         initComponents();
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        this.selectedAccountingReport = selectedAccountingReport;
     }
 
 
@@ -79,7 +87,7 @@ public class FrmAccountingReport extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(66, 66, 66)
                 .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(829, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -95,17 +103,17 @@ public class FrmAccountingReport extends javax.swing.JFrame {
 
         tblIncomes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Encabezado", "Orden", "Precio", "Id"
+                "Fecha", "Orden", "Precio", "Id", "Cliente"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Object.class, java.lang.Float.class, java.lang.Integer.class
+                java.lang.String.class, java.lang.Object.class, java.lang.Float.class, java.lang.Integer.class, java.lang.Object.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -145,7 +153,7 @@ public class FrmAccountingReport extends javax.swing.JFrame {
                 {null, null, null, null, null}
             },
             new String [] {
-                "Id", "Name", "Date", "Price", "Description"
+                "Id", "Name", "Fecha", "Precio", "Descripción"
             }
         ) {
             Class[] types = new Class [] {
@@ -200,7 +208,7 @@ public class FrmAccountingReport extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 115, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 150, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCreateAccountinReport, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnDeleteAccountingReport, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -217,6 +225,7 @@ public class FrmAccountingReport extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())

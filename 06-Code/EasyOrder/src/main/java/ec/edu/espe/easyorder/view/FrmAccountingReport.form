@@ -28,6 +28,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jPanel1" max="32767" attributes="0"/>
                   <Group type="102" attributes="0">
+                      <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
                       <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
@@ -57,7 +58,7 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="66" max="-2" attributes="0"/>
                   <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="829" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -139,7 +140,7 @@
                       <Component id="jScrollPane2" pref="0" max="32767" attributes="0"/>
                       <Component id="jScrollPane1" pref="244" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="115" max="32767" attributes="0"/>
+                  <EmptySpace pref="150" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="btnCreateAccountinReport" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnDeleteAccountingReport" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -171,15 +172,21 @@
             <Component class="javax.swing.JTable" name="tblIncomes">
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                  <Table columnCount="4" rowCount="4">
-                    <Column editable="true" title="Encabezado" type="java.lang.String"/>
+                  <Table columnCount="5" rowCount="4">
+                    <Column editable="true" title="Fecha" type="java.lang.String"/>
                     <Column editable="true" title="Orden" type="java.lang.Object"/>
                     <Column editable="true" title="Precio" type="java.lang.Float"/>
                     <Column editable="true" title="Id" type="java.lang.Integer"/>
+                    <Column editable="true" title="Cliente" type="java.lang.Object"/>
                   </Table>
                 </Property>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                   <TableColumnModel selectionModel="0">
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
                     <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                       <Title/>
                       <Editor/>
@@ -252,9 +259,9 @@
                   <Table columnCount="5" rowCount="4">
                     <Column editable="true" title="Id" type="java.lang.Integer"/>
                     <Column editable="true" title="Name" type="java.lang.String"/>
-                    <Column editable="true" title="Date" type="java.lang.Object"/>
-                    <Column editable="true" title="Price" type="java.lang.Float"/>
-                    <Column editable="true" title="Description" type="java.lang.String"/>
+                    <Column editable="true" title="Fecha" type="java.lang.Object"/>
+                    <Column editable="true" title="Precio" type="java.lang.Float"/>
+                    <Column editable="true" title="Descripci&#xf3;n" type="java.lang.String"/>
                   </Table>
                 </Property>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
